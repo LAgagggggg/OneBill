@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TGa-qZ-7eh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="IHU-KR-xDf">
+            <objects>
+                <navigationController id="TGa-qZ-7eh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lfi-ce-BLA">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Dc3-ZN-ws0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej1-Oi-bJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-761" y="382"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Fm-xV-3zK"/>
+                        <viewControllerLayoutGuide type="bottom" id="sfe-ue-cQg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-ui-7Dh" customClass="TodayCardView">
+                                <rect key="frame" x="30" y="247" width="315" height="230"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ULD-ui-7Dh" secondAttribute="height" multiplier="315:230" id="H4j-g5-uov"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ULD-ui-7Dh" secondAttribute="trailing" constant="30" id="NwI-im-Zjw"/>
+                            <constraint firstItem="ULD-ui-7Dh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="Toz-Ws-0MY"/>
+                            <constraint firstItem="sfe-ue-cQg" firstAttribute="top" secondItem="ULD-ui-7Dh" secondAttribute="bottom" constant="190" id="tPN-KW-TtZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zus-3q-vMx">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="icon_add_b" id="RbN-O0-Vq7"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="todayCardView" destination="ULD-ui-7Dh" id="R1k-Ek-7BL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="382"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_add_b" width="24" height="24"/>
+    </resources>
+</document>
