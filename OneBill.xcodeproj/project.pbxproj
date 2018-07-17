@@ -14,6 +14,7 @@
 		082B1FC820FD79BE0036B5FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC620FD79BE0036B5FC /* LaunchScreen.storyboard */; };
 		082B1FCB20FD79BE0036B5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FCA20FD79BE0036B5FC /* main.m */; };
 		082B1FD320FDCFF70036B5FC /* TodayCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FD220FDCFF70036B5FC /* TodayCardView.m */; };
+		08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B420FE4E9C008F87DB /* OBMainButton.m */; };
 		4C5D426A12EA881EA8A8565A /* libPods-OneBill.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,8 @@
 		082B1FCA20FD79BE0036B5FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		082B1FD120FDCFF70036B5FC /* TodayCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayCardView.h; sourceTree = "<group>"; };
 		082B1FD220FDCFF70036B5FC /* TodayCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardView.m; sourceTree = "<group>"; };
+		08E425B320FE4E9C008F87DB /* OBMainButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMainButton.h; sourceTree = "<group>"; };
+		08E425B420FE4E9C008F87DB /* OBMainButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBMainButton.m; sourceTree = "<group>"; };
 		4BEDCD7393621A1D868FDE1A /* Pods-OneBill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.release.xcconfig"; sourceTree = "<group>"; };
 		75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBill.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6A73D7CD687F1DEA2030AC /* Pods-OneBill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.debug.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 			children = (
 				082B1FD120FDCFF70036B5FC /* TodayCardView.h */,
 				082B1FD220FDCFF70036B5FC /* TodayCardView.m */,
+				08E425B320FE4E9C008F87DB /* OBMainButton.h */,
+				08E425B420FE4E9C008F87DB /* OBMainButton.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */,
 				082B1FD320FDCFF70036B5FC /* TodayCardView.m in Sources */,
 				082B1FC020FD79BB0036B5FC /* MainViewController.m in Sources */,
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,

@@ -45,8 +45,8 @@
     [self.labelL setTextAlignment:NSTextAlignmentRight];
     [self.labelR setTextAlignment:NSTextAlignmentLeft];
     [self.labelL setFont:[UIFont systemFontOfSize:16 weight:UIFontWeightMedium] ];
-    [self.labelR setFont:[UIFont systemFontOfSize:18 weight:UIFontWeightBold] ];
-    [self.labelR setText:@" Today"];
+    [self.labelR setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightBold] ];
+    [self.labelR setText:@" TODAY"];
     [self.labelL setText:@"your bill"];
     [self.labelR setTextColor:[UIColor whiteColor] ];
     [self.labelL setTextColor:[UIColor whiteColor] ];

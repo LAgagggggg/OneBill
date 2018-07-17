@@ -1,0 +1,97 @@
+//
+//  OBMainButton.m
+//  OneBill
+//
+//  Created by LAgagggggg on 2018/7/18.
+//  Copyright © 2018 ookkee. All rights reserved.
+//
+
+#import "OBMainButton.h"
+#import <Masonry.h>
+
+#define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
+#define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
+
+@interface OBMainButton()
+@property (strong,nonatomic)UIImageView * icon;
+@property (strong,nonatomic)UILabel * label;
+@end
+
+@implementation OBMainButton
+
+- (instancetype)initWithType:(OBButtonType)type
+{
+    self = [super init];
+    if (self) {
+        self.layer.cornerRadius=10.f;
+        self.layer.shadowColor=[UIColor grayColor].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 5);
+        self.layer.shadowOpacity = 0.3;
+        self.layer.shadowRadius = 3;
+        if (type==OBButtonTypeAdd) {
+            self.backgroundColor=[UIColor whiteColor];
+            //左侧icon
+            self.icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_add_b"]];
+            [self addSubview:self.icon];
+            [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(@(22));
+                make.height.equalTo(self.icon.mas_width);
+                make.left.equalTo(self.mas_left).with.offset(23);
+                make.centerY.equalTo(self.mas_centerY);
+            }];
+            //分割线
+            UIView * lineView=[[UIView alloc]init];
+            lineView.backgroundColor=DarkCyanColor;
+            [self addSubview:lineView];
+            [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.mas_centerY);
+                make.centerX.equalTo(self.icon.mas_centerX).with.offset(27);
+                make.width.equalTo(@(1));
+                make.height.equalTo(self.icon.mas_height).dividedBy(2);
+            }];
+            //右侧文字
+            self.label=[[UILabel alloc]init];
+            self.label.text=@"Add One Bill";
+            self.label.textColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1];
+            [self addSubview:self.label];
+            [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.mas_centerY);
+                make.left.equalTo(lineView.mas_right).with.offset(17);
+            }];
+        }
+        else if (type==OBButtonTypeCheck) {
+            self.backgroundColor=DarkBlueColor;
+            //左侧icon
+            self.icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_ok_w"]];
+            [self addSubview:self.icon];
+            [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(@(22));
+                make.height.equalTo(self.icon.mas_width);
+                make.left.equalTo(self.mas_left).with.offset(23);
+                make.centerY.equalTo(self.mas_centerY);
+            }];
+            //分割线
+            UIView * lineView=[[UIView alloc]init];
+            lineView.backgroundColor=DarkCyanColor;
+            [self addSubview:lineView];
+            [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.mas_centerY);
+                make.centerX.equalTo(self.icon.mas_centerX).with.offset(27);
+                make.width.equalTo(@(1));
+                make.height.equalTo(self.icon.mas_height).dividedBy(2);
+            }];
+            //右侧文字
+            self.label=[[UILabel alloc]init];
+            self.label.text=@"Check Bills";
+            self.label.textColor=[UIColor whiteColor];
+            [self addSubview:self.label];
+            [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.mas_centerY);
+                make.left.equalTo(lineView.mas_right).with.offset(17);
+            }];
+        }
+    }
+    return self;
+}
+
+@end

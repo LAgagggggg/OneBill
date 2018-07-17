@@ -39,21 +39,54 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-ui-7Dh" customClass="TodayCardView">
                                 <rect key="frame" x="30" y="247" width="315" height="230"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ULD-ui-7Dh" secondAttribute="height" multiplier="315:230" id="H4j-g5-uov"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsN-Ek-mbl">
+                                <rect key="frame" x="122" y="144" width="131" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="One Bill A Day" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5i-ib-xSM">
+                                        <rect key="frame" x="15" y="0.0" width="108" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="‘‘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2W0-cF-izs">
+                                        <rect key="frame" x="-24" y="0.0" width="44" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="30"/>
+                                        <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Keeps worries away." textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7g-aR-z64">
+                                        <rect key="frame" x="-8" y="20" width="155" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="aZU-Gk-iJO"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="IsN-Ek-mbl" secondAttribute="trailing" constant="106" id="L5v-7i-zef"/>
                             <constraint firstAttribute="trailing" secondItem="ULD-ui-7Dh" secondAttribute="trailing" constant="30" id="NwI-im-Zjw"/>
+                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="top" secondItem="8Fm-xV-3zK" secondAttribute="bottom" constant="80" id="RQU-Uy-c5H"/>
                             <constraint firstItem="ULD-ui-7Dh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="Toz-Ws-0MY"/>
+                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="106" id="VfP-EH-d4z"/>
                             <constraint firstItem="sfe-ue-cQg" firstAttribute="top" secondItem="ULD-ui-7Dh" secondAttribute="bottom" constant="190" id="tPN-KW-TtZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zus-3q-vMx">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="icon_add_b" id="RbN-O0-Vq7"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="A866E01A2F6ED4213BFAC57078BCBF8D" id="RbN-O0-Vq7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="todayCardView" destination="ULD-ui-7Dh" id="R1k-Ek-7BL"/>
@@ -61,10 +94,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="382"/>
+            <point key="canvasLocation" x="29.600000000000001" y="381.85907046476763"/>
         </scene>
     </scenes>
     <resources>
-        <image name="icon_add_b" width="24" height="24"/>
+        <image name="A866E01A2F6ED4213BFAC57078BCBF8D" width="24" height="24"/>
     </resources>
 </document>
