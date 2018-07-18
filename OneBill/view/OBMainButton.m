@@ -15,6 +15,7 @@
 @interface OBMainButton()
 @property (strong,nonatomic)UIImageView * icon;
 @property (strong,nonatomic)UILabel * label;
+@property (strong,nonatomic)UIButton * btn;
 @end
 
 @implementation OBMainButton
@@ -90,8 +91,32 @@
                 make.left.equalTo(lineView.mas_right).with.offset(17);
             }];
         }
+        //添加按钮效果
+        self.btn=[UIButton buttonWithType:UIButtonTypeCustom];
+        self.btn.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.btn];
+        [self.btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
+        }];
+        [self.btn addTarget:self action:@selector(buttonDim) forControlEvents:UIControlEventTouchDown];
+        [self.btn addTarget:self action:@selector(buttonBright) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside ];
     }
     return self;
+}
+
+- (void)buttonDim{
+    self.alpha=0.7;
+}
+
+- (void)buttonBright{
+    self.alpha=1;
+}
+
+-(void)addTarget:(id)tar action:(SEL)sel forControlEvents:(UIControlEvents)event{
+    [self.btn addTarget:tar action:sel forControlEvents:event];
 }
 
 @end

@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, OBButtonType) {
 
 @interface OBMainButton : UIView
 - (instancetype)initWithType:(OBButtonType)type;
+- (void)addTarget:(nullable id)tar action:(nonnull SEL)sel forControlEvents:(UIControlEvents)event;
 @end
 
 NS_ASSUME_NONNULL_END
