@@ -46,7 +46,6 @@
         CategoryView * cView=[[CategoryView alloc]initWithCategory:category];
         [cView layoutIfNeeded];
         needWidth+=cView.frame.size.width;
-        NSLog(@"%f",cView.frame.size.width);
         [self.categoryScrollView addSubview:cView];
         if (i!=0) {
             needWidth+=21;
