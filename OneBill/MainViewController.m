@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
+#import "NewBillViewController.h"
 #import <Masonry.h>
 
 @interface MainViewController ()
@@ -27,6 +28,8 @@
 - (void)setUI{
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage=[UIImage new];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
     self.addBtn=[[OBMainButton alloc]initWithType:OBButtonTypeAdd];
     [self.view addSubview:self.addBtn];
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -35,6 +38,7 @@
         make.height.equalTo(@(66));
         make.width.equalTo(@(200));
     }];
+    [self.addBtn addTarget:self action:@selector(addNewBill) forControlEvents:UIControlEventTouchUpInside];
     self.checkBtn=[[OBMainButton alloc]initWithType:OBButtonTypeCheck];
     [self.view addSubview:self.checkBtn];
     [self.checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,6 +47,12 @@
         make.height.equalTo(@(42));
         make.width.equalTo(@(200));
     }];
+    
+}
+
+- (void)addNewBill{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self performSegueWithIdentifier:@"NBVC" sender:nil];
 }
 
 

@@ -27,7 +27,7 @@
         self.layer.cornerRadius=10.f;
         self.layer.shadowColor=[UIColor grayColor].CGColor;
         self.layer.shadowOffset = CGSizeMake(0, 5);
-        self.layer.shadowOpacity = 0.3;
+        self.layer.shadowOpacity = 0.1;
         self.layer.shadowRadius = 3;
         if (type==OBButtonTypeAdd) {
             self.backgroundColor=[UIColor whiteColor];
