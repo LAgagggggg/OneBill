@@ -9,7 +9,8 @@
 #import "NewBillViewController.h"
 #import "view/CategoryView.h"
 #import "model/CategoryManager.h"
-#import <Masonry.h>
+#import "view/inoutSwitchButton.h"
+#import <masonry.h>
 
 @interface NewBillViewController ()
 @property (strong,nonatomic)UIScrollView * categoryScrollView;
@@ -21,9 +22,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.categoryManager=[CategoryManager sharedInstance];
+    [self setUI];
+}
+
+- (void)setUI{
     self.view.backgroundColor=[UIColor whiteColor];
     [self setCatgoryScrollView];
-    
+    InoutSwitchButton * inoutSwitchBtn=[[InoutSwitchButton alloc]init];
+    [self.view addSubview:inoutSwitchBtn];
+    [inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.centerY.equalTo(self.view.mas_centerY);
+    }];
 }
 
 - (void)setCatgoryScrollView{
@@ -66,7 +76,17 @@
         i++;
         [cViewArr addObject:cView];
     }
-    self.categoryScrollView.contentSize=CGSizeMake(needWidth, 62);
+    CategoryView * cView=[[CategoryView alloc]initWithCategory:@"···"];
+    [self.categoryScrollView addSubview:cView];
+    [cView layoutIfNeeded];
+    needWidth+=21;
+    needWidth+=cView.frame.size.width;
+    CategoryView * lastView=cViewArr.lastObject;
+    [cView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.categoryScrollView.mas_top);
+        make.left.equalTo(lastView.mas_right).with.offset(21);
+    }];
+    self.categoryScrollView.contentSize=CGSizeMake(needWidth+30, 62);
     self.categoryScrollView.scrollEnabled=YES;
     
 }
