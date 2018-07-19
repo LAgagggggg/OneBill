@@ -9,11 +9,13 @@
 #import "NewBillViewController.h"
 #import "view/CategoryView.h"
 #import "model/CategoryManager.h"
-#import "view/inoutSwitchButton.h"
+#import "view/InoutSwitchButton.h"
+#import "view/BillValueInputView.h"
 #import <masonry.h>
 
 @interface NewBillViewController ()
 @property (strong,nonatomic)UIScrollView * categoryScrollView;
+@property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;
 @end
 
@@ -28,11 +30,22 @@
 - (void)setUI{
     self.view.backgroundColor=[UIColor whiteColor];
     [self setCatgoryScrollView];
+    self.inputView=[[BillValueInputView alloc]init];
+    [self.view addSubview:self.inputView];
+    [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).with.offset(75);
+        make.right.equalTo(self.view.mas_right).with.offset(-55);
+        make.top.equalTo(self.categoryScrollView.mas_top).with.offset(86);
+        make.height.equalTo(@(76));
+    }];
     InoutSwitchButton * inoutSwitchBtn=[[InoutSwitchButton alloc]init];
     [self.view addSubview:inoutSwitchBtn];
     [inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.centerY.equalTo(self.view.mas_centerY);
+        make.top.equalTo(self.inputView.mas_bottom).with.offset(49);
+        make.width.equalTo(@(120));
+        make.height.equalTo(@(34));
+        
     }];
 }
 
