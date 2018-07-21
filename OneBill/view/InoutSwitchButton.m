@@ -16,6 +16,8 @@
 @interface InoutSwitchButton()
 @property (strong,nonatomic)UIView * inView;
 @property (strong,nonatomic)UIView * outView;
+@property (strong,nonatomic)UILabel * inLabel;
+@property (strong,nonatomic)UILabel * outLabel;
 @end
 
 
@@ -41,13 +43,23 @@
             make.width.equalTo(@(50));
             make.height.equalTo(@(34));
         }];
-        UILabel * inLabel=[[UILabel alloc]init];
-        inLabel.text=@"IN";
-        inLabel.textAlignment=NSTextAlignmentCenter;
-        inLabel.textColor=textGrayColor;
-        inLabel.font=[UIFont fontWithName:@"HelveticaNeue-Thin" size:14];
-        [self.inView addSubview:inLabel];
-        [inLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.inLabel=[[UILabel alloc]init];
+        self.inLabel.text=@"IN";
+        self.inLabel.textAlignment=NSTextAlignmentCenter;
+        self.inLabel.textColor=textGrayColor;
+        self.inLabel.font=[UIFont fontWithName:@"HelveticaNeue-Thin" size:14];
+        [self.inView addSubview:self.inLabel];
+        [self.inLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.inView.mas_left);
+            make.top.equalTo(self.inView.mas_top);
+            make.right.equalTo(self.inView.mas_right);
+            make.bottom.equalTo(self.inView.mas_bottom);
+        }];
+        UIButton * inBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        inBtn.backgroundColor=[UIColor clearColor];
+        [inBtn addTarget:self action:@selector(chooseIn) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:inBtn];
+        [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.inView.mas_left);
             make.top.equalTo(self.inView.mas_top);
             make.right.equalTo(self.inView.mas_right);
@@ -78,20 +90,50 @@
             make.width.equalTo(@(68));
             make.height.equalTo(@(34));
         }];
-        UILabel * outLabel=[[UILabel alloc]init];
-        outLabel.text=@"OUT";
-        outLabel.textAlignment=NSTextAlignmentCenter;
-        outLabel.textColor=textGrayColor;
-        outLabel.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-        [self.outView addSubview:outLabel];
-        [outLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.outLabel=[[UILabel alloc]init];
+        self.outLabel.text=@"OUT";
+        self.outLabel.textAlignment=NSTextAlignmentCenter;
+        self.outLabel.textColor=textGrayColor;
+        self.outLabel.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        [self.outView addSubview:self.outLabel];
+        [self.outLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.outView.mas_left);
             make.top.equalTo(self.outView.mas_top);
             make.right.equalTo(self.outView.mas_right);
             make.bottom.equalTo(self.outView.mas_bottom);
         }];
+        UIButton * outBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        outBtn.backgroundColor=[UIColor clearColor];
+        [outBtn addTarget:self action:@selector(chooseOut) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:outBtn];
+        [outBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.outView.mas_left);
+            make.top.equalTo(self.outView.mas_top);
+            make.right.equalTo(self.outView.mas_right);
+            make.bottom.equalTo(self.outView.mas_bottom);
+        }];
+        self.isOut=YES;
     }
     return self;
 }
 
+- (void)chooseIn{
+    self.isOut=NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.inView.backgroundColor=[UIColor whiteColor];
+        self.inLabel.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        self.outView.backgroundColor=dimColor;
+        self.outLabel.font=[UIFont fontWithName:@"HelveticaNeue-Thin" size:14];
+    }];
+}
+
+- (void)chooseOut{
+    self.isOut=YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.outView.backgroundColor=[UIColor whiteColor];
+        self.outLabel.font=[UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        self.inView.backgroundColor=dimColor;
+        self.inLabel.font=[UIFont fontWithName:@"HelveticaNeue-Thin" size:14];
+    }];
+}
 @end

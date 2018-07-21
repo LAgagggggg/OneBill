@@ -49,6 +49,15 @@
             make.left.equalTo(self.label.mas_left).with.offset(-24);
             make.right.equalTo(self.label.mas_right).with.offset(24);
         }];
+        self.button=[UIButton buttonWithType:UIButtonTypeCustom];
+        self.button.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.button];
+        [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
+        }];
     }
     return self;
 }
