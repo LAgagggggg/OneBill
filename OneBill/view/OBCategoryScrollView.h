@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBCategoryScrollView : UIScrollView
 @property (strong,nonatomic) CategoryView * selectedView;
-
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr;
 @end
 

@@ -13,7 +13,6 @@
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 
 @interface CategoryView()
-@property (strong,nonatomic)UILabel * label;
 @end
 
 

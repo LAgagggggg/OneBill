@@ -6,24 +6,27 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#import <masonry.h>
 #import "NewBillViewController.h"
 #import "view/CategoryView.h"
 #import "model/CategoryManager.h"
 #import "view/InoutSwitchButton.h"
 #import "view/BillValueInputView.h"
 #import "view/OBCategoryScrollView.h"
-#import <masonry.h>
+#import "model/OBBillManager.h"
 
 @interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate>
-@property (strong,nonatomic)UIScrollView * categoryScrollView;
+@property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;
+@property (strong,nonatomic)InoutSwitchButton * inoutSwitchBtn;
 @property (strong,nonatomic)UIButton * confirmBtn;
 @property (strong,nonatomic)UILabel * locationLabel;
 @property (strong,nonatomic)UITextField * dateLabel;
 @property (strong,nonatomic)CLLocationManager * locationManager;
 @property (strong,nonatomic)CLGeocoder * geoCoder;
 @property (strong,nonatomic)CLLocation * location;
+@property (strong,nonatomic)NSDate * date;
 @end
 
 @implementation NewBillViewController
@@ -54,9 +57,9 @@
         make.height.equalTo(@(76));
     }];
     self.inputView.delegate=self;
-    InoutSwitchButton * inoutSwitchBtn=[[InoutSwitchButton alloc]init];
-    [self.view addSubview:inoutSwitchBtn];
-    [inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.inoutSwitchBtn=[[InoutSwitchButton alloc]init];
+    [self.view addSubview:self.inoutSwitchBtn];
+    [self.inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.inputView.mas_bottom).with.offset(49);
         make.width.equalTo(@(120));
@@ -86,6 +89,7 @@
         make.width.equalTo(@(60));
         make.height.equalTo(@(60));
     }];
+    [self.confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //确认按钮随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
     //地理位置
@@ -149,7 +153,8 @@
     //当前时间
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"HH:mm, MMM d";
-    NSString *dateString=[dateFormatter stringFromDate:[NSDate date]];
+    self.date=[NSDate date];
+    NSString *dateString=[dateFormatter stringFromDate:self.date];
     self.dateLabel.text = dateString;
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
@@ -162,6 +167,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"HH:mm, MMM d";
     NSString *dateString=[dateFormatter stringFromDate:datePicker.date];
+    self.date=datePicker.date;
     self.dateLabel.text = dateString;
 }
 
@@ -281,5 +287,11 @@
     return YES;
 }
 //*********************************************************************************//
+
+-(void)confirmBtnClicked{
+    OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.floatValue Date:self.date Location:self.location Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+    [[OBBillManager sharedInstance] insertBill:bill];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end
