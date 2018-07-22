@@ -240,6 +240,9 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     BOOL isPressedBackspaceAfterSingleSpaceSymbol = [string isEqualToString:@""] && range.length == 1;
     NSInteger indexOfPoint=[self.inputView.text rangeOfString:@"."].location;
+    if(range.location>indexOfPoint){
+        self.inputView.isEdited=YES;
+    }
     if (isPressedBackspaceAfterSingleSpaceSymbol) {
         if (range.location>=indexOfPoint) {
             NSInteger offsetAfterPoint=range.location-indexOfPoint;
