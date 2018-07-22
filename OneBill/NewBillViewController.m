@@ -14,11 +14,16 @@
 #import "view/OBCategoryScrollView.h"
 #import <masonry.h>
 
-@interface NewBillViewController () <UITextFieldDelegate>
+@interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate>
 @property (strong,nonatomic)UIScrollView * categoryScrollView;
 @property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;
 @property (strong,nonatomic)UIButton * confirmBtn;
+@property (strong,nonatomic)UILabel * locationLabel;
+@property (strong,nonatomic)UITextField * dateLabel;
+@property (strong,nonatomic)CLLocationManager * locationManager;
+@property (strong,nonatomic)CLGeocoder * geoCoder;
+@property (strong,nonatomic)CLLocation * location;
 @end
 
 @implementation NewBillViewController
@@ -27,6 +32,7 @@
     [super viewDidLoad];
     self.categoryManager=[CategoryManager sharedInstance];
     [self setUI];
+    [self initializeLocationService];
 }
 
 - (void)setUI{
@@ -82,11 +88,126 @@
     }];
     //确认按钮随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
+    //地理位置
+    UIView * locationView=[[UIView alloc]init];
+    locationView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:locationView];
+    [locationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(separateLine.mas_left);
+        make.top.equalTo(separateLine.mas_top).with.offset(26.5);
+        make.right.equalTo(separateLine.mas_right).with.offset(-40);
+        make.height.equalTo(@(34));
+    }];
+    UIImageView * locationIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"clearBtn"]];
+    [locationView addSubview:locationIconView];
+    [locationIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(locationView.mas_left);
+        make.centerY.equalTo(locationView.mas_centerY);
+        make.width.equalTo(@(20));
+        make.height.equalTo(@(20));
+    }];
+    self.locationLabel=[[UILabel alloc]init];
+    [self.locationLabel setTextColor:[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]];
+    [self.locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14]];
+    [self.locationLabel setNumberOfLines:2];
+    self.locationLabel.text=@"Getting Location Information...";
+    [locationView addSubview:self.locationLabel];
+    [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(locationIconView.mas_right).with.offset(25);
+        make.centerY.equalTo(locationView.mas_centerY);
+        make.right.equalTo(locationView.mas_right);
+        make.height.equalTo(@(34));
+    }];
+    //时间信息
+    UIView * dateView=[[UIView alloc]init];
+    dateView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:dateView];
+    [dateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(separateLine.mas_left);
+        make.top.equalTo(locationView.mas_bottom).with.offset(37);
+        make.right.equalTo(separateLine.mas_right).with.offset(-40);
+        make.height.equalTo(@(20));
+    }];
+    UIImageView * dateIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"clearBtn"]];
+    [dateView addSubview:dateIconView];
+    [dateIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(dateView.mas_left);
+        make.centerY.equalTo(dateView.mas_centerY);
+        make.width.equalTo(@(20));
+        make.height.equalTo(@(20));
+    }];
+    self.dateLabel=[[UITextField alloc]init];
+    [self.dateLabel setTextColor:[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]];
+    [self.dateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14]];
+    [dateView addSubview:self.dateLabel];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(dateIconView.mas_right).with.offset(25);
+        make.centerY.equalTo(dateView.mas_centerY);
+        make.right.equalTo(dateView.mas_right);
+        make.height.equalTo(@(17));
+    }];
+    //当前时间
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HH:mm, MMM d";
+    NSString *dateString=[dateFormatter stringFromDate:[NSDate date]];
+    self.dateLabel.text = dateString;
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    datePicker.locale =  [NSLocale localeWithLocaleIdentifier:@"us"];
+    [datePicker addTarget:self action:@selector(selectedDateChange:) forControlEvents:UIControlEventValueChanged];
+    self.dateLabel.inputView = datePicker;
+}
+
+- (void)selectedDateChange:(UIDatePicker *)datePicker{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HH:mm, MMM d";
+    NSString *dateString=[dateFormatter stringFromDate:datePicker.date];
+    self.dateLabel.text = dateString;
+}
+
+-(void)initializeLocationService {
+    // 初始化定位管理器
+    _locationManager = [[CLLocationManager alloc] init];
+    [_locationManager requestWhenInUseAuthorization];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    [_locationManager startUpdatingLocation];
+    //初始化地理编码器
+    _geoCoder = [[CLGeocoder alloc] init];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    self.location = locations.lastObject;
+    [_geoCoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSMutableString * locStr=[[NSMutableString alloc]init];
+            //获取市,省
+            [locStr appendString:placemark.locality];
+            locStr.length>0? [locStr appendString:@","]:nil;
+            [locStr appendString:placemark.administrativeArea];
+            [locStr appendString:@"\n"];
+            // 位置名
+            [locStr appendString:placemark.name];
+            [locStr appendString:@","];
+            [locStr appendString:placemark.areasOfInterest[0]];
+            self.locationLabel.text=locStr;
+        }else if (error == nil && [placemarks count] == 0) {
+            self.locationLabel.text=@"An error occurred";
+        } else if (error != nil){
+            self.locationLabel.text=@"An error occurred";
+        }
+    }];
+    [manager stopUpdatingLocation];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if ([self.inputView.textField isFirstResponder]) {
         [self.inputView.textField resignFirstResponder];
+    }
+    if([self.dateLabel isFirstResponder]){
+        [self.dateLabel resignFirstResponder];
     }
 }
 
@@ -102,7 +223,6 @@
 
 //******************************ABOUT TEXTFIELD************************************//
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    NSLog(@"%lu",(unsigned long)[self.inputView.text rangeOfString:@"."].location);
     if (!self.inputView.isEdited) {
         [self.inputView makeTextCursorToIndex:0];
     }
@@ -118,7 +238,6 @@
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"%@",NSStringFromRange(range));
     BOOL isPressedBackspaceAfterSingleSpaceSymbol = [string isEqualToString:@""] && range.length == 1;
     NSInteger indexOfPoint=[self.inputView.text rangeOfString:@"."].location;
     if (isPressedBackspaceAfterSingleSpaceSymbol) {
