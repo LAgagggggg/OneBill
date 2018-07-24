@@ -12,6 +12,7 @@
 #import "NewBillViewController.h"
 #import "model/OBBillManager.h"
 #import "BillDetailViewController.h"
+#import "DaySummaryViewController.h"
 #import <Masonry.h>
 
 @interface MainViewController ()
@@ -62,11 +63,32 @@
     swipeForToday.direction=UISwipeGestureRecognizerDirectionUp;
     [self.todayCardView addGestureRecognizer:tapForToday];
     [self.todayCardView addGestureRecognizer:swipeForToday];
+    //进入账单概况的手势
+    UIView * summaryGestureView=[[UIView alloc]init];
+    summaryGestureView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:summaryGestureView];
+    [summaryGestureView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.todayCardView.mas_top);
+    }];
+    UITapGestureRecognizer * tapForSummary=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
+    UISwipeGestureRecognizer * swipeForSummary=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
+    swipeForSummary.direction=UISwipeGestureRecognizerDirectionDown;
+    [summaryGestureView addGestureRecognizer:tapForSummary];
+    [summaryGestureView addGestureRecognizer:swipeForSummary];
+    
 }
 
 -(void)enterTodayDetail{
     BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]] ];
     vc.date=[NSDate date];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)enterDaySummary{
+    DaySummaryViewController * vc=[[DaySummaryViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

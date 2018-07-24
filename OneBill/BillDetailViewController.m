@@ -15,7 +15,6 @@
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)UITableView * tableView;
-@property double todaySpend;
 @end
 
 @implementation BillDetailViewController
@@ -25,7 +24,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-    self.todaySpend=0;
     [self.summaryCardView setDate:self.date Money:[[OBBillManager sharedInstance]sumOfDay:self.date]];
 }
 
@@ -55,7 +53,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.separatorStyle=UITextBorderStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 0, 0);
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
-//    self.tableView.ed
 }
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills

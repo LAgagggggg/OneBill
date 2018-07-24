@@ -85,12 +85,7 @@
     self.confirmBtn.layer.shadowOpacity=0.1;
     self.confirmBtn.layer.shadowRadius=3;
     [self.view addSubview:self.confirmBtn];
-    [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view.mas_right).with.offset(-21);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-43);
-        make.width.equalTo(@(60));
-        make.height.equalTo(@(60));
-    }];
+    [self.confirmBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
     [self.confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //确认按钮随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
