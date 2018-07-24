@@ -10,19 +10,34 @@
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
 #import "NewBillViewController.h"
+#import "model/OBBillManager.h"
+#import "BillDetailViewController.h"
 #import <Masonry.h>
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
 @property (strong, nonatomic) OBMainButton * addBtn;
 @property (strong, nonatomic) OBMainButton * checkBtn;
+@property (strong, nonatomic) NSArray * todayBillsArr;
+@property double todaySpend;
 @end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self setUI];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    //刷新今日花销
+    self.todayBillsArr = [[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]];
+    self.todaySpend=0;
+    for (OBBill * bill in self.todayBillsArr) {
+        self.todaySpend-= bill.isOut?bill.value:-bill.value;
+    }
+    self.todayCardView.labelNum.text=[NSString stringWithFormat:@"%+.2lf",self.todaySpend];
 }
 
 - (void)setUI{
@@ -47,11 +62,21 @@
         make.height.equalTo(@(42));
         make.width.equalTo(@(200));
     }];
-    
+    //进入今日账单详情的手势
+    UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
+    UISwipeGestureRecognizer * swipeForToday=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
+    swipeForToday.direction=UISwipeGestureRecognizerDirectionUp;
+    [self.todayCardView addGestureRecognizer:tapForToday];
+    [self.todayCardView addGestureRecognizer:swipeForToday];
+}
+
+-(void)enterTodayDetail{
+    BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:self.todayBillsArr];
+    vc.date=[NSDate date];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addNewBill{
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self performSegueWithIdentifier:@"NBVC" sender:nil];
 }
 

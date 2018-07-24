@@ -16,7 +16,6 @@
 @interface TodayCardView()
 @property (strong,nonatomic)UILabel * labelL;
 @property (strong,nonatomic)UILabel * labelR;
-@property (strong,nonatomic)UILabel * labelNum;
 @end
 
 @implementation TodayCardView
@@ -34,10 +33,10 @@
     mainCardLayer.backgroundColor=DarkCyanColor.CGColor;
     mainCardLayer.cornerRadius=10.f;
     mainCardLayer.frame=CGRectMake(0, 20, self.frame.size.width, self.frame.size.height-20);
-    mainCardLayer.shadowColor=[UIColor grayColor].CGColor;
-    mainCardLayer.shadowOffset=CGSizeMake(0, 5);
+    mainCardLayer.shadowColor=[UIColor lightGrayColor].CGColor;
+    mainCardLayer.shadowOffset=CGSizeMake(0, 6);
     mainCardLayer.shadowOpacity=0.3;
-    mainCardLayer.shadowRadius=3;
+    mainCardLayer.shadowRadius=10;
     [self.layer addSublayer:mainCardLayer];
     //文字
     self.labelL=[[UILabel alloc]init];

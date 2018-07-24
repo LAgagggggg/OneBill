@@ -90,7 +90,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="todayCardView" destination="ULD-ui-7Dh" id="R1k-Ek-7BL"/>
-                        <segue destination="BaV-4o-v7z" kind="show" identifier="NBVC" id="7n3-m0-OhL"/>
+                        <segue destination="BaV-4o-v7z" kind="show" identifier="NBVC" id="kjM-mK-vTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

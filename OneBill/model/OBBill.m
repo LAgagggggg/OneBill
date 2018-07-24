@@ -9,13 +9,14 @@
 #import "OBBill.h"
 
 @implementation OBBill
-- (instancetype)initWithValue:(float)value Date:(NSDate *)date Location:(CLLocation *)location Category:(NSString *)category andIsOut:(BOOL)isOut
+- (instancetype)initWithValue:(double)value Date:(NSDate *)date Location:(CLLocation *)location AndLocationDescription:(NSString *)description Category:(NSString *)category andIsOut:(BOOL)isOut
 {
     self = [super init];
     if (self) {
         self.value=value;
         self.date=date;
         self.location=location;
+        self.locDescription=description;
         self.category=category;
         self.isOut=isOut;
     }

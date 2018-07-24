@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong,nonatomic)FMDatabase * database;
 +(instancetype)sharedInstance;
 -(BOOL)insertBill:(OBBill *)bill;
+-(NSArray<OBBill *>*)billsSameDayAsDate:(NSDate *)date;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,6 +27,7 @@
 @property (strong,nonatomic)CLGeocoder * geoCoder;
 @property (strong,nonatomic)CLLocation * location;
 @property (strong,nonatomic)NSDate * date;
+@property (strong,nonatomic)NSMutableString * locDescription;
 @end
 
 @implementation NewBillViewController
@@ -36,6 +37,7 @@
     self.categoryManager=[CategoryManager sharedInstance];
     [self setUI];
     [self initializeLocationService];
+    self.locDescription=[[NSMutableString alloc]init];
 }
 
 - (void)setUI{
@@ -195,9 +197,10 @@
             [locStr appendString:placemark.administrativeArea];
             [locStr appendString:@"\n"];
             // 位置名
-            [locStr appendString:placemark.name];
-            [locStr appendString:@","];
-            [locStr appendString:placemark.areasOfInterest[0]];
+            [self.locDescription appendString:placemark.name];
+            [self.locDescription appendString:@","];
+            [self.locDescription appendString:placemark.areasOfInterest[0]];
+            [locStr appendString:self.locDescription];
             self.locationLabel.text=locStr;
         }else if (error == nil && [placemarks count] == 0) {
             self.locationLabel.text=@"An error occurred";
@@ -289,7 +292,7 @@
 //*********************************************************************************//
 
 -(void)confirmBtnClicked{
-    OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.floatValue Date:self.date Location:self.location Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+    OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
     [[OBBillManager sharedInstance] insertBill:bill];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
