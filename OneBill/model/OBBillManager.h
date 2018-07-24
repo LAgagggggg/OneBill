@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)sharedInstance;
 -(BOOL)insertBill:(OBBill *)bill;
 -(NSArray<OBBill *>*)billsSameDayAsDate:(NSDate *)date;
-
+-(double)sumOfDay:(NSDate *)date;
+-(BOOL)updateSumOfDay:(NSDate *)date;
 @end
 
 NS_ASSUME_NONNULL_END

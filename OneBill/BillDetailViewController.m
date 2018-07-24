@@ -26,10 +26,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
     [self setUI];
     self.todaySpend=0;
-    for (OBBill * bill in self.billsArr) {
-        self.todaySpend-= bill.isOut?bill.value:-bill.value;
-    }
-    [self.summaryCardView setDate:self.date Money:self.todaySpend];
+    [self.summaryCardView setDate:self.date Money:[[OBBillManager sharedInstance]sumOfDay:self.date]];
 }
 
 -(void)setUI{
@@ -98,7 +95,7 @@ static NSString * const reuseIdentifier = @"Cell";
     {
         if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
         {
-            subview.backgroundColor=[UIColor blueColor];
+            subview.backgroundColor=[UIColor clearColor];
             subview.subviews[0].layer.cornerRadius=10.f;
             subview.subviews[0].layer.masksToBounds=YES;
             CGRect frame=subview.subviews[0].frame;
@@ -119,23 +116,6 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     [self.billsArr removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-}
-
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-    for (UIView *subview in tableView.subviews)
-    {
-        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionStandardButton")] )
-        {
-            float alphaSaver=subview.subviews[0].alpha;
-            [UIView animateWithDuration:0.3 animations:^{
-                subview.subviews[0].alpha=0;
-            } completion:^(BOOL finished) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    subview.subviews[0].alpha=alphaSaver;
-                });
-            }];
-        }
-    }
 }
 
 

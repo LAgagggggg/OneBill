@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
 @property (strong, nonatomic) OBMainButton * addBtn;
 @property (strong, nonatomic) OBMainButton * checkBtn;
-@property (strong, nonatomic) NSArray * todayBillsArr;
 @property double todaySpend;
 @end
 
@@ -32,12 +31,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     //刷新今日花销
-    self.todayBillsArr = [[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]];
-    self.todaySpend=0;
-    for (OBBill * bill in self.todayBillsArr) {
-        self.todaySpend-= bill.isOut?bill.value:-bill.value;
-    }
-    self.todayCardView.labelNum.text=[NSString stringWithFormat:@"%+.2lf",self.todaySpend];
+    self.todayCardView.labelNum.text=[NSString stringWithFormat:@"%+.2lf",[[OBBillManager sharedInstance] sumOfDay:[NSDate date]]];
 }
 
 - (void)setUI{
@@ -71,7 +65,7 @@
 }
 
 -(void)enterTodayDetail{
-    BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:self.todayBillsArr];
+    BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]] ];
     vc.date=[NSDate date];
     [self.navigationController pushViewController:vc animated:YES];
 }

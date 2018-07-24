@@ -294,6 +294,7 @@
 -(void)confirmBtnClicked{
     OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
     [[OBBillManager sharedInstance] insertBill:bill];
+    [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
