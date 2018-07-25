@@ -47,6 +47,16 @@
     return result;
 }
 
+- (BOOL)removeBill:(OBBill *)bill{
+    __block BOOL result;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        NSTimeInterval dateInterval=[bill.date timeIntervalSince1970];
+        NSString * sql=[NSString stringWithFormat:@"delete from %@ where(value==? AND createdDate==?);",@"BillsTable"];
+        result=[db executeUpdate:sql,@(bill.value),@((double)dateInterval)];
+    }];
+    return result;
+}
+
 - (NSArray<OBBill *> *)billsSameDayAsDate:(NSDate *)date{
     NSCalendar * calendar=[NSCalendar currentCalendar];
     NSTimeInterval dayStartStamp=[[calendar startOfDayForDate:date] timeIntervalSince1970];

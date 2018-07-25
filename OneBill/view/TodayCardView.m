@@ -9,7 +9,7 @@
 #import "TodayCardView.h"
 #import <Masonry.h>
 
-#define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
+#define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
 #define LightCyanColor [UIColor colorWithRed:207/255.0 green:239/255.0 blue:242/255.0 alpha:1]
 #define MuchLightCyanColor [UIColor colorWithRed:241/255.0 green:251/255.0 blue:251/255.0 alpha:1]
 
@@ -33,18 +33,18 @@
     mainCardLayer.backgroundColor=DarkCyanColor.CGColor;
     mainCardLayer.cornerRadius=10.f;
     mainCardLayer.frame=CGRectMake(0, 20, self.frame.size.width, self.frame.size.height-20);
-    mainCardLayer.shadowColor=[UIColor lightGrayColor].CGColor;
+    mainCardLayer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
     mainCardLayer.shadowOffset=CGSizeMake(0, 6);
     mainCardLayer.shadowOpacity=0.3;
-    mainCardLayer.shadowRadius=10;
+    mainCardLayer.shadowRadius=12;
     [self.layer addSublayer:mainCardLayer];
     //文字
     self.labelL=[[UILabel alloc]init];
     self.labelR=[[UILabel alloc]init];
     [self.labelL setTextAlignment:NSTextAlignmentRight];
     [self.labelR setTextAlignment:NSTextAlignmentLeft];
-    [self.labelL setFont:[UIFont systemFontOfSize:16 weight:UIFontWeightMedium] ];
-    [self.labelR setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightBold] ];
+    [self.labelL setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
+    [self.labelR setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
     [self.labelR setText:@" TODAY"];
     [self.labelL setText:@"your bill"];
     [self.labelR setTextColor:[UIColor whiteColor] ];
@@ -62,9 +62,9 @@
     //数字
     self.labelNum=[[UILabel alloc]init];
     [self.labelNum setTextColor:[UIColor whiteColor]];
-    [self.labelNum setFont:[UIFont systemFontOfSize:66 weight:UIFontWeightLight]];
+    [self.labelNum setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:64]];
     [self.labelNum setTextAlignment:NSTextAlignmentCenter];
-    [self.labelNum setText:@"+999.99"];
+    [self.labelNum setText:@"+0.00"];
     [self addSubview:self.labelNum];
     [self.labelNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);

@@ -114,6 +114,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[OBBillManager sharedInstance] removeBill:self.billsArr[indexPath.row]];
+    [[OBBillManager sharedInstance] updateSumOfDay:self.billsArr[indexPath.row].date];
+    [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
     [self.billsArr removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }

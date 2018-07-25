@@ -91,7 +91,7 @@
 
 - (void)setCellWithBill:(OBBill *)bill{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"hh:mm";
+    dateFormatter.dateFormat = @"HH:mm";
     self.timeLabel.text=[dateFormatter stringFromDate:bill.date];
     double value= bill.isOut? -bill.value:bill.value;
     self.valueLabel.text=[NSString stringWithFormat:@"%+.2lf",value];
