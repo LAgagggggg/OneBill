@@ -11,6 +11,8 @@
 #import "view/OBTableViewCardCell.h"
 #import <masonry.h>
 
+#define CellEdgeInset 8
+
 @interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
@@ -45,13 +47,14 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.summaryCardView.mas_top);
-        make.left.equalTo(self.view.mas_left).with.offset(30-8);
-        make.right.equalTo(self.view.mas_right).with.offset(-30+8);
+        make.left.equalTo(self.view.mas_left).with.offset(30-CellEdgeInset);
+        make.right.equalTo(self.view.mas_right).with.offset(-30+CellEdgeInset);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITextBorderStyleNone;
-    self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 0, 0);
+    self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
+    self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
 }
 
@@ -96,7 +99,7 @@ static NSString * const reuseIdentifier = @"Cell";
             subview.subviews[0].layer.cornerRadius=10.f;
             subview.subviews[0].layer.masksToBounds=YES;
             CGRect frame=subview.subviews[0].frame;
-            frame.size.width-=8;
+            frame.size.width-=CellEdgeInset;
             subview.subviews[0].frame=frame;
             
         }

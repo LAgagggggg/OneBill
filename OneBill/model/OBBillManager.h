@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <FMDB.h>
 #import "OBBill.h"
+#import "OBDaySummary.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSArray<OBBill *>*)billsSameDayAsDate:(NSDate *)date;
 -(double)sumOfDay:(NSDate *)date;
 -(BOOL)updateSumOfDay:(NSDate *)date;
+-(NSArray<OBDaySummary *>*)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount;
 @end
 
 NS_ASSUME_NONNULL_END

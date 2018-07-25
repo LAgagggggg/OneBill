@@ -53,7 +53,7 @@
     NSTimeInterval dayEndStamp=dayStartStamp+60*60*24;
     NSMutableArray * resultArr=[[NSMutableArray alloc]init];
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?);"];
+        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?) ORDER BY createdDate ASC;;"];
         FMResultSet *resultSet = [db executeQuery:sql,@((double)dayStartStamp),@((double)dayEndStamp)];
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
@@ -77,8 +77,16 @@
     NSTimeInterval dayStartStamp=[[calendar startOfDayForDate:date] timeIntervalSince1970];
     __block BOOL result;
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"insert into %@(dateOfDay,sum) VALUES(?,?);",@"SumTable"];
-        result=[db executeUpdate:sql,@((double)dayStartStamp),@(daySpend)];
+        NSString * sql=@"select count(*) from sumTable where(dateOfDay==?);";
+        NSInteger count=[db intForQuery:sql,@((double)dayStartStamp)];
+        if (count) {
+            sql=[NSString stringWithFormat:@"update %@ set sum=? where(dateOfDay==?);",@"SumTable"];
+            result=[db executeUpdate:sql,@(daySpend),@((double)dayStartStamp)];
+        }
+        else{
+            sql=[NSString stringWithFormat:@"insert into %@(dateOfDay,sum) VALUES(?,?);",@"SumTable"];
+            result=[db executeUpdate:sql,@(dayStartStamp),@(daySpend)];
+        }
     }];
     return result;
 }
@@ -98,4 +106,26 @@
     return sum;
 }
 
+-(NSArray<OBDaySummary *> *)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount{
+    NSMutableArray * summaryArr=[[NSMutableArray alloc]init];
+    [self.queue inDatabase:^(FMDatabase *db) {
+        NSUInteger count = [db intForQuery:@"select count(*) from sumTable;"];
+        NSInteger sqlFetchFromIndex=count-amount-index;
+        NSInteger actualAmount=amount;
+        if (sqlFetchFromIndex<0) {
+            sqlFetchFromIndex=0;
+            actualAmount=count-index;
+        }
+        NSString * sql=[NSString stringWithFormat:@"select * from sumTable ORDER BY dateOfDay ASC LIMIT %ld,%d;",(long)sqlFetchFromIndex,(int)actualAmount];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next]) {
+            OBDaySummary * summary=[[OBDaySummary alloc]init];
+            summary.date=[resultSet dateForColumn:@"dateOfDay"];
+            summary.sum=[resultSet doubleForColumn:@"sum"];
+            [summaryArr addObject:summary];
+        }
+        [resultSet close];
+    }];
+    return summaryArr;
+}
 @end
