@@ -11,6 +11,7 @@
 
 #define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
+#define CellEdgeInset 8
 
 @interface OBDaySummaryTableViewCell()
 @property(strong,nonatomic)UILabel * dateLabel;
@@ -63,7 +64,7 @@
 - (void)setFrame:(CGRect)frame{
     frame.origin.y += 12;
     frame.size.height -= 12;
-    frame.origin.x += 8;
+    frame.origin.x += CellEdgeInset;
     frame.size.width -= 16;
     [super setFrame:frame];
 }
