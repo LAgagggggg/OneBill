@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic) NSMutableArray<NSString *> * categoriesArr;
 + (CategoryManager *)sharedInstance;
-
+- (void)writeToFile;
 @end
 
 NS_ASSUME_NONNULL_END

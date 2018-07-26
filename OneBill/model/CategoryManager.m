@@ -28,4 +28,10 @@
     return manager;
 }
 
+-(void)writeToFile{
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [path objectAtIndex:0];
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"categoryArr.plist"];
+    [self.categoriesArr writeToFile:plistPath atomically:YES];
+}
 @end

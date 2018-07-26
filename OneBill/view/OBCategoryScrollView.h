@@ -13,8 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBCategoryScrollView : UIScrollView
 @property (strong,nonatomic) CategoryView * selectedView;
+@property (strong,nonatomic) NSMutableArray<CategoryView *> * cViewArr;
 @property (strong,nonatomic) NSString * currentCategory;
 @property (strong,nonatomic) UIView * sumLabelView;
+@property (strong,nonatomic) UITextField * addTextField;
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr;
 @end
 

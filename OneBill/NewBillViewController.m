@@ -213,6 +213,9 @@
     if([self.dateLabel isFirstResponder]){
         [self.dateLabel resignFirstResponder];
     }
+    if ([self.categoryScrollView.addTextField isFirstResponder]) {
+        [self.categoryScrollView.addTextField resignFirstResponder];
+    }
 }
 
 //弹出键盘时

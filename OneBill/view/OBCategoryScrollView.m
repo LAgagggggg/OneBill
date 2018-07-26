@@ -8,6 +8,7 @@
 
 #import "OBCategoryScrollView.h"
 #import "../model/OBBillManager.h"
+#import "../model/CategoryManager.h"
 #import <masonry.h>
 
 @implementation OBCategoryScrollView
@@ -22,7 +23,7 @@
         self.backgroundColor=[UIColor clearColor];
         float needWidth=0;
         int i=0;
-        NSMutableArray * cViewArr=[[NSMutableArray alloc]init];
+        self.cViewArr=[[NSMutableArray alloc]init];
         self.sumLabelView=[[UIView alloc]init];
         [self addSubview:self.sumLabelView];
         [self.sumLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -45,7 +46,7 @@
             [cView.button addTarget:self action:@selector(didClickOneView:) forControlEvents:UIControlEventTouchUpInside];
             if (i!=0) {
                 needWidth+=21;
-                CategoryView * lastView=cViewArr.lastObject;
+                CategoryView * lastView=self.cViewArr.lastObject;
                 [cView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(self.mas_top).with.offset(26);
                     make.left.equalTo(lastView.mas_right).with.offset(21);
@@ -66,20 +67,33 @@
                 make.centerX.equalTo(cView.mas_centerX);
             }];
             i++;
-            [cViewArr addObject:cView];
+            [self.cViewArr addObject:cView];
         }
         CategoryView * cView=[[CategoryView alloc]initWithCategory:@"+"];
+        self.addTextField=[[UITextField alloc]init];
+        self.addTextField.font=cView.label.font;
+        self.addTextField.textColor=cView.label.textColor;
+        self.addTextField.textAlignment=NSTextAlignmentCenter;
+        self.addTextField.placeholder=@"+";
+        [self.addTextField addTarget:self action:@selector(textFieldDidEndEditing) forControlEvents:UIControlEventEditingDidEnd];
+        cView.label.hidden=YES;
+        [cView addSubview:self.addTextField];
+        [self.addTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cView.mas_left);
+            make.right.equalTo(cView.mas_right);
+            make.centerY.equalTo(cView.mas_centerY);
+        }];
         [self addSubview:cView];
         [cView layoutIfNeeded];
         needWidth+=21;
-        needWidth+=cView.frame.size.width;
-        CategoryView * lastView=cViewArr.lastObject;
+        needWidth+=100;
+        CategoryView * lastView=self.cViewArr.lastObject;
         [cView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top).with.offset(26);
             make.left.equalTo(lastView.mas_right).with.offset(21);
         }];
-        self.contentSize=CGSizeMake(needWidth+30, 88);
-        self.sumLabelView.frame=CGRectMake(0, 0, needWidth+30, 16);
+        self.contentSize=CGSizeMake(needWidth+20, 88);
+        self.sumLabelView.frame=CGRectMake(0,0,needWidth+20,16);
         self.scrollEnabled=YES;
     }
     return self;
@@ -97,5 +111,63 @@
         self.currentCategory=clickedView.label.text;
     }
 }
+
+-(void)textFieldDidEndEditing{
+    if(self.addTextField.text.length){
+        [[CategoryManager sharedInstance].categoriesArr addObject:self.addTextField.text];
+        [[CategoryManager sharedInstance]writeToFile];
+        float needWidth=self.contentSize.width;
+        CategoryView * cView=[[CategoryView alloc]initWithCategory:self.addTextField.text];
+        [self.addTextField.superview removeFromSuperview];
+        needWidth-=121;
+        [self addSubview:cView];
+        [cView.button addTarget:self action:@selector(didClickOneView:) forControlEvents:UIControlEventTouchUpInside];
+        [cView layoutIfNeeded];
+        needWidth+=21;
+        needWidth+=cView.frame.size.width;
+        CategoryView * lastView=self.cViewArr.lastObject;
+        [cView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).with.offset(26);
+            make.left.equalTo(lastView.mas_right).with.offset(21);
+        }];
+        UILabel * sumLabel=[[UILabel alloc]init];
+        sumLabel.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
+        sumLabel.textColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:0.5];
+        sumLabel.text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:cView.label.text InMonthOfDate:[NSDate date]]];
+        sumLabel.textAlignment=NSTextAlignmentCenter;
+        [self.sumLabelView addSubview:sumLabel];
+        [sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.sumLabelView.mas_top);
+            make.centerX.equalTo(cView.mas_centerX);
+        }];
+        [self.cViewArr addObject:cView];
+        cView=[[CategoryView alloc]initWithCategory:@"+"];
+        self.addTextField=[[UITextField alloc]init];
+        self.addTextField.font=cView.label.font;
+        self.addTextField.textColor=cView.label.textColor;
+        self.addTextField.textAlignment=NSTextAlignmentCenter;
+        self.addTextField.placeholder=@"+";
+        [self.addTextField addTarget:self action:@selector(textFieldDidEndEditing) forControlEvents:UIControlEventEditingDidEnd];
+        cView.label.hidden=YES;
+        [cView addSubview:self.addTextField];
+        [self.addTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cView.mas_left);
+            make.right.equalTo(cView.mas_right);
+            make.centerY.equalTo(cView.mas_centerY);
+        }];
+        [self addSubview:cView];
+        [cView layoutIfNeeded];
+        needWidth+=21;
+        needWidth+=100;
+        lastView=self.cViewArr.lastObject;
+        [cView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).with.offset(26);
+            make.left.equalTo(lastView.mas_right).with.offset(21);
+        }];
+        self.contentSize=CGSizeMake(needWidth, 88);
+        self.sumLabelView.frame=CGRectMake(0,0,needWidth,16);
+    }
+}
+
 
 @end
