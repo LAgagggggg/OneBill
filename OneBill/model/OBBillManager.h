@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(BOOL)insertBill:(OBBill *)bill;
 -(BOOL)removeBill:(OBBill *)bill;
 -(NSArray<OBBill *>*)billsSameDayAsDate:(NSDate *)date;
+-(NSArray<OBBill *>*)billsSameMonthAsDate:(NSDate *)date ofCategory:(NSString *)category;
 -(double)sumOfDay:(NSDate *)date;
+-(double)sumOfCategory:(NSString *)category InMonthOfDate:(NSDate *)date;
 -(BOOL)updateSumOfDay:(NSDate *)date;
 -(NSArray<OBDaySummary *>*)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount;
 @end

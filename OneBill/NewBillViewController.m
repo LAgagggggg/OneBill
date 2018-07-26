@@ -45,10 +45,10 @@
     self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:self.categoryManager.categoriesArr];
     [self.view addSubview:self.categoryScrollView];
     [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(123);
+        make.top.equalTo(self.view.mas_top).with.offset(97);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(62));
+        make.height.equalTo(@(88));
     }];
     self.inputView=[[BillValueInputView alloc]init];
     [self.view addSubview:self.inputView];

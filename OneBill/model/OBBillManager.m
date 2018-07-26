@@ -77,6 +77,31 @@
     return resultArr;
 }
 
+- (NSArray<OBBill *> *)billsSameMonthAsDate:(NSDate *)date ofCategory:(NSString *)category{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents * components = [cal components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    [components setDay:([components day] - ([components day] -1))];
+    NSDate *thisMonth = [cal dateFromComponents:components];
+    [components setMonth:([components month] + 1)];
+    NSDate *nextMonth = [cal dateFromComponents:components];
+    NSTimeInterval monthStartStamp=[thisMonth timeIntervalSince1970];
+    NSTimeInterval monthEndStamp=[nextMonth timeIntervalSince1970];
+    NSMutableArray * resultArr=[[NSMutableArray alloc]init];
+    [self.queue inDatabase:^(FMDatabase *db) {
+        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==?) ORDER BY createdDate ASC;;"];
+        FMResultSet *resultSet = [db executeQuery:sql,@((double)monthStartStamp),@((double)monthEndStamp),category];
+        while ([resultSet next]) {
+            OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
+            NSData * locData=[resultSet dataForColumn:@"location"];
+            CLLocation * location=[NSKeyedUnarchiver unarchiveObjectWithData:locData];
+            bill.location=location;
+            [resultArr addObject:bill];
+        }
+        [resultSet close];
+    }];
+    return resultArr;
+}
+
 -(BOOL)updateSumOfDay:(NSDate *)date{
     NSArray * billArr = [[OBBillManager sharedInstance] billsSameDayAsDate:date];
     double daySpend=0;
@@ -113,6 +138,15 @@
         }
         [resultSet close];
     }];
+    return sum;
+}
+
+- (double)sumOfCategory:(NSString *)category InMonthOfDate:(NSDate *)date{
+    NSArray * tempArr=[self billsSameMonthAsDate:date ofCategory:category];
+    double sum=0;
+    for (OBBill * bill in tempArr) {
+        sum-= bill.isOut?bill.value:-bill.value;
+    }
     return sum;
 }
 
