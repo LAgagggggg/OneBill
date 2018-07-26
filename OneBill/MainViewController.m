@@ -6,6 +6,7 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#import <Masonry.h>
 #import "MainViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -13,7 +14,7 @@
 #import "model/OBBillManager.h"
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
-#import <Masonry.h>
+#import "CheckBillsViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
@@ -57,6 +58,7 @@
         make.height.equalTo(@(42));
         make.width.equalTo(@(200));
     }];
+    [self.checkBtn addTarget:self action:@selector(checkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //进入今日账单详情的手势
     UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
     UISwipeGestureRecognizer * swipeForToday=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
@@ -96,5 +98,9 @@
     [self performSegueWithIdentifier:@"NBVC" sender:nil];
 }
 
+- (void)checkBtnClicked{
+    CheckBillsViewController * vc=[[CheckBillsViewController alloc]initWithDate:[NSDate date]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

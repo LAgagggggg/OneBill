@@ -191,12 +191,13 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.summaryArr insertObjects:tempArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,count)]];
     self.fetchIndex+=count;
     self.fetchStopFlag= count==FetchEachTime? NO:YES;
+    [self.tableView setContentOffset:CGPointMake(0, 0)];
     [self.tableView reloadData];
-    CGPoint offset = self.tableView.contentOffset;
-    NSLog(@"%lf",self.tableView.contentOffset.y);
-    offset.y+=count*commonCellHeight;
-    self.tableView.contentOffset=offset;
-    NSLog(@"%lf",self.tableView.contentOffset.y);
+//    CGPoint offset = self.tableView.contentOffset;
+//    NSLog(@"%lf",self.tableView.contentOffset.y);
+//    offset.y+=count*commonCellHeight;
+//    self.tableView.contentOffset=offset;
+//    NSLog(@"%lf",self.tableView.contentOffset.y);
     self.isInserting=NO;
 }
 

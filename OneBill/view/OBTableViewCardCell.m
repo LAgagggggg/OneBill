@@ -89,9 +89,14 @@
     return self;
 }
 
-- (void)setCellWithBill:(OBBill *)bill{
+- (void)setCellWithBill:(OBBill *)bill andStylePreference:(OBTimeLabelPreference)preference{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"HH:mm";
+    if (preference==OBTimeLibelTimeOnly) {
+        dateFormatter.dateFormat = @"HH:mm";
+    }
+    else if(preference==OBTimeLibelWithDate){
+        dateFormatter.dateFormat = @"HH:mm, MMM d";
+    }
     self.timeLabel.text=[dateFormatter stringFromDate:bill.date];
     double value= bill.isOut? -bill.value:bill.value;
     self.valueLabel.text=[NSString stringWithFormat:@"%+.2lf",value];

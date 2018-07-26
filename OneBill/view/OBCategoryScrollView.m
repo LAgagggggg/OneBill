@@ -55,6 +55,7 @@
                 needWidth+=30;
                 [cView highlight];
                 self.selectedView=cView;
+                self.currentCategory=cView.label.text;
                 [cView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(self.mas_top).with.offset(26);
                     make.left.equalTo(self.mas_left).with.offset(30);
@@ -67,7 +68,7 @@
             i++;
             [cViewArr addObject:cView];
         }
-        CategoryView * cView=[[CategoryView alloc]initWithCategory:@"···"];
+        CategoryView * cView=[[CategoryView alloc]initWithCategory:@"+"];
         [self addSubview:cView];
         [cView layoutIfNeeded];
         needWidth+=21;
@@ -93,6 +94,7 @@
             [self.selectedView downplay];
         }];
         self.selectedView=clickedView;
+        self.currentCategory=clickedView.label.text;
     }
 }
 

@@ -55,7 +55,7 @@
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(75);
         make.right.equalTo(self.view.mas_right).with.offset(-55);
-        make.top.equalTo(self.categoryScrollView.mas_top).with.offset(86);
+        make.top.equalTo(self.categoryScrollView.mas_bottom).with.offset(24);
         make.height.equalTo(@(76));
     }];
     self.inputView.delegate=self;

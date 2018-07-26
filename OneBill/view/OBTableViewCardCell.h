@@ -11,8 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    OBTimeLibelWithDate,
+    OBTimeLibelTimeOnly,
+} OBTimeLabelPreference;
+
 @interface OBTableViewCardCell : UITableViewCell
--(void)setCellWithBill:(OBBill *)bill;
+- (void)setCellWithBill:(OBBill *)bill andStylePreference:(OBTimeLabelPreference)preference;
 @end
 
 NS_ASSUME_NONNULL_END
