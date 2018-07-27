@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(BOOL)updateSumOfDay:(NSDate *)date;
 -(NSArray<OBDaySummary *>*)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount;
 -(double)predictValueWithCategory:(NSString *)category Date:(NSDate *)date AndLocation:(nullable CLLocation *)location;
+-(nullable NSString *)predictCategoryWithDate:(NSDate *)date Location:(nullable CLLocation *)location;
 @end
 
 NS_ASSUME_NONNULL_END

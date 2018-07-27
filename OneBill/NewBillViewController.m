@@ -38,11 +38,11 @@
     self.categoryManager=[CategoryManager sharedInstance];
     [self setUI];
     [self initializeLocationService];
-    self.locDescription=[[NSMutableString alloc]init];
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)setUI{
+    self.locDescription=[[NSMutableString alloc]init];
     self.view.backgroundColor=[UIColor whiteColor];
     self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:self.categoryManager.categoriesArr];
     [self.view addSubview:self.categoryScrollView];
@@ -184,6 +184,17 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     self.location = locations.lastObject;
+    //预测category
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(queue, ^{
+        NSString * predictCategory=[[OBBillManager sharedInstance] predictCategoryWithDate:self.date Location:self.location];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode=MBProgressHUDModeText;
+            hud.label.text=predictCategory;
+            [hud hideAnimated:YES afterDelay:1.0];
+        });
+    });
     [_geoCoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (placemarks.count > 0) {
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
@@ -194,9 +205,7 @@
             [locStr appendString:placemark.administrativeArea];
             [locStr appendString:@"\n"];
             // 位置名
-            [self.locDescription appendString:placemark.name];
-            [self.locDescription appendString:@","];
-            [self.locDescription appendString:placemark.areasOfInterest[0]];
+            [self.locDescription appendString:[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0]];
             [locStr appendString:self.locDescription];
             self.locationLabel.text=locStr;
         }else if (error == nil && [placemarks count] == 0) {
@@ -301,11 +310,17 @@
 //监控category改变
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"categoryScrollView.currentCategory"]&&object==self) {
-        double predictValue=[[OBBillManager sharedInstance] predictValueWithCategory:self.categoryScrollView.currentCategory Date:self.date AndLocation:self.location];
-        MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode=MBProgressHUDModeText;
-        hud.label.text=[NSString stringWithFormat:@"%+.2lf",predictValue];
-        [hud hideAnimated:YES afterDelay:1.5];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0);
+        dispatch_async(queue, ^{
+            double predictValue=[[OBBillManager sharedInstance] predictValueWithCategory:self.categoryScrollView.currentCategory Date:self.date AndLocation:self.location];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode=MBProgressHUDModeText;
+                hud.label.text=[NSString stringWithFormat:@"%+.2lf",predictValue];
+                [hud hideAnimated:YES afterDelay:1.0];
+            });
+        });
+        
     }
 }
 
