@@ -317,13 +317,12 @@
     double locationMatchD=500;
     double timeMatchD=3600;
     double fetchRange=60*60*24*7;//七天
-    int valuePrecision=10;
     double becomePredictValueStandard=0.6;
-    int billEnoughForPredict=4;
+    int billEnoughForPredict=1;
     /*
      首先取出之前一段时间的数据
      将其归类为都相符、仅时间相符以及仅地点相符
-     然后首先尝试从都相符的数据中根据精度获取预测值，比如有百分之60的账单值为10+，精度为10，则返回预测值为10；
+     并依据这三类进行预测
      */
     //取出数据
     NSTimeInterval fetchEndStamp=[date timeIntervalSince1970];
