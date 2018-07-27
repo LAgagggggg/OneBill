@@ -7,7 +7,8 @@
 //
 
 #import "OBBillManager.h"
-#import <CoreLocation/CoreLocation.h>
+#import "CategoryManager.h"
+#import <FMDB.h>
 
 @interface OBBillManager()
 @property (strong,nonatomic)NSString * dbPath;
@@ -88,7 +89,7 @@
     NSTimeInterval monthEndStamp=[nextMonth timeIntervalSince1970];
     NSMutableArray * resultArr=[[NSMutableArray alloc]init];
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==?) ORDER BY createdDate ASC;;"];
+        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==?) ORDER BY createdDate ASC;"];
         FMResultSet *resultSet = [db executeQuery:sql,@((double)monthStartStamp),@((double)monthEndStamp),category];
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
@@ -171,5 +172,62 @@
         [resultSet close];
     }];
     return summaryArr;
+}
+
+- (double)predictValueWithCategory:(NSString *)category Date:(NSDate *)date AndLocation:(CLLocation *)location{
+    double locationMatchD=500;
+    double timeMatchD=3600;
+    double fetchRange=60*60*24*30;
+    int valuePrecision=10;
+    double becomePredictValueStandard=0.6;
+    /*
+     首先取出之前一段时间的数据
+     将其归类为都相符、仅时间相符以及仅地点相符
+     然后首先尝试从都相符的数据中根据精度获取预测值，比如有百分之60的账单值为10+，精度为10，则返回预测值为10；
+    */
+    //取出数据
+    NSTimeInterval fetchEndStamp=[date timeIntervalSince1970];
+    NSMutableArray * billsArr=[[NSMutableArray alloc]init];
+    double predictValue=0;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==? AND isOut==1);"];
+        FMResultSet *resultSet = [db executeQuery:sql,@((double)fetchEndStamp-fetchRange),@((double)fetchEndStamp),category];
+        while ([resultSet next]) {
+            OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
+            NSData * locData=[resultSet dataForColumn:@"location"];
+            CLLocation * location=[NSKeyedUnarchiver unarchiveObjectWithData:locData];
+            bill.location=location;
+            [billsArr addObject:bill];
+        }
+        [resultSet close];
+    }];
+    //归类
+    NSMutableArray<OBBill *> * timeMatchArr=[[NSMutableArray alloc]init];
+    NSMutableArray<OBBill *> * locationMatchArr=[[NSMutableArray alloc]init];
+    NSMutableArray<OBBill *> * bothMatchArr=[[NSMutableArray alloc]init];
+    for (OBBill * bill in billsArr) {
+        BOOL timeMatch=NO;
+        BOOL locationMatch=NO;
+        NSTimeInterval targetTimeStamp=[bill.date timeIntervalSince1970];
+        if (targetTimeStamp>=fetchEndStamp-timeMatchD && targetTimeStamp<=fetchEndStamp+timeMatchD) {
+            [timeMatchArr addObject:bill];
+            timeMatch=YES;
+        }
+        if (bill.location && location) {
+            if ([bill.location distanceFromLocation:location]<=locationMatchD) {
+                [locationMatchArr addObject:bill];
+                locationMatch=YES;
+            }
+            
+        }
+        if (timeMatch && locationMatch) {
+            [bothMatchArr addObject:bill];
+        }
+    }
+    for (OBBill * bill in bothMatchArr) {
+        predictValue+=bill.value;
+    }
+    predictValue/=bothMatchArr.count;
+    return predictValue;
 }
 @end

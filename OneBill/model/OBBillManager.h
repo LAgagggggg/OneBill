@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FMDB.h>
 #import "OBBill.h"
 #import "OBDaySummary.h"
+#import <CoreLocation/CoreLocation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OBBillManager : NSObject
-@property(strong,nonatomic)FMDatabase * database;
 +(instancetype)sharedInstance;
 -(BOOL)insertBill:(OBBill *)bill;
 -(BOOL)removeBill:(OBBill *)bill;
@@ -24,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(double)sumOfCategory:(NSString *)category InMonthOfDate:(NSDate *)date;
 -(BOOL)updateSumOfDay:(NSDate *)date;
 -(NSArray<OBDaySummary *>*)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount;
+-(double)predictValueWithCategory:(NSString *)category Date:(NSDate *)date AndLocation:(nullable CLLocation *)location;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,6 +14,7 @@
 #import "view/BillValueInputView.h"
 #import "view/OBCategoryScrollView.h"
 #import "model/OBBillManager.h"
+#import <MBProgressHUD.h>
 
 @interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate>
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
@@ -38,6 +39,7 @@
     [self setUI];
     [self initializeLocationService];
     self.locDescription=[[NSMutableString alloc]init];
+    [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)setUI{
@@ -294,6 +296,17 @@
     [[OBBillManager sharedInstance] insertBill:bill];
     [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+//监控category改变
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"categoryScrollView.currentCategory"]&&object==self) {
+        double predictValue=[[OBBillManager sharedInstance] predictValueWithCategory:self.categoryScrollView.currentCategory Date:self.date AndLocation:self.location];
+        MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode=MBProgressHUDModeText;
+        hud.label.text=[NSString stringWithFormat:@"%+.2lf",predictValue];
+        [hud hideAnimated:YES afterDelay:1.5];
+    }
 }
 
 @end
