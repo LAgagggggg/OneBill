@@ -14,6 +14,8 @@
 		082B1FC820FD79BE0036B5FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC620FD79BE0036B5FC /* LaunchScreen.storyboard */; };
 		082B1FCB20FD79BE0036B5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FCA20FD79BE0036B5FC /* main.m */; };
 		082B1FD320FDCFF70036B5FC /* TodayCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FD220FDCFF70036B5FC /* TodayCardView.m */; };
+		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
+		089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */; };
 		08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B420FE4E9C008F87DB /* OBMainButton.m */; };
 		08E425B820FF0144008F87DB /* NewBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B720FF0144008F87DB /* NewBillViewController.m */; };
 		08E425BB20FF1BE9008F87DB /* CategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425BA20FF1BE9008F87DB /* CategoryManager.m */; };
@@ -46,6 +48,10 @@
 		082B1FCA20FD79BE0036B5FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		082B1FD120FDCFF70036B5FC /* TodayCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayCardView.h; sourceTree = "<group>"; };
 		082B1FD220FDCFF70036B5FC /* TodayCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardView.m; sourceTree = "<group>"; };
+		087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseView.h; sourceTree = "<group>"; };
+		087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseView.m; sourceTree = "<group>"; };
+		089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseViewCell.h; sourceTree = "<group>"; };
+		089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseViewCell.m; sourceTree = "<group>"; };
 		08E425B320FE4E9C008F87DB /* OBMainButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMainButton.h; sourceTree = "<group>"; };
 		08E425B420FE4E9C008F87DB /* OBMainButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBMainButton.m; sourceTree = "<group>"; };
 		08E425B620FF0144008F87DB /* NewBillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewBillViewController.h; sourceTree = "<group>"; };
@@ -142,6 +148,10 @@
 		082B1FD420FDCFFB0036B5FC /* view */ = {
 			isa = PBXGroup;
 			children = (
+				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
+				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
+				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,
+				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
 				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
 				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
 				08E425D72106218C008F87DB /* OBTableViewCardCell.h */,
@@ -289,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E425E52109AD6C008F87DB /* CheckBillsViewController.m in Sources */,
+				087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */,
 				08E425D021046111008F87DB /* OBBillManager.m in Sources */,
 				08E425C320FFA4C2008F87DB /* InoutSwitchButton.m in Sources */,
 				08E425B820FF0144008F87DB /* NewBillViewController.m in Sources */,
@@ -303,6 +314,7 @@
 				08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */,
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,
 				082B1FBD20FD79BB0036B5FC /* AppDelegate.m in Sources */,
+				089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */,
 				08E425D32105BCC6008F87DB /* BillDetailViewController.m in Sources */,
 				08E425D62105F145008F87DB /* OBDaySummaryCardView.m in Sources */,
 				08E425D92106218C008F87DB /* OBTableViewCardCell.m in Sources */,

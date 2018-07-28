@@ -9,6 +9,8 @@
 #import "BillDetailViewController.h"
 #import "view/OBDaySummaryCardView.h"
 #import "view/OBTableViewCardCell.h"
+#import "view/OBCategoryChooseView.h"
+#import "model/CategoryManager.h"
 #import <masonry.h>
 
 #define CellEdgeInset 8
@@ -56,6 +58,14 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
+    OBCategoryChooseView * view=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
+    }];
 }
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills

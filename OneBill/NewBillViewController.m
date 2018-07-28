@@ -101,7 +101,7 @@
         make.right.equalTo(separateLine.mas_right).with.offset(-40);
         make.height.equalTo(@(34));
     }];
-    UIImageView * locationIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"clearBtn"]];
+    UIImageView * locationIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"locationIcon"]];
     [locationView addSubview:locationIconView];
     [locationIconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(locationView.mas_left);
@@ -131,7 +131,7 @@
         make.right.equalTo(separateLine.mas_right).with.offset(-40);
         make.height.equalTo(@(20));
     }];
-    UIImageView * dateIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"clearBtn"]];
+    UIImageView * dateIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dateIcon"]];
     [dateView addSubview:dateIconView];
     [dateIconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(dateView.mas_left);
@@ -209,7 +209,7 @@
             [locStr appendString:self.locDescription];
             self.locationLabel.text=locStr;
         }else if (error == nil && [placemarks count] == 0) {
-            self.locationLabel.text=@"An error occurred";
+            self.locationLabel.text=@"No Location Information";
         } else if (error != nil){
             self.locationLabel.text=@"An error occurred";
         }

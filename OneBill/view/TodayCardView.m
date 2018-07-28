@@ -32,7 +32,7 @@
     CAShapeLayer * mainCardLayer=[[CAShapeLayer alloc]init];
     mainCardLayer.backgroundColor=DarkCyanColor.CGColor;
     mainCardLayer.cornerRadius=10.f;
-    mainCardLayer.frame=CGRectMake(0, 20, self.frame.size.width, self.frame.size.height-20);
+    mainCardLayer.frame=CGRectMake(0, 20, self.bounds.size.width, self.bounds.size.height-20);
     mainCardLayer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
     mainCardLayer.shadowOffset=CGSizeMake(0, 6);
     mainCardLayer.shadowOpacity=0.3;
