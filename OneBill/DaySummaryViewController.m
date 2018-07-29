@@ -17,7 +17,7 @@
 #define CellEdgeInset 8
 #define FetchEachTime 10
 
-@interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
 @property (strong,nonatomic)UILabel * todaySumLabel;

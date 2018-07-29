@@ -15,7 +15,7 @@
 
 #define CellEdgeInset 8
 
-@interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)UITableView * tableView;

@@ -16,7 +16,7 @@
 #import "model/OBBillManager.h"
 #import <MBProgressHUD.h>
 
-@interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate>
+@interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;

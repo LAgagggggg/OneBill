@@ -16,7 +16,7 @@
 
 #define CellEdgeInset 8
 
-@interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)UITableView * tableView;
