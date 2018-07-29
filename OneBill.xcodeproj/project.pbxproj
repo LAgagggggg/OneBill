@@ -150,12 +150,6 @@
 			children = (
 				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
 				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
-				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,
-				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
-				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
-				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
-				08E425D72106218C008F87DB /* OBTableViewCardCell.h */,
-				08E425D82106218C008F87DB /* OBTableViewCardCell.m */,
 				08E425C52100EF72008F87DB /* BillValueInputView.h */,
 				08E425C62100EF72008F87DB /* BillValueInputView.m */,
 				08E425BD20FF248A008F87DB /* CategoryView.h */,
@@ -170,6 +164,12 @@
 				08E425C921023B8E008F87DB /* OBCategoryScrollView.m */,
 				08E425D42105F145008F87DB /* OBDaySummaryCardView.h */,
 				08E425D52105F145008F87DB /* OBDaySummaryCardView.m */,
+				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,
+				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
+				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
+				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
+				08E425D72106218C008F87DB /* OBTableViewCardCell.h */,
+				08E425D82106218C008F87DB /* OBTableViewCardCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";

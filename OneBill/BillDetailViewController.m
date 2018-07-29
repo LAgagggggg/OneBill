@@ -19,6 +19,10 @@
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)UITableView * tableView;
+@property (strong,nonatomic)OBCategoryChooseView * categoryChooseView;
+@property (strong,nonatomic)OBBill * editingBill;
+@property (strong,nonatomic)NSString * editingBillOldCategory;
+@property (strong,nonatomic)NSIndexPath * editingIndexPath;
 @end
 
 @implementation BillDetailViewController
@@ -29,6 +33,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
     [self setUI];
     [self.summaryCardView setDate:self.date Money:[[OBBillManager sharedInstance]sumOfDay:self.date]];
+    [self addObserver:self forKeyPath:@"categoryChooseView.selectedCategory" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)setUI{
@@ -58,14 +63,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
-    OBCategoryChooseView * view=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
-    [self.view addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.bottom.equalTo(self.view.mas_bottom);
-    }];
+    self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
+    [self.view addSubview:self.categoryChooseView];
+    self.categoryChooseView.frame=CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]init];
+    [tap addTarget:self action:@selector(resignCategoryChooseView)];
+    [self.categoryChooseView.dimView addGestureRecognizer:tap];
 }
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills
@@ -77,9 +80,58 @@ static NSString * const reuseIdentifier = @"Cell";
     return self;
 }
 
+#pragma mark CategoryEdit
+-(void)categoryBtnClicked:(id)sender{
+    UIButton * button=(UIButton *)sender;
+    self.editingIndexPath=[self.tableView indexPathForCell:(UITableViewCell *)button.superview.superview];
+    self.editingBill=self.billsArr[self.editingIndexPath.row];
+    self.editingBillOldCategory=self.editingBill.category;
+    self.categoryChooseView.selectedCategory=button.titleLabel.text;
+    [self showCategoryChooseView];
+}
+
+-(void)resignCategoryChooseView{
+    if (![self.categoryChooseView.selectedCategory isEqualToString:self.editingBillOldCategory]) {
+        [[OBBillManager sharedInstance] editBillOfDate:self.editingBill.date Value:self.editingBill.value withBill:self.editingBill];
+    }
+    CGRect frame=self.categoryChooseView.frame;
+    frame.origin.y=[UIScreen mainScreen].bounds.size.height;
+    self.categoryChooseView.dimView.alpha=0.3;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.categoryChooseView.dimView.alpha=0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+           self.categoryChooseView.frame=frame;
+        }];
+    }];
+}
+
+-(void)showCategoryChooseView{
+    CGRect frame=self.categoryChooseView.frame;
+    frame.origin.y=0;
+    self.categoryChooseView.dimView.alpha=0;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.categoryChooseView.frame=frame;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.categoryChooseView.dimView.alpha=0.3;
+        }];
+    }];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"categoryChooseView.selectedCategory"] && object==self) {
+        //更改cell的category
+        self.editingBill.category=self.categoryChooseView.selectedCategory;
+        [self.tableView reloadRowsAtIndexPaths:@[self.editingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+#pragma mark TableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OBTableViewCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [cell setCellWithBill:self.billsArr[indexPath.row] andStylePreference:OBTimeLibelTimeOnly];
+    [cell.categoryBtn addTarget:self action:@selector(categoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 

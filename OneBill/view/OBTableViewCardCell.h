@@ -17,6 +17,7 @@ typedef enum : NSUInteger {
 } OBTimeLabelPreference;
 
 @interface OBTableViewCardCell : UITableViewCell
+@property (strong,nonatomic)UIButton * categoryBtn;
 - (void)setCellWithBill:(OBBill *)bill andStylePreference:(OBTimeLabelPreference)preference;
 @end
 

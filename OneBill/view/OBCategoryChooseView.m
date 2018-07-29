@@ -13,9 +13,9 @@
 @interface OBCategoryChooseView()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)UIButton * bottomBtn;
 @property (strong,nonatomic)UIView * actualView;
-@property (strong,nonatomic)UIView * dimView;
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSArray<NSString *> * categoryArr;
+@property (strong,nonatomic)OBCategoryChooseViewCell * selectedCell;
 @end
 
 @implementation OBCategoryChooseView
@@ -79,6 +79,14 @@ CGFloat foldPositionY;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OBCategoryChooseViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
     cell.label.text=self.categoryArr[indexPath.row];
+    //确保复用时正确高亮选择的分类
+    if (![cell.label.text isEqualToString:self.selectedCategory]) {
+        [cell downplay];
+    }
+    else{
+        [cell highlight];
+    }
+    if (indexPath.row==0) self.selectedCell=cell;
     return cell;
 }
 
@@ -86,7 +94,21 @@ CGFloat foldPositionY;
     return self.categoryArr.count;
 }
 
+
+-(void)setSelectedCategory:(NSString *)selectedCategory{
+    _selectedCategory=selectedCategory;
+    NSInteger index=[self.categoryArr indexOfObject:selectedCategory];
+    [self.selectedCell downplay];
+    self.selectedCell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [self.selectedCell highlight];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (![self.categoryArr[indexPath.row] isEqualToString:self.selectedCategory]) {
+        [(OBCategoryChooseViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.categoryArr indexOfObject:self.selectedCategory] inSection:0]] downplay];
+        self.selectedCell=[tableView cellForRowAtIndexPath:indexPath];
+        [self.selectedCell highlight];
+        self.selectedCategory=self.selectedCell.label.text;
+    }
 }
 @end

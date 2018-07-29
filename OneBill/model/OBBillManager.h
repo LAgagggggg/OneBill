@@ -15,14 +15,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBBillManager : NSObject
 +(instancetype)sharedInstance;
+//bill
 -(BOOL)insertBill:(OBBill *)bill;
 -(BOOL)removeBill:(OBBill *)bill;
 -(NSArray<OBBill *>*)billsSameDayAsDate:(NSDate *)date;
 -(NSArray<OBBill *>*)billsSameMonthAsDate:(NSDate *)date ofCategory:(NSString *)category;
+-(BOOL)editBillOfDate:(NSDate *)date Value:(double)value withBill:(OBBill *)newBill;
+//sum
 -(double)sumOfDay:(NSDate *)date;
 -(double)sumOfCategory:(NSString *)category InMonthOfDate:(NSDate *)date;
 -(BOOL)updateSumOfDay:(NSDate *)date;
 -(NSArray<OBDaySummary *>*)fetchDaySummaryFromIndex:(NSInteger)index WithAmount:(NSInteger)amount;
+//predict
 -(double)predictValueWithCategory:(NSString *)category Date:(NSDate *)date AndLocation:(nullable CLLocation *)location;
 -(nullable NSString *)predictCategoryWithDate:(NSDate *)date Location:(nullable CLLocation *)location;
 @end

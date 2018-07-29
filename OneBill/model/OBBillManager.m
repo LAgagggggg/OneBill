@@ -103,6 +103,15 @@
     return resultArr;
 }
 
+- (BOOL)editBillOfDate:(NSDate *)date Value:(double)value withBill:(OBBill *)newBill{
+    __block BOOL result;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        NSString * sql=[NSString stringWithFormat:@"update BillsTable set value=?,createdDate=?,category=?,isOut=? where(createdDate==? AND value==?);"];
+        result=[db executeUpdate:sql,@(newBill.value),newBill.date,newBill.category,@(newBill.isOut),date,@(value)];
+    }];
+    return result;
+}
+
 -(BOOL)updateSumOfDay:(NSDate *)date{
     NSArray * billArr = [[OBBillManager sharedInstance] billsSameDayAsDate:date];
     double daySpend=0;

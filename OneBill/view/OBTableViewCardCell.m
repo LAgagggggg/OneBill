@@ -15,7 +15,6 @@
 @interface OBTableViewCardCell()
 @property (strong,nonatomic)UILabel * timeLabel;
 @property (strong,nonatomic)UILabel * valueLabel;
-@property (strong,nonatomic)UIButton * categoryBtn;
 @property (strong,nonatomic)UILabel * locLabel;
 @end
 
