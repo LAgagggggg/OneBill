@@ -12,12 +12,19 @@
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
+@interface OBCategoryScrollView()<UIScrollViewDelegate>
+@property BOOL isLabelShowing;
+@property (strong,nonatomic) UIView * sumLabelView;
+@end
+
 @implementation OBCategoryScrollView
 
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr
 {
     self = [super init];
     if (self) {
+        self.delegate=self;
+        self.categoryArr=categoriesArr;
         self.showsVerticalScrollIndicator=NO;
         self.showsHorizontalScrollIndicator=NO;
         self.alwaysBounceHorizontal=YES;
@@ -26,6 +33,8 @@
         int i=0;
         self.cViewArr=[[NSMutableArray alloc]init];
         self.sumLabelView=[[UIView alloc]init];
+        self.sumLabelView.alpha=0;
+        self.isLabelShowing=NO;
         [self addSubview:self.sumLabelView];
         [self.sumLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top);
@@ -56,7 +65,7 @@
                 needWidth+=30;
                 [cView highlight];
                 self.selectedView=cView;
-                self.currentCategory=cView.label.text;
+                _currentCategory=cView.label.text;
                 [cView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(self.mas_top).with.offset(26);
                     make.left.equalTo(self.mas_left).with.offset(30);
@@ -101,6 +110,20 @@
     return self;
 }
 
+//从外部设置高亮的标签
+-(void)setHighlightCategory:(NSString *)category{
+    _currentCategory=category;
+    NSInteger index=[self.categoryArr indexOfObject:category];
+    if (self.selectedView!=self.cViewArr[index]) {
+        CategoryView * oldView=self.selectedView;
+        self.selectedView=self.cViewArr[index];
+        [UIView animateWithDuration:0.3 animations:^{
+            [oldView downplay];
+            [self.selectedView highlight];
+        }];
+    }
+}
+
 - (void)didClickOneView:(id)sender{
     UIButton * clickedBtn=(UIButton *)sender;
     CategoryView * clickedView=(CategoryView *)clickedBtn.superview;
@@ -116,9 +139,10 @@
 
 -(void)textFieldDidEndEditing{
     if(self.addTextField.text.length ){
-        if (![[NSSet setWithArray:[CategoryManager sharedInstance].categoriesArr] containsObject:self.addTextField.text]) {
+        if (![[NSSet setWithArray:self.categoryArr] containsObject:self.addTextField.text]) {
             [[CategoryManager sharedInstance].categoriesArr addObject:self.addTextField.text];
             [[CategoryManager sharedInstance]writeToFile];
+            self.categoryArr=[CategoryManager sharedInstance].categoriesArr;
             float needWidth=self.contentSize.width;
             CategoryView * cView=[[CategoryView alloc]initWithCategory:self.addTextField.text];
             [self.addTextField.superview removeFromSuperview];
@@ -180,5 +204,32 @@
     }
 }
 
+#pragma mark SetLabelShowWhenScroll
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (self.isLabelShowing==NO) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.sumLabelView.alpha=1;
+        }];
+        self.isLabelShowing=YES;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (self.isLabelShowing==YES) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.sumLabelView.alpha=0;
+        }];
+        self.isLabelShowing=NO;
+    }
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.isLabelShowing==YES && decelerate==NO) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.sumLabelView.alpha=0;
+        }];
+        self.isLabelShowing=NO;
+    }
+}
 
 @end

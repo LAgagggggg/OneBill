@@ -254,7 +254,7 @@
         for ( NSNumber * key in enumeratorKey) {
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
-                predictValue=key.integerValue;
+                predictValue=key.integerValue*10;
                 NSLog(@"PredictValueByBoth");
                 return predictValue;
             }
@@ -277,7 +277,7 @@
         for ( NSNumber * key in enumeratorKey) {
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
-                predictValue=key.integerValue;
+                predictValue=key.integerValue*10;
                 NSLog(@"PredictValueByDate");
                 return predictValue;
             }
@@ -300,7 +300,7 @@
         for ( NSNumber * key in enumeratorKey) {
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
-                predictValue=key.integerValue;
+                predictValue=key.integerValue*10;
                 NSLog(@"PredictValueByLocation");
                 return predictValue;
             }
@@ -313,7 +313,7 @@
             predictValue+=bill.value;
         }
         predictValue/= bothMatchArr.count?bothMatchArr.count:1;
-        predictValue=((int)predictValue)/valuePrecision;
+        predictValue=((int)predictValue)/valuePrecision*10;
         NSLog(@"PredictValueByBothFinally");
         return predictValue;
     }

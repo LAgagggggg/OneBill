@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic) CategoryView * selectedView;
 @property (strong,nonatomic) NSMutableArray<CategoryView *> * cViewArr;
 @property (strong,nonatomic) NSString * currentCategory;
-@property (strong,nonatomic) UIView * sumLabelView;
 @property (strong,nonatomic) UITextField * addTextField;
+@property (strong,nonatomic) NSArray<NSString *> * categoryArr;
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr;
+-(void)setHighlightCategory:(NSString *)category;
 @end
 
 NS_ASSUME_NONNULL_END
