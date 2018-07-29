@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self setUI];
 }
 
@@ -37,8 +37,16 @@
 }
 
 - (void)setUI{
+    //导航栏返回按钮
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"returnBtn"];
+//    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"returnBtn"];
+//    backItem.imageInsets=UIEdgeInsetsMake(0, 100, 20, 0);
+//    self.navigationItem.backBarButtonItem = backItem;
+    //导航栏透明
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage=[UIImage new];
+    //导航栏颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
     self.addBtn=[[OBMainButton alloc]initWithType:OBButtonTypeAdd];

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneBill/BillDetailViewController.m"
-            timestampString = "554522881.49238"
+            timestampString = "554531435.384132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-resignCategoryChooseView"
             landmarkType = "7">
          </BreakpointContent>
