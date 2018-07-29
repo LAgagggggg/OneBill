@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneBill/BillDetailViewController.m"
-            timestampString = "554539234.01852"
+            timestampString = "554547038.033223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "-resignCategoryChooseView"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneBill/NewBillViewController.m"
-            timestampString = "554539234.018622"
+            timestampString = "554547038.033661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
             landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneBill/view/OBCategoryScrollView.m"
-            timestampString = "554539234.018694"
+            timestampString = "554547038.033759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"

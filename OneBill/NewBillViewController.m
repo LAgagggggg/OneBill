@@ -95,6 +95,7 @@
         make.right.equalTo(self.view.mas_right).with.offset(-50.5);
     }];
     self.confirmBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.confirmBtn setImage:[UIImage imageNamed:@"confirmBtn"] forState:UIControlStateNormal];
     self.confirmBtn.backgroundColor=[UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1];
     self.confirmBtn.layer.cornerRadius=10.f;
     self.confirmBtn.layer.shadowColor=[UIColor grayColor].CGColor;

@@ -38,6 +38,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)setUI{
     self.title=@"Bill detail";
+    UIBarButtonItem * searchBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.rightBarButtonItem=searchBtn;
     //设置导航栏返回按钮
     UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     returnBtn.frame = CGRectMake(0, 0, 17,18);
