@@ -30,10 +30,14 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self setUI];
     [self.summaryCardView setDate:self.date Money:[[OBBillManager sharedInstance]sumOfDay:self.date]];
     [self addObserver:self forKeyPath:@"categoryChooseView.selectedCategory" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.billsArr.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 -(void)setUI{
@@ -74,6 +78,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.separatorStyle=UITextBorderStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
+    self.tableView.estimatedRowHeight=117;
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
     self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
     [self.view addSubview:self.categoryChooseView];

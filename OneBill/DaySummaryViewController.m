@@ -15,7 +15,7 @@
 #define commonCellHeight 148
 #define todayCellHeight 180
 #define CellEdgeInset 8
-#define FetchEachTime 10
+#define FetchEachTime 30
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)UITableView * tableView;
@@ -42,13 +42,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [self setUI];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    if (self.tableView.contentSize.height > self.tableView.frame.size.height)
-    {
-        CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height+54);
-        [self.tableView setContentOffset:offset animated:YES];
-    }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.summaryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.isInserting=NO;
     });
@@ -96,6 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
+    self.tableView.estimatedRowHeight=commonCellHeight;
 }
 
 - (void)setTodayCell:(UITableViewCell *)cell{
@@ -169,6 +166,14 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%ld",indexPath.row);
+    if(!self.isInserting && !self.fetchStopFlag && indexPath.row<=3){
+        self.isInserting=YES;
+        [self insertCellAndBackToIndex:indexPath.row];
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return (indexPath.row==self.summaryArr.count-1)?todayCellHeight:commonCellHeight;
 }
@@ -186,26 +191,17 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    NSLog(@"%lf",scrollView.contentOffset.y);
-    if(!self.isInserting && !self.fetchStopFlag && scrollView.contentOffset.y<=0){
-        self.isInserting=YES;
-        [self insertCell];
-    }
 }
 
 //fixme
--(void)insertCell{
+-(void)insertCellAndBackToIndex:(NSInteger)index{
     NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:FetchEachTime]];
     NSInteger count=tempArr.count;
     [self.summaryArr insertObjects:tempArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,count)]];
     self.fetchIndex+=count;
     self.fetchStopFlag= count==FetchEachTime? NO:YES;
-    [self.tableView setContentOffset:CGPointMake(0, 0)];
     [self.tableView reloadData];
-//    CGPoint offset = self.tableView.contentOffset;
-//    NSLog(@"%lf",self.tableView.contentOffset.y);
-//    offset.y+=count*commonCellHeight;
-//    self.tableView.contentOffset=offset;
-//    NSLog(@"%lf",self.tableView.contentOffset.y);
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index+1+tempArr.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     self.isInserting=NO;
 }
 
