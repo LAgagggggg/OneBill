@@ -16,6 +16,7 @@
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSArray<NSString *> * categoryArr;
 @property (strong,nonatomic)OBCategoryChooseViewCell * selectedCell;
+@property BOOL isAdding;
 @end
 
 @implementation OBCategoryChooseView
@@ -26,6 +27,7 @@ CGFloat foldPositionY;
 {
     self = [super init];
     if (self) {
+        self.isAdding=NO;
         self.categoryArr=categoryArr;
         foldPositionY=308;
         self.dimView=[[UIView alloc]init];
@@ -58,6 +60,7 @@ CGFloat foldPositionY;
             make.bottom.equalTo(self.actualView.mas_bottom).with.offset(-14);
             make.height.equalTo(@(44));
         }];
+        [self.bottomBtn addTarget:self action:@selector(addCategory) forControlEvents:UIControlEventTouchUpInside];
         self.tableView=[[UITableView alloc]init];
         [self.actualView addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,6 +81,11 @@ CGFloat foldPositionY;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OBCategoryChooseViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
+    if (indexPath.row==0) self.selectedCell=cell;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(OBCategoryChooseViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     cell.label.text=self.categoryArr[indexPath.row];
     //确保复用时正确高亮选择的分类
     if (![cell.label.text isEqualToString:self.selectedCategory]) {
@@ -86,12 +94,10 @@ CGFloat foldPositionY;
     else{
         [cell highlight];
     }
-    if (indexPath.row==0) self.selectedCell=cell;
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.categoryArr.count;
+    return self.isAdding?self.categoryArr.count+1:self.categoryArr.count;
 }
 
 
@@ -110,5 +116,11 @@ CGFloat foldPositionY;
         [self.selectedCell highlight];
         self.selectedCategory=self.selectedCell.label.text;
     }
+}
+
+//bottomBtnAction
+- (void)addCategory{
+    self.isAdding=YES;
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0]] withRowAnimation:YES];
 }
 @end

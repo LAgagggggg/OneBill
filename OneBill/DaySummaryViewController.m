@@ -98,19 +98,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.view bringSubviewToFront:shadowView];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==self.summaryArr.count-1) {
-        UITableViewCell * cell=[[UITableViewCell alloc]init];
-        [self setTodayCell:cell];
-        return cell;
-    }
-    else{
-        OBDaySummaryTableViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        [cell setWithDaySummary:self.summaryArr[indexPath.row]];
-        return cell;
-    }
-}
-
 - (void)setTodayCell:(UITableViewCell *)cell{
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.backgroundColor=[UIColor clearColor];
@@ -169,13 +156,21 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==self.summaryArr.count-1) {
-        return todayCellHeight;
+        UITableViewCell * cell=[[UITableViewCell alloc]init];
+        [self setTodayCell:cell];
+        return cell;
     }
     else{
-        return commonCellHeight;
+        OBDaySummaryTableViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+        [cell setWithDaySummary:self.summaryArr[indexPath.row]];
+        return cell;
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return (indexPath.row==self.summaryArr.count-1)?todayCellHeight:commonCellHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
