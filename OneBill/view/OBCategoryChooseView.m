@@ -6,16 +6,21 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#define LightGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
+
 #import "OBCategoryChooseView.h"
 #import "OBCategoryChooseViewCell.h"
+#import "../model/CategoryManager.h"
 #import <masonry.h>
+#import <MBProgressHUD.h>
 
 @interface OBCategoryChooseView()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)UIButton * bottomBtn;
 @property (strong,nonatomic)UIView * actualView;
 @property (strong,nonatomic)UITableView * tableView;
-@property (strong,nonatomic)NSArray<NSString *> * categoryArr;
+@property (strong,nonatomic)NSMutableArray<NSString *> * categoryArr;
 @property (strong,nonatomic)OBCategoryChooseViewCell * selectedCell;
+@property (strong,nonatomic)UITextField * addingField;
 @property BOOL isAdding;
 @end
 
@@ -28,7 +33,7 @@ CGFloat foldPositionY;
     self = [super init];
     if (self) {
         self.isAdding=NO;
-        self.categoryArr=categoryArr;
+        self.categoryArr=categoryArr.mutableCopy;
         foldPositionY=308;
         self.dimView=[[UIView alloc]init];
         self.dimView.backgroundColor=[UIColor blackColor];
@@ -79,20 +84,40 @@ CGFloat foldPositionY;
     return self;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OBCategoryChooseViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
-    if (indexPath.row==0) self.selectedCell=cell;
-    return cell;
+-(void)setAddingCell:(UITableViewCell *)cell{
+    self.addingField=[[UITextField alloc]init];
+    self.addingField.font=[UIFont fontWithName:@"HelveticaNeue" size:18];
+    self.addingField.textColor=LightGrayColor;
+    self.addingField.textAlignment=NSTextAlignmentCenter;
+    self.addingField.autocorrectionType=UITextAutocorrectionTypeNo;
+    self.addingField.autocapitalizationType=UITextAutocapitalizationTypeNone;
+    [cell.contentView addSubview:self.addingField];
+    [self.addingField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell.contentView.mas_left).with.offset(20);
+        make.right.equalTo(cell.contentView.mas_right).with.offset(-20);
+        make.centerY.equalTo(cell.contentView.mas_centerY);
+    }];
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(OBCategoryChooseViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    cell.label.text=self.categoryArr[indexPath.row];
-    //确保复用时正确高亮选择的分类
-    if (![cell.label.text isEqualToString:self.selectedCategory]) {
-        [cell downplay];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.isAdding==YES && indexPath.row>=self.categoryArr.count){//增加的输入栏
+        UITableViewCell * cell=[[UITableViewCell alloc]init];
+        [self setAddingCell:cell];
+        [self.addingField becomeFirstResponder];
+        return cell;
     }
     else{
-        [cell highlight];
+        OBCategoryChooseViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
+        cell.label.text=self.categoryArr[indexPath.row];
+        //确保复用时正确高亮选择的分类
+        if (![cell.label.text isEqualToString:self.selectedCategory]) {
+            [cell downplay];
+        }
+        else{
+            [cell highlight];
+        }
+        if (indexPath.row==0) self.selectedCell=cell;
+        return cell;
     }
 }
 
@@ -110,17 +135,66 @@ CGFloat foldPositionY;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (![self.categoryArr[indexPath.row] isEqualToString:self.selectedCategory]) {
-        [(OBCategoryChooseViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.categoryArr indexOfObject:self.selectedCategory] inSection:0]] downplay];
-        self.selectedCell=[tableView cellForRowAtIndexPath:indexPath];
-        [self.selectedCell highlight];
-        self.selectedCategory=self.selectedCell.label.text;
+    if (!self.isAdding) {
+        if (![self.categoryArr[indexPath.row] isEqualToString:self.selectedCategory]) {
+            [(OBCategoryChooseViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.categoryArr indexOfObject:self.selectedCategory] inSection:0]] downplay];
+            self.selectedCell=[tableView cellForRowAtIndexPath:indexPath];
+            [self.selectedCell highlight];
+            self.selectedCategory=self.selectedCell.label.text;
+        }
     }
 }
 
 //bottomBtnAction
 - (void)addCategory{
+    //确认按钮随键盘移动
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
     self.isAdding=YES;
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0]] withRowAnimation:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+//弹出键盘时
+-(void)keyboardWillChange:(NSNotification *)notification{
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [value CGRectValue];
+    CGRect frame=self.frame;
+    frame.origin.y=keyboardRect.origin.y-frame.size.height;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.frame=frame;
+    }];
+}
+
+//添加分类后进行的动作
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    if(self.isAdding){
+        self.isAdding=NO;
+        [self.addingField resignFirstResponder];
+        self.addingField.enabled=NO;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if(self.addingField.text.length){
+            if (![[NSSet setWithArray:self.categoryArr] containsObject:self.addingField.text]) {//不重复则加入并保存
+                [self.categoryArr addObject:self.addingField.text];
+                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                [[CategoryManager sharedInstance].categoriesArr addObject:self.addingField.text];
+                [[CategoryManager sharedInstance]writeToFile];
+            }
+            else{//否则提示
+                MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
+                hud.mode=MBProgressHUDModeText;
+                hud.label.text=@"Category Already Existed";
+                [hud hideAnimated:YES afterDelay:1.5];
+            }
+        }
+        self.dimView.userInteractionEnabled=NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.dimView.userInteractionEnabled=YES;
+        });
+        return NO;
+    }
+    return [super pointInside:point withEvent:event];
 }
 @end

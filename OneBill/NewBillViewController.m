@@ -44,6 +44,8 @@
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
     self.revokeValue=0;
     self.revokeCategory=self.categoryManager.categoriesArr[0];
+    //确认按钮随键盘移动
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)setUI{
@@ -105,8 +107,6 @@
     [self.view addSubview:self.confirmBtn];
     [self.confirmBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
     [self.confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    //确认按钮随键盘移动
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
     //地理位置
     UIView * locationView=[[UIView alloc]init];
     locationView.backgroundColor=[UIColor clearColor];
@@ -285,7 +285,7 @@
 }
 
 //弹出键盘时
--(void)keyboardWillShow:(NSNotification *)notification{
+-(void)keyboardWillChange:(NSNotification *)notification{
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [value CGRectValue];
