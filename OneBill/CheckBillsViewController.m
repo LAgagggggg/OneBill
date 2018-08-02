@@ -7,6 +7,7 @@
 //
 
 #import "CheckBillsViewController.h"
+#import "CategoryManagerViewController.h"
 #import "model/CategoryManager.h"
 #import "model/OBBillManager.h"
 #import "view/OBDaySummaryCardView.h"
@@ -36,7 +37,7 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)setUI{
     self.title=@"Bills";
     UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-    UIBarButtonItem * moreBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem * moreBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(moreBtnClicked)];
     self.navigationItem.rightBarButtonItems=@[moreBtn,calendarBtn];
     //设置导航栏返回按钮
     UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -147,6 +148,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)moreBtnClicked{
+    CategoryManagerViewController * vc=[[CategoryManagerViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
