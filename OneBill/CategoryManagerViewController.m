@@ -11,9 +11,15 @@
 #import "model/CategoryManager.h"
 #import <masonry.h>
 
+#define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
+#define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
+
 @interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<NSString *>* categoryArr;
+@property (strong,nonatomic)CategoryManagerCell * addCell;
+@property (strong,nonatomic)UIButton * addBtn;
+@property BOOL isAdding;
 @end
 
 @implementation CategoryManagerViewController
@@ -22,6 +28,8 @@
     [super viewDidLoad];
     self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
     [self setUI];
+    //添加cell随键盘移动
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)setUI{
@@ -65,34 +73,80 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight=58;
     self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 0, 0);
+    self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
     //用于resign first responder
-    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]init];
+    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
     tap.delegate=self;
     [self.view addGestureRecognizer:tap];
+    [self.view bringSubviewToFront:shadowView];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.categoryArr.count;
+    return self.categoryArr.count+1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CategoryManagerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
+    CategoryManagerCell *cell=nil;
+    if(indexPath.row==self.categoryArr.count){
+        cell=[[CategoryManagerCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        [self setBottomCell:cell];
+        self.addCell=cell;
+    }
+    else{
+         cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
+        [cell setWithCategory:self.categoryArr[indexPath.row]];
+    }
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(CategoryManagerCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    [cell setWithCategory:self.categoryArr[indexPath.row]];
+- (void)setBottomCell:(CategoryManagerCell *)cell{
+    [cell.editBtn setHidden:YES];
+    [cell.categoryTextField setHidden:YES];
+    cell.categoryTextField.userInteractionEnabled=YES;
+    self.addBtn=[UIButton buttonWithType:UIButtonTypeSystem];
+    [self.addBtn setTintColor:textGrayColor];
+    [self.addBtn setImage:[UIImage imageNamed:@"categoryAddBtn_dim"] forState:UIControlStateNormal];
+    [cell.contentView addSubview:self.addBtn];
+    [self.addBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cell.contentView.mas_left);
+        make.right.equalTo(cell.contentView.mas_right);
+        make.top.equalTo(cell.contentView.mas_top);
+        make.bottom.equalTo(cell.contentView.mas_bottom);
+    }];
+    [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - add category
+- (void)addBtnClicked:(UIButton *)sender{
+    self.isAdding=YES;
+    sender.hidden=YES;
+    self.addCell.categoryTextField.hidden=NO;
+    [self.addCell.categoryTextField becomeFirstResponder];
+    
+}
+
+-(void)keyboardWillChange:(NSNotification *)notification{
+    if (self.isAdding) {
+        NSDictionary *userInfo = [notification userInfo];
+        NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardRect = [value CGRectValue];
+        UIEdgeInsets inset = self.tableView.contentInset;
+        inset.bottom=[UIScreen mainScreen].bounds.size.height - keyboardRect.origin.y+30;
+        self.tableView.contentInset=inset;
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+//action of tap gesture for self.view
+- (void)resignAnyResponder{
     //resign current first responder
     UIWindow * keyWindow = [[UIApplication sharedApplication] keyWindow];
     UIView * firstResponder = [keyWindow performSelector:@selector(firstResponder)];
@@ -100,7 +154,6 @@
         firstResponder.userInteractionEnabled=NO;
     }
     [firstResponder resignFirstResponder];
-    return NO;
 }
 
 @end

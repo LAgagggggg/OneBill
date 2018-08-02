@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CategoryManagerCell : UITableViewCell
 @property(strong,nonatomic)UIButton * editBtn;
+@property(strong,nonatomic)UITextField * categoryTextField;
 - (void)setWithCategory:(NSString *)category;
 @end
 
