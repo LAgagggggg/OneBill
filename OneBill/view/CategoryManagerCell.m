@@ -7,12 +7,15 @@
 //
 
 #import "CategoryManagerCell.h"
+#import "../model/CategoryManager.h"
 #import <masonry.h>
+#import <MBProgressHUD.h>
 
 #define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface CategoryManagerCell()
+@property (strong,nonatomic)NSString * oldValue;
 @end
 
 @implementation CategoryManagerCell
@@ -60,6 +63,28 @@
 - (void)editCategory{
     self.categoryTextField.userInteractionEnabled=YES;
     [self.categoryTextField becomeFirstResponder];
+    self.oldValue=self.categoryTextField.text;
+    [self.categoryTextField addTarget:self action:@selector(didEndEditingCategory:) forControlEvents:UIControlEventEditingDidEnd];
+}
+
+- (void)didEndEditingCategory:(UITextField *)textField{
+    if (textField.text.length==0) {
+        textField.text=self.oldValue;
+    }
+    else if (![textField.text isEqualToString:self.oldValue]){
+        NSString * hudText;
+        if ([[CategoryManager sharedInstance] replaceCategory:self.oldValue withNewCategory:textField.text]) {
+            hudText=@"Category Successfully Edited ";
+        }
+        else{
+            hudText=@"Category Already Existed";
+        }
+        MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
+        hud.mode=MBProgressHUDModeText;
+        hud.label.text=hudText;
+        [hud hideAnimated:YES afterDelay:1];
+        
+    }
 }
 
 - (void)setFrame:(CGRect)frame{

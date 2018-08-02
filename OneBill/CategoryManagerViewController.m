@@ -10,11 +10,12 @@
 #import "view/CategoryManagerCell.h"
 #import "model/CategoryManager.h"
 #import <masonry.h>
+#import <MBProgressHUD.h>
 
 #define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
-@interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<NSString *>* categoryArr;
 @property (strong,nonatomic)CategoryManagerCell * addCell;
@@ -72,7 +73,7 @@
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight=58;
-    self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 0, 0);
+    self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 30, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
     //用于resign first responder
@@ -107,6 +108,7 @@
     [cell.editBtn setHidden:YES];
     [cell.categoryTextField setHidden:YES];
     cell.categoryTextField.userInteractionEnabled=YES;
+    cell.categoryTextField.delegate=self;
     self.addBtn=[UIButton buttonWithType:UIButtonTypeSystem];
     [self.addBtn setTintColor:textGrayColor];
     [self.addBtn setImage:[UIImage imageNamed:@"categoryAddBtn_dim"] forState:UIControlStateNormal];
@@ -154,6 +156,29 @@
         firstResponder.userInteractionEnabled=NO;
     }
     [firstResponder resignFirstResponder];
+}
+
+//only for adding
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField.text.length ){
+        if (![self.categoryArr containsObject:textField.text]) {
+            [self.categoryArr addObject:textField.text];
+            [[CategoryManager sharedInstance].categoriesArr addObject:textField.text];
+            [[CategoryManager sharedInstance]writeToFile];
+            self.categoryArr=[CategoryManager sharedInstance].categoriesArr;
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        else{
+            MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode=MBProgressHUDModeText;
+            hud.label.text=@"Category Already Existed";
+            [hud hideAnimated:YES afterDelay:1];
+        }
+    }
+    self.isAdding=NO;
+    self.addBtn.hidden=NO;
+    self.addCell.categoryTextField.text=@"";
+    self.addCell.categoryTextField.hidden=YES;
 }
 
 @end

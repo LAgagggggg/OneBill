@@ -28,6 +28,16 @@
     return manager;
 }
 
+- (BOOL)replaceCategory:(NSString *)old withNewCategory:(NSString *)new{
+    if ([self.categoriesArr containsObject:new]) {
+        return NO;
+    }
+    else{
+        [self.categoriesArr replaceObjectAtIndex:[self.categoriesArr indexOfObject:old] withObject:new];
+        return YES;
+    }
+}
+
 -(void)writeToFile{
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [path objectAtIndex:0];
