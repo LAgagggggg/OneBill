@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong,nonatomic)UIButton * editBtn;
 @property(strong,nonatomic)UITextField * categoryTextField;
 - (void)setWithCategory:(NSString *)category;
+- (void)beginMultiDelete;
+- (void)endMultiDelete;
+- (void)multiDeleteBeSelected;
+- (void)multiDeleteBeDeselected;
 @end
 
 NS_ASSUME_NONNULL_END

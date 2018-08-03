@@ -11,15 +11,16 @@
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
-#define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
+#define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface CategoryManagerCell()
 @property (strong,nonatomic)NSString * oldValue;
+@property(strong,nonatomic)UIButton * checkIconBtn;
 @end
 
+static float animationDuration=0.3;
 @implementation CategoryManagerCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -52,6 +53,29 @@
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
         [self.editBtn addTarget:self action:@selector(editCategory) forControlEvents:UIControlEventTouchUpInside];
+//        UIImage *image= [MyUtil imageWithImage:[UIImage imageNamed:@"MyImage"] scaledToSize:CGSizeMake(80, 80)];
+//
+//        UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+//        imgView.contentMode = UIViewContentModeCenter;
+//        [imgView setImage:image];
+        self.checkIconBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        [self.checkIconBtn setImage:[UIImage imageNamed:@"categoryCheckIcon"] forState:UIControlStateNormal];
+        [self.checkIconBtn setImageEdgeInsets:UIEdgeInsetsMake(3,3,3,3)];
+        [self.contentView addSubview:self.checkIconBtn];
+        [self.checkIconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_right).with.offset(-23);
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.width.equalTo(@(14));
+            make.height.equalTo(@(14));
+        }];
+        self.checkIconBtn.backgroundColor=[UIColor whiteColor];
+        self.checkIconBtn.layer.cornerRadius=7.f;
+        self.checkIconBtn.layer.borderWidth=1.f;
+        self.checkIconBtn.layer.masksToBounds=YES;
+        self.checkIconBtn.layer.borderColor=DarkBlueColor.CGColor;
+        self.checkIconBtn.imageView.hidden=YES;
+        self.checkIconBtn.hidden=YES;
+        self.checkIconBtn.userInteractionEnabled=NO;
     }
     return self;
 }
@@ -93,6 +117,25 @@
 //    frame.origin.x += 37;
 //    frame.size.width -= 37*2;
     [super setFrame:frame];
+}
+
+#pragma mark - about multi delete
+- (void)beginMultiDelete{
+    self.editBtn.hidden=YES;
+    self.checkIconBtn.hidden=NO;
+}
+
+- (void)endMultiDelete{
+    self.editBtn.hidden=NO;
+    self.checkIconBtn.hidden=YES;
+}
+
+- (void)multiDeleteBeSelected{
+    
+}
+
+- (void)multiDeleteBeDeselected{
+    
 }
 
 @end

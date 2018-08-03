@@ -11,7 +11,7 @@
 #import "model/CategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
-
+#define grayWhiteColor [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
@@ -24,16 +24,20 @@
 @property (strong,nonatomic)UIBarButtonItem * deleteBtn;
 @property (strong,nonatomic)UIBarButtonItem * doneBtn;
 @property BOOL isAdding;
+@property BOOL isMultiDeleting;
 @end
 
-@implementation CategoryManagerViewController
 
+static float animationDuration=0.3;
+@implementation CategoryManagerViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
     [self setUI];
     //添加cell随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
+    self.isAdding=NO;
+    self.isMultiDeleting=NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -46,9 +50,8 @@
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
-    self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     self.navigationItem.title=@"Categories";
-    self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+    self.view.backgroundColor=grayWhiteColor;
     self.deleteBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"categoryDeleteBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(beginMultiDelete)];
     self.doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneMultiDelete)];
     self.navigationItem.rightBarButtonItem = self.deleteBtn;
@@ -103,12 +106,25 @@
         cell=[[CategoryManagerCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         [self setBottomCell:cell];
         self.addCell=cell;
+        cell.hidden= self.isMultiDeleting?YES:NO;
     }
     else{
          cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
         [cell setWithCategory:self.categoryArr[indexPath.row]];
     }
     return cell;
+}
+
+//something about multiple delete
+- (void)tableView:(UITableView *)tableView willDisplayCell:(CategoryManagerCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row<self.categoryArr.count) {
+        if (self.isMultiDeleting) {
+            [cell beginMultiDelete];
+        }
+        else{
+            [cell endMultiDelete];
+        }
+    }
 }
 
 - (void)setBottomCell:(CategoryManagerCell *)cell{
@@ -218,18 +234,35 @@
 #pragma mark - multi-delete
 
 - (void)beginMultiDelete{
-    self.navigationItem.rightBarButtonItem=self.doneBtn;
-    self.navigationItem.title=@"Multiple Delete";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem.tintColor=[UIColor whiteColor];
-    self.shadowView.backgroundColor=DarkBlueColor;
-    self.view.backgroundColor=DarkBlueColor;
-    self.addCell.hidden=YES;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.isMultiDeleting=YES;
+        self.navigationItem.rightBarButtonItem=self.doneBtn;
+        self.navigationItem.title=@"Multiple Delete";
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+        self.navigationItem.leftBarButtonItem.tintColor=[UIColor whiteColor];
+        self.shadowView.backgroundColor=DarkBlueColor;
+        self.shadowView.layer.masksToBounds=YES;
+        self.view.backgroundColor=DarkBlueColor;
+        self.addCell.hidden=YES;
+        [self.tableView reloadData];
+    }];
 }
 
 -(void)doneMultiDelete{
-    self.navigationItem.rightBarButtonItem=self.deleteBtn;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.isMultiDeleting=NO;
+        self.navigationItem.rightBarButtonItem=self.deleteBtn;
+        self.navigationItem.title=@"Categoried";
+        self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
+        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
+        self.shadowView.backgroundColor=grayWhiteColor;
+        self.shadowView.layer.masksToBounds=NO;
+        self.view.backgroundColor=grayWhiteColor;
+        self.addCell.hidden=NO;
+        [self.tableView reloadData];
+    }];
 }
 
 @end
