@@ -106,6 +106,7 @@
         self.contentSize=CGSizeMake(needWidth+20, 88);
         self.sumLabelView.frame=CGRectMake(0,0,needWidth+20,16);
         self.scrollEnabled=YES;
+        self.alwaysShowSum=NO;
     }
     return self;
 }
@@ -204,31 +205,43 @@
     }
 }
 
+-(void)setAlwaysShowSum:(BOOL)alwaysShowSum{
+    _alwaysShowSum=alwaysShowSum;
+    self.isLabelShowing=alwaysShowSum?YES:NO;
+    self.sumLabelView.alpha= alwaysShowSum?1:0;
+}
+
 #pragma mark SetLabelShowWhenScroll
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (self.isLabelShowing==NO) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.sumLabelView.alpha=1;
-        }];
-        self.isLabelShowing=YES;
+    if (!self.alwaysShowSum) {
+        if (self.isLabelShowing==NO) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.sumLabelView.alpha=1;
+            }];
+            self.isLabelShowing=YES;
+        }
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (self.isLabelShowing==YES) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.sumLabelView.alpha=0;
-        }];
-        self.isLabelShowing=NO;
+    if (!self.alwaysShowSum) {
+        if (self.isLabelShowing==YES) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.sumLabelView.alpha=0;
+            }];
+            self.isLabelShowing=NO;
+        }
     }
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (self.isLabelShowing==YES && decelerate==NO) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.sumLabelView.alpha=0;
-        }];
-        self.isLabelShowing=NO;
+    if (!self.alwaysShowSum) {
+        if (self.isLabelShowing==YES && decelerate==NO) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.sumLabelView.alpha=0;
+            }];
+            self.isLabelShowing=NO;
+        }
     }
 }
 

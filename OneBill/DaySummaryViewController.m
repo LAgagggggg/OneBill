@@ -55,14 +55,8 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)setUI{
     self.title=@"Bills";
     //设置导航栏返回按钮
-    UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    returnBtn.frame = CGRectMake(0, 0, 17,18);
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"returnBtn"] forState:UIControlStateNormal];
-    [returnBtn addTarget:self action:@selector(returnBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * returnBarBtn = [[UIBarButtonItem alloc]initWithCustomView:returnBtn];;
-    UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,returnBarBtn];
+    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //导航栏右侧按钮
@@ -169,7 +163,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
     if(!self.isInserting && !self.fetchStopFlag && indexPath.row<=3){
         self.isInserting=YES;
         [self insertCellAndBackToIndex:indexPath.row];

@@ -12,14 +12,17 @@
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
-#define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
+#define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (strong,nonatomic)UITableView * tableView;
+@property (strong,nonatomic)UIView * shadowView;
 @property (strong,nonatomic)NSMutableArray<NSString *>* categoryArr;
 @property (strong,nonatomic)CategoryManagerCell * addCell;
 @property (strong,nonatomic)UIButton * addBtn;
+@property (strong,nonatomic)UIBarButtonItem * deleteBtn;
+@property (strong,nonatomic)UIBarButtonItem * doneBtn;
 @property BOOL isAdding;
 @end
 
@@ -33,41 +36,42 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
+}
+
 - (void)setUI{
     //设置导航栏返回按钮
-    UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    returnBtn.frame = CGRectMake(0, 0, 17,18);
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"returnBtn"] forState:UIControlStateNormal];
-    [returnBtn addTarget:self action:@selector(returnBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * returnBarBtn = [[UIBarButtonItem alloc]initWithCustomView:returnBtn];;
-    UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,returnBarBtn];
+    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     self.navigationItem.title=@"Categories";
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-    [self.editButtonItem setImage:[UIImage imageNamed:@"categoryDeleteBtn"]];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.deleteBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"categoryDeleteBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(beginMultiDelete)];
+    self.doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneMultiDelete)];
+    self.navigationItem.rightBarButtonItem = self.deleteBtn;
+    self.tableView.allowsMultipleSelection=YES;
     //顶部阴影
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;
-    UIView * shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, rectNav.size.width, rectStatus.size.height+rectNav.size.height)];
-    [self.view addSubview:shadowView];
-    shadowView.backgroundColor=self.view.backgroundColor;
-    shadowView.layer.shadowColor=[UIColor grayColor].CGColor;
-    shadowView.layer.shadowOffset = CGSizeMake(0, 3);
-    shadowView.layer.shadowOpacity = 0.1;
-    shadowView.layer.shadowRadius = 12;
+    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, rectNav.size.width, rectStatus.size.height+rectNav.size.height)];
+    [self.view addSubview:self.shadowView];
+    self.shadowView.backgroundColor=self.view.backgroundColor;
+    self.shadowView.layer.shadowColor=[UIColor grayColor].CGColor;
+    self.shadowView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.shadowView.layer.shadowOpacity = 0.1;
+    self.shadowView.layer.shadowRadius = 12;
     //set tableView
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(shadowView.mas_bottom);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.shadowView.mas_bottom);
+        make.left.equalTo(self.view.mas_left).with.offset(37);
+        make.right.equalTo(self.view.mas_right).with.offset(-37);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -80,7 +84,11 @@
     UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
     tap.delegate=self;
     [self.view addGestureRecognizer:tap];
-    [self.view bringSubviewToFront:shadowView];
+    [self.view bringSubviewToFront:self.shadowView];
+}
+
+- (void)returnBtnClicked{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -88,7 +96,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.categoryArr.count+1;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CategoryManagerCell *cell=nil;
@@ -122,7 +129,39 @@
     [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-#pragma mark - add category
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row==self.categoryArr.count) {//最后一行
+        return NO;
+    }
+    for (UIView *subview in tableView.subviews)
+    {
+        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
+        {
+            subview.backgroundColor=[UIColor clearColor];
+            subview.subviews[0].layer.cornerRadius=10.f;
+            subview.subviews[0].layer.masksToBounds=YES;
+        }
+    }
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[CategoryManager sharedInstance].categoriesArr removeObjectAtIndex:indexPath.row];
+    [[CategoryManager sharedInstance] writeToFile];
+    [self.categoryArr removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"Delete";
+}
+
+
+
+#pragma mark - add&edit category
 - (void)addBtnClicked:(UIButton *)sender{
     self.isAdding=YES;
     sender.hidden=YES;
@@ -143,16 +182,12 @@
     }
 }
 
-- (void)returnBtnClicked{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 //action of tap gesture for self.view
 - (void)resignAnyResponder{
     //resign current first responder
     UIWindow * keyWindow = [[UIApplication sharedApplication] keyWindow];
     UIView * firstResponder = [keyWindow performSelector:@selector(firstResponder)];
-    if ([firstResponder.superview.superview isKindOfClass:[CategoryManagerCell class]]) {
+    if ([firstResponder.superview.superview isKindOfClass:[CategoryManagerCell class]] && !self.isAdding) {
         firstResponder.userInteractionEnabled=NO;
     }
     [firstResponder resignFirstResponder];
@@ -165,7 +200,6 @@
             [self.categoryArr addObject:textField.text];
             [[CategoryManager sharedInstance].categoriesArr addObject:textField.text];
             [[CategoryManager sharedInstance]writeToFile];
-            self.categoryArr=[CategoryManager sharedInstance].categoriesArr;
             [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else{
@@ -179,6 +213,23 @@
     self.addBtn.hidden=NO;
     self.addCell.categoryTextField.text=@"";
     self.addCell.categoryTextField.hidden=YES;
+}
+
+#pragma mark - multi-delete
+
+- (void)beginMultiDelete{
+    self.navigationItem.rightBarButtonItem=self.doneBtn;
+    self.navigationItem.title=@"Multiple Delete";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem.tintColor=[UIColor whiteColor];
+    self.shadowView.backgroundColor=DarkBlueColor;
+    self.view.backgroundColor=DarkBlueColor;
+    self.addCell.hidden=YES;
+}
+
+-(void)doneMultiDelete{
+    self.navigationItem.rightBarButtonItem=self.deleteBtn;
 }
 
 @end

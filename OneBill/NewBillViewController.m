@@ -50,14 +50,8 @@
 
 - (void)setUI{
     //设置导航栏返回按钮
-    UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    returnBtn.frame = CGRectMake(0, 0, 17,18);
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"returnBtn"] forState:UIControlStateNormal];
-    [returnBtn addTarget:self action:@selector(returnBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * returnBarBtn = [[UIBarButtonItem alloc]initWithCustomView:returnBtn];;
-    UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,returnBarBtn];
+    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.locDescription=[[NSMutableString alloc]init];
     self.view.backgroundColor=[UIColor whiteColor];

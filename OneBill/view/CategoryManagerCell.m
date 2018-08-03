@@ -90,8 +90,8 @@
 - (void)setFrame:(CGRect)frame{
     frame.origin.y += 14;
     frame.size.height -= 14;
-    frame.origin.x += 37;
-    frame.size.width -= 37*2;
+//    frame.origin.x += 37;
+//    frame.size.width -= 37*2;
     [super setFrame:frame];
 }
 

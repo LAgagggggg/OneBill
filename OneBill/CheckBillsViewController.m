@@ -40,14 +40,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UIBarButtonItem * moreBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(moreBtnClicked)];
     self.navigationItem.rightBarButtonItems=@[moreBtn,calendarBtn];
     //设置导航栏返回按钮
-    UIButton * returnBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    returnBtn.frame = CGRectMake(0, 0, 17,18);
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"returnBtn"] forState:UIControlStateNormal];
-    [returnBtn addTarget:self action:@selector(returnBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * returnBarBtn = [[UIBarButtonItem alloc]initWithCustomView:returnBtn];;
-    UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,returnBarBtn];
+    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //顶部选择category
@@ -59,6 +53,7 @@ static NSString * const reuseIdentifier = @"Cell";
     topView.layer.shadowOpacity = 0.1;
     topView.layer.shadowRadius = 12;
     self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
+    self.categoryScrollView.alwaysShowSum=YES;
     [topView addSubview:self.categoryScrollView];
     [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(74);
