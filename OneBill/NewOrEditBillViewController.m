@@ -7,7 +7,7 @@
 //
 
 #import <masonry.h>
-#import "NewBillViewController.h"
+#import "NewOrEditBillViewController.h"
 #import "view/CategoryView.h"
 #import "model/CategoryManager.h"
 #import "view/InoutSwitchButton.h"
@@ -16,7 +16,7 @@
 #import "model/OBBillManager.h"
 #import <MBProgressHUD.h>
 
-@interface NewBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
+@interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;
@@ -32,20 +32,29 @@
 @property (strong,nonatomic)NSMutableString * locDescription;
 @property (strong,nonatomic)NSString * revokeCategory;
 @property double revokeValue;
+//about edit mode
+@property BOOL editMode;
+@property (strong,nonatomic)OBBill * editModeOldBill;
 @end
 
-@implementation NewBillViewController
+@implementation NewOrEditBillViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.categoryManager=[CategoryManager sharedInstance];
-    [self setUI];
-    [self initializeLocationService];
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
-    self.revokeValue=0;
-    self.revokeCategory=self.categoryManager.categoriesArr[0];
+    [self setUI];
     //确认按钮随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
+    //为撤回保存值
+    self.revokeValue=0;
+    self.revokeCategory=self.categoryManager.categoriesArr[0];
+    if (!self.editMode) {//非edit状态
+        [self initializeLocationService];
+    }
+    else{//edit状态填入已有值
+        [self setEditModeUI];
+    }
 }
 
 - (void)setUI{
@@ -204,14 +213,36 @@
     }];
 }
 
-- (void)selectedDateChange:(UIDatePicker *)datePicker{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"HH:mm, MMM d";
-    NSString *dateString=[dateFormatter stringFromDate:datePicker.date];
-    self.date=datePicker.date;
-    self.dateLabel.text = dateString;
+- (void)editModeWithBill:(OBBill *)bill{
+    self.editMode=YES;
+    self.editModeOldBill=bill;
 }
 
+- (void)setEditModeUI{
+    [self.categoryScrollView setHighlightCategory:self.editModeOldBill.category];
+    self.inputView.text=[NSString stringWithFormat:@"%.2lf",self.editModeOldBill.value];
+    self.inputView.isEdited=YES;
+    self.editModeOldBill.isOut?[self.inoutSwitchBtn chooseOut]:[self.inoutSwitchBtn chooseIn];
+    self.date=self.editModeOldBill.date;
+    self.location=self.editModeOldBill.location;
+}
+
+#pragma mark - dateLabel
+- (void)setDate:(NSDate *)date{
+    _date=date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HH:mm, MMM d";
+    NSString *dateString=[dateFormatter stringFromDate:date];
+    self.dateLabel.text = dateString;
+    UIDatePicker * datePicker=(UIDatePicker *)self.dateLabel.inputView;
+    datePicker.date=date;
+}
+
+- (void)selectedDateChange:(UIDatePicker *)datePicker{
+    self.date=datePicker.date;
+}
+
+#pragma mark - location service
 -(void)initializeLocationService {
     // 初始化定位管理器
     _locationManager = [[CLLocationManager alloc] init];
@@ -220,12 +251,11 @@
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     _locationManager.distanceFilter = kCLDistanceFilterNone;
     [_locationManager startUpdatingLocation];
-    //初始化地理编码器
-    _geoCoder = [[CLGeocoder alloc] init];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     self.location = locations.lastObject;
+    [manager stopUpdatingLocation];
     //预测category
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(queue, ^{
@@ -242,9 +272,20 @@
                 }
             });
         }
-        
     });
-    [_geoCoder reverseGeocodeLocation:self.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+}
+
+//懒加载初始化地理编码器
+- (CLGeocoder *)geoCoder{
+    if (!_geoCoder) {
+        _geoCoder=[[CLGeocoder alloc]init];
+    }
+    return _geoCoder;
+}
+
+- (void)setLocation:(CLLocation *)location{
+    _location=location;
+    [self.geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (placemarks.count > 0) {
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             NSMutableString * locStr=[[NSMutableString alloc]init];
@@ -263,9 +304,9 @@
             self.locationLabel.text=@"An error occurred";
         }
     }];
-    [manager stopUpdatingLocation];
 }
 
+#pragma mark - edit value
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if ([self.inputView.textField isFirstResponder]) {
         [self.inputView.textField resignFirstResponder];
@@ -350,13 +391,22 @@
 //*********************************************************************************//
 
 -(void)confirmBtnClicked{
-    OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
-    [[OBBillManager sharedInstance] insertBill:bill];
-    [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.editMode) {
+        OBBill * newBill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+        [[OBBillManager sharedInstance] editBillOfDate:self.editModeOldBill.date Value:self.editModeOldBill.value withBill:newBill];
+        [[OBBillManager sharedInstance] updateSumOfDay:newBill.date];
+        [[OBBillManager sharedInstance] updateSumOfDay:self.editModeOldBill.date];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else{
+        OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+        [[OBBillManager sharedInstance] insertBill:bill];
+        [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
-#pragma mark PREDICT
+#pragma mark - prediction
 -(void)revokePrediction{
     self.inputView.textField.text=[NSString stringWithFormat:@"%.2lf",self.revokeValue];
     self.inputView.isEdited= self.revokeValue==0? NO:YES;

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "model/OBBill.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NewBillViewController : UIViewController
-
+@interface NewOrEditBillViewController : UIViewController
+- (void)editModeWithBill:(OBBill *)bill;
 @end
 
 NS_ASSUME_NONNULL_END

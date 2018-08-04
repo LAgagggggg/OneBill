@@ -7,6 +7,7 @@
 //
 
 #import "BillDetailViewController.h"
+#import "NewOrEditBillViewController.h"
 #import "view/OBDaySummaryCardView.h"
 #import "view/OBTableViewCardCell.h"
 #import "view/OBCategoryChooseView.h"
@@ -165,6 +166,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NewOrEditBillViewController * vc=[[NewOrEditBillViewController alloc]init];
+    [vc editModeWithBill:self.billsArr[indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

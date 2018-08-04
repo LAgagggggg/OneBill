@@ -10,7 +10,7 @@
 #import "MainViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
-#import "NewBillViewController.h"
+#import "NewOrEditBillViewController.h"
 #import "model/OBBillManager.h"
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"

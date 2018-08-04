@@ -115,6 +115,15 @@
 -(void)setHighlightCategory:(NSString *)category{
     _currentCategory=category;
     NSInteger index=[self.categoryArr indexOfObject:category];
+    //判断按钮是否在视野内
+    [self layoutIfNeeded];
+    float cViewStartX=self.cViewArr[index].frame.origin.x;
+    float cViewEndX=cViewStartX+self.cViewArr[index].frame.size.width;
+    float visionStart=self.contentOffset.x;
+    float visionEnd=self.contentOffset.x+[UIScreen mainScreen].bounds.size.width;
+    if (!(cViewStartX>=visionStart && cViewEndX<=visionEnd)) {
+        [self setContentOffset:CGPointMake(cViewStartX-30, 0) animated:YES];
+    }
     if (self.selectedView!=self.cViewArr[index]) {
         CategoryView * oldView=self.selectedView;
         self.selectedView=self.cViewArr[index];

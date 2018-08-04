@@ -201,7 +201,7 @@
     double predictValue=0;
     [self.queue inDatabase:^(FMDatabase *db) {
         NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==? AND isOut==1);"];
-        FMResultSet *resultSet = [db executeQuery:sql,@((double)fetchEndStamp-fetchRange),@((double)fetchEndStamp),category];
+        FMResultSet *resultSet = [db executeQuery:sql,@((double)fetchEndStamp-fetchRange),@((double)fetchEndStamp-60*60*23),category];
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
             NSData * locData=[resultSet dataForColumn:@"location"];
@@ -339,7 +339,7 @@
     NSString * predictCategory=nil;
     [self.queue inDatabase:^(FMDatabase *db) {
         NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?  AND isOut==1);"];
-        FMResultSet *resultSet = [db executeQuery:sql,@((double)fetchEndStamp-fetchRange),@((double)fetchEndStamp)];
+        FMResultSet *resultSet = [db executeQuery:sql,@((double)fetchEndStamp-fetchRange),@((double)fetchEndStamp-60*60*23)];
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
             NSData * locData=[resultSet dataForColumn:@"location"];
