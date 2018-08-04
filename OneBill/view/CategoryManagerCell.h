@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CategoryManagerCell : UITableViewCell
 @property(strong,nonatomic)UIButton * editBtn;
 @property(strong,nonatomic)UITextField * categoryTextField;
+@property BOOL isSelected;
 - (void)setWithCategory:(NSString *)category;
 - (void)beginMultiDelete;
 - (void)endMultiDelete;

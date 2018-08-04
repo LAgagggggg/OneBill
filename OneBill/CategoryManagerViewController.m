@@ -55,7 +55,6 @@ static float animationDuration=0.3;
     self.deleteBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"categoryDeleteBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(beginMultiDelete)];
     self.doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneMultiDelete)];
     self.navigationItem.rightBarButtonItem = self.deleteBtn;
-    self.tableView.allowsMultipleSelection=YES;
     //顶部阴影
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;
@@ -82,12 +81,13 @@ static float animationDuration=0.3;
     self.tableView.rowHeight=58;
     self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 30, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
+    self.tableView.allowsSelection=YES;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
     //用于resign first responder
-    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
-    tap.delegate=self;
-    [self.view addGestureRecognizer:tap];
-    [self.view bringSubviewToFront:self.shadowView];
+////    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
+//    tap.delegate=self;
+//    [self.view addGestureRecognizer:tap];
+//    [self.view bringSubviewToFront:self.shadowView];
 }
 
 - (void)returnBtnClicked{
@@ -143,6 +143,13 @@ static float animationDuration=0.3;
         make.bottom.equalTo(cell.contentView.mas_bottom);
     }];
     [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.isMultiDeleting) {
+        CategoryManagerCell * cell=[self.tableView cellForRowAtIndexPath:indexPath];
+        cell.isSelected?[cell multiDeleteBeDeselected]:[cell multiDeleteBeSelected];
+    }
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

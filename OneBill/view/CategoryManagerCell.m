@@ -17,6 +17,7 @@
 @interface CategoryManagerCell()
 @property (strong,nonatomic)NSString * oldValue;
 @property(strong,nonatomic)UIButton * checkIconBtn;
+@property(strong,nonatomic)UIView * deleteLine;
 @end
 
 static float animationDuration=0.3;
@@ -76,6 +77,16 @@ static float animationDuration=0.3;
         self.checkIconBtn.imageView.hidden=YES;
         self.checkIconBtn.hidden=YES;
         self.checkIconBtn.userInteractionEnabled=NO;
+        self.deleteLine=[[UIView alloc]init];
+        [self.contentView addSubview:self.deleteLine];
+        self.deleteLine.backgroundColor=[UIColor whiteColor];
+        [self.deleteLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_left);
+            make.right.equalTo(self.editBtn.mas_left).with.offset(-13);
+            make.centerY.equalTo(self.contentView.mas_centerY);
+            make.height.equalTo(@(1));
+        }];
+        self.deleteLine.hidden=YES;
     }
     return self;
 }
@@ -121,20 +132,42 @@ static float animationDuration=0.3;
 
 #pragma mark - about multi delete
 - (void)beginMultiDelete{
-    self.editBtn.hidden=YES;
-    self.checkIconBtn.hidden=NO;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.editBtn.hidden=YES;
+        self.checkIconBtn.hidden=NO;
+    }];
+    
 }
 
 - (void)endMultiDelete{
-    self.editBtn.hidden=NO;
-    self.checkIconBtn.hidden=YES;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.editBtn.hidden=NO;
+        self.checkIconBtn.hidden=YES;
+    }];
+    
 }
 
 - (void)multiDeleteBeSelected{
+    self.isSelected=YES;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.backgroundColor=DarkBlueColor;
+        self.layer.masksToBounds=YES;
+        self.deleteLine.hidden=NO;
+        self.checkIconBtn.imageView.hidden=NO;
+        self.categoryTextField.textColor=[UIColor whiteColor];
+    }];
     
 }
 
 - (void)multiDeleteBeDeselected{
+    self.isSelected=NO;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.backgroundColor=[UIColor whiteColor];
+        self.layer.masksToBounds=NO;
+        self.deleteLine.hidden=YES;
+        self.checkIconBtn.imageView.hidden=YES;
+        self.categoryTextField.textColor=textGrayColor;
+    }];
     
 }
 
