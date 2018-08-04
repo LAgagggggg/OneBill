@@ -74,8 +74,8 @@ static float animationDuration=0.3;
         self.checkIconBtn.layer.borderWidth=1.f;
         self.checkIconBtn.layer.masksToBounds=YES;
         self.checkIconBtn.layer.borderColor=DarkBlueColor.CGColor;
-        self.checkIconBtn.imageView.hidden=YES;
-        self.checkIconBtn.hidden=YES;
+        self.checkIconBtn.imageView.alpha=0;
+        self.checkIconBtn.alpha=0;
         self.checkIconBtn.userInteractionEnabled=NO;
         self.deleteLine=[[UIView alloc]init];
         [self.contentView addSubview:self.deleteLine];
@@ -86,7 +86,7 @@ static float animationDuration=0.3;
             make.centerY.equalTo(self.contentView.mas_centerY);
             make.height.equalTo(@(1));
         }];
-        self.deleteLine.hidden=YES;
+        self.deleteLine.alpha=0;
     }
     return self;
 }
@@ -133,16 +133,17 @@ static float animationDuration=0.3;
 #pragma mark - about multi delete
 - (void)beginMultiDelete{
     [UIView animateWithDuration:animationDuration animations:^{
-        self.editBtn.hidden=YES;
-        self.checkIconBtn.hidden=NO;
+        self.editBtn.alpha=0;
+        self.checkIconBtn.alpha=1;
+        self.checkIconBtn.imageView.alpha=0;
     }];
     
 }
 
 - (void)endMultiDelete{
     [UIView animateWithDuration:animationDuration animations:^{
-        self.editBtn.hidden=NO;
-        self.checkIconBtn.hidden=YES;
+        self.editBtn.alpha=1;
+        self.checkIconBtn.alpha=0;
     }];
     
 }
@@ -152,8 +153,8 @@ static float animationDuration=0.3;
     [UIView animateWithDuration:animationDuration animations:^{
         self.backgroundColor=DarkBlueColor;
         self.layer.masksToBounds=YES;
-        self.deleteLine.hidden=NO;
-        self.checkIconBtn.imageView.hidden=NO;
+        self.deleteLine.alpha=1;
+        self.checkIconBtn.imageView.alpha=1;
         self.categoryTextField.textColor=[UIColor whiteColor];
     }];
     
@@ -164,8 +165,8 @@ static float animationDuration=0.3;
     [UIView animateWithDuration:animationDuration animations:^{
         self.backgroundColor=[UIColor whiteColor];
         self.layer.masksToBounds=NO;
-        self.deleteLine.hidden=YES;
-        self.checkIconBtn.imageView.hidden=YES;
+        self.deleteLine.alpha=0;
+        self.checkIconBtn.imageView.alpha=0;
         self.categoryTextField.textColor=textGrayColor;
     }];
     

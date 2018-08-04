@@ -18,11 +18,13 @@
 @interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)UIView * shadowView;
+@property (strong,nonatomic)NSMutableIndexSet * selectedIndexSet;
 @property (strong,nonatomic)NSMutableArray<NSString *>* categoryArr;
 @property (strong,nonatomic)CategoryManagerCell * addCell;
 @property (strong,nonatomic)UIButton * addBtn;
 @property (strong,nonatomic)UIBarButtonItem * deleteBtn;
 @property (strong,nonatomic)UIBarButtonItem * doneBtn;
+@property (strong,nonatomic)UITapGestureRecognizer * tapGestureRecognizer;
 @property BOOL isAdding;
 @property BOOL isMultiDeleting;
 @end
@@ -83,15 +85,22 @@ static float animationDuration=0.3;
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.allowsSelection=YES;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
-    //用于resign first responder
-////    UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
-//    tap.delegate=self;
-//    [self.view addGestureRecognizer:tap];
-//    [self.view bringSubviewToFront:self.shadowView];
+//    用于resign first responder
+    self.tapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
+    self.tapGestureRecognizer.delegate=self;
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
+    [self.view bringSubviewToFront:self.shadowView];
 }
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (NSIndexSet *)selectedIndexSet{
+    if (!_selectedIndexSet) {
+        _selectedIndexSet=[[NSMutableIndexSet alloc]init];
+    }
+    return _selectedIndexSet;
 }
 
 #pragma mark - Table view data source
@@ -148,41 +157,46 @@ static float animationDuration=0.3;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isMultiDeleting) {
         CategoryManagerCell * cell=[self.tableView cellForRowAtIndexPath:indexPath];
-        cell.isSelected?[cell multiDeleteBeDeselected]:[cell multiDeleteBeSelected];
-    }
-}
-
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row==self.categoryArr.count) {//最后一行
-        return NO;
-    }
-    for (UIView *subview in tableView.subviews)
-    {
-        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
-        {
-            subview.backgroundColor=[UIColor clearColor];
-            subview.subviews[0].layer.cornerRadius=10.f;
-            subview.subviews[0].layer.masksToBounds=YES;
+        if (cell.isSelected) {
+            [cell multiDeleteBeDeselected];
+            [self.selectedIndexSet removeIndex:indexPath.row];
+        }
+        else{
+            [cell multiDeleteBeSelected];
+            [self.selectedIndexSet addIndex:indexPath.row];
         }
     }
-    return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[CategoryManager sharedInstance].categoriesArr removeObjectAtIndex:indexPath.row];
-    [[CategoryManager sharedInstance] writeToFile];
-    [self.categoryArr removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-}
+//-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.row==self.categoryArr.count) {//最后一行
+//        return NO;
+//    }
+//    for (UIView *subview in tableView.subviews)
+//    {
+//        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
+//        {
+//            subview.backgroundColor=[UIColor clearColor];
+//            subview.subviews[0].layer.cornerRadius=10.f;
+//            subview.subviews[0].layer.masksToBounds=YES;
+//        }
+//    }
+//    return YES;
+//}
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return @"Delete";
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [[CategoryManager sharedInstance].categoriesArr removeObjectAtIndex:indexPath.row];
+//    [[CategoryManager sharedInstance] writeToFile];
+//    [self.categoryArr removeObjectAtIndex:indexPath.row];
+//    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//}
 
-
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return @"Delete";
+//}
 
 #pragma mark - add&edit category
 - (void)addBtnClicked:(UIButton *)sender{
@@ -215,6 +229,16 @@ static float animationDuration=0.3;
     }
     [firstResponder resignFirstResponder];
 }
+//
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceivePress:(UIPress *)press{
+//    NSLog(@"xxx");
+//    return NO;
+//}
+//
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+//    NSLog(@"hhh");
+//    return NO;
+//}
 
 //only for adding
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -241,8 +265,9 @@ static float animationDuration=0.3;
 #pragma mark - multi-delete
 
 - (void)beginMultiDelete{
+    self.isMultiDeleting=YES;
+    self.tapGestureRecognizer.enabled=NO;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.isMultiDeleting=YES;
         self.navigationItem.rightBarButtonItem=self.doneBtn;
         self.navigationItem.title=@"Multiple Delete";
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -257,8 +282,13 @@ static float animationDuration=0.3;
 }
 
 -(void)doneMultiDelete{
+    self.isMultiDeleting=NO;
+    self.tapGestureRecognizer.enabled=YES;
+    [[CategoryManager sharedInstance].categoriesArr removeObjectsAtIndexes:self.selectedIndexSet];
+    self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
+    [[CategoryManager sharedInstance] writeToFile];
+    [self.selectedIndexSet removeAllIndexes];
     [UIView animateWithDuration:animationDuration animations:^{
-        self.isMultiDeleting=NO;
         self.navigationItem.rightBarButtonItem=self.deleteBtn;
         self.navigationItem.title=@"Categoried";
         self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1];
