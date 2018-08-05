@@ -6,15 +6,17 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import <masonry.h>
 #import "NewOrEditBillViewController.h"
+#import "OBMapPickerViewController.h"
+#import <masonry.h>
+#import <MBProgressHUD.h>
 #import "view/CategoryView.h"
-#import "model/CategoryManager.h"
 #import "view/InoutSwitchButton.h"
 #import "view/BillValueInputView.h"
 #import "view/OBCategoryScrollView.h"
 #import "model/OBBillManager.h"
-#import <MBProgressHUD.h>
+#import "model/CategoryManager.h"
+
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
@@ -139,6 +141,15 @@
         make.centerY.equalTo(locationView.mas_centerY);
         make.right.equalTo(locationView.mas_right);
         make.height.equalTo(@(34));
+    }];
+    UIButton * locationBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [locationBtn addTarget:self action:@selector(locationLabelTaped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:locationBtn];
+    [locationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.locationLabel.mas_left);
+        make.right.equalTo(self.locationLabel.mas_right);
+        make.top.equalTo(self.locationLabel.mas_top);
+        make.bottom.equalTo(self.locationLabel.mas_bottom);
     }];
     //时间信息
     UIView * dateView=[[UIView alloc]init];
@@ -304,6 +315,16 @@
             self.locationLabel.text=@"An error occurred";
         }
     }];
+}
+
+- (void)locationLabelTaped{
+    OBMapPickerViewController * mapVC=[[OBMapPickerViewController alloc]init];
+    mapVC.location=self.location;
+    mapVC.locationPickDoneHandler = ^(CLLocation * _Nonnull location) {
+        self.location=location;
+    };
+    UINavigationController * mapVCWrapperVC=[[UINavigationController alloc]initWithRootViewController:mapVC];
+    [self presentViewController:mapVCWrapperVC animated:YES completion:nil];
 }
 
 #pragma mark - edit value
