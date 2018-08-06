@@ -15,12 +15,14 @@
 #define commonCellHeight 148
 #define todayCellHeight 180
 #define CellEdgeInset 8
-#define FetchEachTime 30
+#define FetchEachTime 20
+#define TableViewRefreshInset 60
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
 @property (strong,nonatomic)UILabel * todaySumLabel;
+@property(strong,nonatomic)UIActivityIndicatorView *reloadIndicator;
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
 @property BOOL isInserting;
@@ -84,7 +86,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITextBorderStyleNone;
-    self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
@@ -147,6 +148,15 @@ static NSString * const reuseIdentifier = @"Cell";
         make.centerX.equalTo(todayView.mas_centerX);
         make.top.equalTo(todayLabelR.mas_bottom).with.offset(5);
     }];
+    self.reloadIndicator= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.tableView addSubview:self.reloadIndicator];
+    [self.reloadIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.tableView.mas_centerX);
+        make.bottom.equalTo(self.tableView.mas_top);
+        make.height.equalTo(@(TableViewRefreshInset));
+    }];
+    self.tableView.contentInset=UIEdgeInsetsMake(TableViewRefreshInset, 0, 54, 0);
+    [self.reloadIndicator setHidesWhenStopped:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -159,13 +169,6 @@ static NSString * const reuseIdentifier = @"Cell";
         OBDaySummaryTableViewCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
         [cell setWithDaySummary:self.summaryArr[indexPath.row]];
         return cell;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(!self.isInserting && !self.fetchStopFlag && indexPath.row<=3){
-        self.isInserting=YES;
-        [self insertCellAndBackToIndex:indexPath.row];
     }
 }
 
@@ -184,20 +187,46 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - refresh&fetch more
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"%lf",scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
+        [self.reloadIndicator startAnimating];
+    }
 }
 
-//fixme
--(void)insertCellAndBackToIndex:(NSInteger)index{
-    NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:FetchEachTime]];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.tableView.contentOffset.y<=0 && !decelerate && !self.fetchStopFlag) {
+        [self.tableView setContentOffset:CGPointMake(0, -TableViewRefreshInset) animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self insertCellAndBackToRightPosition];
+            [self.reloadIndicator stopAnimating];
+        });
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (self.tableView.contentOffset.y<=0 && !self.fetchStopFlag) {
+        [self.tableView setContentOffset:CGPointMake(0, -TableViewRefreshInset) animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self insertCellAndBackToRightPosition];
+            [self.reloadIndicator stopAnimating];
+        });
+    }
+}
+
+-(void)insertCellAndBackToRightPosition{
+    NSArray * tempArr=[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:FetchEachTime];
     NSInteger count=tempArr.count;
     [self.summaryArr insertObjects:tempArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,count)]];
     self.fetchIndex+=count;
-    self.fetchStopFlag= count==FetchEachTime? NO:YES;
     [self.tableView reloadData];
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index+1+tempArr.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    self.isInserting=NO;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    self.fetchStopFlag=NO;
+    if (count!=FetchEachTime) {
+        self.fetchStopFlag=YES;
+        self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
+    }
 }
 
 - (void)returnBtnClicked{
