@@ -119,7 +119,7 @@
     [locationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(separateLine.mas_left);
         make.top.equalTo(separateLine.mas_top).with.offset(26.5);
-        make.right.equalTo(separateLine.mas_right).with.offset(-40);
+        make.right.equalTo(separateLine.mas_right).with.offset(-10);
         make.height.equalTo(@(34));
     }];
     UIImageView * locationIconView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"locationIcon"]];
@@ -260,7 +260,8 @@
     [_locationManager requestWhenInUseAuthorization];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.distanceFilter = CLLocationDistanceMax;
+    _locationManager.pausesLocationUpdatesAutomatically=YES;
     [_locationManager startUpdatingLocation];
 }
 
@@ -306,7 +307,9 @@
             [locStr appendString:placemark.administrativeArea];
             [locStr appendString:@"\n"];
             // 位置名
-            [self.locDescription appendString:[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0]];
+//            [self.locDescription appendFormat:@"%@,%@",placemark.name,placemark.thoroughfare];
+            self.locDescription=[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0];
+//            [self.locDescription appendString:[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0]];
             [locStr appendString:self.locDescription];
             self.locationLabel.text=locStr;
         }else if (error == nil && [placemarks count] == 0) {

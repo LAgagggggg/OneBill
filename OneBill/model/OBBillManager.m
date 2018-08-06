@@ -106,8 +106,9 @@
 - (BOOL)editBillOfDate:(NSDate *)date Value:(double)value withBill:(OBBill *)newBill{
     __block BOOL result;
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"update BillsTable set value=?,createdDate=?,category=?,isOut=? where(createdDate==? AND value==?);"];
-        result=[db executeUpdate:sql,@(newBill.value),newBill.date,newBill.category,@(newBill.isOut),date,@(value)];
+        NSString * sql=[NSString stringWithFormat:@"update BillsTable set value=?,createdDate=?,location=?,locDescription=?,category=?,isOut=? where(createdDate==? AND value==?);"];
+        NSData * locData=[NSKeyedArchiver archivedDataWithRootObject:newBill.location];
+        result=[db executeUpdate:sql,@(newBill.value),newBill.date,locData,newBill.locDescription,newBill.category,@(newBill.isOut),date,@(value)];
     }];
     return result;
 }

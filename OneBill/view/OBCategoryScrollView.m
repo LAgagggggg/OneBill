@@ -114,23 +114,28 @@
 //从外部设置高亮的标签
 -(void)setHighlightCategory:(NSString *)category{
     _currentCategory=category;
-    NSInteger index=[self.categoryArr indexOfObject:category];
-    //判断按钮是否在视野内
-    [self layoutIfNeeded];
-    float cViewStartX=self.cViewArr[index].frame.origin.x;
-    float cViewEndX=cViewStartX+self.cViewArr[index].frame.size.width;
-    float visionStart=self.contentOffset.x;
-    float visionEnd=self.contentOffset.x+[UIScreen mainScreen].bounds.size.width;
-    if (!(cViewStartX>=visionStart && cViewEndX<=visionEnd)) {
-        [self setContentOffset:CGPointMake(cViewStartX-30, 0) animated:YES];
+    if ([self.categoryArr containsObject:category]) {
+        NSInteger index=[self.categoryArr indexOfObject:category];
+        //判断按钮是否在视野内
+        [self layoutIfNeeded];
+        float cViewStartX=self.cViewArr[index].frame.origin.x;
+        float cViewEndX=cViewStartX+self.cViewArr[index].frame.size.width;
+        float visionStart=self.contentOffset.x;
+        float visionEnd=self.contentOffset.x+[UIScreen mainScreen].bounds.size.width;
+        if (!(cViewStartX>=visionStart && cViewEndX<=visionEnd)) {
+            [self setContentOffset:CGPointMake(cViewStartX-30, 0) animated:YES];
+        }
+        if (self.selectedView!=self.cViewArr[index]) {
+            CategoryView * oldView=self.selectedView;
+            self.selectedView=self.cViewArr[index];
+            [UIView animateWithDuration:0.3 animations:^{
+                [oldView downplay];
+                [self.selectedView highlight];
+            }];
+        }
     }
-    if (self.selectedView!=self.cViewArr[index]) {
-        CategoryView * oldView=self.selectedView;
-        self.selectedView=self.cViewArr[index];
-        [UIView animateWithDuration:0.3 animations:^{
-            [oldView downplay];
-            [self.selectedView highlight];
-        }];
+    else{//若标签不存在则所有标签都不亮
+        [self.selectedView downplay];
     }
 }
 
