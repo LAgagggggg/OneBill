@@ -59,6 +59,11 @@
     }
 }
 
+-(void)dealloc{
+    [self removeObserver:self forKeyPath:@"categoryScrollView.currentCategory"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)setUI{
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];

@@ -34,6 +34,11 @@ static NSString * const reuseIdentifier = @"Cell";
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"categoryScrollView.currentCategory"];
+}
+
 -(void)setUI{
     self.title=@"Bills";
     UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];

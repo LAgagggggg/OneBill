@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TGa-qZ-7eh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TGa-qZ-7eh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,44 +36,44 @@
                         <viewControllerLayoutGuide type="bottom" id="sfe-ue-cQg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-ui-7Dh" customClass="TodayCardView">
-                                <rect key="frame" x="30" y="15.5" width="540" height="394.5"/>
+                                <rect key="frame" x="30" y="264" width="315" height="230"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ULD-ui-7Dh" secondAttribute="height" multiplier="315:230" id="H4j-g5-uov"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsN-Ek-mbl">
-                                <rect key="frame" x="126" y="150" width="348" height="60"/>
+                                <rect key="frame" x="16" y="124" width="343" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Bill A Day" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5i-ib-xSM">
-                                        <rect key="frame" x="7.5" y="0.0" width="333" height="21"/>
+                                        <rect key="frame" x="117.5" y="0.0" width="108" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keeps worries away." textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7g-aR-z64">
-                                        <rect key="frame" x="97" y="21" width="154.5" height="21"/>
+                                        <rect key="frame" x="94.5" y="21" width="154.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="‘‘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2W0-cF-izs">
-                                        <rect key="frame" x="-12" y="0.0" width="44" height="34"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="‘‘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2W0-cF-izs">
+                                        <rect key="frame" x="89.5" y="0.0" width="13" height="34"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="30"/>
                                         <color key="textColor" red="0.43529411764705883" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="G7g-aR-z64" firstAttribute="centerX" secondItem="IsN-Ek-mbl" secondAttribute="centerX" id="1tR-ko-qX4"/>
                                     <constraint firstItem="G7g-aR-z64" firstAttribute="top" secondItem="z5i-ib-xSM" secondAttribute="bottom" id="CRU-F9-Ukc"/>
-                                    <constraint firstItem="2W0-cF-izs" firstAttribute="leading" secondItem="G7g-aR-z64" secondAttribute="leading" constant="-10" id="D1G-KC-lv6"/>
                                     <constraint firstItem="z5i-ib-xSM" firstAttribute="centerX" secondItem="IsN-Ek-mbl" secondAttribute="centerX" id="Fgt-zq-vIQ"/>
+                                    <constraint firstItem="z5i-ib-xSM" firstAttribute="leading" secondItem="2W0-cF-izs" secondAttribute="trailing" constant="15" id="a1L-7Z-CkH"/>
                                     <constraint firstAttribute="height" constant="60" id="aZU-Gk-iJO"/>
                                     <constraint firstItem="2W0-cF-izs" firstAttribute="top" secondItem="z5i-ib-xSM" secondAttribute="top" id="fgz-lW-YjL"/>
                                     <constraint firstItem="z5i-ib-xSM" firstAttribute="top" secondItem="IsN-Ek-mbl" secondAttribute="top" id="znN-xn-zWe"/>
@@ -76,13 +82,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="z5i-ib-xSM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="133.5" id="7hS-PO-GyT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IsN-Ek-mbl" secondAttribute="trailing" constant="106" id="L5v-7i-zef"/>
+                            <constraint firstItem="ULD-ui-7Dh" firstAttribute="top" secondItem="IsN-Ek-mbl" secondAttribute="top" constant="140" id="HDW-gc-XLP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IsN-Ek-mbl" secondAttribute="trailing" id="L5v-7i-zef"/>
                             <constraint firstAttribute="trailing" secondItem="ULD-ui-7Dh" secondAttribute="trailing" constant="30" id="NwI-im-Zjw"/>
-                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="top" secondItem="8Fm-xV-3zK" secondAttribute="bottom" constant="80" id="RQU-Uy-c5H"/>
+                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="top" secondItem="8Fm-xV-3zK" secondAttribute="bottom" constant="60" id="RQU-Uy-c5H"/>
                             <constraint firstItem="ULD-ui-7Dh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="Toz-Ws-0MY"/>
-                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="106" id="VfP-EH-d4z"/>
-                            <constraint firstItem="sfe-ue-cQg" firstAttribute="top" secondItem="ULD-ui-7Dh" secondAttribute="bottom" constant="190" id="tPN-KW-TtZ"/>
+                            <constraint firstItem="IsN-Ek-mbl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VfP-EH-d4z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zus-3q-vMx">
@@ -106,7 +111,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XiU-56-lHq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6WA-bc-Xmz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

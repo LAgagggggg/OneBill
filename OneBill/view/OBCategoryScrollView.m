@@ -103,7 +103,7 @@
             make.top.equalTo(self.mas_top).with.offset(26);
             make.left.equalTo(lastView.mas_right).with.offset(21);
         }];
-        self.contentSize=CGSizeMake(needWidth+20, 88);
+        self.contentSize=CGSizeMake(needWidth+20, 0);
         self.sumLabelView.frame=CGRectMake(0,0,needWidth+20,16);
         self.scrollEnabled=YES;
         self.alwaysShowSum=NO;

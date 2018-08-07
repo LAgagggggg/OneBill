@@ -29,9 +29,10 @@
 @property BOOL isMultiDeleting;
 @end
 
-
 static float animationDuration=0.3;
+
 @implementation CategoryManagerViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
@@ -40,6 +41,10 @@ static float animationDuration=0.3;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
     self.isAdding=NO;
     self.isMultiDeleting=NO;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -276,9 +281,9 @@ static float animationDuration=0.3;
         self.shadowView.backgroundColor=DarkBlueColor;
         self.shadowView.layer.masksToBounds=YES;
         self.view.backgroundColor=DarkBlueColor;
-        self.addCell.hidden=YES;
-        [self.tableView reloadData];
+        self.addCell.alpha=0;
     }];
+    [self.tableView reloadData];
 }
 
 -(void)doneMultiDelete{
@@ -297,9 +302,9 @@ static float animationDuration=0.3;
         self.shadowView.backgroundColor=grayWhiteColor;
         self.shadowView.layer.masksToBounds=NO;
         self.view.backgroundColor=grayWhiteColor;
-        self.addCell.hidden=NO;
-        [self.tableView reloadData];
+        self.addCell.alpha=1;
     }];
+    [self.tableView reloadData];
 }
 
 @end

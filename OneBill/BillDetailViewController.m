@@ -36,6 +36,10 @@ static NSString * const reuseIdentifier = @"Cell";
     [self addObserver:self forKeyPath:@"categoryChooseView.selectedCategory" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+-(void)dealloc{
+    [self removeObserver:self forKeyPath:@"categoryChooseView.selectedCategory"];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.billsArr.count) {
@@ -67,10 +71,11 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.summaryCardView.mas_top);
-        make.left.equalTo(self.view.mas_left).with.offset(30-CellEdgeInset);
-        make.right.equalTo(self.view.mas_right).with.offset(-30+CellEdgeInset);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
+    self.tableView.layer.masksToBounds=NO;
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITextBorderStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
@@ -180,10 +185,6 @@ static NSString * const reuseIdentifier = @"Cell";
             subview.backgroundColor=[UIColor clearColor];
             subview.subviews[0].layer.cornerRadius=10.f;
             subview.subviews[0].layer.masksToBounds=YES;
-            CGRect frame=subview.subviews[0].frame;
-            frame.size.width-=CellEdgeInset;
-            subview.subviews[0].frame=frame;
-            
         }
     }
     return YES;
