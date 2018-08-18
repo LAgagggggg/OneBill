@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OBMainControllerTransition : NSObject <UIViewControllerAnimatedTransitioning>
+@interface TodayCardTransitionAnimationPush : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end
 

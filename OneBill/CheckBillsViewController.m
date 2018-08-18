@@ -18,13 +18,16 @@
 #define CellEdgeInset 8
 
 @interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSString * currentCategory;
+
 @end
 
 @implementation CheckBillsViewController
+
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {

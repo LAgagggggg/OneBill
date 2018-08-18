@@ -19,6 +19,7 @@
 #define TableViewRefreshInset 60
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
 @property (strong,nonatomic)UILabel * todaySumLabel;
@@ -26,9 +27,11 @@
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
 @property BOOL isInserting;
+
 @end
 
 @implementation DaySummaryViewController
+
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {

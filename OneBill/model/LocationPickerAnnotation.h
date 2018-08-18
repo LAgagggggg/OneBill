@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly)       NSString *subtitle;
 
 - (id) initWithCoordinates:(CLLocationCoordinate2D)coordinates Title:(NSString *)title SubTitle:(NSString *)subTitle;
+
 @end
 
 NS_ASSUME_NONNULL_END

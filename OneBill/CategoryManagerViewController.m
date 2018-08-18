@@ -16,6 +16,7 @@
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)UIView * shadowView;
 @property (strong,nonatomic)NSMutableIndexSet * selectedIndexSet;
@@ -27,6 +28,7 @@
 @property (strong,nonatomic)UITapGestureRecognizer * tapGestureRecognizer;
 @property BOOL isAdding;
 @property BOOL isMultiDeleting;
+
 @end
 
 static float animationDuration=0.3;

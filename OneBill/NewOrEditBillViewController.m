@@ -19,6 +19,7 @@
 
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
+
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)BillValueInputView * inputView;
 @property (strong,nonatomic)CategoryManager * categoryManager;
@@ -37,6 +38,7 @@
 //about edit mode
 @property BOOL editMode;
 @property (strong,nonatomic)OBBill * editModeOldBill;
+
 @end
 
 @implementation NewOrEditBillViewController

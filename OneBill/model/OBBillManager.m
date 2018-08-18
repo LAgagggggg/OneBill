@@ -11,11 +11,14 @@
 #import <FMDB.h>
 
 @interface OBBillManager()
+
 @property (strong,nonatomic)NSString * dbPath;
 @property (strong,nonatomic)FMDatabaseQueue * queue;
+
 @end
 
 @implementation OBBillManager
+
 +(instancetype)sharedInstance{
     //单例创建数据库
     static OBBillManager *manager = nil;

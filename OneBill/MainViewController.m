@@ -17,10 +17,12 @@
 #import "CheckBillsViewController.h"
 
 @interface MainViewController ()
+
 @property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
 @property (strong, nonatomic) OBMainButton * addBtn;
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
+
 @end
 
 @implementation MainViewController

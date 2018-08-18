@@ -12,8 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BillDetailViewController : UIViewController
+
 @property (strong,nonatomic)NSDate * date;
+
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills;
+
 @end
 
 NS_ASSUME_NONNULL_END

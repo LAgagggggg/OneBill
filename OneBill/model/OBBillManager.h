@@ -14,6 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OBBillManager : NSObject
+
 +(instancetype)sharedInstance;
 //bill
 -(BOOL)insertBill:(OBBill *)bill;
@@ -29,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 //predict
 -(double)predictValueWithCategory:(NSString *)category Date:(NSDate *)date AndLocation:(nullable CLLocation *)location;
 -(nullable NSString *)predictCategoryWithDate:(NSDate *)date Location:(nullable CLLocation *)location;
+
 @end
 
 NS_ASSUME_NONNULL_END

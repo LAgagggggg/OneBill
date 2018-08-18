@@ -13,7 +13,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewOrEditBillViewController : UIViewController
+
 - (void)editModeWithBill:(OBBill *)bill;
+
 @end
 
 NS_ASSUME_NONNULL_END

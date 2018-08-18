@@ -10,8 +10,10 @@
 #import "model/LocationPickerAnnotation.h"
 
 @interface OBMapPickerViewController ()<MKMapViewDelegate>
+
 @property (strong,nonatomic)MKMapView * mapView;
 @property (strong,nonatomic)MKPointAnnotation * annotation;
+
 @end
 
 @implementation OBMapPickerViewController
