@@ -20,7 +20,7 @@
 
 @implementation TodayCardTransitionAnimationPush
 
-static float animationDuration=0.8;
+static float animationDuration=0.4;
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
@@ -41,32 +41,33 @@ static float animationDuration=0.8;
     fromImgView.frame=fromVc.todayCardView.frame;
     fromImgView.layer.cornerRadius=10.f;
     [containView addSubview:fromImgView];
-    //新控制器卡片
-    UIGraphicsBeginImageContextWithOptions(toVc.summaryCardView.frame.size, NO, 0);
-    [toVc.summaryCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *toImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIImageView * toImgView=[[UIImageView alloc]initWithImage:toImg];
-    toImgView.frame=toVc.summaryCardView.frame;
-    toImgView.layer.cornerRadius=10.f;
-//    [containView addSubview:toImgView];
-
     toVc.view.alpha=0;
-
-    [UIView transitionFromView:fromImgView toView:toImgView duration:animationDuration options:UIViewAnimationOptionAllowAnimatedContent completion:nil];
+    __block CGRect frame=fromImgView.frame;
+    frame.origin.y=toVc.summaryCardView.frame.origin.y+3;
+    fromImgView.contentMode=UIViewContentModeCenter;
+    fromImgView.layer.masksToBounds=YES;
+    //卡片首先移动到顶端
     [UIView animateWithDuration:animationDuration animations:^{
         fromVc.view.alpha=0;
+        fromImgView.frame=frame;
     } completion:^(BOOL finished) {
+        frame.size.height=toVc.summaryCardView.frame.size.height;
         [UIView animateWithDuration:animationDuration animations:^{
+            //卡片缩小 新界面显现
+            fromImgView.frame=frame;
             toVc.view.alpha=1;
         } completion:^(BOOL finished) {
+            //完成后清扫
             fromVc.view.alpha=1;
-            [fromImgView removeFromSuperview];
-            [toImgView removeFromSuperview];
             [self.transitionContext completeTransition:YES];
             [self.transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view.layer.mask = nil;
             [self.transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.layer.mask = nil;
         }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(animationDuration*3/5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:animationDuration animations:^{
+                fromImgView.alpha=0;
+            }];
+        });
     }];
 }
 

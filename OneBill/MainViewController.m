@@ -117,7 +117,7 @@
 #pragma mark - transitionAnimation
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-    if ([toVC isMemberOfClass:[BillDetailViewController class]]) {
+    if ([fromVC isEqual:self] && [toVC isMemberOfClass:[BillDetailViewController class]]) {
         return [[TodayCardTransitionAnimationPush alloc]init];
     }
     else{
