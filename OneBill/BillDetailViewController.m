@@ -19,7 +19,6 @@
 @interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
-@property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)OBCategoryChooseView * categoryChooseView;
 @property (strong,nonatomic)OBBill * editingBill;
@@ -64,7 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.left.equalTo(self.view.mas_left).with.offset(30);
         make.right.equalTo(self.view.mas_right).with.offset(-30);
         make.top.equalTo(self.view.mas_top).with.offset(93);
-        make.height.equalTo(@(58));
+        make.height.equalTo(@(58+25));
     }];
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];

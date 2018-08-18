@@ -9,6 +9,8 @@
 #import "TodayCardTransitionAnimationPush.h"
 #import "MainViewController.h"
 #import "BillDetailViewController.h"
+#import "view/OBDaySummaryCardView.h"
+#import "view/TodayCardView.h"
 
 @interface TodayCardTransitionAnimationPush()<CAAnimationDelegate>
 
@@ -18,63 +20,69 @@
 
 @implementation TodayCardTransitionAnimationPush
 
+static float animationDuration=0.8;
+
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
     MainViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     BillDetailViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     //获得容器视图
     UIView *containView = [transitionContext containerView];
-    // 都添加到container中。注意顺序 目标控制器的view需要后面添加
     [containView addSubview:fromVc.view];
     [containView addSubview:toVc.view];
-    
-    UIButton *button = fromVc.button;
-    //绘制圆形
-    UIBezierPath *startPath = [UIBezierPath bezierPathWithOvalInRect:button.frame];
-    
-    //创建两个圆形的 UIBezierPath 实例；一个是 button 的 size ，另外一个则拥有足够覆盖屏幕的半径。最终的动画则是在这两个贝塞尔路径之间进行的
-    //按钮中心离屏幕最远的那个角的点
-    CGPoint finalPoint;
-    //判断触发点在那个象限
-    if(button.frame.origin.x > (toVc.view.bounds.size.width / 2)){
-        if (button.frame.origin.y < (toVc.view.bounds.size.height / 2)) {
-            //第一象限
-            finalPoint = CGPointMake(0, CGRectGetMaxY(toVc.view.frame));
-        }else{
-            //第四象限
-            finalPoint = CGPointMake(0, 0);
-        }
-    }else{
-        if (button.frame.origin.y < (toVc.view.bounds.size.height / 2)) {
-            //第二象限
-            finalPoint = CGPointMake(CGRectGetMaxX(toVc.view.frame), CGRectGetMaxY(toVc.view.frame));
-        }else{
-            //第三象限
-            finalPoint = CGPointMake(CGRectGetMaxX(toVc.view.frame), 0);
-        }
-    }
-    
-    CGPoint startPoint = CGPointMake(button.center.x, button.center.y);
-    //计算向外扩散的半径 = 按钮中心离屏幕最远的那个角距离 - 按钮半径
-    CGFloat radius = sqrt((finalPoint.x-startPoint.x) * (finalPoint.x-startPoint.x) + (finalPoint.y-startPoint.y) * (finalPoint.y-startPoint.y)) - sqrt(button.frame.size.width/2 * button.frame.size.width/2 + button.frame.size.height/2 * button.frame.size.height/2);
-    UIBezierPath *endPath = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(button.frame, -radius, -radius)];
-    
-    //赋值给toVc视图layer的mask
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.path = endPath.CGPath;
-    toVc.view.layer.mask = maskLayer;
-    
-    CABasicAnimation *maskAnimation =[CABasicAnimation animationWithKeyPath:@"path"];
-    maskAnimation.fromValue = (__bridge id)startPath.CGPath;
-    maskAnimation.toValue = (__bridge id)endPath.CGPath;
-    maskAnimation.duration = [self transitionDuration:transitionContext];
-    maskAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    maskAnimation.delegate = self;
-    [maskLayer addAnimation:maskAnimation forKey:@"path"];
+    containView.backgroundColor=[UIColor whiteColor];
+    [toVc.summaryCardView.superview layoutIfNeeded];
+    //原控制器卡片
+    UIGraphicsBeginImageContextWithOptions(fromVc.todayCardView.frame.size, NO, 0);
+    [fromVc.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *fromImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageView * fromImgView=[[UIImageView alloc]initWithImage:fromImg];
+    fromImgView.frame=fromVc.todayCardView.frame;
+    fromImgView.layer.cornerRadius=10.f;
+    [containView addSubview:fromImgView];
+    //新控制器卡片
+    UIGraphicsBeginImageContextWithOptions(toVc.summaryCardView.frame.size, NO, 0);
+    [toVc.summaryCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *toImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageView * toImgView=[[UIImageView alloc]initWithImage:toImg];
+    toImgView.frame=toVc.summaryCardView.frame;
+    toImgView.layer.cornerRadius=10.f;
+//    [containView addSubview:toImgView];
+
+    toVc.view.alpha=0;
+
+    [UIView transitionFromView:fromImgView toView:toImgView duration:animationDuration options:UIViewAnimationOptionAllowAnimatedContent completion:nil];
+    [UIView animateWithDuration:animationDuration animations:^{
+        fromVc.view.alpha=0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:animationDuration animations:^{
+            toVc.view.alpha=1;
+        } completion:^(BOOL finished) {
+            fromVc.view.alpha=1;
+            [fromImgView removeFromSuperview];
+            [toImgView removeFromSuperview];
+            [self.transitionContext completeTransition:YES];
+            [self.transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view.layer.mask = nil;
+            [self.transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.layer.mask = nil;
+        }];
+    }];
 }
 
 - (NSTimeInterval)transitionDuration:(nullable id<UIViewControllerContextTransitioning>)transitionContext {
     return 0.6;
 }
+
+//#pragma mark - CAAnimationDelegate
+//
+//- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+//
+//    //告诉 iOS 这个 transition 完成
+//    [self.transitionContext completeTransition:YES];
+//    [self.transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view.layer.mask = nil;
+//    [self.transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.layer.mask = nil;
+//
+//}
 
 @end

@@ -11,8 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class OBDaySummaryCardView;
+
 @interface BillDetailViewController : UIViewController
 
+@property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)NSDate * date;
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills;

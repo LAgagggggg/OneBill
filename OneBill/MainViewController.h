@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class TodayCardView;
+
 @interface MainViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
+
 @end
+
 

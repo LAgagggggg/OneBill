@@ -8,17 +8,17 @@
 
 #import <Masonry.h>
 #import "MainViewController.h"
+#import "TodayCardTransitionAnimationPush.h"
+#import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
-#import "NewOrEditBillViewController.h"
 #import "model/OBBillManager.h"
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "CheckBillsViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <UINavigationControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
 @property (strong, nonatomic) OBMainButton * addBtn;
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.delegate=self;
     [self setUI];
 }
 
@@ -111,6 +112,17 @@
 - (void)checkBtnClicked{
     CheckBillsViewController * vc=[[CheckBillsViewController alloc]initWithDate:[NSDate date]];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - transitionAnimation
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    if ([toVC isMemberOfClass:[BillDetailViewController class]]) {
+        return [[TodayCardTransitionAnimationPush alloc]init];
+    }
+    else{
+        return nil;
+    }
 }
 
 @end

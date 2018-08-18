@@ -40,7 +40,7 @@
         [self.dateLabel setTextColor:[UIColor whiteColor]];
         [self addSubview:self.dateLabel];
         [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.mas_centerY).with.offset(25);
+            make.centerY.equalTo(self.mas_centerY).with.offset(12.5);
             make.left.equalTo(self.mas_left).with.offset(31);
         }];
         self.moneyLabel=[[UILabel alloc]init];
@@ -49,7 +49,7 @@
         [self.moneyLabel setTextColor:[UIColor whiteColor]];
         [self addSubview:self.moneyLabel];
         [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.mas_centerY).with.offset(25);
+            make.centerY.equalTo(self.mas_centerY).with.offset(12.5);
             make.right.equalTo(self.mas_right).with.offset(-25);
         }];
     }
