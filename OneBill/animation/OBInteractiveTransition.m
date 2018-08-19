@@ -10,9 +10,7 @@
 
 @interface OBInteractiveTransition ()
 
-/**手势方向*/
 @property (nonatomic, assign) OBInteractiveTransitionGestureDirection direction;
-/**手势类型*/
 @property (nonatomic, assign) OBInteractiveTransitionType type;
 
 @end
@@ -72,18 +70,17 @@
     }
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
-            //手势开始的时候标记手势状态，并开始相应的事件
+            //手势开始的时候标记手势状态并开始相应的事件
             self.interation = YES;
             [self startGesture];
             break;
         case UIGestureRecognizerStateChanged:{
-            //手势过程中，通过updateInteractiveTransition设置pop过程进行的百分比
+            //手势过程中
             [self updateInteractiveTransition:percent];
-            NSLog(@"%lf",percent);
             break;
         }
         case UIGestureRecognizerStateEnded:{
-            //手势完成后结束标记并且判断移动距离是否过半，过则finishInteractiveTransition完成转场操作，否者取消转场操作
+            //手势完成后结束标记并且判断移动距离是否过半
             self.interation = NO;
             if (percent > 0.5) {
                 [self finishInteractiveTransition];

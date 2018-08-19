@@ -42,6 +42,10 @@ static float animationDuration=0.5;
     UIImageView * fromImgView=[[UIImageView alloc]initWithImage:fromImg];
     fromImgView.frame=fromVc.todayCardView.frame;
     fromImgView.layer.cornerRadius=10.f;
+    fromImgView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
+    fromImgView.layer.shadowOffset=CGSizeMake(0, 6);
+    fromImgView.layer.shadowOpacity=0.3;
+    fromImgView.layer.shadowRadius=12;
     [containView addSubview:fromImgView];
     //button
     UIView * addBtnImgView=[fromVc.addBtn snapshotViewAfterScreenUpdates:NO];
