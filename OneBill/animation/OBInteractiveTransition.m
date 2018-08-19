@@ -40,9 +40,6 @@
     [pan addTarget:self action:@selector(handleGesture:)];
 }
 
-/**
- *  手势过渡的过程
- */
 - (void)handleGesture:(UIPanGestureRecognizer *)panGesture{
     //手势百分比
     CGFloat percent = 0;
