@@ -10,7 +10,7 @@
 
 @implementation UIView (ReplaceAnimation)
 
-+(void)replaceView:(UIView *)fromView withView:(UIView *)toView duration:(NSTimeInterval)duration completion:(void (^)(BOOL))completion{
++(void)replaceView:(UIView *)fromView withView:(UIView *)toView duration:(NSTimeInterval)duration transitionContext:(nonnull id<UIViewControllerContextTransitioning>)transitionContext completion:(void (^ _Nullable)(BOOL))completion{
     //准备动画
     fromView.alpha=1;
     toView.alpha=0;
@@ -29,17 +29,27 @@
     [UIView animateWithDuration:duration animations:^{
         fromView.frame=frame;
     } completion:^(BOOL finished) {
-        frame.size.width=toView.frame.size.width;
-        frame.size.height=toView.frame.size.height;
-        [UIView animateWithDuration:duration animations:^{
-            //卡片缩小 新界面显现
-            fromView.frame=frame;
-            fromView.alpha=0;
-        } completion:^(BOOL finished) {
-            //完成后
-            completion(finished);
-        }];
-        
+        if (transitionContext && ![transitionContext transitionWasCancelled]) {//动画正常进行
+            frame.size.width=toView.frame.size.width;
+            frame.size.height=toView.frame.size.height;
+            [UIView animateWithDuration:duration animations:^{
+                //卡片缩小 新界面显现
+                fromView.frame=frame;
+                fromView.alpha=0;
+            } completion:^(BOOL finished) {
+                //完成后
+                completion(finished);
+                if (fromView) [fromView removeFromSuperview];
+            }];
+        }
+        else{//动画取消
+            [UIView animateWithDuration:duration animations:^{
+                fromView.alpha=0;
+            } completion:^(BOOL finished) {
+                completion(finished);
+                if (fromView) [fromView removeFromSuperview];
+            }];
+        }
     }];
 }
 

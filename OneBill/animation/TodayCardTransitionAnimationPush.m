@@ -27,13 +27,13 @@ static float animationDuration=0.5;
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
     MainViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    BillDetailViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    BillDetailViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     //获得容器视图
     UIView *containView = [transitionContext containerView];
     [containView addSubview:fromVc.view];
-    [containView addSubview:toVc.view];
+    [containView addSubview:toVC.view];
     containView.backgroundColor=[UIColor whiteColor];
-    [toVc.summaryCardView.superview layoutIfNeeded];
+    [toVC.summaryCardView.superview layoutIfNeeded];
     //原控制器卡片以及覆盖其上的按钮
     UIGraphicsBeginImageContextWithOptions(fromVc.todayCardView.frame.size, NO, 0);
     [fromVc.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -44,31 +44,29 @@ static float animationDuration=0.5;
     fromImgView.layer.cornerRadius=10.f;
     [containView addSubview:fromImgView];
     //button
-    UIGraphicsBeginImageContextWithOptions(fromVc.addBtn.frame.size, NO, 0);
-    [fromVc.addBtn.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *addBtnImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIImageView * addBtnImgView=[[UIImageView alloc]initWithImage:addBtnImg];
+    UIView * addBtnImgView=[fromVc.addBtn snapshotViewAfterScreenUpdates:NO];
     addBtnImgView.frame=fromVc.addBtn.frame;
     addBtnImgView.layer.cornerRadius=10.f;
     [containView addSubview:addBtnImgView];
     //准备动画
     fromVc.todayCardView.hidden=YES;
-    toVc.view.alpha=0;
+    toVC.view.alpha=0;
     [UIView animateWithDuration:animationDuration animations:^{
         fromVc.view.alpha=0;
         addBtnImgView.alpha=0;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:animationDuration animations:^{
-            toVc.view.alpha=1;
+            if (![self.transitionContext transitionWasCancelled]) toVC.view.alpha=1;
         }];
     }];
-    [UIView replaceView:fromImgView withView:toVc.summaryCardView duration:animationDuration completion:^(BOOL finished) {
+    [UIView replaceView:fromImgView withView:toVC.summaryCardView duration:animationDuration transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVc.view.alpha=1;
         fromVc.todayCardView.hidden=NO;
-        [self.transitionContext completeTransition:YES];
-        [self.transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view.layer.mask = nil;
-        [self.transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.layer.mask = nil;
+        addBtnImgView.hidden=YES;
+        [self.transitionContext completeTransition:![self.transitionContext transitionWasCancelled]];
+        //转场失败后的处理
+        if ([transitionContext transitionWasCancelled]) {
+        }
     }];
 }
 

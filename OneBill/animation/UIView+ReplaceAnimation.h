@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (ReplaceAnimation)
 
-+ (void)replaceView:(nonnull UIView *)fromView withView:(nonnull UIView *)toView duration:(NSTimeInterval)duration completion:(void (^ __nullable)(BOOL finished))completion;
++ (void)replaceView:(nonnull UIView *)fromView withView:(nonnull UIView *)toView duration:(NSTimeInterval)duration transitionContext:(nonnull id<UIViewControllerContextTransitioning>)transitionContext completion:(void (^ __nullable)(BOOL finished))completion;
 
 @end
 

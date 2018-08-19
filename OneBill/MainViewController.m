@@ -16,10 +16,13 @@
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "CheckBillsViewController.h"
+#import "animation/OBInteractiveTransition.h"
 
 @interface MainViewController () <UINavigationControllerDelegate>
+
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
+@property (nonatomic, strong) OBInteractiveTransition *interactivePush;
 
 @end
 
@@ -70,10 +73,11 @@
     [self.checkBtn addTarget:self action:@selector(checkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //进入今日账单详情的手势
     UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
-    UISwipeGestureRecognizer * swipeForToday=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
-    swipeForToday.direction=UISwipeGestureRecognizerDirectionUp;
+//    UIPanGestureRecognizer * panForToday=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
+    UIPanGestureRecognizer * panForToday=[[UIPanGestureRecognizer alloc]init];
+//    swipeForToday.direction=UISwipeGestureRecognizerDirectionUp;
     [self.todayCardView addGestureRecognizer:tapForToday];
-    [self.todayCardView addGestureRecognizer:swipeForToday];
+    [self.todayCardView addGestureRecognizer:panForToday];
     //进入账单概况的手势
     UIView * summaryGestureView=[[UIView alloc]init];
     summaryGestureView.backgroundColor=[UIColor clearColor];
@@ -89,7 +93,14 @@
     swipeForSummary.direction=UISwipeGestureRecognizerDirectionDown;
     [summaryGestureView addGestureRecognizer:tapForSummary];
     [summaryGestureView addGestureRecognizer:swipeForSummary];
-    
+    //上划转场动画
+    self.interactivePush=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionUp];
+    typeof(self)weakSelf = self;
+    self.interactivePush.pushConifg = ^{
+        [weakSelf enterTodayDetail];
+    };
+    self.interactivePush.vc=self.navigationController;
+    [self.interactivePush setPanGestureRecognizer:panForToday];
 }
 
 -(void)enterTodayDetail{
@@ -121,6 +132,10 @@
     else{
         return nil;
     }
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+    return self.interactivePush.interation?self.interactivePush:nil;
 }
 
 @end

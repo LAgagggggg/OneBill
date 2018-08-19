@@ -16,6 +16,7 @@
 		082B1FD320FDCFF70036B5FC /* TodayCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FD220FDCFF70036B5FC /* TodayCardView.m */; };
 		0833B1D92127283C003D8428 /* TodayCardTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */; };
 		0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */; };
+		0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
@@ -58,6 +59,8 @@
 		0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardTransitionAnimationPush.m; sourceTree = "<group>"; };
 		0833B1DA2129075F003D8428 /* UIView+ReplaceAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ReplaceAnimation.h"; sourceTree = "<group>"; };
 		0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ReplaceAnimation.m"; sourceTree = "<group>"; };
+		0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBInteractiveTransition.h; sourceTree = "<group>"; };
+		0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBInteractiveTransition.m; sourceTree = "<group>"; };
 		08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
@@ -202,10 +205,12 @@
 		0833B1DD21290EF2003D8428 /* animation */ = {
 			isa = PBXGroup;
 			children = (
-				0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */,
-				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
 				0833B1DA2129075F003D8428 /* UIView+ReplaceAnimation.h */,
 				0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */,
+				0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */,
+				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
+				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
+				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
 			path = animation;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */,
 				087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */,
 				08E425D021046111008F87DB /* OBBillManager.m in Sources */,
+				0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */,
 				08E425C320FFA4C2008F87DB /* InoutSwitchButton.m in Sources */,
 				08E425B820FF0144008F87DB /* NewOrEditBillViewController.m in Sources */,
 				08E425C72100EF72008F87DB /* BillValueInputView.m in Sources */,
