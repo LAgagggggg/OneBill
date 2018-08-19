@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-        self.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-60, 58+25);
+        self.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-60, 58+22);
         self.backgroundColor=LightCyanColor;
         self.layer.cornerRadius=10.f;
         self.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
@@ -33,7 +33,7 @@
         CAShapeLayer * mainCardLayer=[[CAShapeLayer alloc]init];
         mainCardLayer.backgroundColor=DarkCyanColor.CGColor;
         mainCardLayer.cornerRadius=10.f;
-        mainCardLayer.frame=CGRectMake(0, 25, self.frame.size.width, self.frame.size.height-25);
+        mainCardLayer.frame=CGRectMake(0, 22, self.frame.size.width, self.frame.size.height-22);
         [self.layer addSublayer:mainCardLayer];
         self.dateLabel=[[UILabel alloc]init];
         [self.dateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];

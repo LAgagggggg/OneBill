@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.left.equalTo(self.view.mas_left).with.offset(30);
         make.right.equalTo(self.view.mas_right).with.offset(-30);
         make.top.equalTo(self.view.mas_top).with.offset(93);
-        make.height.equalTo(@(58+25));
+        make.height.equalTo(@(58+22));
     }];
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];

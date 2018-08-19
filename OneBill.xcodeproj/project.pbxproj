@@ -15,6 +15,7 @@
 		082B1FCB20FD79BE0036B5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FCA20FD79BE0036B5FC /* main.m */; };
 		082B1FD320FDCFF70036B5FC /* TodayCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FD220FDCFF70036B5FC /* TodayCardView.m */; };
 		0833B1D92127283C003D8428 /* TodayCardTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */; };
+		0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
@@ -55,6 +56,8 @@
 		082B1FD220FDCFF70036B5FC /* TodayCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardView.m; sourceTree = "<group>"; };
 		0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayCardTransitionAnimationPush.h; sourceTree = "<group>"; };
 		0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardTransitionAnimationPush.m; sourceTree = "<group>"; };
+		0833B1DA2129075F003D8428 /* UIView+ReplaceAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ReplaceAnimation.h"; sourceTree = "<group>"; };
+		0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ReplaceAnimation.m"; sourceTree = "<group>"; };
 		08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
@@ -139,13 +142,12 @@
 			children = (
 				08E425BC20FF1BFD008F87DB /* model */,
 				082B1FD420FDCFFB0036B5FC /* view */,
+				0833B1DD21290EF2003D8428 /* animation */,
 				082B1FC120FD79BB0036B5FC /* Main.storyboard */,
 				082B1FBB20FD79BB0036B5FC /* AppDelegate.h */,
 				082B1FBC20FD79BB0036B5FC /* AppDelegate.m */,
 				082B1FBE20FD79BB0036B5FC /* MainViewController.h */,
 				082B1FBF20FD79BB0036B5FC /* MainViewController.m */,
-				0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */,
-				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
 				08E425B620FF0144008F87DB /* NewOrEditBillViewController.h */,
 				08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */,
 				08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */,
@@ -195,6 +197,17 @@
 				08524B782112A30500D0D397 /* CategoryManagerCell.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		0833B1DD21290EF2003D8428 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */,
+				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
+				0833B1DA2129075F003D8428 /* UIView+ReplaceAnimation.h */,
+				0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */,
+			);
+			path = animation;
 			sourceTree = "<group>";
 		};
 		08E425BC20FF1BFD008F87DB /* model */ = {
@@ -339,6 +352,7 @@
 				082B1FC020FD79BB0036B5FC /* MainViewController.m in Sources */,
 				08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */,
 				08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */,
+				0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */,
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,
 				082B1FBD20FD79BB0036B5FC /* AppDelegate.m in Sources */,
 				08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */,

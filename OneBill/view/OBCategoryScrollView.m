@@ -7,8 +7,8 @@
 //
 
 #import "OBCategoryScrollView.h"
-#import "../model/OBBillManager.h"
-#import "../model/CategoryManager.h"
+#import "OBBillManager.h"
+#import "CategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
 

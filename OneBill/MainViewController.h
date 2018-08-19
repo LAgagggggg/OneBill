@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class TodayCardView;
+@class TodayCardView,OBMainButton;
 
 @interface MainViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
+@property (strong, nonatomic) OBMainButton * addBtn;
 
 @end
 

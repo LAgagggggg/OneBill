@@ -8,7 +8,7 @@
 
 #import <Masonry.h>
 #import "MainViewController.h"
-#import "TodayCardTransitionAnimationPush.h"
+#import "animation/TodayCardTransitionAnimationPush.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -18,8 +18,6 @@
 #import "CheckBillsViewController.h"
 
 @interface MainViewController () <UINavigationControllerDelegate>
-
-@property (strong, nonatomic) OBMainButton * addBtn;
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
 
