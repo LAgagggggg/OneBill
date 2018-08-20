@@ -76,8 +76,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom);
-        make.left.equalTo(self.view.mas_left).with.offset(30-CellEdgeInset);
-        make.right.equalTo(self.view.mas_right).with.offset(-30+CellEdgeInset);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
@@ -104,6 +104,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(OBTableViewCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     [cell setCellWithBill:self.billsArr[indexPath.row] andStylePreference:OBTimeLibelWithDate];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
