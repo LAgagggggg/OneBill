@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DaySummaryViewController : UIViewController
 
+@property (strong,nonatomic)UITableView * tableView;
+@property (nonatomic,strong) UITableViewCell * selectedCell;
+
 @end
 
 NS_ASSUME_NONNULL_END

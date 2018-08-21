@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "animation/TodayCardTransitionAnimationPush.h"
 #import "animation/TodayCardTransitionAnimationPop.h"
+#import "animation/SummaryToDetailTransitionAnimationPush.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -133,6 +134,9 @@
     }
     else if([toVC isEqual:self] && [fromVC isMemberOfClass:[BillDetailViewController class]]){
         return [[TodayCardTransitionAnimationPop alloc]init];
+    }
+    else if([fromVC isMemberOfClass:[DaySummaryViewController class]] && [toVC isMemberOfClass:[BillDetailViewController class]]){
+        return [[SummaryToDetailTransitionAnimationPush alloc]init];
     }
     else{
         return nil;

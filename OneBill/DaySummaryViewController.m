@@ -9,6 +9,7 @@
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "view/OBDaySummaryTableViewCell.h"
+#import "view/OBDaySummaryTodayCell.h"
 #import "model/OBBillManager.h"
 
 #define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
@@ -20,9 +21,7 @@
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
-@property (strong,nonatomic)UILabel * todaySumLabel;
 @property(strong,nonatomic)UIActivityIndicatorView *reloadIndicator;
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
@@ -93,64 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
     self.tableView.estimatedRowHeight=commonCellHeight;
-}
-
-- (void)setTodayCell:(UITableViewCell *)cell{
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    cell.backgroundColor=[UIColor clearColor];
-    UIView * todayView=[[UIView alloc]init];
-    todayView.backgroundColor=DarkCyanColor;
-    todayView.layer.cornerRadius=10.f;
-    todayView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
-    todayView.layer.shadowOffset = CGSizeMake(0, 6);
-    todayView.layer.shadowOpacity = 0.3;
-    todayView.layer.shadowRadius = 8;
-    [cell.contentView addSubview:todayView];
-    [todayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cell.contentView.mas_left).with.offset(CellEdgeInset);
-        make.right.equalTo(cell.contentView.mas_right).with.offset(-CellEdgeInset);
-        make.top.equalTo(cell.contentView.mas_top).with.offset(36);
-        make.bottom.equalTo(cell.contentView.mas_bottom).with.offset(-CellEdgeInset);
-    }];
-    CGRect frame=cell.selectedBackgroundView.frame;
-    frame.origin.x+=CellEdgeInset;
-    frame.origin.y+=36;
-    frame.size.width-=CellEdgeInset;
-    frame.size.height-=CellEdgeInset;
-    cell.selectedBackgroundView.frame=frame;
-    cell.selectedBackgroundView.layer.cornerRadius=10.f;
-    cell.selectedBackgroundView.layer.masksToBounds=YES;
-    //label
-    UILabel * todayLabelL=[[UILabel alloc]init];
-    UILabel * todayLabelR=[[UILabel alloc]init];
-    [todayLabelL setTextAlignment:NSTextAlignmentRight];
-    [todayLabelR setTextAlignment:NSTextAlignmentLeft];
-    [todayLabelL setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
-    [todayLabelR setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
-    [todayLabelR setText:@" TODAY"];
-    [todayLabelL setText:@"your bill"];
-    [todayLabelR setTextColor:[UIColor whiteColor] ];
-    [todayLabelL setTextColor:[UIColor whiteColor] ];
-    [todayView addSubview:todayLabelR];
-    [todayView addSubview:todayLabelL];
-    [todayLabelL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(todayView.mas_left).with.offset(31);
-        make.top.equalTo(todayView.mas_top).with.offset(26);
-    }];
-    [todayLabelR mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(todayLabelL.mas_right);
-        make.top.equalTo(todayView.mas_top).with.offset(26);
-    }];
-    self.todaySumLabel=[[UILabel alloc]init];
-    [self.todaySumLabel setTextColor:[UIColor whiteColor]];
-    [self.todaySumLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:48]];
-    [self.todaySumLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.todaySumLabel setText:[NSString stringWithFormat:@"%+.2lf",[[OBBillManager sharedInstance] sumOfDay:[NSDate date]]]];
-    [todayView addSubview:self.todaySumLabel];
-    [self.todaySumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(todayView.mas_centerX);
-        make.top.equalTo(todayLabelR.mas_bottom).with.offset(5);
-    }];
+    //菊花
     self.reloadIndicator= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.tableView addSubview:self.reloadIndicator];
     [self.reloadIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,10 +104,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.reloadIndicator setHidesWhenStopped:YES];
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==self.summaryArr.count-1) {
-        UITableViewCell * cell=[[UITableViewCell alloc]init];
-        [self setTodayCell:cell];
+        OBDaySummaryTodayCell * cell=[[OBDaySummaryTodayCell alloc]init];
+        [cell setupTodayCell];
         return cell;
     }
     else{
@@ -185,6 +129,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.selectedCell=[tableView cellForRowAtIndexPath:indexPath];//for animation
     BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:self.summaryArr[indexPath.row].date]];
     vc.date=self.summaryArr[indexPath.row].date;
     [self.navigationController pushViewController:vc animated:YES];

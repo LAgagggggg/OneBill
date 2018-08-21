@@ -18,6 +18,8 @@
 		0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */; };
 		0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */; };
 		0833B1E3212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */; };
+		0833B1E6212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */; };
+		0833B1E9212C67F4003D8428 /* OBDaySummaryTodayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
@@ -64,6 +66,10 @@
 		0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBInteractiveTransition.m; sourceTree = "<group>"; };
 		0833B1E1212B2FF6003D8428 /* TodayCardTransitionAnimationPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayCardTransitionAnimationPop.h; sourceTree = "<group>"; };
 		0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardTransitionAnimationPop.m; sourceTree = "<group>"; };
+		0833B1E4212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SummaryToDetailTransitionAnimationPush.h; sourceTree = "<group>"; };
+		0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryToDetailTransitionAnimationPush.m; sourceTree = "<group>"; };
+		0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDaySummaryTodayCell.h; sourceTree = "<group>"; };
+		0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDaySummaryTodayCell.m; sourceTree = "<group>"; };
 		08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
@@ -197,6 +203,8 @@
 				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
 				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
 				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
+				0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */,
+				0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */,
 				08E425D72106218C008F87DB /* OBTableViewCardCell.h */,
 				08E425D82106218C008F87DB /* OBTableViewCardCell.m */,
 				08524B772112A30500D0D397 /* CategoryManagerCell.h */,
@@ -214,6 +222,8 @@
 				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
 				0833B1E1212B2FF6003D8428 /* TodayCardTransitionAnimationPop.h */,
 				0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */,
+				0833B1E4212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.h */,
+				0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */,
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
@@ -346,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0833B1E9212C67F4003D8428 /* OBDaySummaryTodayCell.m in Sources */,
 				08E425E52109AD6C008F87DB /* CheckBillsViewController.m in Sources */,
 				08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */,
 				087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */,
@@ -353,6 +364,7 @@
 				0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */,
 				08E425C320FFA4C2008F87DB /* InoutSwitchButton.m in Sources */,
 				08E425B820FF0144008F87DB /* NewOrEditBillViewController.m in Sources */,
+				0833B1E6212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m in Sources */,
 				08E425C72100EF72008F87DB /* BillValueInputView.m in Sources */,
 				08E425DF21073C6A008F87DB /* DaySummaryViewController.m in Sources */,
 				08E425BB20FF1BE9008F87DB /* CategoryManager.m in Sources */,

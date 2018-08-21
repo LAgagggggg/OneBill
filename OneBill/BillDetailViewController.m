@@ -43,7 +43,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.summaryCardView addGestureRecognizer:pan];
     [self.interactivePop setPanGestureRecognizer:pan];
     //边缘右滑
-    UIScreenEdgePanGestureRecognizer * edgePan=[[UIScreenEdgePanGestureRecognizer alloc]init];
+    UIScreenEdgePanGestureRecognizer * edgePan=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgePanChanged:)];
     edgePan.edges=UIRectEdgeLeft;
     [self.tableView addGestureRecognizer:edgePan];
     [self.interactivePop setPanGestureRecognizer:edgePan];
@@ -219,6 +219,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)edgePanChanged:(UIScreenEdgePanGestureRecognizer *)edgePan{
+    //统一边缘滑动手势和顶部卡片下滑手势
+    CGPoint point=[edgePan translationInView:edgePan.view];
+    point.y=point.x;
+    [edgePan setTranslation:point inView:edgePan.view];
 }
 
 @end
