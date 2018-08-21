@@ -42,6 +42,11 @@ static NSString * const reuseIdentifier = @"Cell";
     UIPanGestureRecognizer * pan=[[UIPanGestureRecognizer alloc]init];
     [self.summaryCardView addGestureRecognizer:pan];
     [self.interactivePop setPanGestureRecognizer:pan];
+    //边缘右滑
+    UIScreenEdgePanGestureRecognizer * edgePan=[[UIScreenEdgePanGestureRecognizer alloc]init];
+    edgePan.edges=UIRectEdgeLeft;
+    [self.tableView addGestureRecognizer:edgePan];
+    [self.interactivePop setPanGestureRecognizer:edgePan];
 }
 
 -(void)dealloc{
@@ -62,7 +67,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;
-    self.navigationController.interactivePopGestureRecognizer.delegate=self;
+//    self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     self.summaryCardView=[[OBDaySummaryCardView alloc]init];
     [self.view addSubview:self.summaryCardView];
