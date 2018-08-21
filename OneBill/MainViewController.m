@@ -9,6 +9,7 @@
 #import <Masonry.h>
 #import "MainViewController.h"
 #import "animation/TodayCardTransitionAnimationPush.h"
+#import "animation/TodayCardTransitionAnimationPop.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePush;
+@property (nonatomic, strong) BillDetailViewController *todayDetailVC;
 
 @end
 
@@ -104,9 +106,9 @@
 }
 
 -(void)enterTodayDetail{
-    BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]] ];
-    vc.date=[NSDate date];
-    [self.navigationController pushViewController:vc animated:YES];
+    self.todayDetailVC=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:[NSDate date]] ];
+    self.todayDetailVC.date=[NSDate date];
+    [self.navigationController pushViewController:self.todayDetailVC animated:YES];
 }
 
 -(void)enterDaySummary{
@@ -123,11 +125,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - transitionAnimation
+#pragma mark - transitionAnimation Control
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
     if ([fromVC isEqual:self] && [toVC isMemberOfClass:[BillDetailViewController class]]) {
         return [[TodayCardTransitionAnimationPush alloc]init];
+    }
+    else if([toVC isEqual:self] && [fromVC isMemberOfClass:[BillDetailViewController class]]){
+        return [[TodayCardTransitionAnimationPop alloc]init];
     }
     else{
         return nil;
@@ -135,7 +140,15 @@
 }
 
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
-    return self.interactivePush.interation?self.interactivePush:nil;
+    if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPush class]]){
+        return self.interactivePush.interation?self.interactivePush:nil;
+    }
+    else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){
+        return self.todayDetailVC.interactivePop.interation?self.todayDetailVC.interactivePop:nil;
+    }
+    else{
+        return nil;
+    }
 }
 
 @end

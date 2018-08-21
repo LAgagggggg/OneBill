@@ -17,6 +17,7 @@
 		0833B1D92127283C003D8428 /* TodayCardTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */; };
 		0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */; };
 		0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */; };
+		0833B1E3212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
@@ -61,6 +62,8 @@
 		0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ReplaceAnimation.m"; sourceTree = "<group>"; };
 		0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBInteractiveTransition.h; sourceTree = "<group>"; };
 		0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBInteractiveTransition.m; sourceTree = "<group>"; };
+		0833B1E1212B2FF6003D8428 /* TodayCardTransitionAnimationPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayCardTransitionAnimationPop.h; sourceTree = "<group>"; };
+		0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayCardTransitionAnimationPop.m; sourceTree = "<group>"; };
 		08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				0833B1DB2129075F003D8428 /* UIView+ReplaceAnimation.m */,
 				0833B1D72127283C003D8428 /* TodayCardTransitionAnimationPush.h */,
 				0833B1D82127283C003D8428 /* TodayCardTransitionAnimationPush.m */,
+				0833B1E1212B2FF6003D8428 /* TodayCardTransitionAnimationPop.h */,
+				0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */,
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
@@ -362,6 +367,7 @@
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,
 				082B1FBD20FD79BB0036B5FC /* AppDelegate.m in Sources */,
 				08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */,
+				0833B1E3212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m in Sources */,
 				0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */,
 				089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */,
 				08E425D32105BCC6008F87DB /* BillDetailViewController.m in Sources */,

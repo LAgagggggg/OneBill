@@ -6,17 +6,18 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#import <masonry.h>
 #import "BillDetailViewController.h"
 #import "NewOrEditBillViewController.h"
 #import "view/OBDaySummaryCardView.h"
 #import "view/OBTableViewCardCell.h"
 #import "view/OBCategoryChooseView.h"
 #import "model/CategoryManager.h"
-#import <masonry.h>
+
 
 #define CellEdgeInset 8
 
-@interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+@interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
 @property (strong,nonatomic)UITableView * tableView;
@@ -35,6 +36,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [self setUI];
     [self.summaryCardView setDate:self.date Money:[[OBBillManager sharedInstance]sumOfDay:self.date]];
     [self addObserver:self forKeyPath:@"categoryChooseView.selectedCategory" options:NSKeyValueObservingOptionNew context:nil];
+    //上划转场动画
+    self.interactivePop=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePop GestureDirection:OBInteractiveTransitionGestureDirectionDown];
+    self.interactivePop.vc=self;
+    UIPanGestureRecognizer * pan=[[UIPanGestureRecognizer alloc]init];
+    [self.summaryCardView addGestureRecognizer:pan];
+    [self.interactivePop setPanGestureRecognizer:pan];
 }
 
 -(void)dealloc{

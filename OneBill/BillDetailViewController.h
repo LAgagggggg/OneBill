@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "model/OBBillManager.h"
+#import "animation/OBInteractiveTransition.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
 @property (strong,nonatomic)NSDate * date;
+@property (nonatomic, strong) OBInteractiveTransition *interactivePop;
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills;
 
