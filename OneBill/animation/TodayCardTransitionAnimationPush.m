@@ -14,7 +14,7 @@
 #import "OBMainButton.h"
 #import "UIView+ReplaceAnimation.h"
 
-@interface TodayCardTransitionAnimationPush()<CAAnimationDelegate>
+@interface TodayCardTransitionAnimationPush()
 
 @property (nonatomic, strong)id<UIViewControllerContextTransitioning> transitionContext;
 

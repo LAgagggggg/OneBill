@@ -47,17 +47,14 @@ static NSString * const reuseIdentifier = @"Cell";
     edgePan.edges=UIRectEdgeLeft;
     [self.tableView addGestureRecognizer:edgePan];
     [self.interactivePop setPanGestureRecognizer:edgePan];
+//    移动到底部
+    if (self.billsArr.count) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.billsArr.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
 }
 
 -(void)dealloc{
     [self removeObserver:self forKeyPath:@"categoryChooseView.selectedCategory"];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    if (self.billsArr.count) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.billsArr.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
 }
 
 -(void)setUI{
@@ -69,6 +66,10 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.leftBarButtonItem=returnBarBtn;
 //    self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+    //顶部遮盖
+    UIView * shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width,100)];
+    [self.view addSubview:shadowView];
+    shadowView.backgroundColor=self.view.backgroundColor;
     self.summaryCardView=[[OBDaySummaryCardView alloc]init];
     [self.view addSubview:self.summaryCardView];
     [self.summaryCardView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,7 +84,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.summaryCardView.mas_top);
+        make.top.equalTo(self.summaryCardView.mas_bottom);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
@@ -91,9 +92,9 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.layer.masksToBounds=NO;
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITextBorderStyleNone;
-    self.tableView.contentInset=UIEdgeInsetsMake(58+25+12, 0, 20, 0);
+    self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
-    self.tableView.estimatedRowHeight=117;
+    self.tableView.estimatedRowHeight=109;
     [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
     self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
     [self.view addSubview:self.categoryChooseView];
@@ -101,6 +102,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]init];
     [tap addTarget:self action:@selector(resignCategoryChooseView)];
     [self.categoryChooseView.dimView addGestureRecognizer:tap];
+    [self.view bringSubviewToFront:shadowView];
+    [self.view bringSubviewToFront:self.summaryCardView];
 }
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills

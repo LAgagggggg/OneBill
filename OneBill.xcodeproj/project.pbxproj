@@ -20,6 +20,7 @@
 		0833B1E3212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */; };
 		0833B1E6212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */; };
 		0833B1E9212C67F4003D8428 /* OBDaySummaryTodayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */; };
+		0833B1EC212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1EB212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
@@ -70,6 +71,8 @@
 		0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryToDetailTransitionAnimationPush.m; sourceTree = "<group>"; };
 		0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDaySummaryTodayCell.h; sourceTree = "<group>"; };
 		0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDaySummaryTodayCell.m; sourceTree = "<group>"; };
+		0833B1EA212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SummaryToDetailTransitionAnimationPop.h; sourceTree = "<group>"; };
+		0833B1EB212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SummaryToDetailTransitionAnimationPop.m; sourceTree = "<group>"; };
 		08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				0833B1E2212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m */,
 				0833B1E4212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.h */,
 				0833B1E5212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m */,
+				0833B1EA212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.h */,
+				0833B1EB212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m */,
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
@@ -359,6 +364,7 @@
 				0833B1E9212C67F4003D8428 /* OBDaySummaryTodayCell.m in Sources */,
 				08E425E52109AD6C008F87DB /* CheckBillsViewController.m in Sources */,
 				08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */,
+				0833B1EC212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m in Sources */,
 				087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */,
 				08E425D021046111008F87DB /* OBBillManager.m in Sources */,
 				0833B1E0212919E8003D8428 /* OBInteractiveTransition.m in Sources */,

@@ -75,8 +75,6 @@
 }
 
 - (void)setFrame:(CGRect)frame{
-    frame.origin.y += 12;
-    frame.size.height -= 12;
     frame.origin.x += CellEdgeInset;
     frame.size.width -= 2*CellEdgeInset;
     [super setFrame:frame];

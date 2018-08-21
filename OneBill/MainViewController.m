@@ -11,6 +11,7 @@
 #import "animation/TodayCardTransitionAnimationPush.h"
 #import "animation/TodayCardTransitionAnimationPop.h"
 #import "animation/SummaryToDetailTransitionAnimationPush.h"
+#import "animation/SummaryToDetailTransitionAnimationPop.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -138,6 +139,12 @@
     else if([fromVC isMemberOfClass:[DaySummaryViewController class]] && [toVC isMemberOfClass:[BillDetailViewController class]]){
         return [[SummaryToDetailTransitionAnimationPush alloc]init];
     }
+    else if([fromVC isMemberOfClass:[BillDetailViewController class]] && [toVC isMemberOfClass:[DaySummaryViewController class]]){
+        SummaryToDetailTransitionAnimationPop * pop=[[SummaryToDetailTransitionAnimationPop alloc]init];
+        BillDetailViewController * vc=(BillDetailViewController *)fromVC;
+        pop.interactivePop=vc.interactivePop;
+        return pop;
+    }
     else{
         return nil;
     }
@@ -149,6 +156,10 @@
     }
     else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){
         return self.todayDetailVC.interactivePop.interation?self.todayDetailVC.interactivePop:nil;
+    }
+    else if ([animationController isMemberOfClass:[SummaryToDetailTransitionAnimationPop class]]){
+        SummaryToDetailTransitionAnimationPop * pop=animationController;
+        return pop.interactivePop.interation?pop.interactivePop:nil;
     }
     else{
         return nil;

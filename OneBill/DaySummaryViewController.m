@@ -44,16 +44,17 @@ static NSString * const reuseIdentifier = @"Cell";
     self.fetchIndex+=tempArr.count;
     self.fetchStopFlag= tempArr.count==FetchEachTime? NO:YES;
     [self setUI];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     if (self.summaryArr.count) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.summaryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.isInserting=NO;
     });
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
 }
 
 -(void)setUI{
@@ -91,7 +92,6 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
-    self.tableView.estimatedRowHeight=commonCellHeight;
     //菊花
     self.reloadIndicator= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.tableView addSubview:self.reloadIndicator];
@@ -121,6 +121,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return (indexPath.row==self.summaryArr.count-1)?todayCellHeight:commonCellHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return (indexPath.row==self.summaryArr.count-1)?todayCellHeight-8:commonCellHeight-12;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -180,4 +184,5 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

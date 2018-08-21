@@ -12,7 +12,7 @@
 #import "OBDaySummaryCardView.h"
 #import "UIView+ReplaceAnimation.h"
 
-@interface SummaryToDetailTransitionAnimationPush() <CAAnimationDelegate>
+@interface SummaryToDetailTransitionAnimationPush()
 
 @property (nonatomic, strong)id<UIViewControllerContextTransitioning> transitionContext;
 
@@ -33,7 +33,7 @@ static float animationDuration=0.5;
     containView.backgroundColor=[UIColor whiteColor];
     [fromVC.view layoutIfNeeded];
     [toVC.summaryCardView.superview layoutIfNeeded];
-    //原控制器卡片以及覆盖其上的按钮
+    //点击的cell
     UIGraphicsBeginImageContextWithOptions(fromVC.selectedCell.frame.size, NO, 0);
     [fromVC.selectedCell.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *fromImg = UIGraphicsGetImageFromCurrentImageContext();
