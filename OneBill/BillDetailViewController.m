@@ -104,6 +104,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.categoryChooseView.dimView addGestureRecognizer:tap];
     [self.view bringSubviewToFront:shadowView];
     [self.view bringSubviewToFront:self.summaryCardView];
+    [self.view bringSubviewToFront:self.categoryChooseView];
 }
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills
@@ -227,7 +228,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)edgePanChanged:(UIScreenEdgePanGestureRecognizer *)edgePan{
     //统一边缘滑动手势和顶部卡片下滑手势
     CGPoint point=[edgePan translationInView:edgePan.view];
-    point.y=point.x;
+    point.y=point.x*1.5;
     [edgePan setTranslation:point inView:edgePan.view];
 }
 

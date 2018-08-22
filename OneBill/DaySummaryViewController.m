@@ -92,6 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
+    self.tableView.estimatedRowHeight=commonCellHeight;
     //菊花
     self.reloadIndicator= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.tableView addSubview:self.reloadIndicator];
@@ -123,9 +124,9 @@ static NSString * const reuseIdentifier = @"Cell";
     return (indexPath.row==self.summaryArr.count-1)?todayCellHeight:commonCellHeight;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return (indexPath.row==self.summaryArr.count-1)?todayCellHeight-8:commonCellHeight-12;
-}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return (indexPath.row==self.summaryArr.count-1)?todayCellHeight-8:commonCellHeight-12;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.summaryArr.count;
