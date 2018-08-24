@@ -6,11 +6,12 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#import <Masonry.h>
+#import <MBProgressHUD.h>
 #import "CategoryManagerViewController.h"
 #import "view/CategoryManagerCell.h"
 #import "model/CategoryManager.h"
-#import <masonry.h>
-#import <MBProgressHUD.h>
+
 #define grayWhiteColor [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]

@@ -6,6 +6,7 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
+#import <Masonry.h>
 #import "CheckBillsViewController.h"
 #import "CategoryManagerViewController.h"
 #import "model/CategoryManager.h"
@@ -13,7 +14,6 @@
 #import "view/OBDaySummaryCardView.h"
 #import "view/OBTableViewCardCell.h"
 #import "view/OBCategoryScrollView.h"
-#import <masonry.h>
 
 #define CellEdgeInset 8
 

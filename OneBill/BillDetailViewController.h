@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "model/OBBillManager.h"
+#import "OBBillManager.h"
 #import "animation/OBInteractiveTransition.h"
 
 NS_ASSUME_NONNULL_BEGIN
