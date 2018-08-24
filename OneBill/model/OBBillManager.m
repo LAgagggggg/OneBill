@@ -92,8 +92,16 @@
     NSTimeInterval monthEndStamp=[nextMonth timeIntervalSince1970];
     NSMutableArray * resultArr=[[NSMutableArray alloc]init];
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==?) ORDER BY createdDate ASC;"];
-        FMResultSet *resultSet = [db executeQuery:sql,@((double)monthStartStamp),@((double)monthEndStamp),category];
+        NSString * sql=nil;
+        FMResultSet * resultSet=nil;
+        if (category) {
+            sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<? AND category==?) ORDER BY createdDate ASC;"];
+            resultSet = [db executeQuery:sql,@((double)monthStartStamp),@((double)monthEndStamp),category];
+        }
+        else{
+            sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?) ORDER BY createdDate ASC;"];
+            resultSet = [db executeQuery:sql,@((double)monthStartStamp),@((double)monthEndStamp)];
+        }
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];
             NSData * locData=[resultSet dataForColumn:@"location"];
