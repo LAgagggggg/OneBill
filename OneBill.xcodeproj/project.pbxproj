@@ -43,8 +43,15 @@
 		08E425DF21073C6A008F87DB /* DaySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425DE21073C6A008F87DB /* DaySummaryViewController.m */; };
 		08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425E1210743CD008F87DB /* OBDaySummary.m */; };
 		08E425E52109AD6C008F87DB /* CheckBillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425E42109AD6C008F87DB /* CheckBillsViewController.m */; };
+		08EEB60421305A3400C57436 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FCA20FD79BE0036B5FC /* main.m */; };
+		08EEB60521305B9C00C57436 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FBC20FD79BB0036B5FC /* AppDelegate.m */; };
+		08EEB60721305C4500C57436 /* OneBillUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA13C7212FFA9F00E830A5 /* OneBillUITests.m */; };
 		08FA13BA212FF42100E830A5 /* OneBillTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA13B9212FF42100E830A5 /* OneBillTests.m */; };
-		08FA13C8212FFA9F00E830A5 /* OneBillUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA13C7212FFA9F00E830A5 /* OneBillUITests.m */; };
+		08FA13D021304C7200E830A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA13CF21304C7200E830A5 /* CoreGraphics.framework */; };
+		08FA13D221304C7900E830A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA13D121304C7900E830A5 /* UIKit.framework */; };
+		08FA13D421304C7F00E830A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA13D321304C7F00E830A5 /* Foundation.framework */; };
+		08FA13D521304C9300E830A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC420FD79BE0036B5FC /* Assets.xcassets */; };
+		08FA13D621304C9B00E830A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC120FD79BB0036B5FC /* Main.storyboard */; };
 		4C5D426A12EA881EA8A8565A /* libPods-OneBill.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +143,7 @@
 		08E425E1210743CD008F87DB /* OBDaySummary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDaySummary.m; sourceTree = "<group>"; };
 		08E425E32109AD6C008F87DB /* CheckBillsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBillsViewController.h; sourceTree = "<group>"; };
 		08E425E42109AD6C008F87DB /* CheckBillsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBillsViewController.m; sourceTree = "<group>"; };
+		08F0EBED2130524600B01EF2 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FA13B1212FF26B00E830A5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		08FA13B7212FF42100E830A5 /* OneBillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneBillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FA13B9212FF42100E830A5 /* OneBillTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneBillTests.m; sourceTree = "<group>"; };
@@ -143,6 +151,10 @@
 		08FA13C5212FFA9F00E830A5 /* OneBillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneBillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FA13C7212FFA9F00E830A5 /* OneBillUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneBillUITests.m; sourceTree = "<group>"; };
 		08FA13C9212FFA9F00E830A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08FA13CF21304C7200E830A5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		08FA13D121304C7900E830A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		08FA13D321304C7F00E830A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		08FA13F421304E6700E830A5 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEDCD7393621A1D868FDE1A /* Pods-OneBill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.release.xcconfig"; sourceTree = "<group>"; };
 		75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBill.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6A73D7CD687F1DEA2030AC /* Pods-OneBill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +180,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FA13D421304C7F00E830A5 /* Foundation.framework in Frameworks */,
+				08FA13D221304C7900E830A5 /* UIKit.framework in Frameworks */,
+				08FA13D021304C7200E830A5 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +332,11 @@
 		73EC6F66C993932DA9967418 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08F0EBED2130524600B01EF2 /* libMasonry.a */,
+				08FA13F421304E6700E830A5 /* libMasonry.a */,
+				08FA13D321304C7F00E830A5 /* Foundation.framework */,
+				08FA13D121304C7900E830A5 /* UIKit.framework */,
+				08FA13CF21304C7200E830A5 /* CoreGraphics.framework */,
 				08FA13B1212FF26B00E830A5 /* XCTest.framework */,
 				75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */,
 			);
@@ -453,6 +473,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FA13D621304C9B00E830A5 /* Main.storyboard in Resources */,
+				08FA13D521304C9300E830A5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +554,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08FA13C8212FFA9F00E830A5 /* OneBillUITests.m in Sources */,
+				08EEB60521305B9C00C57436 /* AppDelegate.m in Sources */,
+				08EEB60721305C4500C57436 /* OneBillUITests.m in Sources */,
+				08EEB60421305A3400C57436 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
