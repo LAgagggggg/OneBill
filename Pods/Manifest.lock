@@ -4,23 +4,27 @@ PODS:
   - FMDB/standard (2.6.2)
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
+  - ODRefreshControl (1.2)
 
 DEPENDENCIES:
   - FMDB
   - Masonry
   - MBProgressHUD (~> 1.0.0)
+  - ODRefreshControl (~> 1.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FMDB
     - Masonry
     - MBProgressHUD
+    - ODRefreshControl
 
 SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  ODRefreshControl: 907e6149d72dde488d5917ccfabee5bd8d711a20
 
-PODFILE CHECKSUM: cf50f6d47f11c83cef15f9f32be60f46ae63f26a
+PODFILE CHECKSUM: b8605b27bedac16e47f2df1480a77a10d1b189d1
 
 COCOAPODS: 1.5.2

@@ -6,6 +6,7 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 #import <Masonry.h>
+#import <ODRefreshControl.h>
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "view/OBDaySummaryTableViewCell.h"
@@ -23,6 +24,7 @@
 
 @property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
 @property(strong,nonatomic)UIActivityIndicatorView *reloadIndicator;
+//@property (nonatomic, strong) ODRefreshControl *refreshControl;
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
 @property BOOL isInserting;
@@ -92,8 +94,10 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
-    self.tableView.estimatedRowHeight=commonCellHeight;
+    self.tableView.estimatedRowHeight=(commonCellHeight*self.summaryArr.count+(todayCellHeight-commonCellHeight)-TableViewRefreshInset)/self.summaryArr.count;
     //菊花
+//    _refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+//    [_refreshControl addTarget:self action:@selector(insertCellAndBackToRightPosition) forControlEvents:UIControlEventValueChanged];
     self.reloadIndicator= [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.tableView addSubview:self.reloadIndicator];
     [self.reloadIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,10 +127,6 @@ static NSString * const reuseIdentifier = @"Cell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return (indexPath.row==self.summaryArr.count-1)?todayCellHeight:commonCellHeight;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return (indexPath.row==self.summaryArr.count-1)?todayCellHeight-8:commonCellHeight-12;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.summaryArr.count;
@@ -176,10 +176,11 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     self.fetchStopFlag=NO;
-    if (count!=FetchEachTime) {
+    if (count!=FetchEachTime) {//说明没有更多条目了
         self.fetchStopFlag=YES;
         self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
     }
+//    [self.refreshControl endRefreshing];
 }
 
 - (void)returnBtnClicked{
