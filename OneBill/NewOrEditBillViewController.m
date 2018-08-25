@@ -20,9 +20,9 @@
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
-@property (strong,nonatomic)BillValueInputView * inputView;
-@property (strong,nonatomic)CategoryManager * categoryManager;
+@property (strong,nonatomic)OBCategoryScrollView *categoryScrollView;
+@property (strong,nonatomic)BillValueInputView *inputView;
+@property (strong,nonatomic)CategoryManager *categoryManager;
 @property (strong,nonatomic)InoutSwitchButton * inoutSwitchBtn;
 @property (strong,nonatomic)UIButton * confirmBtn;
 @property (strong,nonatomic)UILabel * locationLabel;

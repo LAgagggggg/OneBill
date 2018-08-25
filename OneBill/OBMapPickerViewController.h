@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBMapPickerViewController : UIViewController
 
-@property (strong,nonatomic) void(^locationPickDoneHandler)(CLLocation * location);
-@property (strong,nonatomic)CLLocation * location;
+@property (strong,nonatomic) void(^locationPickDoneHandler)(CLLocation *location);
+@property (strong,nonatomic)CLLocation *location;
 
 @end
 
