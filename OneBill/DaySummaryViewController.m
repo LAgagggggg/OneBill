@@ -94,7 +94,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
-    self.tableView.estimatedRowHeight=(commonCellHeight*self.summaryArr.count+(todayCellHeight-commonCellHeight)-TableViewRefreshInset)/self.summaryArr.count;
+    self.tableView.estimatedRowHeight=((commonCellHeight-12)*self.summaryArr.count+(todayCellHeight-commonCellHeight+12)+TableViewRefreshInset)/self.summaryArr.count;
+//    self.tableView.estimatedRowHeight=2411/self.summaryArr.count;
     //菊花
 //    _refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
 //    [_refreshControl addTarget:self action:@selector(insertCellAndBackToRightPosition) forControlEvents:UIControlEventValueChanged];
@@ -143,6 +144,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - refresh&fetch more
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"%lf",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
         [self.reloadIndicator startAnimating];
     }
