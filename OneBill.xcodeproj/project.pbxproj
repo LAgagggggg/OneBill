@@ -38,7 +38,7 @@
 		08E425D021046111008F87DB /* OBBillManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425CF21046111008F87DB /* OBBillManager.m */; };
 		08E425D32105BCC6008F87DB /* BillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425D22105BCC6008F87DB /* BillDetailViewController.m */; };
 		08E425D62105F145008F87DB /* OBDaySummaryCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425D52105F145008F87DB /* OBDaySummaryCardView.m */; };
-		08E425D92106218C008F87DB /* OBTableViewCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425D82106218C008F87DB /* OBTableViewCardCell.m */; };
+		08E425D92106218C008F87DB /* OBDetailCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425D82106218C008F87DB /* OBDetailCardCell.m */; };
 		08E425DC21073C3E008F87DB /* OBDaySummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */; };
 		08E425DF21073C6A008F87DB /* DaySummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425DE21073C6A008F87DB /* DaySummaryViewController.m */; };
 		08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425E1210743CD008F87DB /* OBDaySummary.m */; };
@@ -133,8 +133,8 @@
 		08E425D22105BCC6008F87DB /* BillDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillDetailViewController.m; sourceTree = "<group>"; };
 		08E425D42105F145008F87DB /* OBDaySummaryCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDaySummaryCardView.h; sourceTree = "<group>"; };
 		08E425D52105F145008F87DB /* OBDaySummaryCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDaySummaryCardView.m; sourceTree = "<group>"; };
-		08E425D72106218C008F87DB /* OBTableViewCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBTableViewCardCell.h; sourceTree = "<group>"; };
-		08E425D82106218C008F87DB /* OBTableViewCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBTableViewCardCell.m; sourceTree = "<group>"; };
+		08E425D72106218C008F87DB /* OBDetailCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDetailCardCell.h; sourceTree = "<group>"; };
+		08E425D82106218C008F87DB /* OBDetailCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDetailCardCell.m; sourceTree = "<group>"; };
 		08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDaySummaryTableViewCell.h; sourceTree = "<group>"; };
 		08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDaySummaryTableViewCell.m; sourceTree = "<group>"; };
 		08E425DD21073C6A008F87DB /* DaySummaryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DaySummaryViewController.h; sourceTree = "<group>"; };
@@ -267,8 +267,8 @@
 				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
 				0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */,
 				0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */,
-				08E425D72106218C008F87DB /* OBTableViewCardCell.h */,
-				08E425D82106218C008F87DB /* OBTableViewCardCell.m */,
+				08E425D72106218C008F87DB /* OBDetailCardCell.h */,
+				08E425D82106218C008F87DB /* OBDetailCardCell.m */,
 				08524B772112A30500D0D397 /* CategoryManagerCell.h */,
 				08524B782112A30500D0D397 /* CategoryManagerCell.m */,
 			);
@@ -536,7 +536,7 @@
 				08E425D32105BCC6008F87DB /* BillDetailViewController.m in Sources */,
 				0833B1D92127283C003D8428 /* TodayCardTransitionAnimationPush.m in Sources */,
 				08E425D62105F145008F87DB /* OBDaySummaryCardView.m in Sources */,
-				08E425D92106218C008F87DB /* OBTableViewCardCell.m in Sources */,
+				08E425D92106218C008F87DB /* OBDetailCardCell.m in Sources */,
 				08E425CD210460E1008F87DB /* OBBill.m in Sources */,
 				08E425DC21073C3E008F87DB /* OBDaySummaryTableViewCell.m in Sources */,
 			);

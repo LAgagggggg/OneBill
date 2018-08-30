@@ -12,7 +12,7 @@
 #import "model/CategoryManager.h"
 #import "model/OBBillManager.h"
 #import "view/OBDaySummaryCardView.h"
-#import "view/OBTableViewCardCell.h"
+#import "view/OBDetailCardCell.h"
 #import "view/OBCategoryScrollView.h"
 
 #define CellEdgeInset 8
@@ -84,7 +84,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.separatorStyle=UITextBorderStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(8, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
-    [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
+    [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];
 }
 
 - (instancetype)initWithDate:(NSDate *)date
@@ -98,11 +98,11 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OBTableViewCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    OBDetailCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(OBTableViewCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(OBDetailCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     [cell setCellWithBill:self.billsArr[indexPath.row] andStylePreference:OBTimeLibelWithDate];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
 }

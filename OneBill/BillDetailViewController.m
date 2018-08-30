@@ -10,7 +10,7 @@
 #import "BillDetailViewController.h"
 #import "NewOrEditBillViewController.h"
 #import "view/OBDaySummaryCardView.h"
-#import "view/OBTableViewCardCell.h"
+#import "view/OBDetailCardCell.h"
 #import "view/OBCategoryChooseView.h"
 #import "model/CategoryManager.h"
 
@@ -95,7 +95,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.estimatedRowHeight=109;
-    [self.tableView registerClass:[OBTableViewCardCell class] forCellReuseIdentifier:reuseIdentifier];
+    [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];
     self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
     [self.view addSubview:self.categoryChooseView];
     self.categoryChooseView.frame=CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
@@ -165,11 +165,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark TableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OBTableViewCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    OBDetailCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(OBTableViewCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(OBDetailCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     [cell setCellWithBill:self.billsArr[indexPath.row] andStylePreference:OBTimeLibelTimeOnly];
     [cell.categoryBtn addTarget:self action:@selector(categoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }

@@ -6,19 +6,19 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import "OBTableViewCardCell.h"
+#import "OBDetailCardCell.h"
 #import <masonry.h>
 
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
-@interface OBTableViewCardCell()
+@interface OBDetailCardCell()
 @property (strong,nonatomic)UILabel * timeLabel;
 @property (strong,nonatomic)UILabel * valueLabel;
 @property (strong,nonatomic)UILabel * locLabel;
 @end
 
-@implementation OBTableViewCardCell
+@implementation OBDetailCardCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -81,6 +81,7 @@
         self.locLabel.alpha=0.5;
         [self.contentView addSubview:self.locLabel];
         [self.locLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_centerX);
             make.right.equalTo(self.contentView.mas_right).with.offset(-16);
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-16);
         }];
