@@ -115,6 +115,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==self.summaryArr.count-1) {
         OBDaySummaryTodayCell * cell=[[OBDaySummaryTodayCell alloc]init];
+        self.todayCell=cell;
         [cell setupTodayCell];
         return cell;
     }

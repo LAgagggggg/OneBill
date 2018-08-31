@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class OBDaySummaryTodayCell;
+
 @interface DaySummaryViewController : UIViewController
 
 @property (strong,nonatomic)UITableView * tableView;
 @property (nonatomic,strong) UITableViewCell * selectedCell;
+@property (nonatomic,strong) OBDaySummaryTodayCell * todayCell;
 
 @end
 

@@ -58,10 +58,9 @@ static float animationDuration=0.5;
     [UIView animateWithDuration:animationDuration animations:^{
         fromVC.view.alpha=0;
         addBtnImgView.alpha=0;
+        if (![self.transitionContext transitionWasCancelled]) toVC.view.alpha=1;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:animationDuration animations:^{
-            if (![self.transitionContext transitionWasCancelled]) toVC.view.alpha=1;
-        }];
+
     }];
     [UIView replaceView:fromImgView withView:toVC.summaryCardView duration:animationDuration transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;

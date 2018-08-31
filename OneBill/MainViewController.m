@@ -12,6 +12,7 @@
 #import "animation/TodayCardTransitionAnimationPop.h"
 #import "animation/SummaryToDetailTransitionAnimationPush.h"
 #import "animation/SummaryToDetailTransitionAnimationPop.h"
+#import "animation/MainToSummaryTransitionAnimationPush.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -25,7 +26,8 @@
 
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
-@property (nonatomic, strong) OBInteractiveTransition *interactivePush;
+@property (nonatomic, strong) OBInteractiveTransition *interactivePushToDetail;
+@property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
 @property (nonatomic, strong) BillDetailViewController *todayDetailVC;
 
 @end
@@ -93,18 +95,24 @@
         make.bottom.equalTo(self.todayCardView.mas_top);
     }];
     UITapGestureRecognizer * tapForSummary=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
-    UISwipeGestureRecognizer * swipeForSummary=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
-    swipeForSummary.direction=UISwipeGestureRecognizerDirectionDown;
+    UIPanGestureRecognizer * panForSummary=[[UIPanGestureRecognizer alloc]init];
     [summaryGestureView addGestureRecognizer:tapForSummary];
-    [summaryGestureView addGestureRecognizer:swipeForSummary];
-    //上划转场动画
-    self.interactivePush=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionUp];
+    [summaryGestureView addGestureRecognizer:panForSummary];
+    //上划转场动画 -今日详情
+    self.interactivePushToDetail=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionUp];
     typeof(self)weakSelf = self;
-    self.interactivePush.pushConifg = ^{
+    self.interactivePushToDetail.pushConifg = ^{
         [weakSelf enterTodayDetail];
     };
-    self.interactivePush.vc=self.navigationController;
-    [self.interactivePush setPanGestureRecognizer:panForToday];
+    self.interactivePushToDetail.vc=self.navigationController;
+    [self.interactivePushToDetail setPanGestureRecognizer:panForToday];
+    //下拉转场动画 -summary界面
+    self.interactivePushToSummary=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionDown];
+    self.interactivePushToSummary.pushConifg = ^{
+        [weakSelf enterDaySummary];
+    };
+    self.interactivePushToSummary.vc=self.navigationController;
+    [self.interactivePushToSummary setPanGestureRecognizer:panForSummary];
 }
 
 -(void)enterTodayDetail{
@@ -136,6 +144,9 @@
     else if([toVC isEqual:self] && [fromVC isMemberOfClass:[BillDetailViewController class]]){
         return [[TodayCardTransitionAnimationPop alloc]init];
     }
+    else if([fromVC isEqual:self] && [toVC isMemberOfClass:[DaySummaryViewController class]]){
+        return [[MainToSummaryTransitionAnimationPush alloc]init];
+    }
     else if([fromVC isMemberOfClass:[DaySummaryViewController class]] && [toVC isMemberOfClass:[BillDetailViewController class]]){
         return [[SummaryToDetailTransitionAnimationPush alloc]init];
     }
@@ -152,7 +163,10 @@
 
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
     if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPush class]]){
-        return self.interactivePush.interation?self.interactivePush:nil;
+        return self.interactivePushToDetail.interation?self.interactivePushToDetail:nil;
+    }
+    if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPush class]]){
+        return self.interactivePushToSummary.interation?self.interactivePushToSummary:nil;
     }
     else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){
         return self.todayDetailVC.interactivePop.interation?self.todayDetailVC.interactivePop:nil;

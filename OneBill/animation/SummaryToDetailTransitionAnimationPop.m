@@ -59,9 +59,9 @@ static float animationDuration=0.5;
     toVC.view.alpha=0;
     [UIView animateWithDuration:animationDuration animations:^{
         fromVC.view.alpha=0;
+        if (![self.transitionContext transitionWasCancelled]) toVC.view.alpha=1;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:animationDuration animations:^{
-            if (![self.transitionContext transitionWasCancelled]) toVC.view.alpha=1;
         }];
     }];
     [UIView replaceView:fromImgView withView:toView duration:animationDuration transitionContext:self.transitionContext completion:^(BOOL finished) {
