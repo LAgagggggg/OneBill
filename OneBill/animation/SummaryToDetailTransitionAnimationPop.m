@@ -20,7 +20,7 @@
 
 @implementation SummaryToDetailTransitionAnimationPop
 
-static float animationDuration=0.5;
+static float animationDuration=0.6;
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
