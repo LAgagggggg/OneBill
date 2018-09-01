@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -93,31 +92,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="todayCardView" destination="ULD-ui-7Dh" id="h5y-Ff-Q7J"/>
-                        <segue destination="BaV-4o-v7z" kind="show" identifier="NBVC" id="kjM-mK-vTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="41" y="382"/>
-        </scene>
-        <!--Add new Bill-->
-        <scene sceneID="txq-dM-4j4">
-            <objects>
-                <viewController title="Add new Bill" id="BaV-4o-v7z" customClass="NewOrEditBillViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RU6-cK-GHw"/>
-                        <viewControllerLayoutGuide type="bottom" id="XiU-56-lHq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6WA-bc-Xmz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLw-EJ-CLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="788" y="382"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "model/OBBillManager.h"
+#import "MainViewController.h"
+#import "NewOrEditBillViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +20,42 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self creatShortcutItem];
+    UIApplicationShortcutItem *shortcutItem = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
+    //如果是从快捷选项标签启动app，则根据不同标识执行不同操作，然后返回NO，防止调用- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
+    if (shortcutItem) {
+        //判断先前我们设置的快捷选项标签唯一标识，根据不同标识执行不同操作
+        if([shortcutItem.type isEqualToString:@"com.ookkee.OneBill.add"]){
+            NewOrEditBillViewController * addVC = [[NewOrEditBillViewController alloc] init];
+            UINavigationController * naVC=(UINavigationController *)self.window.rootViewController;
+            [naVC pushViewController:addVC animated:YES];
+        }
+        return NO;
+    }
     return YES;
 }
 
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler
+{
+    if (shortcutItem) {
+        if([shortcutItem.type isEqualToString:@"com.ookkee.OneBill.add"]){
+            NewOrEditBillViewController * addVC = [[NewOrEditBillViewController alloc] init];
+            UINavigationController * naVC=(UINavigationController *)self.window.rootViewController;
+            [naVC pushViewController:addVC animated:YES];
+        }
+    }
+    
+    if (completionHandler) {
+        completionHandler(YES);
+    }
+}
+
+- (void)creatShortcutItem
+{
+    UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAdd];
+    UIApplicationShortcutItem * item = [[UIApplicationShortcutItem alloc] initWithType:@"com.ookkee.OneBill.add" localizedTitle:@"Add Bill" localizedSubtitle:nil icon:icon userInfo:nil];
+    [UIApplication sharedApplication].shortcutItems = @[item];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -47,6 +82,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 
 @end

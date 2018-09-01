@@ -129,7 +129,8 @@
 }
 
 - (void)addNewBill{
-    [self performSegueWithIdentifier:@"NBVC" sender:nil];
+    NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 - (void)checkBtnClicked{

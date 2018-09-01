@@ -68,6 +68,7 @@
 
 - (void)setUI{
     //设置导航栏返回按钮
+    self.title=@"Add New Bill";
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
@@ -237,6 +238,7 @@
 }
 
 - (void)setEditModeUI{
+    self.title=@"Editing Bill";
     [self.categoryScrollView setHighlightCategory:self.editModeOldBill.category];
     self.inputView.text=[NSString stringWithFormat:@"%.2lf",self.editModeOldBill.value];
     self.inputView.isEdited=YES;
