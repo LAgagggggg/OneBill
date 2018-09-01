@@ -44,6 +44,7 @@
 		08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425E1210743CD008F87DB /* OBDaySummary.m */; };
 		08E425E52109AD6C008F87DB /* CheckBillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425E42109AD6C008F87DB /* CheckBillsViewController.m */; };
 		08E42DA12139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E42DA02139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.m */; };
+		08E42DA4213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E42DA3213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m */; };
 		08EEB60421305A3400C57436 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FCA20FD79BE0036B5FC /* main.m */; };
 		08EEB60521305B9C00C57436 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 082B1FBC20FD79BB0036B5FC /* AppDelegate.m */; };
 		08EEB60721305C4500C57436 /* OneBillUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA13C7212FFA9F00E830A5 /* OneBillUITests.m */; };
@@ -146,6 +147,8 @@
 		08E425E42109AD6C008F87DB /* CheckBillsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBillsViewController.m; sourceTree = "<group>"; };
 		08E42D9F2139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainToSummaryTransitionAnimationPush.h; sourceTree = "<group>"; };
 		08E42DA02139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainToSummaryTransitionAnimationPush.m; sourceTree = "<group>"; };
+		08E42DA2213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainToSummaryTransitionAnimationPop.h; sourceTree = "<group>"; };
+		08E42DA3213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainToSummaryTransitionAnimationPop.m; sourceTree = "<group>"; };
 		08F0EBED2130524600B01EF2 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		08FA13B1212FF26B00E830A5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		08FA13B7212FF42100E830A5 /* OneBillTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneBillTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +296,8 @@
 				0833B1EB212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m */,
 				08E42D9F2139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.h */,
 				08E42DA02139A39300F7DC33 /* MainToSummaryTransitionAnimationPush.m */,
+				08E42DA2213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.h */,
+				08E42DA3213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m */,
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
@@ -524,6 +529,7 @@
 				0833B1E6212C62B0003D8428 /* SummaryToDetailTransitionAnimationPush.m in Sources */,
 				08E425C72100EF72008F87DB /* BillValueInputView.m in Sources */,
 				08E425DF21073C6A008F87DB /* DaySummaryViewController.m in Sources */,
+				08E42DA4213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m in Sources */,
 				08E425BB20FF1BE9008F87DB /* CategoryManager.m in Sources */,
 				08E425BF20FF248A008F87DB /* CategoryView.m in Sources */,
 				08E425CA21023B8F008F87DB /* OBCategoryScrollView.m in Sources */,

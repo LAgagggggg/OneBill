@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "animation/OBInteractiveTransition.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic)UITableView * tableView;
 @property (nonatomic,strong) UITableViewCell * selectedCell;
 @property (nonatomic,strong) OBDaySummaryTodayCell * todayCell;
+@property (nonatomic, strong) OBInteractiveTransition *interactivePop;
 
 @end
 

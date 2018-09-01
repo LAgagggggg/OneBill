@@ -64,7 +64,7 @@ static float animationDuration=0.6;
         [UIView animateWithDuration:animationDuration animations:^{
         }];
     }];
-    [UIView replaceView:fromImgView withView:toView duration:animationDuration transitionContext:self.transitionContext completion:^(BOOL finished) {
+    [UIView replaceView:fromImgView withView:toView duration:animationDuration backgroundColor:nil transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;
         fromVC.summaryCardView.hidden=NO;
         [self.transitionContext completeTransition:![self.transitionContext transitionWasCancelled]];

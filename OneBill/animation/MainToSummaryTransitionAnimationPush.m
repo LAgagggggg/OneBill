@@ -22,7 +22,7 @@
 
 @implementation MainToSummaryTransitionAnimationPush
 
-static float animationDuration=0.5;
+static float animationDuration=0.6;
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
@@ -63,7 +63,7 @@ static float animationDuration=0.5;
         [UIView animateWithDuration:animationDuration animations:^{
         }];
     }];
-    [UIView replaceView:fromImgView withView:todayCardTargetView duration:animationDuration transitionContext:self.transitionContext completion:^(BOOL finished) {
+    [UIView replaceView:fromImgView withView:todayCardTargetView duration:animationDuration backgroundColor:nil transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;
         fromVC.todayCardView.hidden=NO;
         addBtnImgView.hidden=YES;

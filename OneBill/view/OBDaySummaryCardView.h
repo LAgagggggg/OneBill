@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OBDaySummaryCardView : UIView
+
+@property (strong,nonatomic)UIColor * mainColor;
+
 - (void)setDate:(NSDate *)date Money:(double)value;
+
 @end
 
 NS_ASSUME_NONNULL_END

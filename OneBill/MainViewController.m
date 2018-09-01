@@ -13,6 +13,7 @@
 #import "animation/SummaryToDetailTransitionAnimationPush.h"
 #import "animation/SummaryToDetailTransitionAnimationPop.h"
 #import "animation/MainToSummaryTransitionAnimationPush.h"
+#import "animation/MainToSummaryTransitionAnimationPop.h"
 #import "NewOrEditBillViewController.h"
 #import "view/TodayCardView.h"
 #import "view/OBMainButton.h"
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToDetail;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
 @property (nonatomic, strong) BillDetailViewController *todayDetailVC;
+@property (nonatomic, strong) DaySummaryViewController *summaryVC;
 
 @end
 
@@ -122,8 +124,8 @@
 }
 
 -(void)enterDaySummary{
-    DaySummaryViewController * vc=[[DaySummaryViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    self.summaryVC=[[DaySummaryViewController alloc]init];
+    [self.navigationController pushViewController:self.summaryVC animated:YES];
 }
 
 - (void)addNewBill{
@@ -138,19 +140,24 @@
 #pragma mark - transitionAnimation Control
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-    if ([fromVC isEqual:self] && [toVC isMemberOfClass:[BillDetailViewController class]]) {
+    if ([fromVC isEqual:self] && [toVC isMemberOfClass:[BillDetailViewController class]]) {//主界面至今日详情
         return [[TodayCardTransitionAnimationPush alloc]init];
     }
-    else if([toVC isEqual:self] && [fromVC isMemberOfClass:[BillDetailViewController class]]){
+    else if([toVC isEqual:self] && [fromVC isMemberOfClass:[BillDetailViewController class]]){//今日详情返回主界面
         return [[TodayCardTransitionAnimationPop alloc]init];
     }
-    else if([fromVC isEqual:self] && [toVC isMemberOfClass:[DaySummaryViewController class]]){
+    else if([fromVC isEqual:self] && [toVC isMemberOfClass:[DaySummaryViewController class]]){//主界面至概况界面
         return [[MainToSummaryTransitionAnimationPush alloc]init];
     }
+    else if([toVC isEqual:self] && [fromVC isMemberOfClass:[DaySummaryViewController class]]){//概况界面返回主界面
+        return [[MainToSummaryTransitionAnimationPop alloc]init];
+    }
     else if([fromVC isMemberOfClass:[DaySummaryViewController class]] && [toVC isMemberOfClass:[BillDetailViewController class]]){
+        //概况界面至详情界面
         return [[SummaryToDetailTransitionAnimationPush alloc]init];
     }
     else if([fromVC isMemberOfClass:[BillDetailViewController class]] && [toVC isMemberOfClass:[DaySummaryViewController class]]){
+        //详情界面返回概况界面
         SummaryToDetailTransitionAnimationPop * pop=[[SummaryToDetailTransitionAnimationPop alloc]init];
         BillDetailViewController * vc=(BillDetailViewController *)fromVC;
         pop.interactivePop=vc.interactivePop;
@@ -161,17 +168,21 @@
     }
 }
 
+//自定义转场动画手势
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
-    if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPush class]]){
+    if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPush class]]){//进入今日详情
         return self.interactivePushToDetail.interation?self.interactivePushToDetail:nil;
     }
-    if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPush class]]){
+    if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPush class]]){//进入g概况
         return self.interactivePushToSummary.interation?self.interactivePushToSummary:nil;
     }
-    else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){
+    else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){//从今日详情返回
         return self.todayDetailVC.interactivePop.interation?self.todayDetailVC.interactivePop:nil;
     }
-    else if ([animationController isMemberOfClass:[SummaryToDetailTransitionAnimationPop class]]){
+    else if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPop class]]){//从概况返回
+        return self.summaryVC.interactivePop.interation?self.summaryVC.interactivePop:nil;
+    }
+    else if ([animationController isMemberOfClass:[SummaryToDetailTransitionAnimationPop class]]){//从概况至详情
         SummaryToDetailTransitionAnimationPop * pop=animationController;
         return pop.interactivePop.interation?pop.interactivePop:nil;
     }

@@ -23,6 +23,7 @@
 {
     self = [super init];
     if (self) {
+        self.mainColor=DarkCyanColor;
         self.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-60, 58+22);
         self.backgroundColor=LightCyanColor;
         self.layer.cornerRadius=10.f;

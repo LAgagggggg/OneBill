@@ -19,15 +19,15 @@
 - (void)setupTodayCell{
     self.selectionStyle=UITableViewCellSelectionStyleNone;
     self.backgroundColor=[UIColor clearColor];
-    UIView * todayView=[[UIView alloc]init];
-    todayView.backgroundColor=DarkCyanColor;
-    todayView.layer.cornerRadius=10.f;
-    todayView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
-    todayView.layer.shadowOffset = CGSizeMake(0, 6);
-    todayView.layer.shadowOpacity = 0.3;
-    todayView.layer.shadowRadius = 8;
-    [self.contentView addSubview:todayView];
-    [todayView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.todayView=[[UIView alloc]init];
+    self.todayView.backgroundColor=DarkCyanColor;
+    self.todayView.layer.cornerRadius=10.f;
+    self.todayView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
+    self.todayView.layer.shadowOffset = CGSizeMake(0, 6);
+    self.todayView.layer.shadowOpacity = 0.3;
+    self.todayView.layer.shadowRadius = 8;
+    [self.contentView addSubview:self.todayView];
+    [self.todayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left);
         make.right.equalTo(self.contentView.mas_right);
         make.top.equalTo(self.contentView.mas_top).with.offset(36);
@@ -52,24 +52,24 @@
     [todayLabelL setText:@"your bill"];
     [todayLabelR setTextColor:[UIColor whiteColor] ];
     [todayLabelL setTextColor:[UIColor whiteColor] ];
-    [todayView addSubview:todayLabelR];
-    [todayView addSubview:todayLabelL];
+    [self.todayView addSubview:todayLabelR];
+    [self.todayView addSubview:todayLabelL];
     [todayLabelL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(todayView.mas_left).with.offset(31);
-        make.top.equalTo(todayView.mas_top).with.offset(26);
+        make.left.equalTo(self.todayView.mas_left).with.offset(31);
+        make.top.equalTo(self.todayView.mas_top).with.offset(26);
     }];
     [todayLabelR mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(todayLabelL.mas_right);
-        make.top.equalTo(todayView.mas_top).with.offset(26);
+        make.top.equalTo(self.todayView.mas_top).with.offset(26);
     }];
     self.todaySumLabel=[[UILabel alloc]init];
     [self.todaySumLabel setTextColor:[UIColor whiteColor]];
     [self.todaySumLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:48]];
     [self.todaySumLabel setTextAlignment:NSTextAlignmentCenter];
     [self.todaySumLabel setText:[NSString stringWithFormat:@"%+.2lf",[[OBBillManager sharedInstance] sumOfDay:[NSDate date]]]];
-    [todayView addSubview:self.todaySumLabel];
+    [self.todayView addSubview:self.todaySumLabel];
     [self.todaySumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(todayView.mas_centerX);
+        make.centerX.equalTo(self.todayView.mas_centerX);
         make.top.equalTo(todayLabelR.mas_bottom).with.offset(5);
     }];
 }

@@ -52,11 +52,18 @@ static NSString * const reuseIdentifier = @"Cell";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.isInserting=NO;
     });
+    //边缘右滑返回
+    self.interactivePop=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePop GestureDirection:OBInteractiveTransitionGestureDirectionRight];
+    self.interactivePop.vc=self;
+    UIScreenEdgePanGestureRecognizer * edgePan=[[UIScreenEdgePanGestureRecognizer alloc]init];
+    edgePan.edges=UIRectEdgeLeft;
+    [self.view addGestureRecognizer:edgePan];
+    [self.interactivePop setPanGestureRecognizer:edgePan];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
 }
 
 -(void)setUI{
@@ -64,7 +71,6 @@ static NSString * const reuseIdentifier = @"Cell";
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;
-    self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //导航栏右侧按钮
     UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"summaryBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
