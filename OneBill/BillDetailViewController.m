@@ -200,8 +200,11 @@ static NSString * const reuseIdentifier = @"Cell";
         if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
         {
             subview.backgroundColor=[UIColor clearColor];
-            subview.subviews[0].layer.cornerRadius=10.f;
-            subview.subviews[0].layer.masksToBounds=YES;
+            subview.layer.cornerRadius=10.f;
+            subview.layer.masksToBounds=YES;
+            UIView * deleteBtn=subview.subviews[0];
+            deleteBtn.layer.cornerRadius=10.f;
+            deleteBtn.layer.masksToBounds=YES;
         }
     }
     return YES;
