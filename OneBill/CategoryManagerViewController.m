@@ -139,6 +139,7 @@ static float animationDuration=0.3;
             [cell beginMultiDelete];
         }
         else{
+            
             [cell endMultiDelete];
         }
     }
@@ -160,20 +161,6 @@ static float animationDuration=0.3;
         make.bottom.equalTo(cell.contentView.mas_bottom);
     }];
     [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.isMultiDeleting) {
-        CategoryManagerCell * cell=[self.tableView cellForRowAtIndexPath:indexPath];
-        if (cell.isSelected) {
-            [cell multiDeleteBeDeselected];
-            [self.selectedIndexSet removeIndex:indexPath.row];
-        }
-        else{
-            [cell multiDeleteBeSelected];
-            [self.selectedIndexSet addIndex:indexPath.row];
-        }
-    }
 }
 
 //-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -298,7 +285,7 @@ static float animationDuration=0.3;
     [self.selectedIndexSet removeAllIndexes];
     [UIView animateWithDuration:animationDuration animations:^{
         self.navigationItem.rightBarButtonItem=self.deleteBtn;
-        self.navigationItem.title=@"Categoried";
+        self.navigationItem.title=@"Categories";
         self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1];
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
         [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
@@ -308,6 +295,20 @@ static float animationDuration=0.3;
         self.addCell.alpha=1;
     }];
     [self.tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.isMultiDeleting) {
+        CategoryManagerCell * cell=[self.tableView cellForRowAtIndexPath:indexPath];
+        if (cell.isSelected) {
+            [cell multiDeleteBeDeselected];
+            [self.selectedIndexSet removeIndex:indexPath.row];
+        }
+        else{
+            [cell multiDeleteBeSelected];
+            [self.selectedIndexSet addIndex:indexPath.row];
+        }
+    }
 }
 
 @end

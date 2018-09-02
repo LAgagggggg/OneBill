@@ -23,7 +23,7 @@
 #import "CheckBillsViewController.h"
 #import "animation/OBInteractiveTransition.h"
 
-@interface MainViewController () <UINavigationControllerDelegate>
+@interface MainViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) OBMainButton * checkBtn;
 @property double todaySpend;
@@ -38,7 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.delegate=self;
     [self setUI];
 }

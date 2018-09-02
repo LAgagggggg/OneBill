@@ -141,6 +141,7 @@ static float animationDuration=0.3;
 }
 
 - (void)endMultiDelete{
+    [self multiDeleteBeDeselected];
     [UIView animateWithDuration:animationDuration animations:^{
         self.editBtn.alpha=1;
         self.checkIconBtn.alpha=0;

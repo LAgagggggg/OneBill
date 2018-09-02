@@ -22,7 +22,7 @@
 
 @implementation MainToSummaryTransitionAnimationPop
 
-static float animationDuration=1.2;
+static float animationDuration=0.6;
 
 - (void)animateTransition:(nonnull id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
