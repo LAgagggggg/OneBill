@@ -48,7 +48,7 @@ static float animationDuration=0.5;
     fromImgView.layer.shadowRadius=12;
     [containView addSubview:fromImgView];
     //button
-    UIView * addBtnImgView=[toVC.addBtn snapshotViewAfterScreenUpdates:YES];
+    UIView * addBtnImgView=[toVC.addBtn snapshotViewAfterScreenUpdates:NO];
     addBtnImgView.frame=toVC.addBtn.frame;
     addBtnImgView.layer.cornerRadius=10.f;
     [containView addSubview:addBtnImgView];

@@ -23,6 +23,7 @@
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSString * currentCategory;
+@property (strong,nonatomic)UITapGestureRecognizer * textFieldResignTap;
 
 @end
 
@@ -85,6 +86,9 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.contentInset=UIEdgeInsetsMake(8, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];
+    //用于注销firstResponder
+    self.textFieldResignTap=[[UITapGestureRecognizer alloc]init];
+    [self.view addGestureRecognizer:self.textFieldResignTap];
 }
 
 - (instancetype)initWithDate:(NSDate *)date
@@ -157,6 +161,13 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)moreBtnClicked{
     CategoryManagerViewController * vc=[[CategoryManagerViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if ([self.categoryScrollView.addTextField isFirstResponder]) {
+        [self.categoryScrollView.addTextField resignFirstResponder];
+    }
+    return NO;
 }
 
 @end

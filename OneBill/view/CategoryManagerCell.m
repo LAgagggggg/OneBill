@@ -99,6 +99,8 @@ static float animationDuration=0.3;
     self.categoryTextField.userInteractionEnabled=YES;
     [self.categoryTextField becomeFirstResponder];
     self.oldValue=self.categoryTextField.text;
+    UITextField * addingTextField=self.categoryTextField;
+    [addingTextField setSelectedTextRange:[addingTextField textRangeFromPosition:addingTextField.beginningOfDocument toPosition:addingTextField.endOfDocument]];
     [self.categoryTextField addTarget:self action:@selector(didEndEditingCategory:) forControlEvents:UIControlEventEditingDidEnd];
 }
 
@@ -109,15 +111,16 @@ static float animationDuration=0.3;
     else if (![textField.text isEqualToString:self.oldValue]){
         NSString * hudText;
         if ([[CategoryManager sharedInstance] replaceCategory:self.oldValue withNewCategory:textField.text]) {
-            hudText=@"Category Successfully Edited ";
+            hudText=@"Category Successfully Edited";
         }
         else{
             hudText=@"Category Already Existed";
+            textField.text=self.oldValue;
         }
         MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
         hud.mode=MBProgressHUDModeText;
         hud.label.text=hudText;
-        [hud hideAnimated:YES afterDelay:1];
+        [hud hideAnimated:YES afterDelay:0.6];
         
     }
 }

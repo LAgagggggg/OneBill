@@ -199,7 +199,6 @@ static float animationDuration=0.3;
     sender.hidden=YES;
     self.addCell.categoryTextField.hidden=NO;
     [self.addCell.categoryTextField becomeFirstResponder];
-    
 }
 
 -(void)keyboardWillChange:(NSNotification *)notification{
