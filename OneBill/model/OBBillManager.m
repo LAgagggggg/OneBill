@@ -67,7 +67,7 @@
     NSTimeInterval dayEndStamp=dayStartStamp+60*60*24;
     NSMutableArray * resultArr=[[NSMutableArray alloc]init];
     [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?) ORDER BY createdDate ASC;;"];
+        NSString * sql=[NSString stringWithFormat:@"select * from BillsTable where(createdDate>=? AND createdDate<?) ORDER BY createdDate DESC;;"];
         FMResultSet *resultSet = [db executeQuery:sql,@((double)dayStartStamp),@((double)dayEndStamp)];
         while ([resultSet next]) {
             OBBill * bill=[[OBBill alloc]initWithValue:[resultSet doubleForColumn:@"value"] Date:[resultSet dateForColumn:@"createdDate"] Location:nil AndLocationDescription:[resultSet stringForColumn:@"locDescription"] Category:[resultSet stringForColumn:@"category"] andIsOut:[resultSet boolForColumn:@"isOut"]];

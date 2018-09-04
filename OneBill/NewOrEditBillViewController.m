@@ -429,13 +429,14 @@
         [[OBBillManager sharedInstance] editBillOfDate:self.editModeOldBill.date Value:self.editModeOldBill.value withBill:newBill];
         [[OBBillManager sharedInstance] updateSumOfDay:newBill.date];
         [[OBBillManager sharedInstance] updateSumOfDay:self.editModeOldBill.date];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        self.editCompletedHandler();
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else{
         OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
         [[OBBillManager sharedInstance] insertBill:bill];
         [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

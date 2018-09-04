@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)editModeWithBill:(OBBill *)bill;
 
+@property (strong,nonatomic) void(^editCompletedHandler)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

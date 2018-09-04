@@ -48,9 +48,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView addGestureRecognizer:edgePan];
     [self.interactivePop setPanGestureRecognizer:edgePan];
 //    移动到底部
-    if (self.billsArr.count) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.billsArr.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
+//    if (self.billsArr.count) {
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.billsArr.count-1 inSection:0]  atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//    }
 }
 
 -(void)dealloc{
@@ -94,7 +94,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.separatorStyle=UITextBorderStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
-    self.tableView.estimatedRowHeight=109;
+    self.tableView.estimatedRowHeight=117;
     [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];
     self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
     [self.view addSubview:self.categoryChooseView];
@@ -186,11 +186,35 @@ static NSString * const reuseIdentifier = @"Cell";
     return 1;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#pragma mark - edit&delete
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NewOrEditBillViewController * vc=[[NewOrEditBillViewController alloc]init];
     [vc editModeWithBill:self.billsArr[indexPath.row]];
+    vc.editCompletedHandler = ^{
+        [self updateEditedCell];
+    };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)updateEditedCell{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(queue, ^{
+        self.billsArr=[[OBBillManager sharedInstance] billsSameDayAsDate:self.date].mutableCopy;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                 [self.tableView reloadData];
+        });
+    });
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[OBBillManager sharedInstance] removeBill:self.billsArr[indexPath.row]];
+    [[OBBillManager sharedInstance] updateSumOfDay:self.billsArr[indexPath.row].date];
+    [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
+    [self.billsArr removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -213,15 +237,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"Delete";
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[OBBillManager sharedInstance] removeBill:self.billsArr[indexPath.row]];
-    [[OBBillManager sharedInstance] updateSumOfDay:self.billsArr[indexPath.row].date];
-    [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
-    [self.billsArr removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 - (void)returnBtnClicked{
