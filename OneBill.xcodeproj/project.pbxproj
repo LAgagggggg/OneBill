@@ -226,16 +226,17 @@
 				082B1FC620FD79BE0036B5FC /* LaunchScreen.storyboard */,
 				082B1FC920FD79BE0036B5FC /* Info.plist */,
 				082B1FCA20FD79BE0036B5FC /* main.m */,
-				08E425BC20FF1BFD008F87DB /* model */,
-				082B1FD420FDCFFB0036B5FC /* view */,
-				0833B1DD21290EF2003D8428 /* animation */,
-				0889CB0E214510B90069BEBA /* controller */,
+				08771EEF214514C10058A13E /* Util */,
+				08E425BC20FF1BFD008F87DB /* Models */,
+				082B1FD420FDCFFB0036B5FC /* Views */,
+				0833B1DD21290EF2003D8428 /* Animation */,
+				0889CB0E214510B90069BEBA /* Controllers */,
 				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
 			);
 			path = OneBill;
 			sourceTree = "<group>";
 		};
-		082B1FD420FDCFFB0036B5FC /* view */ = {
+		082B1FD420FDCFFB0036B5FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
@@ -265,10 +266,10 @@
 				08524B772112A30500D0D397 /* CategoryManagerCell.h */,
 				08524B782112A30500D0D397 /* CategoryManagerCell.m */,
 			);
-			path = view;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		0833B1DD21290EF2003D8428 /* animation */ = {
+		0833B1DD21290EF2003D8428 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
 				0833B1DA2129075F003D8428 /* UIView+ReplaceAnimation.h */,
@@ -288,10 +289,21 @@
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
-			path = animation;
+			path = Animation;
 			sourceTree = "<group>";
 		};
-		0889CB0E214510B90069BEBA /* controller */ = {
+		08771EEF214514C10058A13E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				08E425CE21046111008F87DB /* OBBillManager.h */,
+				08E425CF21046111008F87DB /* OBBillManager.m */,
+				08E425B920FF1BE9008F87DB /* CategoryManager.h */,
+				08E425BA20FF1BE9008F87DB /* CategoryManager.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		0889CB0E214510B90069BEBA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				082B1FBE20FD79BB0036B5FC /* MainViewController.h */,
@@ -309,24 +321,20 @@
 				08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */,
 				08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */,
 			);
-			path = controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		08E425BC20FF1BFD008F87DB /* model */ = {
+		08E425BC20FF1BFD008F87DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				08E425E0210743CD008F87DB /* OBDaySummary.h */,
 				08E425E1210743CD008F87DB /* OBDaySummary.m */,
 				08E425CB210460E1008F87DB /* OBBill.h */,
 				08E425CC210460E1008F87DB /* OBBill.m */,
-				08E425CE21046111008F87DB /* OBBillManager.h */,
-				08E425CF21046111008F87DB /* OBBillManager.m */,
-				08E425B920FF1BE9008F87DB /* CategoryManager.h */,
-				08E425BA20FF1BE9008F87DB /* CategoryManager.m */,
 				0859FA1A2117EE6D00784EED /* LocationPickerAnnotation.h */,
 				0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */,
 			);
-			path = model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		08FA13B8212FF42100E830A5 /* OneBillTests */ = {
