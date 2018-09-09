@@ -9,9 +9,9 @@
 #import <ODRefreshControl.h>
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
-#import "view/OBDaySummaryTableViewCell.h"
-#import "view/OBDaySummaryTodayCell.h"
-#import "model/OBBillManager.h"
+#import  "OBDaySummaryTableViewCell.h"
+#import  "OBDaySummaryTodayCell.h"
+#import  "OBBillManager.h"
 
 #define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
 #define commonCellHeight 148

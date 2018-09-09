@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "model/OBBill.h"
+#import  "OBBill.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,12 +10,12 @@
 #import <MBProgressHUD.h>
 #import "NewOrEditBillViewController.h"
 #import "OBMapPickerViewController.h"
-#import "view/CategoryView.h"
-#import "view/InoutSwitchButton.h"
-#import "view/BillValueInputView.h"
-#import "view/OBCategoryScrollView.h"
-#import "model/OBBillManager.h"
-#import "model/CategoryManager.h"
+#import  "CategoryView.h"
+#import  "InoutSwitchButton.h"
+#import  "BillValueInputView.h"
+#import  "OBCategoryScrollView.h"
+#import  "OBBillManager.h"
+#import  "CategoryManager.h"
 
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>

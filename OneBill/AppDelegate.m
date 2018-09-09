@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "model/OBBillManager.h"
+#import  "OBBillManager.h"
 #import "MainViewController.h"
 #import "NewOrEditBillViewController.h"
 

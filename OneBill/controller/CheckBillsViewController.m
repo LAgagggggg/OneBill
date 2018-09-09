@@ -9,11 +9,11 @@
 #import <Masonry.h>
 #import "CheckBillsViewController.h"
 #import "CategoryManagerViewController.h"
-#import "model/CategoryManager.h"
-#import "model/OBBillManager.h"
-#import "view/OBDaySummaryCardView.h"
-#import "view/OBDetailCardCell.h"
-#import "view/OBCategoryScrollView.h"
+#import  "CategoryManager.h"
+#import  "OBBillManager.h"
+#import  "OBDaySummaryCardView.h"
+#import  "OBDetailCardCell.h"
+#import  "OBCategoryScrollView.h"
 
 #define CellEdgeInset 8
 
@@ -167,7 +167,7 @@ static NSString * const reuseIdentifier = @"Cell";
     if ([self.categoryScrollView.addTextField isFirstResponder]) {
         [self.categoryScrollView.addTextField resignFirstResponder];
     }
-    return NO;
+    return YES;
 }
 
 @end

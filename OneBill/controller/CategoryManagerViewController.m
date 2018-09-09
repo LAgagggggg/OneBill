@@ -9,8 +9,8 @@
 #import <Masonry.h>
 #import <MBProgressHUD.h>
 #import "CategoryManagerViewController.h"
-#import "view/CategoryManagerCell.h"
-#import "model/CategoryManager.h"
+#import  "CategoryManagerCell.h"
+#import  "CategoryManager.h"
 
 #define grayWhiteColor [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
@@ -213,6 +213,7 @@ static float animationDuration=0.3;
     }
 }
 
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
 //action of tap gesture for self.view
 - (void)resignAnyResponder{
     //resign current first responder
@@ -223,16 +224,6 @@ static float animationDuration=0.3;
     }
     [firstResponder resignFirstResponder];
 }
-//
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceivePress:(UIPress *)press{
-//    NSLog(@"xxx");
-//    return NO;
-//}
-//
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-//    NSLog(@"hhh");
-//    return NO;
-//}
 
 //only for adding
 - (void)textFieldDidEndEditing:(UITextField *)textField{

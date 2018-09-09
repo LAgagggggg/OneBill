@@ -220,30 +220,17 @@
 		082B1FBA20FD79BB0036B5FC /* OneBill */ = {
 			isa = PBXGroup;
 			children = (
-				08E425BC20FF1BFD008F87DB /* model */,
-				082B1FD420FDCFFB0036B5FC /* view */,
-				0833B1DD21290EF2003D8428 /* animation */,
-				082B1FC120FD79BB0036B5FC /* Main.storyboard */,
 				082B1FBB20FD79BB0036B5FC /* AppDelegate.h */,
 				082B1FBC20FD79BB0036B5FC /* AppDelegate.m */,
-				082B1FBE20FD79BB0036B5FC /* MainViewController.h */,
-				082B1FBF20FD79BB0036B5FC /* MainViewController.m */,
-				08E425B620FF0144008F87DB /* NewOrEditBillViewController.h */,
-				08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */,
-				08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */,
-				08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */,
-				08E425D12105BCC6008F87DB /* BillDetailViewController.h */,
-				08E425D22105BCC6008F87DB /* BillDetailViewController.m */,
-				08E425DD21073C6A008F87DB /* DaySummaryViewController.h */,
-				08E425DE21073C6A008F87DB /* DaySummaryViewController.m */,
-				08E425E32109AD6C008F87DB /* CheckBillsViewController.h */,
-				08E425E42109AD6C008F87DB /* CheckBillsViewController.m */,
-				08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */,
-				08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */,
-				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
+				082B1FC120FD79BB0036B5FC /* Main.storyboard */,
 				082B1FC620FD79BE0036B5FC /* LaunchScreen.storyboard */,
 				082B1FC920FD79BE0036B5FC /* Info.plist */,
 				082B1FCA20FD79BE0036B5FC /* main.m */,
+				08E425BC20FF1BFD008F87DB /* model */,
+				082B1FD420FDCFFB0036B5FC /* view */,
+				0833B1DD21290EF2003D8428 /* animation */,
+				0889CB0E214510B90069BEBA /* controller */,
+				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
 			);
 			path = OneBill;
 			sourceTree = "<group>";
@@ -302,6 +289,27 @@
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
 			path = animation;
+			sourceTree = "<group>";
+		};
+		0889CB0E214510B90069BEBA /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				082B1FBE20FD79BB0036B5FC /* MainViewController.h */,
+				082B1FBF20FD79BB0036B5FC /* MainViewController.m */,
+				08E425B620FF0144008F87DB /* NewOrEditBillViewController.h */,
+				08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */,
+				08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */,
+				08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */,
+				08E425D22105BCC6008F87DB /* BillDetailViewController.m */,
+				08E425D12105BCC6008F87DB /* BillDetailViewController.h */,
+				08E425DD21073C6A008F87DB /* DaySummaryViewController.h */,
+				08E425DE21073C6A008F87DB /* DaySummaryViewController.m */,
+				08E425E32109AD6C008F87DB /* CheckBillsViewController.h */,
+				08E425E42109AD6C008F87DB /* CheckBillsViewController.m */,
+				08524B7421129F6D00D0D397 /* CategoryManagerViewController.h */,
+				08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 		08E425BC20FF1BFD008F87DB /* model */ = {

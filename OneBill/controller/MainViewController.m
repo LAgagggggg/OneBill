@@ -8,20 +8,20 @@
 
 #import <Masonry.h>
 #import "MainViewController.h"
-#import "animation/TodayCardTransitionAnimationPush.h"
-#import "animation/TodayCardTransitionAnimationPop.h"
-#import "animation/SummaryToDetailTransitionAnimationPush.h"
-#import "animation/SummaryToDetailTransitionAnimationPop.h"
-#import "animation/MainToSummaryTransitionAnimationPush.h"
-#import "animation/MainToSummaryTransitionAnimationPop.h"
+#import  "TodayCardTransitionAnimationPush.h"
+#import  "TodayCardTransitionAnimationPop.h"
+#import  "SummaryToDetailTransitionAnimationPush.h"
+#import  "SummaryToDetailTransitionAnimationPop.h"
+#import  "MainToSummaryTransitionAnimationPush.h"
+#import  "MainToSummaryTransitionAnimationPop.h"
 #import "NewOrEditBillViewController.h"
-#import "view/TodayCardView.h"
-#import "view/OBMainButton.h"
-#import "model/OBBillManager.h"
+#import  "TodayCardView.h"
+#import  "OBMainButton.h"
+#import  "OBBillManager.h"
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "CheckBillsViewController.h"
-#import "animation/OBInteractiveTransition.h"
+#import  "OBInteractiveTransition.h"
 
 @interface MainViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
