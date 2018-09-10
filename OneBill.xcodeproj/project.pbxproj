@@ -239,8 +239,6 @@
 		082B1FD420FDCFFB0036B5FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
-				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
 				08E425C52100EF72008F87DB /* BillValueInputView.h */,
 				08E425C62100EF72008F87DB /* BillValueInputView.m */,
 				08E425BD20FF248A008F87DB /* CategoryView.h */,
@@ -253,6 +251,8 @@
 				08E425C220FFA4C2008F87DB /* InoutSwitchButton.m */,
 				08E425C821023B8E008F87DB /* OBCategoryScrollView.h */,
 				08E425C921023B8E008F87DB /* OBCategoryScrollView.m */,
+				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
+				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
 				08E425D42105F145008F87DB /* OBDaySummaryCardView.h */,
 				08E425D52105F145008F87DB /* OBDaySummaryCardView.m */,
 				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,

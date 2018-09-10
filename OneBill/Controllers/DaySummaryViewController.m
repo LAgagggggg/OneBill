@@ -73,8 +73,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.leftBarButtonItem=returnBarBtn;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //导航栏右侧按钮
-    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"summaryBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-    self.navigationItem.rightBarButtonItem=calendarBtn;
+//    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"summaryBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
+//    self.navigationItem.rightBarButtonItem=calendarBtn;
     //顶部阴影
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;

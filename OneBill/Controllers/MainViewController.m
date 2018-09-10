@@ -31,6 +31,7 @@
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
 @property (nonatomic, strong) BillDetailViewController *todayDetailVC;
 @property (nonatomic, strong) DaySummaryViewController *summaryVC;
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *menuBtn;
 
 @end
 

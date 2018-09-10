@@ -88,7 +88,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zus-3q-vMx">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="A866E01A2F6ED4213BFAC57078BCBF8D" id="RbN-O0-Vq7"/>
+                        <barButtonItem key="leftBarButtonItem" title=" " id="RbN-O0-Vq7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="todayCardView" destination="ULD-ui-7Dh" id="h5y-Ff-Q7J"/>
@@ -99,7 +99,4 @@
             <point key="canvasLocation" x="41" y="382"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="A866E01A2F6ED4213BFAC57078BCBF8D" width="24" height="24"/>
-    </resources>
 </document>

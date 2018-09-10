@@ -45,9 +45,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)setUI{
     self.title=@"Bills";
-    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
+    //导航栏右侧按钮
+//    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
     UIBarButtonItem * moreBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(moreBtnClicked)];
-    self.navigationItem.rightBarButtonItems=@[moreBtn,calendarBtn];
+    self.navigationItem.rightBarButtonItems=@[moreBtn];
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;

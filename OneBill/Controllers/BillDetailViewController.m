@@ -59,8 +59,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)setUI{
     self.title=@"Bill detail";
-    UIBarButtonItem * searchBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-    self.navigationItem.rightBarButtonItem=searchBtn;
+    //导航栏搜索按钮
+//    UIBarButtonItem * searchBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
+//    self.navigationItem.rightBarButtonItem=searchBtn;
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;
@@ -91,7 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
     self.tableView.layer.masksToBounds=NO;
     self.tableView.backgroundColor=[UIColor clearColor];
-    self.tableView.separatorStyle=UITextBorderStyleNone;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.estimatedRowHeight=117;

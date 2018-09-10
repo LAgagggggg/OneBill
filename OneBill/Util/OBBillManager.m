@@ -267,7 +267,6 @@
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictValue=key.integerValue*10;
-                NSLog(@"PredictValueByBoth");
                 return predictValue;
             }
         }
@@ -290,7 +289,6 @@
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictValue=key.integerValue*10;
-                NSLog(@"PredictValueByDate");
                 return predictValue;
             }
         }
@@ -313,7 +311,6 @@
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictValue=key.integerValue*10;
-                NSLog(@"PredictValueByLocation");
                 return predictValue;
             }
         }
@@ -326,7 +323,6 @@
         }
         predictValue/= bothMatchArr.count?bothMatchArr.count:1;
         predictValue=((int)predictValue)/valuePrecision*10;
-        NSLog(@"PredictValueByBothFinally");
         return predictValue;
     }
     else{
@@ -406,7 +402,6 @@
             NSNumber * count=[predictDictForBoth objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictCategory=key;
-                NSLog(@"PredictCategoryByBoth");
                 return predictCategory;
             }
         }
@@ -429,7 +424,6 @@
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictCategory=key;
-                NSLog(@"PredictCategoryByLocation");
                 return predictCategory;
             }
         }
@@ -452,7 +446,6 @@
             NSNumber * count=[predictDict objectForKey:key];
             if (count.integerValue>=predictLimit) {
                 predictCategory=key;
-                NSLog(@"PredictCategoryByTime");
                 return predictCategory;
             }
         }
@@ -468,7 +461,6 @@
                 keyForMax=key;
             }
         }
-        NSLog(@"PredictCategoryByBothFinally");
         return keyForMax;
     }
     return predictCategory;
