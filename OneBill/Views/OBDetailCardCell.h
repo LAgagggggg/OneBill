@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../model/OBBill.h"
+#import "OBBill.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

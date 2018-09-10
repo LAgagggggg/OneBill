@@ -7,7 +7,7 @@
 //
 
 #import "CategoryManagerCell.h"
-#import "../model/CategoryManager.h"
+#import "CategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../model/OBDaySummary.h"
+#import "OBDaySummary.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -246,7 +246,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)edgePanChanged:(UIScreenEdgePanGestureRecognizer *)edgePan{
     //统一边缘滑动手势和顶部卡片下滑手势
     CGPoint point=[edgePan translationInView:edgePan.view];
-    point.y=point.x*1.5;
+    point.y=point.x*1.2;
     [edgePan setTranslation:point inView:edgePan.view];
 }
 
