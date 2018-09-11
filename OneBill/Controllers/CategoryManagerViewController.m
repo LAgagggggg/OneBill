@@ -262,18 +262,20 @@ static float animationDuration=0.3;
     }];
     [self.tableView reloadData];
     
-    [self.tableView setValue:nil forKeyPath:@"_shadowUpdatesController"];
-    unsigned int count=0;
-//    Class class=NSClassFromString(@"_UITableViewShadowUpdatesController");
-    Ivar * ivars=class_copyIvarList([self.tableView class], &count);
-//    NSLog(@"%@",NSStringFromClass(self.tableView.superclass));
-    for (int i=0; i<count; i++) {
-        Ivar var=ivars[i];
-        const char * varName=ivar_getName(var);
-        const char * varType=ivar_getTypeEncoding(var);
-        NSLog(@"%s--%s",varName,varType);
-    }
-    free(ivars);
+////    [self.tableView setValue:nil forKeyPath:@"_shadowUpdatesController"];
+//    [self.tableView setValue:[UIColor clearColor] forKeyPath:@"_separatorTopShadowColor"];
+//    [self.tableView setValue:[UIColor clearColor] forKeyPath:@"_separatorBottomShadowColor"];
+//    unsigned int count=0;
+////    Class class=NSClassFromString(@"_UITableViewShadowUpdatesController");
+//    Ivar * ivars=class_copyIvarList([self.tableView class], &count);
+////    NSLog(@"%@",NSStringFromClass(self.tableView.superclass));
+//    for (int i=0; i<count; i++) {
+//        Ivar var=ivars[i];
+//        const char * varName=ivar_getName(var);
+//        const char * varType=ivar_getTypeEncoding(var);
+//        NSLog(@"%s--%s",varName,varType);
+//    }
+//    free(ivars);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -301,9 +303,9 @@ static float animationDuration=0.3;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-    UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:sourceIndexPath];
-    NSLog(@"%ld->%ld",sourceIndexPath.row,destinationIndexPath.row);
-    NSLog(@"%@",NSStringFromCGRect(cell.frame));
+    [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [[CategoryManager sharedInstance] writeToFile];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
