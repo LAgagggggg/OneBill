@@ -123,6 +123,7 @@ static float animationDuration=0.3;
         NSString * hudText;
         if ([[CategoryManager sharedInstance] replaceCategory:self.oldValue withNewCategory:textField.text]) {
             hudText=@"Category Successfully Edited";
+            [[CategoryManager sharedInstance] writeToFile];
         }
         else{
             hudText=@"Category Already Existed";
@@ -187,8 +188,5 @@ static float animationDuration=0.3;
     
 }
 
-- (void)dragStateDidChange:(UITableViewCellDragState)dragState{
-    
-}
 
 @end
