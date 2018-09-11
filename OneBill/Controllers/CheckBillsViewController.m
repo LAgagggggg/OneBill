@@ -20,10 +20,12 @@
 @interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
+@property (strong,nonatomic)UIView * topView;
 @property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)NSString * currentCategory;
 @property (strong,nonatomic)UITapGestureRecognizer * textFieldResignTap;
+@property BOOL categoriesEditedFlag;
 
 @end
 
@@ -36,6 +38,15 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
     [self setUI];
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
+    self.categoriesEditedFlag=NO;
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.categoriesEditedFlag) {
+        [self setCategoryView];
+    }
 }
 
 - (void)dealloc
@@ -55,29 +66,21 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //顶部选择category
-    UIView * topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,157)];
-    [self.view addSubview:topView];
-    topView.backgroundColor=self.view.backgroundColor;
-    topView.layer.shadowColor=[UIColor grayColor].CGColor;
-    topView.layer.shadowOffset = CGSizeMake(0, 3);
-    topView.layer.shadowOpacity = 0.1;
-    topView.layer.shadowRadius = 12;
-    self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
-    self.categoryScrollView.alwaysShowSum=YES;
-    [topView addSubview:self.categoryScrollView];
-    [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(74);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(88));
-    }];
+    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,157)];
+    [self.view addSubview:self.topView];
+    self.topView.backgroundColor=self.view.backgroundColor;
+    self.topView.layer.shadowColor=[UIColor grayColor].CGColor;
+    self.topView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.topView.layer.shadowOpacity = 0.1;
+    self.topView.layer.shadowRadius = 12;
+    [self setCategoryView];
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];
-    [self.view bringSubviewToFront:topView];
+    [self.view bringSubviewToFront:self.topView];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(topView.mas_bottom);
+        make.top.equalTo(self.topView.mas_bottom);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
@@ -90,6 +93,39 @@ static NSString * const reuseIdentifier = @"Cell";
     //用于注销firstResponder
     self.textFieldResignTap=[[UITapGestureRecognizer alloc]init];
     [self.view addGestureRecognizer:self.textFieldResignTap];
+}
+
+- (void)setCategoryView{
+    if (self.categoryScrollView) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.categoryScrollView.alpha=0;
+        } completion:^(BOOL finished) {
+            [self.categoryScrollView removeFromSuperview];
+            self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
+            self.categoryScrollView.alwaysShowSum=YES;
+            [self.topView addSubview:self.categoryScrollView];
+            [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.view.mas_top).with.offset(74);
+                make.left.equalTo(self.view.mas_left);
+                make.right.equalTo(self.view.mas_right);
+                make.height.equalTo(@(88));
+            }];
+            [UIView animateWithDuration:0.3 animations:^{
+                self.categoryScrollView.alpha=1;
+            }];
+        }];
+    }
+    else{
+        self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
+        self.categoryScrollView.alwaysShowSum=YES;
+        [self.topView addSubview:self.categoryScrollView];
+        [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).with.offset(74);
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.height.equalTo(@(88));
+        }];
+    }
 }
 
 - (instancetype)initWithDate:(NSDate *)date
@@ -160,6 +196,9 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)moreBtnClicked{
+    [[CategoryManager sharedInstance] registerWriteToFileCallBack:^{
+        self.categoriesEditedFlag=YES;
+    }];
     CategoryManagerViewController * vc=[[CategoryManagerViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (CategoryManager *)sharedInstance;
 - (BOOL)replaceCategory:(NSString *)old withNewCategory:(NSString *)new;
 - (void)writeToFile;
+- (void)registerWriteToFileCallBack:(void(^)(void))handler;
 
 @end
 

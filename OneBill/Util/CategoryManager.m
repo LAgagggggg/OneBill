@@ -8,6 +8,12 @@
 
 #import "CategoryManager.h"
 
+@interface CategoryManager()
+
+@property (strong,nonatomic) void(^categoriesEditedHandler)(void);
+
+@end
+
 @implementation CategoryManager
 
 +(CategoryManager *)sharedInstance{
@@ -43,5 +49,13 @@
     NSString *documentsPath = [path objectAtIndex:0];
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"categoryArr.plist"];
     [self.categoriesArr writeToFile:plistPath atomically:YES];
+    if (self.categoriesEditedHandler) {
+        self.categoriesEditedHandler();
+    }
 }
+
+- (void)registerWriteToFileCallBack:(void(^)(void))handler{
+    self.categoriesEditedHandler=handler;
+}
+
 @end

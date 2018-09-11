@@ -96,6 +96,8 @@ static float animationDuration=0.3;
             make.height.equalTo(@(1));
         }];
         self.deleteLine.alpha=0;
+        //about drag
+
     }
     return self;
 }
@@ -159,7 +161,6 @@ static float animationDuration=0.3;
         self.editBtn.alpha=1;
         self.checkIconBtn.alpha=0;
     }];
-    
 }
 
 - (void)multiDeleteBeSelected{
@@ -186,9 +187,8 @@ static float animationDuration=0.3;
     
 }
 
--(void)dragStateDidChange:(UITableViewCellDragState)dragState{
+- (void)dragStateDidChange:(UITableViewCellDragState)dragState{
     
 }
-
 
 @end
