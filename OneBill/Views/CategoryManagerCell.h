@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong,nonatomic)UIButton * editBtn;
 @property(strong,nonatomic)UITextField * categoryTextField;
 @property BOOL isSelected;
+@property BOOL hasHideReorderControl;
 - (void)setWithCategory:(NSString *)category;
 - (void)beginMultiDelete;
 - (void)endMultiDelete;

@@ -24,6 +24,7 @@ static float animationDuration=0.3;
 @implementation CategoryManagerCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.hasHideReorderControl=NO;
         self.selectionStyle=UITableViewCellSelectionStyleNone;
         //为了拖拽
         [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,6 +143,7 @@ static float animationDuration=0.3;
 
 #pragma mark - about multi delete
 - (void)beginMultiDelete{
+    self.hasHideReorderControl=NO;
     [UIView animateWithDuration:animationDuration animations:^{
         self.editBtn.alpha=0;
         self.checkIconBtn.alpha=1;
@@ -151,6 +153,7 @@ static float animationDuration=0.3;
 }
 
 - (void)endMultiDelete{
+    self.hasHideReorderControl=NO;
     [self multiDeleteBeDeselected];
     [UIView animateWithDuration:animationDuration animations:^{
         self.editBtn.alpha=1;
@@ -186,5 +189,6 @@ static float animationDuration=0.3;
 -(void)dragStateDidChange:(UITableViewCellDragState)dragState{
     
 }
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Masonry.h>
+#import <objc/runtime.h>
 #import <MBProgressHUD.h>
 #import "CategoryManagerViewController.h"
 #import  "CategoryManagerCell.h"
@@ -16,7 +17,7 @@
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
-@interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface CategoryManagerViewController ()<UIGestureRecognizerDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITableViewDragDelegate>
 
 @property (strong,nonatomic)UITableView * tableView;
 @property (strong,nonatomic)UIView * shadowView;
@@ -260,6 +261,19 @@ static float animationDuration=0.3;
         self.addCell.alpha=1;
     }];
     [self.tableView reloadData];
+    
+    [self.tableView setValue:nil forKeyPath:@"_shadowUpdatesController"];
+    unsigned int count=0;
+//    Class class=NSClassFromString(@"_UITableViewShadowUpdatesController");
+    Ivar * ivars=class_copyIvarList([self.tableView class], &count);
+//    NSLog(@"%@",NSStringFromClass(self.tableView.superclass));
+    for (int i=0; i<count; i++) {
+        Ivar var=ivars[i];
+        const char * varName=ivar_getName(var);
+        const char * varType=ivar_getTypeEncoding(var);
+        NSLog(@"%s--%s",varName,varType);
+    }
+    free(ivars);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -296,20 +310,23 @@ static float animationDuration=0.3;
     return UITableViewCellEditingStyleNone;
 }
 
-- (void)hideReorderControlForCell:(UITableViewCell *)cell{
-    for (UIView * view in cell.subviews) {
-        Class reorderClass = NSClassFromString(@"UITableViewCellReorderControl");
-        if ([view isMemberOfClass:reorderClass]) {
-            [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(cell.mas_left);
-                make.right.equalTo(cell.mas_right);
-                make.top.equalTo(cell.mas_top);
-                make.bottom.equalTo(cell.mas_bottom);
-            }];
-            for (UIImageView * imgView in view.subviews) {
-                imgView.image=nil;
+- (void)hideReorderControlForCell:(CategoryManagerCell *)cell{
+    if (!cell.hasHideReorderControl) {
+        for (UIView * view in cell.subviews) {
+            Class reorderClass = NSClassFromString(@"UITableViewCellReorderControl");
+            if ([view isMemberOfClass:reorderClass]) {
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(cell.mas_left);
+                    make.right.equalTo(cell.mas_right);
+                    make.top.equalTo(cell.mas_top);
+                    make.bottom.equalTo(cell.mas_bottom);
+                }];
+                for (UIImageView * imgView in view.subviews) {
+                    imgView.image=nil;
+                }
             }
         }
+        cell.hasHideReorderControl=YES;
     }
 }
 
