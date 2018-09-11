@@ -25,13 +25,21 @@ static float animationDuration=0.3;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle=UITableViewCellSelectionStyleNone;
+        //为了拖拽
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).with.offset(7);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-7);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
+        }];
         //UI
-        self.backgroundColor=[UIColor whiteColor];
-        self.layer.cornerRadius=10.f;
-        self.layer.shadowColor=[UIColor whiteColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0,3);
-        self.layer.shadowOpacity = 0.3;
-        self.layer.shadowRadius = 12;
+        self.backgroundColor=[UIColor clearColor];
+        self.contentView.backgroundColor=[UIColor whiteColor];
+        self.contentView.layer.cornerRadius=10.f;
+        self.contentView.layer.shadowColor=[UIColor whiteColor].CGColor;
+        self.contentView.layer.shadowOffset = CGSizeMake(0,3);
+        self.contentView.layer.shadowOpacity = 0.3;
+        self.contentView.layer.shadowRadius = 12;
         //文字
         self.categoryTextField=[[UITextField alloc]init];
         self.categoryTextField.autocorrectionType=UITextAutocorrectionTypeNo;
@@ -125,13 +133,12 @@ static float animationDuration=0.3;
     }
 }
 
-- (void)setFrame:(CGRect)frame{
-    frame.origin.y += 14;
-    frame.size.height -= 14;
-//    frame.origin.x += 37;
-//    frame.size.width -= 37*2;
-    [super setFrame:frame];
-}
+//拖拽时会调用该方法，所以在这不能用
+//- (void)setFrame:(CGRect)frame{
+//    frame.origin.y += 14;
+//    frame.size.height -= 14;
+//    [super setFrame:frame];
+//}
 
 #pragma mark - about multi delete
 - (void)beginMultiDelete{
@@ -155,8 +162,8 @@ static float animationDuration=0.3;
 - (void)multiDeleteBeSelected{
     self.isSelected=YES;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.backgroundColor=DarkBlueColor;
-        self.layer.masksToBounds=YES;
+        self.contentView.backgroundColor=DarkBlueColor;
+        self.contentView.layer.masksToBounds=YES;
         self.deleteLine.alpha=1;
         self.checkIconBtn.imageView.alpha=1;
         self.categoryTextField.textColor=[UIColor whiteColor];
@@ -167,12 +174,16 @@ static float animationDuration=0.3;
 - (void)multiDeleteBeDeselected{
     self.isSelected=NO;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.backgroundColor=[UIColor whiteColor];
-        self.layer.masksToBounds=NO;
+        self.contentView.backgroundColor=[UIColor whiteColor];
+        self.contentView.layer.masksToBounds=NO;
         self.deleteLine.alpha=0;
         self.checkIconBtn.imageView.alpha=0;
         self.categoryTextField.textColor=textGrayColor;
     }];
+    
+}
+
+-(void)dragStateDidChange:(UITableViewCellDragState)dragState{
     
 }
 

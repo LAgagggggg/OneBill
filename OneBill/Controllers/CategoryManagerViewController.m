@@ -42,7 +42,7 @@ static float animationDuration=0.3;
     [self setUI];
     //添加cell随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
-    self.isAdding=NO;
+    self.isAdding=YES;
     self.isMultiDeleting=NO;
 }
 
@@ -88,10 +88,11 @@ static float animationDuration=0.3;
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight=58;
+    self.tableView.rowHeight=56;
     self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 30, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.allowsSelection=YES;
+    self.tableView.editing=YES;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
 //    用于resign first responder
     self.tapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
@@ -139,10 +140,12 @@ static float animationDuration=0.3;
             [cell beginMultiDelete];
         }
         else{
-            
             [cell endMultiDelete];
         }
     }
+    //拖拽相关
+    cell.shouldIndentWhileEditing=NO;
+    [self hideReorderControlForCell:cell];
 }
 
 - (void)setBottomCell:(CategoryManagerCell *)cell{
@@ -162,36 +165,6 @@ static float animationDuration=0.3;
     }];
     [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
-
-//-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.row==self.categoryArr.count) {//最后一行
-//        return NO;
-//    }
-//    for (UIView *subview in tableView.subviews)
-//    {
-//        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
-//        {
-//            subview.backgroundColor=[UIColor clearColor];
-//            subview.subviews[0].layer.cornerRadius=10.f;
-//            subview.subviews[0].layer.masksToBounds=YES;
-//        }
-//    }
-//    return YES;
-//}
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [[CategoryManager sharedInstance].categoriesArr removeObjectAtIndex:indexPath.row];
-//    [[CategoryManager sharedInstance] writeToFile];
-//    [self.categoryArr removeObjectAtIndex:indexPath.row];
-//    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//}
-
-//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return @"Delete";
-//}
 
 #pragma mark - add&edit category
 - (void)addBtnClicked:(UIButton *)sender{
@@ -251,6 +224,7 @@ static float animationDuration=0.3;
 
 - (void)beginMultiDelete{
     self.isMultiDeleting=YES;
+    self.tableView.editing=NO;
     self.tapGestureRecognizer.enabled=NO;
     [UIView animateWithDuration:animationDuration animations:^{
         self.navigationItem.rightBarButtonItem=self.doneBtn;
@@ -268,6 +242,7 @@ static float animationDuration=0.3;
 
 -(void)doneMultiDelete{
     self.isMultiDeleting=NO;
+    self.tableView.editing=YES;
     self.tapGestureRecognizer.enabled=YES;
     [[CategoryManager sharedInstance].categoriesArr removeObjectsAtIndexes:self.selectedIndexSet];
     self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
@@ -300,5 +275,43 @@ static float animationDuration=0.3;
         }
     }
 }
+
+#pragma mark - drag to sort
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (!self.isMultiDeleting) {
+        return indexPath.row==self.categoryArr.count?NO:YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:sourceIndexPath];
+    NSLog(@"%ld->%ld",sourceIndexPath.row,destinationIndexPath.row);
+    NSLog(@"%@",NSStringFromCGRect(cell.frame));
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (void)hideReorderControlForCell:(UITableViewCell *)cell{
+    for (UIView * view in cell.subviews) {
+        Class reorderClass = NSClassFromString(@"UITableViewCellReorderControl");
+        if ([view isMemberOfClass:reorderClass]) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(cell.mas_left);
+                make.right.equalTo(cell.mas_right);
+                make.top.equalTo(cell.mas_top);
+                make.bottom.equalTo(cell.mas_bottom);
+            }];
+            for (UIImageView * imgView in view.subviews) {
+                imgView.image=nil;
+            }
+        }
+    }
+}
+
 
 @end
