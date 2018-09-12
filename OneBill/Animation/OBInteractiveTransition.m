@@ -68,11 +68,20 @@
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
             //手势开始的时候标记手势状态并开始相应的事件
-            self.interation = YES;
-            [self startGesture];
             break;
         case UIGestureRecognizerStateChanged:{
+//            NSLog(@"%lf in direction%ld",percent,self.direction);
             //手势过程中
+            if (percent>0 && self.interation!=YES) {
+                self.interation = YES;
+                [self startGesture];
+                break;
+            }
+            if (percent<=0) {
+                self.interation=NO;
+                [self cancelInteractiveTransition];
+                break;
+            }
             [self updateInteractiveTransition:percent];
             break;
         }

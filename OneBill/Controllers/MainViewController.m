@@ -81,11 +81,7 @@
     [self.checkBtn addTarget:self action:@selector(checkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //进入今日账单详情的手势
     UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
-//    UIPanGestureRecognizer * panForToday=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
-    UIPanGestureRecognizer * panForToday=[[UIPanGestureRecognizer alloc]init];
-//    swipeForToday.direction=UISwipeGestureRecognizerDirectionUp;
     [self.todayCardView addGestureRecognizer:tapForToday];
-    [self.todayCardView addGestureRecognizer:panForToday];
     //进入账单概况的手势
     UIView * summaryGestureView=[[UIView alloc]init];
     summaryGestureView.backgroundColor=[UIColor clearColor];
@@ -97,9 +93,9 @@
         make.bottom.equalTo(self.todayCardView.mas_top);
     }];
     UITapGestureRecognizer * tapForSummary=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
-    UIPanGestureRecognizer * panForSummary=[[UIPanGestureRecognizer alloc]init];
+    UIPanGestureRecognizer * panForTransition=[[UIPanGestureRecognizer alloc]init];
     [summaryGestureView addGestureRecognizer:tapForSummary];
-    [summaryGestureView addGestureRecognizer:panForSummary];
+    [self.view addGestureRecognizer:panForTransition];
     //上划转场动画 -今日详情
     self.interactivePushToDetail=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionUp];
     typeof(self)weakSelf = self;
@@ -107,14 +103,14 @@
         [weakSelf enterTodayDetail];
     };
     self.interactivePushToDetail.vc=self.navigationController;
-    [self.interactivePushToDetail setPanGestureRecognizer:panForToday];
+    [self.interactivePushToDetail setPanGestureRecognizer:panForTransition];
     //下拉转场动画 -summary界面
     self.interactivePushToSummary=[OBInteractiveTransition interactiveTransitionWithTransitionType:OBInteractiveTransitionTypePush GestureDirection:OBInteractiveTransitionGestureDirectionDown];
     self.interactivePushToSummary.pushConifg = ^{
         [weakSelf enterDaySummary];
     };
     self.interactivePushToSummary.vc=self.navigationController;
-    [self.interactivePushToSummary setPanGestureRecognizer:panForSummary];
+    [self.interactivePushToSummary setPanGestureRecognizer:panForTransition];
 }
 
 -(void)enterTodayDetail{
@@ -174,7 +170,7 @@
     if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPush class]]){//进入今日详情
         return self.interactivePushToDetail.interation?self.interactivePushToDetail:nil;
     }
-    if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPush class]]){//进入g概况
+    if ([animationController isMemberOfClass:[MainToSummaryTransitionAnimationPush class]]){//进入概况
         return self.interactivePushToSummary.interation?self.interactivePushToSummary:nil;
     }
     else if ([animationController isMemberOfClass:[TodayCardTransitionAnimationPop class]]){//从今日详情返回
