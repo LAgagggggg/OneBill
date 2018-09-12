@@ -133,7 +133,6 @@ static float animationDuration=0.3;
         hud.mode=MBProgressHUDModeText;
         hud.label.text=hudText;
         [hud hideAnimated:YES afterDelay:0.6];
-        
     }
 }
 
@@ -186,6 +185,21 @@ static float animationDuration=0.3;
         self.categoryTextField.textColor=textGrayColor;
     }];
     
+}
+
+- (void)addSubview:(UIView *)view{
+    [super addSubview:view];
+    if ([view isMemberOfClass:NSClassFromString(@"UITableViewCellReorderControl")]) {
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+        }];
+        for (UIImageView * imgView in view.subviews) {
+            imgView.image=nil;
+        }
+    }
 }
 
 

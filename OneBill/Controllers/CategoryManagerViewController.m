@@ -47,6 +47,16 @@ static float animationDuration=0.3;
     self.isMultiDeleting=NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self exchangeShadowMethod];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self exchangeShadowMethod];
+}
+
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -93,7 +103,7 @@ static float animationDuration=0.3;
     self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 30, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.allowsSelection=YES;
-//    self.tableView.editing=YES;
+    self.tableView.editing=YES;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
 //    用于resign first responder
     self.tapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
@@ -294,26 +304,26 @@ static float animationDuration=0.3;
     }
 }
 
-//#pragma mark - drag to sort
-//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (!self.isMultiDeleting) {
-//        return indexPath.row==self.categoryArr.count?NO:YES;
-//    }
-//    else{
-//        return NO;
-//    }
-//}
-//
-//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-//    [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-//    [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-//    [[CategoryManager sharedInstance] writeToFile];
-//}
-//
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return UITableViewCellEditingStyleNone;
-//}
-//
+#pragma mark - drag to sort
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (!self.isMultiDeleting) {
+        return indexPath.row==self.categoryArr.count?NO:YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [[CategoryManager sharedInstance] writeToFile];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
 //- (void)hideReorderControlForCell:(CategoryManagerCell *)cell{
 //    if (!cell.hasHideReorderControl) {
 //        for (UIView * view in cell.subviews) {
@@ -333,6 +343,34 @@ static float animationDuration=0.3;
 //        cell.hasHideReorderControl=YES;
 //    }
 //}
+
+
+- (void)exchangeShadowMethod{
+    Class class = objc_getClass("UIShadowView");
+//    unsigned int count=0;
+//    Method * methods = class_copyMethodList(class, &count);
+//    for (int i=0; i<count; i++) {
+//        Method method=methods[i];
+//        const char * methodName=sel_getName(method_getName(method));
+//        const char * methodType=method_getTypeEncoding(method);
+//        NSLog(@"%s--%s",methodName,methodType);
+//    }
+    SEL originalSelector = @selector(setShadowImage:forEdge:inside:);
+    SEL mySelector = @selector(fakeMethodForShadow);
+    if (class_respondsToSelector(class, originalSelector)) {
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method myMethod = class_getInstanceMethod([self class], mySelector);
+        IMP originalImp = method_getImplementation(originalMethod);
+        IMP myImp = method_getImplementation(myMethod);
+        class_replaceMethod([self class], mySelector, originalImp, method_getTypeEncoding(myMethod));
+        class_replaceMethod(class, originalSelector,myImp, method_getTypeEncoding(originalMethod));
+    }
+}
+
+- (void)fakeMethodForShadow
+{
+    
+}
 
 
 @end
