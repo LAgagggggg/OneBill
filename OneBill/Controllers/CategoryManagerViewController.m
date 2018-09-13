@@ -103,7 +103,7 @@ static float animationDuration=0.3;
     self.tableView.contentInset=UIEdgeInsetsMake(16, 0, 30, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.allowsSelection=YES;
-    self.tableView.editing=YES;
+//    self.tableView.editing=YES;
     [self.tableView registerClass:[CategoryManagerCell class] forCellReuseIdentifier:@"categoryCell"];
 //    用于resign first responder
     self.tapGestureRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resignAnyResponder)];
@@ -156,7 +156,6 @@ static float animationDuration=0.3;
     }
     //拖拽相关
     cell.shouldIndentWhileEditing=NO;
-//    [self hideReorderControlForCell:cell];
 }
 
 - (void)setBottomCell:(CategoryManagerCell *)cell{
@@ -323,27 +322,6 @@ static float animationDuration=0.3;
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleNone;
 }
-
-//- (void)hideReorderControlForCell:(CategoryManagerCell *)cell{
-//    if (!cell.hasHideReorderControl) {
-//        for (UIView * view in cell.subviews) {
-//            Class reorderClass = NSClassFromString(@"UITableViewCellReorderControl");
-//            if ([view isMemberOfClass:reorderClass]) {
-//                [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.left.equalTo(cell.mas_left);
-//                    make.right.equalTo(cell.mas_right);
-//                    make.top.equalTo(cell.mas_top);
-//                    make.bottom.equalTo(cell.mas_bottom);
-//                }];
-//                for (UIImageView * imgView in view.subviews) {
-//                    imgView.image=nil;
-//                }
-//            }
-//        }
-//        cell.hasHideReorderControl=YES;
-//    }
-//}
-
 
 - (void)exchangeShadowMethod{
     Class class = objc_getClass("UIShadowView");

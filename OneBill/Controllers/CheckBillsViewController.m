@@ -35,7 +35,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self setUI];
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
     self.categoriesEditedFlag=NO;
@@ -46,6 +45,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidAppear:animated];
     if (self.categoriesEditedFlag) {
         [self setCategoryView];
+        self.categoriesEditedFlag=NO;
     }
 }
 
