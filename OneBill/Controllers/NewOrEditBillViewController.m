@@ -311,13 +311,16 @@
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             NSMutableString * locStr=[[NSMutableString alloc]init];
             //获取市,省
-            [locStr appendString:placemark.locality];
+            placemark.locality?[locStr appendString:placemark.locality]:nil;
             locStr.length>0? [locStr appendString:@","]:nil;
-            [locStr appendString:placemark.administrativeArea];
-            [locStr appendString:@"\n"];
+            placemark.administrativeArea?[locStr appendString:placemark.administrativeArea]:nil;
+            locStr.length>0?[locStr appendString:@"\n"]:nil;
             // 位置名
 //            [self.locDescription appendFormat:@"%@,%@",placemark.name,placemark.thoroughfare];
-            self.locDescription=[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0];
+            if ([placemark.addressDictionary objectForKey:@"FormattedAddressLines"]) {
+                NSArray * lines=[placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+                lines.count?self.locDescription=lines[0]:nil;
+            }
 //            [self.locDescription appendString:[placemark.addressDictionary objectForKey:@"FormattedAddressLines"][0]];
             [locStr appendString:self.locDescription];
             self.locationLabel.text=locStr;
