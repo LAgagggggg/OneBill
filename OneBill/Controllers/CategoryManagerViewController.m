@@ -49,12 +49,12 @@ static float animationDuration=0.3;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self exchangeShadowMethod];
+//    [self exchangeShadowMethod];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self exchangeShadowMethod];
+//    [self exchangeShadowMethod];
 }
 
 -(void)dealloc{
@@ -323,32 +323,32 @@ static float animationDuration=0.3;
     return UITableViewCellEditingStyleNone;
 }
 
-- (void)exchangeShadowMethod{
-    Class class = objc_getClass("UIShadowView");
-//    unsigned int count=0;
-//    Method * methods = class_copyMethodList(class, &count);
-//    for (int i=0; i<count; i++) {
-//        Method method=methods[i];
-//        const char * methodName=sel_getName(method_getName(method));
-//        const char * methodType=method_getTypeEncoding(method);
-//        NSLog(@"%s--%s",methodName,methodType);
+//- (void)exchangeShadowMethod{
+//    Class class = objc_getClass("UIShadowView");
+////    unsigned int count=0;
+////    Method * methods = class_copyMethodList(class, &count);
+////    for (int i=0; i<count; i++) {
+////        Method method=methods[i];
+////        const char * methodName=sel_getName(method_getName(method));
+////        const char * methodType=method_getTypeEncoding(method);
+////        NSLog(@"%s--%s",methodName,methodType);
+////    }
+//    SEL originalSelector = @selector(setShadowImage:forEdge:inside:);
+//    SEL mySelector = @selector(fakeMethodForShadow);
+//    if (class_respondsToSelector(class, originalSelector)) {
+//        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+//        Method myMethod = class_getInstanceMethod([self class], mySelector);
+//        IMP originalImp = method_getImplementation(originalMethod);
+//        IMP myImp = method_getImplementation(myMethod);
+//        class_replaceMethod([self class], mySelector, originalImp, method_getTypeEncoding(myMethod));
+//        class_replaceMethod(class, originalSelector,myImp, method_getTypeEncoding(originalMethod));
 //    }
-    SEL originalSelector = @selector(setShadowImage:forEdge:inside:);
-    SEL mySelector = @selector(fakeMethodForShadow);
-    if (class_respondsToSelector(class, originalSelector)) {
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method myMethod = class_getInstanceMethod([self class], mySelector);
-        IMP originalImp = method_getImplementation(originalMethod);
-        IMP myImp = method_getImplementation(myMethod);
-        class_replaceMethod([self class], mySelector, originalImp, method_getTypeEncoding(myMethod));
-        class_replaceMethod(class, originalSelector,myImp, method_getTypeEncoding(originalMethod));
-    }
-}
-
-- (void)fakeMethodForShadow
-{
-    
-}
+//}
+//
+//- (void)fakeMethodForShadow
+//{
+//
+//}
 
 
 @end

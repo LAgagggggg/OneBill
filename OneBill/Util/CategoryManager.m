@@ -27,7 +27,7 @@
         manager.categoriesArr=[NSMutableArray arrayWithContentsOfFile:plistPath];
         if (manager.categoriesArr==nil) {
             manager.categoriesArr=[[NSMutableArray alloc]init];
-            [manager.categoriesArr addObjectsFromArray:@[@"Meal",@"DailyUse",@"Housing",@"Communication",@"Travel",@"Entertainment"]];
+            [manager.categoriesArr addObjectsFromArray:@[@"Meals",@"Drinks",@"Transports",@"DailyUse",@"Housing",@"Communication",@"Travel",@"Entertainment"]];
             [manager.categoriesArr writeToFile:plistPath atomically:YES];
         }
     });
