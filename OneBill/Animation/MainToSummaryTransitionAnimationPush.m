@@ -14,6 +14,8 @@
 #import "OBMainButton.h"
 #import "UIView+ReplaceAnimation.h"
 
+#define MuchLightCyanColor [UIColor colorWithRed:241/255.0 green:251/255.0 blue:251/255.0 alpha:1]
+
 @interface MainToSummaryTransitionAnimationPush()
 
 @property (nonatomic, strong)id<UIViewControllerContextTransitioning> transitionContext;
@@ -39,14 +41,21 @@ static float animationDuration=0.6;
     [fromVC.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *fromImg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    CGRect frame=fromVC.todayCardView.frame;
+    frame.origin.y-=15;
+    frame.size.height+=15;
+    UIView * imgWrapperView=[[UIView alloc]initWithFrame:frame];
+    imgWrapperView.backgroundColor=MuchLightCyanColor;
+    imgWrapperView.layer.cornerRadius=10.f;
+    imgWrapperView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
+    imgWrapperView.layer.shadowOffset=CGSizeMake(0, 6);
+    imgWrapperView.layer.shadowOpacity=0.3;
+    imgWrapperView.layer.shadowRadius=12;
     UIImageView * fromImgView=[[UIImageView alloc]initWithImage:fromImg];
-    fromImgView.frame=fromVC.todayCardView.frame;
+    fromImgView.frame=CGRectMake(0, 15, frame.size.width, frame.size.height-15);
     fromImgView.layer.cornerRadius=10.f;
-    fromImgView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
-    fromImgView.layer.shadowOffset=CGSizeMake(0, 6);
-    fromImgView.layer.shadowOpacity=0.3;
-    fromImgView.layer.shadowRadius=12;
-    [containView addSubview:fromImgView];
+    [imgWrapperView addSubview:fromImgView];
+    [containView addSubview:imgWrapperView];
     //button
     UIView * addBtnImgView=[fromVC.addBtn snapshotViewAfterScreenUpdates:NO];
     addBtnImgView.frame=fromVC.addBtn.frame;
@@ -63,7 +72,7 @@ static float animationDuration=0.6;
         [UIView animateWithDuration:animationDuration animations:^{
         }];
     }];
-    [UIView replaceView:fromImgView withView:todayCardTargetView duration:animationDuration backgroundColor:nil transitionContext:self.transitionContext completion:^(BOOL finished) {
+    [UIView replaceView:imgWrapperView withView:todayCardTargetView duration:animationDuration backgroundColor:nil transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;
         fromVC.todayCardView.hidden=NO;
         addBtnImgView.hidden=YES;
