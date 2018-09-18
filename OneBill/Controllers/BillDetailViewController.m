@@ -93,7 +93,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.layer.masksToBounds=NO;
     self.tableView.backgroundColor=[UIColor clearColor];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
+    self.tableView.contentInset=UIEdgeInsetsMake(8, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.estimatedRowHeight=117;
     [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];

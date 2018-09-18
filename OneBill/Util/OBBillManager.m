@@ -127,24 +127,36 @@
 -(BOOL)updateSumOfDay:(NSDate *)date{
     NSArray * billArr = [[OBBillManager sharedInstance] billsSameDayAsDate:date];
     double daySpend=0;
-    for (OBBill * bill in billArr) {
-        daySpend-= bill.isOut?bill.value:-bill.value;
-    }
     NSCalendar * calendar=[NSCalendar currentCalendar];
     NSTimeInterval dayStartStamp=[[calendar startOfDayForDate:date] timeIntervalSince1970];
     __block BOOL result;
-    [self.queue inDatabase:^(FMDatabase *db) {
-        NSString * sql=@"select count(*) from sumTable where(dateOfDay==?);";
-        NSInteger count=[db intForQuery:sql,@((double)dayStartStamp)];
-        if (count) {
-            sql=[NSString stringWithFormat:@"update %@ set sum=? where(dateOfDay==?);",@"SumTable"];
-            result=[db executeUpdate:sql,@(daySpend),@((double)dayStartStamp)];
+    if (billArr.count==0) {//如果没有账单则不记录(并删除)该天summary
+        [self.queue inDatabase:^(FMDatabase *db) {
+            NSString * sql=@"select count(*) from sumTable where(dateOfDay==?);";
+            NSInteger count=[db intForQuery:sql,@((double)dayStartStamp)];
+            if (count) {
+                sql=[NSString stringWithFormat:@"delete from %@ where(dateOfDay==?);",@"SumTable"];
+                result=[db executeUpdate:sql,@((double)dayStartStamp)];
+            }
+        }];
+    }
+    else{
+        for (OBBill * bill in billArr) {
+            daySpend-= bill.isOut?bill.value:-bill.value;
         }
-        else{
-            sql=[NSString stringWithFormat:@"insert into %@(dateOfDay,sum) VALUES(?,?);",@"SumTable"];
-            result=[db executeUpdate:sql,@(dayStartStamp),@(daySpend)];
-        }
-    }];
+        [self.queue inDatabase:^(FMDatabase *db) {
+            NSString * sql=@"select count(*) from sumTable where(dateOfDay==?);";
+            NSInteger count=[db intForQuery:sql,@((double)dayStartStamp)];
+            if (count) {
+                sql=[NSString stringWithFormat:@"update %@ set sum=? where(dateOfDay==?);",@"SumTable"];
+                result=[db executeUpdate:sql,@(daySpend),@((double)dayStartStamp)];
+            }
+            else{
+                sql=[NSString stringWithFormat:@"insert into %@(dateOfDay,sum) VALUES(?,?);",@"SumTable"];
+                result=[db executeUpdate:sql,@(dayStartStamp),@(daySpend)];
+            }
+        }];
+    }
     return result;
 }
 

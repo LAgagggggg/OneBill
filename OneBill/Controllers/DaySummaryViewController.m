@@ -28,6 +28,7 @@
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
 @property BOOL isInserting;
+@property NSInteger didEnterIndex;
 
 @end
 
@@ -38,6 +39,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.fetchIndex=0;
+    self.didEnterIndex=-1;
     self.isInserting=YES;
     [[OBBillManager sharedInstance]updateSumOfDay:[NSDate date]];
     self.summaryArr=[[NSMutableArray alloc]init];
@@ -62,8 +64,23 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{//在详情中编辑后回到概况应当更新当日数值
+    [super viewDidAppear:animated];
+    if (self.didEnterIndex>=0) {
+        if(self.summaryArr[_didEnterIndex].sum!=[[OBBillManager sharedInstance] sumOfDay:self.summaryArr[_didEnterIndex].date]){
+            self.summaryArr[_didEnterIndex].sum=[[OBBillManager sharedInstance] sumOfDay:self.summaryArr[_didEnterIndex].date];
+            if (self.summaryArr[_didEnterIndex].sum!=0) {
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_didEnterIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            }
+            else{
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_didEnterIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+                [self.summaryArr removeObjectAtIndex:_didEnterIndex];
+                self.fetchIndex--;
+            }
+        }
+        
+    }
+    
 }
 
 -(void)setUI{
@@ -143,6 +160,7 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.selectedCell=[tableView cellForRowAtIndexPath:indexPath];//for animation
+    self.didEnterIndex=indexPath.row;
     BillDetailViewController * vc=[[BillDetailViewController alloc]initWithBills:[[OBBillManager sharedInstance] billsSameDayAsDate:self.summaryArr[indexPath.row].date]];
     vc.date=self.summaryArr[indexPath.row].date;
     [self.navigationController pushViewController:vc animated:YES];
