@@ -94,6 +94,7 @@
     }];
     UITapGestureRecognizer * tapForSummary=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterDaySummary)];
     UIPanGestureRecognizer * panForTransition=[[UIPanGestureRecognizer alloc]init];
+    panForTransition.delegate=self;
     [summaryGestureView addGestureRecognizer:tapForSummary];
     [self.view addGestureRecognizer:panForTransition];
     //上划转场动画 -今日详情
@@ -132,6 +133,16 @@
 - (void)checkBtnClicked{
     CheckBillsViewController * vc=[[CheckBillsViewController alloc]initWithDate:[NSDate date]];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+//碰到按钮时不触发手势
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if ([touch.view isMemberOfClass:[UIButton class]]) {
+        return NO;
+    }
+    else{
+        return YES;
+    }
 }
 
 #pragma mark - transitionAnimation Control
