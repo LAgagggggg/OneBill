@@ -67,14 +67,15 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidAppear:(BOOL)animated{//在详情中编辑后回到概况应当更新当日数值
     [super viewDidAppear:animated];
     if (self.didEnterIndex>=0) {
-        if(self.summaryArr[_didEnterIndex].sum!=[[OBBillManager sharedInstance] sumOfDay:self.summaryArr[_didEnterIndex].date]){
-            self.summaryArr[_didEnterIndex].sum=[[OBBillManager sharedInstance] sumOfDay:self.summaryArr[_didEnterIndex].date];
-            if (self.summaryArr[_didEnterIndex].sum!=0) {
+        double newsSum=[[OBBillManager sharedInstance] sumOfDay:self.summaryArr[_didEnterIndex].date];
+        if(self.summaryArr[_didEnterIndex].sum!=newsSum){
+            self.summaryArr[_didEnterIndex].sum=newsSum;
+            if (self.summaryArr[_didEnterIndex].sum!=0 || _didEnterIndex==self.summaryArr.count-1) {
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_didEnterIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             }
             else{
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_didEnterIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                 [self.summaryArr removeObjectAtIndex:_didEnterIndex];
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_didEnterIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                 self.fetchIndex--;
             }
         }

@@ -129,8 +129,9 @@
     double daySpend=0;
     NSCalendar * calendar=[NSCalendar currentCalendar];
     NSTimeInterval dayStartStamp=[[calendar startOfDayForDate:date] timeIntervalSince1970];
+    NSTimeInterval todayStartStamp=[[calendar startOfDayForDate:[NSDate date]] timeIntervalSince1970];
     __block BOOL result;
-    if (billArr.count==0) {//如果没有账单则不记录(并删除)该天summary
+    if (billArr.count==0 && dayStartStamp!=todayStartStamp) {//如果没有账单则不记录(并删除)该天summary(不删今天的)
         [self.queue inDatabase:^(FMDatabase *db) {
             NSString * sql=@"select count(*) from sumTable where(dateOfDay==?);";
             NSInteger count=[db intForQuery:sql,@((double)dayStartStamp)];
