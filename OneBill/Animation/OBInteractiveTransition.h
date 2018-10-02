@@ -30,10 +30,12 @@ typedef NS_ENUM(NSUInteger, OBInteractiveTransitionType) {//手势控制哪种�
 @property (nonatomic, copy) GestureConifg presentConifg;
 @property (nonatomic, copy) GestureConifg pushConifg;
 @property (nonatomic, weak) UIViewController *vc;
+@property BOOL impactFeedBackEnable;//default is YES
 
 + (instancetype)interactiveTransitionWithTransitionType:(OBInteractiveTransitionType)type GestureDirection:(OBInteractiveTransitionGestureDirection)direction;
 - (instancetype)initWithTransitionType:(OBInteractiveTransitionType)type GestureDirection:(OBInteractiveTransitionGestureDirection)direction;
 //给传入的控制器添加手势
 - (void)addPanGestureForViewController:(UIViewController *)viewController;
 - (void)setPanGestureRecognizer:(UIPanGestureRecognizer *)pan;
+
 @end

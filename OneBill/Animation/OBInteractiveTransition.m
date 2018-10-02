@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) OBInteractiveTransitionGestureDirection direction;
 @property (nonatomic, assign) OBInteractiveTransitionType type;
+@property (strong,nonatomic) UIImpactFeedbackGenerator * impactFeedBack;
 
 @end
 
@@ -26,6 +27,8 @@
     if (self) {
         _direction = direction;
         _type = type;
+        _impactFeedBackEnable=YES;
+        _impactFeedBack=[[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];
     }
     return self;
 }
@@ -68,6 +71,7 @@
     switch (panGesture.state) {
         case UIGestureRecognizerStateBegan:
             //手势开始的时候标记手势状态并开始相应的事件
+            if(self.impactFeedBackEnable) [self.impactFeedBack prepare];
             break;
         case UIGestureRecognizerStateChanged:{
 //            NSLog(@"%lf in direction%ld",percent,self.direction);
@@ -75,6 +79,7 @@
             if (percent>0 && self.interation!=YES) {
                 self.interation = YES;
                 [self startGesture];
+                if(self.impactFeedBackEnable) [self.impactFeedBack impactOccurred];
                 break;
             }
             if (percent<=0) {
@@ -90,8 +95,10 @@
             self.interation = NO;
             if (percent > 0.5) {
                 [self finishInteractiveTransition];
+                if(self.impactFeedBackEnable) [self.impactFeedBack impactOccurred];
             }else{
                 [self cancelInteractiveTransition];
+                if(self.impactFeedBackEnable) [self.impactFeedBack impactOccurred];
             }
             break;
         }

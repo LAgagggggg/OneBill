@@ -421,8 +421,8 @@
             return NO;
         }
     }
-    if(self.inputView.text.length>11) return NO;
-    return YES;
+    if(self.inputView.text.length>11&&!isPressedBackspaceAfterSingleSpaceSymbol) return NO;
+    else return YES;
 }
 //*********************************************************************************//
 
