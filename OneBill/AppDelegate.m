@@ -19,6 +19,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    UINavigationController * navVC=[[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc]init]];
+    [self.window setRootViewController:navVC];
+    [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     [self creatShortcutItem];
     UIApplicationShortcutItem *shortcutItem = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];

@@ -12,7 +12,7 @@
 
 @interface MainViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet TodayCardView *todayCardView;
+@property (strong, nonatomic) TodayCardView *todayCardView;
 @property (strong, nonatomic) OBMainButton * addBtn;
 
 @end

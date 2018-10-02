@@ -22,10 +22,12 @@
 #import "DaySummaryViewController.h"
 #import "CheckBillsViewController.h"
 #import  "OBInteractiveTransition.h"
+#import "TodaySayingView.h"
 
 @interface MainViewController () <UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) OBMainButton * checkBtn;
+@property (strong, nonatomic) TodaySayingView * sayingView;
 @property double todaySpend;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToDetail;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
@@ -49,6 +51,7 @@
 }
 
 - (void)setUI{
+    double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
     //导航栏返回按钮
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 //    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"returnBtn"];
@@ -61,6 +64,25 @@
     //导航栏颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
+    //顶部文字
+    self.sayingView=[[TodaySayingView alloc]initWithLine:@[@"One Bill A Day",@"Keeps worries away."]];
+    [self.view addSubview:self.sayingView];
+    [self.sayingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(130*screenHeightAdaptRatio);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.height.equalTo(@(60));
+        make.width.equalTo(self.view.mas_width);
+    }];
+    //今日卡片
+    self.todayCardView=[[TodayCardView alloc]init];
+    [self.view addSubview:self.todayCardView];
+    [self.todayCardView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).with.offset(30);
+        make.right.equalTo(self.view.mas_right).with.offset(-30);
+        make.top.equalTo(self.sayingView.mas_top).with.offset(122*screenHeightAdaptRatio);
+        make.height.equalTo(@(229*screenHeightAdaptRatio));
+    }];
+    //按钮
     self.addBtn=[[OBMainButton alloc]initWithType:OBButtonTypeAdd];
     [self.view addSubview:self.addBtn];
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {

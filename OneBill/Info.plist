@@ -28,8 +28,6 @@
 	<string>需要通过定位获取您周边的地理位置信息，是否允许获取你的定位？</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
