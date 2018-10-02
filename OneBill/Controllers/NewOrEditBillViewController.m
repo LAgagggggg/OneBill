@@ -67,6 +67,7 @@
 }
 
 - (void)setUI{
+    double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
     //设置导航栏返回按钮
     self.title=@"Add New Bill";
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
@@ -77,7 +78,7 @@
     self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:self.categoryManager.categoriesArr];
     [self.view addSubview:self.categoryScrollView];
     [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(97);
+        make.top.equalTo(self.view.mas_top).with.offset(97*screenHeightAdaptRatio);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@(88));
@@ -87,7 +88,7 @@
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(75);
         make.right.equalTo(self.view.mas_right).with.offset(-55);
-        make.top.equalTo(self.categoryScrollView.mas_bottom).with.offset(24);
+        make.top.equalTo(self.categoryScrollView.mas_bottom).with.offset(24*screenHeightAdaptRatio);
         make.height.equalTo(@(76));
     }];
     self.inputView.delegate=self;
@@ -95,7 +96,7 @@
     [self.view addSubview:self.inoutSwitchBtn];
     [self.inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.inputView.mas_bottom).with.offset(49);
+        make.top.equalTo(self.inputView.mas_bottom).with.offset(49*screenHeightAdaptRatio);
         make.width.equalTo(@(120));
         make.height.equalTo(@(34));
         
@@ -104,7 +105,7 @@
     separateLine.backgroundColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:0.3];
     [self.view addSubview:separateLine];
     [separateLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-242.5);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-242.5*screenHeightAdaptRatio);
         make.height.equalTo(@(1));
         make.left.equalTo(self.view.mas_left).with.offset(70.5);
         make.right.equalTo(self.view.mas_right).with.offset(-50.5);
@@ -126,7 +127,7 @@
     [self.view addSubview:locationView];
     [locationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(separateLine.mas_left);
-        make.top.equalTo(separateLine.mas_top).with.offset(26.5);
+        make.top.equalTo(separateLine.mas_top).with.offset(26.5*screenHeightAdaptRatio);
         make.right.equalTo(separateLine.mas_right).with.offset(-10);
         make.height.equalTo(@(34));
     }];
@@ -165,7 +166,7 @@
     [self.view addSubview:dateView];
     [dateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(separateLine.mas_left);
-        make.top.equalTo(locationView.mas_bottom).with.offset(37);
+        make.top.equalTo(locationView.mas_bottom).with.offset(37*screenHeightAdaptRatio);
         make.right.equalTo(separateLine.mas_right).with.offset(-40);
         make.height.equalTo(@(20));
     }];
@@ -207,7 +208,7 @@
     [self.predictView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(25);
         make.right.equalTo(self.view.mas_right).with.offset(-25);
-        make.bottom.equalTo(self.categoryScrollView.mas_top).with.offset(-5);
+        make.bottom.equalTo(self.categoryScrollView.mas_top).with.offset(-5*screenHeightAdaptRatio);
         make.height.equalTo(@(32));
     }];
     UILabel * predictLabel=[[UILabel alloc]init];

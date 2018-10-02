@@ -25,6 +25,7 @@
     self = [super init];
     if (self) {
         //三层结构
+        double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
         self.backgroundColor=LightCyanColor;
         self.layer.cornerRadius=10.f;
         self.layer.shadowColor=MuchLightCyanColor.CGColor;
@@ -59,11 +60,11 @@
         [self addSubview:self.labelR];
         [self addSubview:self.labelL];
         [self.labelL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.mas_top).with.offset(80);
+            make.bottom.equalTo(self.mas_top).with.offset(80*screenHeightAdaptRatio);
             make.right.equalTo(self.mas_centerX);
         }];
         [self.labelR mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.mas_top).with.offset(80);
+            make.bottom.equalTo(self.mas_top).with.offset(80*screenHeightAdaptRatio);
             make.left.equalTo(self.mas_centerX);
         }];
         //数字
@@ -75,7 +76,7 @@
         [self addSubview:self.labelNum];
         [self.labelNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
-            make.centerY.equalTo(self.labelR.mas_centerY).with.offset(70);
+            make.centerY.equalTo(self.labelR.mas_centerY).with.offset(70*screenHeightAdaptRatio);
         }];
     }
     return self;
