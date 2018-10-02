@@ -22,8 +22,9 @@
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic)NSMutableArray<OBDaySummary *> * summaryArr;
-@property(strong,nonatomic)UIActivityIndicatorView *reloadIndicator;
+@property (strong,nonatomic) NSMutableArray<OBDaySummary *> * summaryArr;
+@property (strong,nonatomic) UIActivityIndicatorView *reloadIndicator;
+@property(strong,nonatomic) UIImpactFeedbackGenerator * impactFeedback;
 //@property (nonatomic, strong) ODRefreshControl *refreshControl;
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;
@@ -134,7 +135,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.reloadIndicator setHidesWhenStopped:YES];
 }
 
-
+- (UIImpactFeedbackGenerator *)impactFeedback{
+    if (!_impactFeedback) {
+        _impactFeedback=[[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleMedium];
+    }
+    return _impactFeedback;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==self.summaryArr.count-1) {
@@ -171,6 +177,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
+        if (!self.reloadIndicator.animating) [self.impactFeedback impactOccurred];
         [self.reloadIndicator startAnimating];
     }
 }

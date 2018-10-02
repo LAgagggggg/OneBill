@@ -48,9 +48,8 @@ static float animationDuration=0.5;
     imgWrapperView.layer.shadowOffset=CGSizeMake(0, 6);
     imgWrapperView.layer.shadowOpacity=0.3;
     imgWrapperView.layer.shadowRadius=12;
-    UIImageView * fromImgView=[[UIImageView alloc]initWithImage:fromImg];
-    fromImgView.frame=CGRectMake(0, 15, frame.size.width, frame.size.height-15);
-    fromImgView.layer.cornerRadius=10.f;
+    UIView * fromImgView=[[UIView alloc]initWithFrame:CGRectMake(0, 15, frame.size.width, frame.size.height-15)];
+    fromImgView.layer.contents=(__bridge id)(fromImg.CGImage);
     [imgWrapperView addSubview:fromImgView];
     [containView addSubview:imgWrapperView];
     //button
