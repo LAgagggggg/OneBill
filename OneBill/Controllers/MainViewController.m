@@ -45,6 +45,14 @@
     [self setUI];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    UIGraphicsBeginImageContextWithOptions(self.todayCardView.frame.size, NO, 0);
+    [self.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    self.animationImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     //刷新今日花销
     self.todayCardView.labelNum.text=[NSString stringWithFormat:@"%+.2lf",[[OBBillManager sharedInstance] sumOfDay:[NSDate date]]];

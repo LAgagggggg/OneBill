@@ -35,12 +35,8 @@ static float animationDuration=0.6;
     [containView addSubview:fromVC.view];
     [containView addSubview:toVC.view];
     containView.backgroundColor=[UIColor whiteColor];
-    UIView * todayCardTargetView=[[UIView alloc]initWithFrame:CGRectMake(30, [UIScreen mainScreen].bounds.size.height-62-136, 316, 136)];
     //原控制器卡片以及覆盖其上的按钮
-    UIGraphicsBeginImageContextWithOptions(fromVC.todayCardView.frame.size, NO, 0);
-    [fromVC.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *fromImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage * fromImg=fromVC.animationImg;
     CGRect frame=fromVC.todayCardView.frame;
     frame.origin.y-=15;
     frame.size.height+=15;
@@ -72,6 +68,7 @@ static float animationDuration=0.6;
         [UIView animateWithDuration:animationDuration animations:^{
         }];
     }];
+    UIView * todayCardTargetView=[[UIView alloc]initWithFrame:CGRectMake(30, [UIScreen mainScreen].bounds.size.height-62-136, [UIScreen mainScreen].bounds.size.width-60, 136)];
     [UIView replaceView:imgWrapperView withView:todayCardTargetView duration:animationDuration backgroundColor:nil transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;
         fromVC.todayCardView.hidden=NO;

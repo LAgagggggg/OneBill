@@ -37,10 +37,7 @@ static float animationDuration=0.5;
     containView.backgroundColor=[UIColor whiteColor];
     [toVC.summaryCardView.superview layoutIfNeeded];
     //原控制器卡片以及覆盖其上的按钮
-    UIGraphicsBeginImageContextWithOptions(fromVC.todayCardView.frame.size, NO, 0);
-    [fromVC.todayCardView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *fromImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *fromImg = fromVC.animationImg;
     CGRect frame=fromVC.todayCardView.frame;
     frame.origin.y-=15;
     frame.size.height+=15;
