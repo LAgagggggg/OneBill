@@ -33,6 +33,7 @@
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
 @property (nonatomic, strong) BillDetailViewController *todayDetailVC;
 @property (nonatomic, strong) DaySummaryViewController *summaryVC;
+@property (strong,nonatomic) UIImpactFeedbackGenerator * impactFeedBack;
 //@property (strong, nonatomic) IBOutlet UIBarButtonItem *menuBtn;
 
 @end
@@ -100,6 +101,8 @@
         make.width.equalTo(@(200));
     }];
     [self.addBtn addTarget:self action:@selector(addNewBill) forControlEvents:UIControlEventTouchUpInside];
+    [self.addBtn addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
+    [self.addBtn addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
     self.checkBtn=[[OBMainButton alloc]initWithType:OBButtonTypeCheck];
     [self.view addSubview:self.checkBtn];
     [self.checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,6 +112,8 @@
         make.width.equalTo(@(200));
     }];
     [self.checkBtn addTarget:self action:@selector(checkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkBtn addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
+    [self.checkBtn addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
     //进入今日账单详情的手势
     UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(enterTodayDetail)];
     [self.todayCardView addGestureRecognizer:tapForToday];
@@ -142,6 +147,22 @@
     };
     self.interactivePushToSummary.vc=self.navigationController;
     [self.interactivePushToSummary setPanGestureRecognizer:panForTransition];
+}
+
+
+#pragma mark - button event
+- (void)makeImpact{
+    if (!self.impactFeedBack) {
+        self.impactFeedBack=[[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];
+    }
+    [self.impactFeedBack prepare];
+    [self.impactFeedBack impactOccurred];
+}
+
+- (void)makeImpactWhenMoveOut:(UIButton *)button{
+    OBMainButton * btn=(OBMainButton *)button.superview;
+    [btn cancelHighlight];
+    [self.impactFeedBack impactOccurred];
 }
 
 -(void)enterTodayDetail{

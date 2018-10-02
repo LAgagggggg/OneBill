@@ -119,4 +119,9 @@
     [self.btn addTarget:tar action:sel forControlEvents:event];
 }
 
+- (void)cancelHighlight{
+    self.btn.highlighted=NO;
+    [self buttonBright];
+}
+
 @end
