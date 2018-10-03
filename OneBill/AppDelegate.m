@@ -10,7 +10,6 @@
 #import  "OBBillManager.h"
 #import "MainViewController.h"
 #import "NewOrEditBillViewController.h"
-#import <KMCGeigerCounter.h>
 
 @interface AppDelegate ()
 
@@ -23,9 +22,6 @@
 //    if (@available(iOS 11, *)) {
 //        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 //    }
-#if !TARGET_IPHONE_SIMULATOR
-    [KMCGeigerCounter sharedGeigerCounter].enabled = YES;
-#endif
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     UINavigationController * navVC=[[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc]init]];
