@@ -16,9 +16,6 @@
 @property (strong,nonatomic)UILabel * timeLabel;
 @property (strong,nonatomic)UILabel * valueLabel;
 @property (strong,nonatomic)UILabel * locLabel;
-//for under iOS11
-@property BOOL frameSetFlag;
-@property CGRect solidFrame;
 @end
 
 @implementation OBDetailCardCell
@@ -113,17 +110,31 @@
 }
 
 - (void)setFrame:(CGRect)frame{
-    if (@available(iOS 11, *)) {//适配iOS11以下的左滑删除
+    
+    if (@available(iOS 11, *)) {
         frame.origin.y += 8;
         frame.size.height -= 8;
         frame.origin.x += 30;
         frame.size.width -= 60;
-    }
-    else{
-        if (!self.frameSetFlag && frame.size.height >=50) {//ugly
+    }//适配iOS11以下的左滑删除
+    else if(!self.frameSolidFlag){//初始时为frame定型
+        if (!self.frameSetFlag && frame.size.height >=50 && self.timeLabel.text!=nil) {//ugly
             self.frameSetFlag=1;
             self.solidFrame=frame;
         }
+        frame.origin.y=self.solidFrame.origin.y+8;
+        frame.size.height=self.solidFrame.size.height-8;
+        frame.origin.x=self.solidFrame.origin.x+30;
+        frame.size.width=self.solidFrame.size.width-60;
+        if (self.frameSetFlag) {
+            self.frameSolidFlag=1;
+        }
+    }
+    else{//其他frame改变时只会横向改变，只需更改x
+        frame.origin.x += 30;
+        frame.size.width=self.solidFrame.size.width-60;
+    }
+    if(self.isEditing){//editing的cell需要重新定型
         frame.origin.y=self.solidFrame.origin.y+8;
         frame.size.height=self.solidFrame.size.height-8;
         frame.origin.x=self.solidFrame.origin.x+30;
@@ -132,26 +143,25 @@
     [super setFrame:frame];
 }
 
-//- (void)addSubview:(UIView *)view{
-//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
-////    if ([view isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")])
-//    if ([view respondsToSelector:@selector(deleteView)]) {
-//        view.backgroundColor=[UIColor clearColor];
-//        view.layer.cornerRadius=10.f;
-//        view.layer.masksToBounds=YES;
-//        UIView * deleteBtn=view.subviews[0];
-//        deleteBtn.layer.cornerRadius=10.f;
-//        deleteBtn.layer.masksToBounds=YES;
-//    }
-//    [super addSubview:view];
-//}
-//
-//- (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview{
-//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
-//}
-//
-//- (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview{
-//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
-//}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    if (@available(iOS 11,*)) {//deleteBtn for the cell under iOS11 will be set here
+    }
+    else{
+        for (UIView *subview in self.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")] )
+            {
+                subview.backgroundColor=[UIColor clearColor];
+                subview.layer.cornerRadius=10.f;
+                subview.layer.masksToBounds=YES;
+                UIView * deleteBtn=subview.subviews[0];
+                deleteBtn.layer.cornerRadius=10.f;
+                deleteBtn.layer.masksToBounds=YES;
+            }
+        }
+    }
+}
 
 @end

@@ -213,11 +213,27 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[OBBillManager sharedInstance] removeBill:self.billsArr[indexPath.row]];
-    [[OBBillManager sharedInstance] updateSumOfDay:self.billsArr[indexPath.row].date];
-    [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
-    [self.billsArr removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[OBBillManager sharedInstance] removeBill:self.billsArr[indexPath.row]];
+        [[OBBillManager sharedInstance] updateSumOfDay:self.billsArr[indexPath.row].date];
+        if(@available(iOS 11,*)){
+        }
+        else{
+            for (int i = (int)indexPath.row; i<self.billsArr.count; i++) {
+                OBDetailCardCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                cell.frameSolidFlag=0;
+                CGRect newFrame=cell.solidFrame;
+                newFrame.origin.y -= 117;
+                cell.solidFrame=newFrame;
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
+            [self.billsArr removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        });
+    });
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

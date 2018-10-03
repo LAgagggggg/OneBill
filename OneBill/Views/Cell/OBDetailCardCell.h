@@ -18,7 +18,13 @@ typedef enum : NSUInteger {
 
 @interface OBDetailCardCell : UITableViewCell
 @property (strong,nonatomic)UIButton * categoryBtn;
+//adapt for under iOS11
+@property BOOL frameSetFlag;
+@property BOOL frameSolidFlag;
+@property CGRect solidFrame;
+
 - (void)setCellWithBill:(OBBill *)bill andStylePreference:(OBTimeLabelPreference)preference;
+
 @end
 
 NS_ASSUME_NONNULL_END

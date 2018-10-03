@@ -159,6 +159,7 @@ static float animationDuration=0.3;
     cell.shouldIndentWhileEditing=NO;
 }
 
+#pragma mark - add&edit category
 - (void)setBottomCell:(CategoryManagerCell *)cell{
     [cell.editBtn setHidden:YES];
     [cell.categoryTextField setHidden:YES];
@@ -177,7 +178,6 @@ static float animationDuration=0.3;
     [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-#pragma mark - add&edit category
 - (void)addBtnClicked:(UIButton *)sender{
     self.isAdding=YES;
     sender.hidden=YES;
@@ -303,7 +303,7 @@ static float animationDuration=0.3;
 
 #pragma mark - drag to sort
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (!self.isMultiDeleting) {
+    if (!self.isMultiDeleting) {//防止拖动最后的添加cell
         return indexPath.row==self.categoryArr.count?NO:YES;
     }
     else{
@@ -312,9 +312,11 @@ static float animationDuration=0.3;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-    [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-    [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-    [[CategoryManager sharedInstance] writeToFile];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+        [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+        [[CategoryManager sharedInstance] writeToFile];
+    });
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{

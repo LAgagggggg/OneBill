@@ -62,7 +62,6 @@ static NSString * const reuseIdentifier = @"Cell";
     edgePan.edges=UIRectEdgeLeft;
     [self.view addGestureRecognizer:edgePan];
     [self.interactivePop setPanGestureRecognizer:edgePan];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated{//在详情中编辑后回到概况应当更新当日数值
