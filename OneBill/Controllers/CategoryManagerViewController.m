@@ -43,7 +43,7 @@ static float animationDuration=0.3;
     [self setUI];
     //添加cell随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];
-    self.isAdding=YES;
+    self.isAdding=NO;
     self.isMultiDeleting=NO;
 }
 
@@ -186,15 +186,12 @@ static float animationDuration=0.3;
 }
 
 -(void)keyboardWillChange:(NSNotification *)notification{
-    if (self.isAdding) {
         NSDictionary *userInfo = [notification userInfo];
         NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
         CGRect keyboardRect = [value CGRectValue];
         UIEdgeInsets inset = self.tableView.contentInset;
-        inset.bottom=[UIScreen mainScreen].bounds.size.height - keyboardRect.origin.y+30;
+        inset.bottom=[UIScreen mainScreen].bounds.size.height - keyboardRect.origin.y+25;
         self.tableView.contentInset=inset;
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.categoryArr.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
 }
 
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
@@ -237,8 +234,8 @@ static float animationDuration=0.3;
     self.isMultiDeleting=YES;
 //    self.tableView.editing=NO;
     self.tapGestureRecognizer.enabled=NO;
+    self.navigationItem.rightBarButtonItem=self.doneBtn;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.navigationItem.rightBarButtonItem=self.doneBtn;
         self.navigationItem.title=@"Multiple Delete";
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
         self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
@@ -261,8 +258,8 @@ static float animationDuration=0.3;
         [[CategoryManager sharedInstance] writeToFile];
         [self.selectedIndexSet removeAllIndexes];
     }
+    self.navigationItem.rightBarButtonItem=self.deleteBtn;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.navigationItem.rightBarButtonItem=self.deleteBtn;
         self.navigationItem.title=@"Categories";
         self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1];
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];

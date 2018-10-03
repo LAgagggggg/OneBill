@@ -56,11 +56,14 @@ static float animationDuration=0.3;
         }];
         self.editBtn=[UIButton buttonWithType:UIButtonTypeSystem];
         [self.editBtn setImage:[UIImage imageNamed:@"categoryEditBtn"] forState:UIControlStateNormal];
+        self.editBtn.imageEdgeInsets=UIEdgeInsetsMake(10, 10, 10, 10);
         self.editBtn.tintColor=textGrayColor;
         [self.contentView addSubview:self.editBtn];
         [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-23);
             make.centerY.equalTo(self.contentView.mas_centerY);
+            make.width.equalTo(@(31));
+            make.height.equalTo(@(32));
         }];
         [self.editBtn addTarget:self action:@selector(editCategory) forControlEvents:UIControlEventTouchUpInside];
 //        UIImage *image= [MyUtil imageWithImage:[UIImage imageNamed:@"MyImage"] scaledToSize:CGSizeMake(80, 80)];
