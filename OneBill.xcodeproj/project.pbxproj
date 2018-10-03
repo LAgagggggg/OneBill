@@ -24,6 +24,7 @@
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
+		0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875F7F3216474CC006DBE13 /* OBDetailTableView.m */; };
 		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
 		089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */; };
 		08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */; };
@@ -107,6 +108,8 @@
 		08524B782112A30500D0D397 /* CategoryManagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerCell.m; sourceTree = "<group>"; };
 		0859FA1A2117EE6D00784EED /* LocationPickerAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerAnnotation.h; sourceTree = "<group>"; };
 		0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerAnnotation.m; sourceTree = "<group>"; };
+		0875F7F2216474CC006DBE13 /* OBDetailTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDetailTableView.h; sourceTree = "<group>"; };
+		0875F7F3216474CC006DBE13 /* OBDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDetailTableView.m; sourceTree = "<group>"; };
 		087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseView.h; sourceTree = "<group>"; };
 		087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseView.m; sourceTree = "<group>"; };
 		089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseViewCell.h; sourceTree = "<group>"; };
@@ -238,6 +241,9 @@
 		082B1FD420FDCFFB0036B5FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0875F7F6216474F2006DBE13 /* Cell */,
+				0875F7F721647506006DBE13 /* Button */,
+				0875F7F5216474D2006DBE13 /* ScrollView */,
 				08E425C52100EF72008F87DB /* BillValueInputView.h */,
 				08E425C62100EF72008F87DB /* BillValueInputView.m */,
 				08E425BD20FF248A008F87DB /* CategoryView.h */,
@@ -246,26 +252,8 @@
 				0809700E2163268700C104CD /* TodaySayingView.m */,
 				082B1FD120FDCFF70036B5FC /* TodayCardView.h */,
 				082B1FD220FDCFF70036B5FC /* TodayCardView.m */,
-				08E425B320FE4E9C008F87DB /* OBMainButton.h */,
-				08E425B420FE4E9C008F87DB /* OBMainButton.m */,
-				08E425C420FFAB04008F87DB /* InoutSwitchButton.h */,
-				08E425C220FFA4C2008F87DB /* InoutSwitchButton.m */,
-				08E425C821023B8E008F87DB /* OBCategoryScrollView.h */,
-				08E425C921023B8E008F87DB /* OBCategoryScrollView.m */,
-				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
-				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
 				08E425D42105F145008F87DB /* OBDaySummaryCardView.h */,
 				08E425D52105F145008F87DB /* OBDaySummaryCardView.m */,
-				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,
-				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
-				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
-				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
-				0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */,
-				0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */,
-				08E425D72106218C008F87DB /* OBDetailCardCell.h */,
-				08E425D82106218C008F87DB /* OBDetailCardCell.m */,
-				08524B772112A30500D0D397 /* CategoryManagerCell.h */,
-				08524B782112A30500D0D397 /* CategoryManagerCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +279,47 @@
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		0875F7F5216474D2006DBE13 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */,
+				087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */,
+				0875F7F2216474CC006DBE13 /* OBDetailTableView.h */,
+				0875F7F3216474CC006DBE13 /* OBDetailTableView.m */,
+				08E425C821023B8E008F87DB /* OBCategoryScrollView.h */,
+				08E425C921023B8E008F87DB /* OBCategoryScrollView.m */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		0875F7F6216474F2006DBE13 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */,
+				089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */,
+				08E425DA21073C3E008F87DB /* OBDaySummaryTableViewCell.h */,
+				08E425DB21073C3E008F87DB /* OBDaySummaryTableViewCell.m */,
+				0833B1E7212C67F4003D8428 /* OBDaySummaryTodayCell.h */,
+				0833B1E8212C67F4003D8428 /* OBDaySummaryTodayCell.m */,
+				08E425D72106218C008F87DB /* OBDetailCardCell.h */,
+				08E425D82106218C008F87DB /* OBDetailCardCell.m */,
+				08524B772112A30500D0D397 /* CategoryManagerCell.h */,
+				08524B782112A30500D0D397 /* CategoryManagerCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0875F7F721647506006DBE13 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				08E425B320FE4E9C008F87DB /* OBMainButton.h */,
+				08E425B420FE4E9C008F87DB /* OBMainButton.m */,
+				08E425C420FFAB04008F87DB /* InoutSwitchButton.h */,
+				08E425C220FFA4C2008F87DB /* InoutSwitchButton.m */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 		08771EEF214514C10058A13E /* Util */ = {
@@ -557,6 +586,7 @@
 				0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */,
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,
 				082B1FBD20FD79BB0036B5FC /* AppDelegate.m in Sources */,
+				0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */,
 				08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */,
 				0833B1E3212B2FF6003D8428 /* TodayCardTransitionAnimationPop.m in Sources */,
 				0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */,

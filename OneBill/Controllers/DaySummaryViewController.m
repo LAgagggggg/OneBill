@@ -87,6 +87,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)setUI{
     self.title=@"Bills";
+    self.automaticallyAdjustsScrollViewInsets=NO;
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;

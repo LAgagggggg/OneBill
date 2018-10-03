@@ -69,6 +69,7 @@
         }];
         //数字
         self.labelNum=[[UILabel alloc]init];
+        self.labelNum.adjustsFontSizeToFitWidth=YES;
         [self.labelNum setTextColor:[UIColor whiteColor]];
         [self.labelNum setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:64]];
         [self.labelNum setTextAlignment:NSTextAlignmentCenter];
@@ -77,6 +78,7 @@
         [self.labelNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
             make.centerY.equalTo(self.labelR.mas_centerY).with.offset(70*screenHeightAdaptRatio);
+            make.width.equalTo(self.mas_width).multipliedBy(0.8);
         }];
     }
     return self;

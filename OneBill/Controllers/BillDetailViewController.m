@@ -9,10 +9,11 @@
 #import <Masonry.h>
 #import "BillDetailViewController.h"
 #import "NewOrEditBillViewController.h"
-#import  "OBDaySummaryCardView.h"
-#import  "OBDetailCardCell.h"
-#import  "OBCategoryChooseView.h"
-#import  "CategoryManager.h"
+#import "OBDaySummaryCardView.h"
+#import "OBDetailCardCell.h"
+#import "OBCategoryChooseView.h"
+#import "CategoryManager.h"
+#import "OBDetailTableView.h"
 
 
 #define CellEdgeInset 8
@@ -59,6 +60,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(void)setUI{
     self.title=@"Bill detail";
+    self.automaticallyAdjustsScrollViewInsets=NO;
     //导航栏搜索按钮
 //    UIBarButtonItem * searchBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
 //    self.navigationItem.rightBarButtonItem=searchBtn;
@@ -79,7 +81,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.top.equalTo(self.view.mas_top).with.offset(93);
         make.height.equalTo(@(58+22));
     }];
-    self.tableView=[[UITableView alloc]init];
+    self.tableView=[[OBDetailTableView alloc]init];
     [self.view addSubview:self.tableView];
     [self.view bringSubviewToFront:self.summaryCardView];
     self.tableView.delegate=self;
@@ -218,22 +220,22 @@ static NSString * const reuseIdentifier = @"Cell";
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    for (UIView *subview in tableView.subviews)
-    {
-        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
-        {
-            subview.backgroundColor=[UIColor clearColor];
-            subview.layer.cornerRadius=10.f;
-            subview.layer.masksToBounds=YES;
-            UIView * deleteBtn=subview.subviews[0];
-            deleteBtn.layer.cornerRadius=10.f;
-            deleteBtn.layer.masksToBounds=YES;
-        }
-    }
-    return YES;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    for (UIView *subview in tableView.subviews)
+//    {
+//        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
+//        {
+//            subview.backgroundColor=[UIColor clearColor];
+//            subview.layer.cornerRadius=10.f;
+//            subview.layer.masksToBounds=YES;
+//            UIView * deleteBtn=subview.subviews[0];
+//            deleteBtn.layer.cornerRadius=10.f;
+//            deleteBtn.layer.masksToBounds=YES;
+//        }
+//    }
+//    return YES;
+//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -17,6 +17,11 @@
 #import  "OBBillManager.h"
 #import  "CategoryManager.h"
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 110000
+#define OBMas_top self.topLayoutGuide
+#else
+#define OBMas_top self.view.mas_top
+#endif
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 
@@ -69,6 +74,7 @@
 - (void)setUI{
     double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
     //设置导航栏返回按钮
+    self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=@"Add New Bill";
     UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
     self.navigationItem.leftBarButtonItem=returnBarBtn;

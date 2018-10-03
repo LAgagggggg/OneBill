@@ -16,6 +16,9 @@
 @property (strong,nonatomic)UILabel * timeLabel;
 @property (strong,nonatomic)UILabel * valueLabel;
 @property (strong,nonatomic)UILabel * locLabel;
+//for under iOS11
+@property BOOL frameSetFlag;
+@property CGRect solidFrame;
 @end
 
 @implementation OBDetailCardCell
@@ -61,13 +64,15 @@
         self.categoryBtn.tintColor=DarkBlueColor;
 //        self.categoryBtn.titleEdgeInsets=UIEdgeInsetsMake(0, 13, 0, 13);
         self.categoryBtn.titleLabel.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
+        self.categoryBtn.titleLabel.adjustsFontSizeToFitWidth=YES;
         self.categoryBtn.layer.cornerRadius=10.f;
         self.categoryBtn.layer.borderWidth=1;
         self.categoryBtn.layer.borderColor=DarkBlueColor.CGColor;
         [self.contentView addSubview:self.categoryBtn];
         [self.categoryBtn.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.categoryBtn.mas_left).with.offset(13);
-            make.right.equalTo(self.categoryBtn.mas_right).with.offset(-13);
+            make.left.equalTo(self.categoryBtn.mas_left).with.offset(8);
+            make.right.equalTo(self.categoryBtn.mas_right).with.offset(-8);
+            make.centerY.equalTo(self.categoryBtn.mas_centerY);
         }];
         [self.categoryBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-17);
@@ -108,10 +113,22 @@
 }
 
 - (void)setFrame:(CGRect)frame{
-    frame.origin.y += 8;
-    frame.size.height -= 8;
-    frame.origin.x += 30;
-    frame.size.width -= 60;
+    if (@available(iOS 11, *)) {//适配iOS11以下的左滑删除
+        frame.origin.y += 8;
+        frame.size.height -= 8;
+        frame.origin.x += 30;
+        frame.size.width -= 60;
+    }
+    else{
+        if (!self.frameSetFlag && frame.size.height >=50) {//ugly
+            self.frameSetFlag=1;
+            self.solidFrame=frame;
+        }
+        frame.origin.y=self.solidFrame.origin.y+8;
+        frame.size.height=self.solidFrame.size.height-8;
+        frame.origin.x=self.solidFrame.origin.x+30;
+        frame.size.width=self.solidFrame.size.width-60;
+    }
     [super setFrame:frame];
 }
 
