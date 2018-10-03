@@ -46,6 +46,7 @@
         }];
         self.moneyLabel=[[UILabel alloc]init];
         [self.moneyLabel setTextAlignment:NSTextAlignmentRight];
+        self.moneyLabel.adjustsFontSizeToFitWidth=YES;
         [self.moneyLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:36]];
         [self.moneyLabel setTextColor:[UIColor whiteColor]];
         [self addSubview:self.moneyLabel];

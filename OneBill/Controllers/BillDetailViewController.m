@@ -21,7 +21,7 @@
 @interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
-@property (strong,nonatomic)UITableView * tableView;
+@property (strong,nonatomic)OBDetailTableView * tableView;
 @property (strong,nonatomic)OBCategoryChooseView * categoryChooseView;
 @property (strong,nonatomic)OBBill * editingBill;
 @property (strong,nonatomic)NSString * editingBillOldCategory;
@@ -220,22 +220,24 @@ static NSString * const reuseIdentifier = @"Cell";
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    for (UIView *subview in tableView.subviews)
-//    {
-//        if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
-//        {
-//            subview.backgroundColor=[UIColor clearColor];
-//            subview.layer.cornerRadius=10.f;
-//            subview.layer.masksToBounds=YES;
-//            UIView * deleteBtn=subview.subviews[0];
-//            deleteBtn.layer.cornerRadius=10.f;
-//            deleteBtn.layer.masksToBounds=YES;
-//        }
-//    }
-//    return YES;
-//}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (@available(iOS 11,*)) {//only set deleteBtn for above iOS11 here, under iOS11 will be set in cell
+        for (UIView *subview in tableView.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
+            {
+                subview.backgroundColor=[UIColor clearColor];
+                subview.layer.cornerRadius=10.f;
+                subview.layer.masksToBounds=YES;
+                UIView * deleteBtn=subview.subviews[0];
+                deleteBtn.layer.cornerRadius=10.f;
+                deleteBtn.layer.masksToBounds=YES;
+            }
+        }
+    }
+    return YES;
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {

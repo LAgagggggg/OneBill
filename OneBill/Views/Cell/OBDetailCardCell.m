@@ -132,4 +132,26 @@
     [super setFrame:frame];
 }
 
+//- (void)addSubview:(UIView *)view{
+//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
+////    if ([view isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")])
+//    if ([view respondsToSelector:@selector(deleteView)]) {
+//        view.backgroundColor=[UIColor clearColor];
+//        view.layer.cornerRadius=10.f;
+//        view.layer.masksToBounds=YES;
+//        UIView * deleteBtn=view.subviews[0];
+//        deleteBtn.layer.cornerRadius=10.f;
+//        deleteBtn.layer.masksToBounds=YES;
+//    }
+//    [super addSubview:view];
+//}
+//
+//- (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview{
+//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
+//}
+//
+//- (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview{
+//    NSLog(@"---%@---%@",NSStringFromClass([view class]),view.backgroundColor);
+//}
+
 @end
