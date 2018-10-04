@@ -38,7 +38,7 @@ static float animationDuration=0.3;
         self.contentView.backgroundColor=[UIColor whiteColor];
         self.contentView.layer.cornerRadius=10.f;
         self.contentView.layer.shadowColor=[UIColor whiteColor].CGColor;
-        self.contentView.layer.shadowOffset = CGSizeMake(0,3);
+        self.contentView.layer.shadowOffset = CGSizeMake(3,3);
         self.contentView.layer.shadowOpacity = 0.3;
         self.contentView.layer.shadowRadius = 12;
         //文字
@@ -103,6 +103,12 @@ static float animationDuration=0.3;
 
     }
     return self;
+}
+
+- (void)layoutSubviews{//shadowPath
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds cornerRadius:10.f];
+    [self.contentView.layer setShadowPath:shadowPath.CGPath];
 }
 
 - (void)setWithCategory:(NSString *)category{

@@ -61,6 +61,12 @@
     self.sumLabel.text=[NSString stringWithFormat:@"%+.2lf",summary.sum];
 }
 
+- (void)layoutSubviews{//shadowPath
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10.f];
+    [self.layer setShadowPath:shadowPath.CGPath];
+}
+
 - (void)setFrame:(CGRect)frame{
     frame.origin.y += 12;
     frame.size.height -= 12;

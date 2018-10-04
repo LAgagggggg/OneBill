@@ -61,6 +61,12 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10.f];
+    [self.layer setShadowPath:shadowPath.CGPath];
+}
+
 - (void)highlight{
     self.backgroundColor=DarkBlueColor;
     [self.label setTextColor:[UIColor whiteColor]];

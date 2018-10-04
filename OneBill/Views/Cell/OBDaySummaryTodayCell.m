@@ -74,6 +74,12 @@
     }];
 }
 
+- (void)layoutSubviews{//shadowPath
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10.f];
+    [self.layer setShadowPath:shadowPath.CGPath];
+}
+
 - (void)setFrame:(CGRect)frame{
     frame.origin.x += CellEdgeInset;
     frame.size.width -= 2*CellEdgeInset;
