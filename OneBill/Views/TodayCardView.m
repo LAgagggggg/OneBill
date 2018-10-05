@@ -15,7 +15,8 @@
 
 @interface TodayCardView()
 
-@property (strong,nonatomic)UIView * mainCardView;
+@property (strong,nonatomic)CALayer * secondCardLayer;
+@property (strong,nonatomic)CALayer * thirdCardLayer;
 @property (strong,nonatomic)UILabel * labelL;
 @property (strong,nonatomic)UILabel * labelR;
 @end
@@ -28,26 +29,20 @@
     if (self) {
         //三层结构
         double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
-        self.backgroundColor=LightCyanColor;
+        self.backgroundColor=MuchLightCyanColor;
         self.layer.cornerRadius=10.f;
-        self.layer.shadowColor=MuchLightCyanColor.CGColor;
-        self.layer.shadowOffset = CGSizeMake(0, -15);
-        self.layer.shadowOpacity = 1;
-        self.layer.shadowRadius = 0;
-        self.mainCardView=[[UIView alloc]init];
-        self.mainCardView.backgroundColor=DarkCyanColor;
-        self.mainCardView.layer.cornerRadius=10.f;
-        self.mainCardView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
-        self.mainCardView.layer.shadowOffset=CGSizeMake(0, 6);
-        self.mainCardView.layer.shadowOpacity=0.3;
-        self.mainCardView.layer.shadowRadius=12;
-        [self addSubview:self.mainCardView];
-        [self.mainCardView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left);
-            make.right.equalTo(self.mas_right);
-            make.top.equalTo(self.mas_top).with.offset(20);
-            make.bottom.equalTo(self.mas_bottom);
-        }];
+        self.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 6);
+        self.layer.shadowOpacity = 0.3;
+        self.layer.shadowRadius = 6;
+        self.secondCardLayer=[[CALayer alloc]init];
+        self.secondCardLayer.backgroundColor=LightCyanColor.CGColor;
+        self.secondCardLayer.cornerRadius=10.f;
+        [self.layer addSublayer:self.secondCardLayer];
+        self.thirdCardLayer=[[CALayer alloc]init];
+        self.thirdCardLayer.backgroundColor=DarkCyanColor.CGColor;
+        self.thirdCardLayer.cornerRadius=10.f;
+        [self.layer addSublayer:self.thirdCardLayer];
         //文字
         self.labelL=[[UILabel alloc]init];
         self.labelR=[[UILabel alloc]init];
@@ -88,11 +83,18 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+    double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
+    CGRect frame=self.bounds;
+    frame.origin.y+=14*screenHeightAdaptRatio;
+    frame.size.height-=14*screenHeightAdaptRatio;
+    self.secondCardLayer.frame=frame;
+    frame.origin.y+=22*screenHeightAdaptRatio;
+    frame.size.height-=22*screenHeightAdaptRatio;
+    self.thirdCardLayer.frame=frame;
     //prevent off-screen render
     UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.layer.bounds cornerRadius:10];
     self.layer.shadowPath=shadowPath.CGPath;
-    UIBezierPath * cardShadowPath=[UIBezierPath bezierPathWithRoundedRect:self.mainCardView.layer.bounds cornerRadius:10];
-    self.mainCardView.layer.shadowPath=cardShadowPath.CGPath;
+    
 }
 
 @end

@@ -36,20 +36,17 @@ static float animationDuration=0.6;
     [containView addSubview:toVC.view];
     containView.backgroundColor=[UIColor whiteColor];
     //原控制器卡片以及覆盖其上的按钮
-    UIImage * fromImg=fromVC.animationImg;
+    UIImage *fromImg = fromVC.animationImg;
     CGRect frame=fromVC.todayCardView.frame;
-    frame.origin.y-=15;
-    frame.size.height+=15;
     UIView * imgWrapperView=[[UIView alloc]initWithFrame:frame];
-    imgWrapperView.backgroundColor=MuchLightCyanColor;
+    imgWrapperView.layer.contents=(__bridge id)(fromImg.CGImage);
+    imgWrapperView.layer.contentsScale=[UIScreen mainScreen].scale;
     imgWrapperView.layer.cornerRadius=10.f;
     imgWrapperView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
     imgWrapperView.layer.shadowOffset=CGSizeMake(0, 6);
     imgWrapperView.layer.shadowOpacity=0.3;
-    imgWrapperView.layer.shadowRadius=12;
-    UIView * fromImgView=[[UIView alloc]initWithFrame:CGRectMake(0, 15, frame.size.width, frame.size.height-15)];
-    fromImgView.layer.contents=(__bridge id)(fromImg.CGImage);
-    [imgWrapperView addSubview:fromImgView];
+    imgWrapperView.layer.shadowRadius=6;
+    //    imgWrapperView.layer.shadowPath=[UIBezierPath bezierPathWithRoundedRect:imgWrapperView.bounds cornerRadius:10.f].CGPath;
     [containView addSubview:imgWrapperView];
     //button
     UIView * addBtnImgView=[fromVC.addBtn snapshotViewAfterScreenUpdates:NO];

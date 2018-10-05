@@ -19,6 +19,7 @@
     fromViewShadowView.layer.shadowOpacity=fromView.layer.shadowOpacity;
     fromViewShadowView.layer.shadowRadius=fromView.layer.shadowRadius;
     fromViewShadowView.backgroundColor=color?color:[UIColor whiteColor];
+//    fromViewShadowView.layer.shadowPath=[UIBezierPath bezierPathWithRoundedRect:fromViewShadowView.layer.bounds cornerRadius:10].CGPath;
     [fromView.superview insertSubview:fromViewShadowView belowSubview:fromView];
     //准备动画
     fromView.alpha=1;

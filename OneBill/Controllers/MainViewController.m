@@ -88,7 +88,7 @@
     [self.todayCardView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(30);
         make.right.equalTo(self.view.mas_right).with.offset(-30);
-        make.top.equalTo(self.sayingView.mas_top).with.offset(122*screenHeightAdaptRatio);
+        make.top.equalTo(self.sayingView.mas_top).with.offset(108*screenHeightAdaptRatio);
         make.height.equalTo(@(229*screenHeightAdaptRatio));
     }];
     //按钮
