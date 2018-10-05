@@ -117,6 +117,14 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    UIBezierPath * inViewShadowPath=[UIBezierPath bezierPathWithRoundedRect:self.inView.bounds cornerRadius:10.f];
+    self.inView.layer.shadowPath=inViewShadowPath.CGPath;
+    UIBezierPath * outViewShadowPath=[UIBezierPath bezierPathWithRoundedRect:self.outView.bounds cornerRadius:10.f];
+    self.outView.layer.shadowPath=outViewShadowPath.CGPath;
+}
+
 - (void)chooseIn{
     self.isOut=NO;
     [UIView animateWithDuration:0.3 animations:^{

@@ -76,8 +76,9 @@
 
 - (void)layoutSubviews{//shadowPath
     [super layoutSubviews];
-    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10.f];
-    [self.layer setShadowPath:shadowPath.CGPath];
+    [self.contentView layoutIfNeeded];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.todayView.bounds cornerRadius:10.f];
+    [self.todayView.layer setShadowPath:shadowPath.CGPath];
 }
 
 - (void)setFrame:(CGRect)frame{

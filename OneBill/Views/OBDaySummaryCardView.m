@@ -58,6 +58,12 @@
     return self;
 }
 
+- (void)layoutSubviews{//shadowPath
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.layer.bounds cornerRadius:10.f];
+    [self.layer setShadowPath:shadowPath.CGPath];
+}
+
 - (void)setDate:(NSDate *)date Money:(double)value{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"MM/dd";

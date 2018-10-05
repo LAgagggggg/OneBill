@@ -107,6 +107,13 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    //shadowPath
+    [super layoutSubviews];
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10.f];
+    [self.layer setShadowPath:shadowPath.CGPath];
+}
+
 - (void)buttonDim{
     self.alpha=0.7;
 }

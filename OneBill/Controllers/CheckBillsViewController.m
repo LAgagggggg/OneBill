@@ -74,6 +74,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.topView.layer.shadowOffset = CGSizeMake(0, 3);
     self.topView.layer.shadowOpacity = 0.1;
     self.topView.layer.shadowRadius = 12;
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.topView.bounds cornerRadius:10.f];
+    self.topView.layer.shadowPath=shadowPath.CGPath;
     [self setCategoryView];
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];

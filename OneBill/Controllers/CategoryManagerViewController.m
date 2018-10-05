@@ -87,6 +87,8 @@ static float animationDuration=0.3;
     self.shadowView.layer.shadowOffset = CGSizeMake(0, 3);
     self.shadowView.layer.shadowOpacity = 0.1;
     self.shadowView.layer.shadowRadius = 12;
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.shadowView.bounds cornerRadius:10.f];
+    self.shadowView.layer.shadowPath=shadowPath.CGPath;
     //set tableView
     self.tableView=[[UITableView alloc]init];
     [self.view addSubview:self.tableView];

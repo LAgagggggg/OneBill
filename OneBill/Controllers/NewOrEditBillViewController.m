@@ -118,14 +118,16 @@
     }];
     self.confirmBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.confirmBtn setImage:[UIImage imageNamed:@"confirmBtn"] forState:UIControlStateNormal];
+    [self.confirmBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
     self.confirmBtn.backgroundColor=[UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1];
     self.confirmBtn.layer.cornerRadius=10.f;
     self.confirmBtn.layer.shadowColor=[UIColor grayColor].CGColor;
     self.confirmBtn.layer.shadowOffset=CGSizeMake(0, 5);
     self.confirmBtn.layer.shadowOpacity=0.1;
     self.confirmBtn.layer.shadowRadius=3;
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.confirmBtn.bounds cornerRadius:10.f];
+    self.confirmBtn.layer.shadowPath=shadowPath.CGPath;
     [self.view addSubview:self.confirmBtn];
-    [self.confirmBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
     [self.confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     //地理位置
     UIView * locationView=[[UIView alloc]init];

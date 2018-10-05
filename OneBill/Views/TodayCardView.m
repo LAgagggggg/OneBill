@@ -14,6 +14,8 @@
 #define MuchLightCyanColor [UIColor colorWithRed:241/255.0 green:251/255.0 blue:251/255.0 alpha:1]
 
 @interface TodayCardView()
+
+@property (strong,nonatomic)UIView * mainCardView;
 @property (strong,nonatomic)UILabel * labelL;
 @property (strong,nonatomic)UILabel * labelR;
 @end
@@ -32,15 +34,15 @@
         self.layer.shadowOffset = CGSizeMake(0, -15);
         self.layer.shadowOpacity = 1;
         self.layer.shadowRadius = 0;
-        UIView * mainCardView=[[UIView alloc]init];
-        mainCardView.backgroundColor=DarkCyanColor;
-        mainCardView.layer.cornerRadius=10.f;
-        mainCardView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
-        mainCardView.layer.shadowOffset=CGSizeMake(0, 6);
-        mainCardView.layer.shadowOpacity=0.3;
-        mainCardView.layer.shadowRadius=12;
-        [self addSubview:mainCardView];
-        [mainCardView mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.mainCardView=[[UIView alloc]init];
+        self.mainCardView.backgroundColor=DarkCyanColor;
+        self.mainCardView.layer.cornerRadius=10.f;
+        self.mainCardView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;
+        self.mainCardView.layer.shadowOffset=CGSizeMake(0, 6);
+        self.mainCardView.layer.shadowOpacity=0.3;
+        self.mainCardView.layer.shadowRadius=12;
+        [self addSubview:self.mainCardView];
+        [self.mainCardView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
             make.top.equalTo(self.mas_top).with.offset(20);
@@ -82,6 +84,15 @@
         }];
     }
     return self;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    //prevent off-screen render
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.layer.bounds cornerRadius:10];
+    self.layer.shadowPath=shadowPath.CGPath;
+    UIBezierPath * cardShadowPath=[UIBezierPath bezierPathWithRoundedRect:self.mainCardView.layer.bounds cornerRadius:10];
+    self.mainCardView.layer.shadowPath=cardShadowPath.CGPath;
 }
 
 @end

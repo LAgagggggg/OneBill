@@ -146,6 +146,10 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+    //prevent off-screen render
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:10];
+    self.layer.shadowPath=shadowPath.CGPath;
+    
     if (@available(iOS 11,*)) {//deleteBtn for the cell under iOS11 will be set here
     }
     else{
