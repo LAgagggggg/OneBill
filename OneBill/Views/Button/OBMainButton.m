@@ -33,6 +33,7 @@
             self.backgroundColor=[UIColor whiteColor];
             //左侧icon
             self.icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_add_b"]];
+            self.icon.contentMode=UIViewContentModeCenter;
             [self addSubview:self.icon];
             [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(@(22));
@@ -64,6 +65,7 @@
             self.backgroundColor=DarkBlueColor;
             //左侧icon
             self.icon=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_ok_w"]];
+            self.icon.contentMode=UIViewContentModeScaleAspectFit;
             [self addSubview:self.icon];
             [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(@(22));

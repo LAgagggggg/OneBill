@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UITableViewCell * selectedCell;
 @property (nonatomic,strong) OBDaySummaryTodayCell * todayCell;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePop;
+@property NSInteger fetchEachTime;
 
 @end
 

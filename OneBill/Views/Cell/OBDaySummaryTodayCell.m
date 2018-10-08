@@ -26,6 +26,8 @@
     self.todayView.layer.shadowOffset = CGSizeMake(0, 6);
     self.todayView.layer.shadowOpacity = 0.3;
     self.todayView.layer.shadowRadius = 8;
+    self.todayView.layer.shouldRasterize=YES;
+    self.todayView.layer.rasterizationScale=[UIScreen mainScreen].scale;
     [self.contentView addSubview:self.todayView];
     [self.todayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left);

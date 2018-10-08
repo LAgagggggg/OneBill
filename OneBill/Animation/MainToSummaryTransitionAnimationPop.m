@@ -40,7 +40,11 @@ static float animationDuration=0.6;
     UIGraphicsEndImageContext();
     UIImageView * fromImgView=[[UIImageView alloc]initWithImage:fromImg];
     //计算cell相对屏幕的frame
+//    [fromVC.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[fromVC.tableView numberOfRowsInSection:0]-1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     CGRect cellFrame=CGRectMake(fromVC.tableView.frame.origin.x+fromVC.todayCell.frame.origin.x, fromVC.todayCell.frame.origin.y-fromVC.tableView.contentOffset.y+fromVC.tableView.frame.origin.y+fromVC.todayCell.todayView.frame.origin.y, fromVC.todayCell.todayView.frame.size.width, fromVC.todayCell.todayView.frame.size.height);
+    if (fromVC.tableView.contentSize.height-[UIScreen mainScreen].bounds.size.height-100>fromVC.tableView.contentOffset.y ) {//刷新之后todayCell的frame没有更新fix
+        cellFrame.origin.y=[UIScreen mainScreen].bounds.size.height+100;
+    }
     fromImgView.frame=cellFrame;
     fromImgView.layer.cornerRadius=10.f;
     fromImgView.layer.shadowColor=[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1].CGColor;

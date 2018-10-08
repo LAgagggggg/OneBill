@@ -41,6 +41,8 @@ static float animationDuration=0.3;
         self.contentView.layer.shadowOffset = CGSizeMake(3,3);
         self.contentView.layer.shadowOpacity = 0.3;
         self.contentView.layer.shadowRadius = 12;
+        self.contentView.layer.shouldRasterize=YES;
+        self.contentView.layer.rasterizationScale=[UIScreen mainScreen].scale;
         //文字
         self.categoryTextField=[[UITextField alloc]init];
         self.categoryTextField.autocorrectionType=UITextAutocorrectionTypeNo;

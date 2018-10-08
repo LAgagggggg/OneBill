@@ -32,6 +32,8 @@
         self.layer.shadowOffset = CGSizeMake(5, 5);
         self.layer.shadowOpacity = 0.1;
         self.layer.shadowRadius = 3;
+        self.layer.shouldRasterize=YES;
+        self.layer.rasterizationScale=[UIScreen mainScreen].scale;
         self.timeLabel=[[UILabel alloc]init];
         [self.contentView addSubview:self.timeLabel];
         [self.timeLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];

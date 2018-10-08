@@ -228,12 +228,12 @@
 				082B1FC620FD79BE0036B5FC /* LaunchScreen.storyboard */,
 				082B1FC920FD79BE0036B5FC /* Info.plist */,
 				082B1FCA20FD79BE0036B5FC /* main.m */,
+				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
 				08771EEF214514C10058A13E /* Util */,
 				08E425BC20FF1BFD008F87DB /* Models */,
 				082B1FD420FDCFFB0036B5FC /* Views */,
 				0833B1DD21290EF2003D8428 /* Animation */,
 				0889CB0E214510B90069BEBA /* Controllers */,
-				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
 			);
 			path = OneBill;
 			sourceTree = "<group>";

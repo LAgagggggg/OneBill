@@ -17,7 +17,6 @@
 #define commonCellHeight 148
 #define todayCellHeight 180
 #define CellEdgeInset 8
-#define FetchEachTime 20
 #define TableViewRefreshInset 60
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
@@ -39,15 +38,16 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.fetchEachTime=20;
     self.fetchIndex=0;
     self.didEnterIndex=-1;
     self.isInserting=YES;
     [[OBBillManager sharedInstance]updateSumOfDay:[NSDate date]];
     self.summaryArr=[[NSMutableArray alloc]init];
-    NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:FetchEachTime]];
+    NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:self.fetchEachTime]];
     [self.summaryArr addObjectsFromArray:tempArr];
     self.fetchIndex+=tempArr.count;
-    self.fetchStopFlag= tempArr.count==FetchEachTime? NO:YES;
+    self.fetchStopFlag= tempArr.count==self.fetchEachTime? NO:YES;
     [self setUI];
     if (self.summaryArr.count) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.summaryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
@@ -176,6 +176,10 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - refresh&fetch more
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"---%lf---",scrollView.contentOffset.y);
+//    NSLog(@"---%lf---",[self.tableView convertRect:self.todayCell.frame toView:self.view].origin.y);
+//    NSLog(@"!!!%@!!!",NSStringFromCGRect(self.todayCell.frame));
+//    NSLog(@"!!!%lf-%lf",self.todayCell.frame.origin.y,[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathWithIndex:[self.tableView numberOfRowsInSection:0]]].origin.y);
     if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
         if (!self.reloadIndicator.animating) [self.impactFeedback impactOccurred];
         [self.reloadIndicator startAnimating];
@@ -203,18 +207,20 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 -(void)insertCellAndBackToRightPosition{
-    NSArray * tempArr=[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:FetchEachTime];
-    NSInteger count=tempArr.count;
-    [self.summaryArr insertObjects:tempArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,count)]];
-    self.fetchIndex+=count;
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    self.fetchStopFlag=NO;
-    if (count!=FetchEachTime) {//说明没有更多条目了
-        self.fetchStopFlag=YES;
-        self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
+    if (self.reloadIndicator.animating) {//防止多次调用
+        NSArray * tempArr=[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:self.fetchEachTime];
+        NSInteger count=tempArr.count;
+        [self.summaryArr insertObjects:tempArr atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,count)]];
+        self.fetchIndex+=count;
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        self.fetchStopFlag=NO;
+        if (count!=self.fetchEachTime) {//说明没有更多条目了
+            self.fetchStopFlag=YES;
+            self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
+        }
+        //    [self.refreshControl endRefreshing];
     }
-//    [self.refreshControl endRefreshing];
 }
 
 - (void)returnBtnClicked{
