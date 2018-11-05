@@ -54,6 +54,16 @@ static NSString * const reuseIdentifier = @"Cell";
 //    }
 }
 
+-(void)viewWillAppear:(BOOL)animated{//更新今日花销
+    [super viewWillAppear:animated];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        double sumOfDay=[[OBBillManager sharedInstance]sumOfDay:self.date];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.summaryCardView setDate:self.date Money:sumOfDay];
+        });
+    });
+}
+
 -(void)dealloc{
     [self removeObserver:self forKeyPath:@"categoryChooseView.selectedCategory"];
 }
@@ -259,6 +269,8 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     return @"Delete";
 }
+
+#pragma mark - event response
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];
