@@ -67,7 +67,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //顶部选择category
-    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,157)];
+    self.topView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,OB_TopHeight+10+88)];
     [self.view addSubview:self.topView];
     self.topView.backgroundColor=self.view.backgroundColor;
     self.topView.layer.shadowColor=[UIColor grayColor].CGColor;
@@ -98,7 +98,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.view addGestureRecognizer:self.textFieldResignTap];
 }
 
-- (void)setCategoryView{
+- (void)setCategoryView{//in order to refresh the category scrollView after categories being edited
     if (self.categoryScrollView) {
         [UIView animateWithDuration:0.3 animations:^{
             self.categoryScrollView.alpha=0;
@@ -108,7 +108,7 @@ static NSString * const reuseIdentifier = @"Cell";
             self.categoryScrollView.alwaysShowSum=YES;
             [self.topView addSubview:self.categoryScrollView];
             [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.view.mas_top).with.offset(74);
+                make.top.equalTo(self.view.mas_top).with.offset(OB_TopHeight+10);
                 make.left.equalTo(self.view.mas_left);
                 make.right.equalTo(self.view.mas_right);
                 make.height.equalTo(@(88));
@@ -123,7 +123,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.categoryScrollView.alwaysShowSum=YES;
         [self.topView addSubview:self.categoryScrollView];
         [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_top).with.offset(74);
+            make.top.equalTo(self.view.mas_top).with.offset(OB_TopHeight+10);
             make.left.equalTo(self.view.mas_left);
             make.right.equalTo(self.view.mas_right);
             make.height.equalTo(@(88));
@@ -140,6 +140,8 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     return self;
 }
+
+#pragma mark UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OBDetailCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -193,6 +195,8 @@ static NSString * const reuseIdentifier = @"Cell";
 //    }
 //    return YES;
 //}
+
+#pragma mark - event response
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];

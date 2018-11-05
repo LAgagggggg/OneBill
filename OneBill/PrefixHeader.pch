@@ -1,0 +1,41 @@
+//
+//  PrefixHeader.pch
+//  OneBill
+//
+//  Created by LAgagggggg on 2018/11/5.
+//  Copyright © 2018 ookkee. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//import
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Masonry.h>
+#import <MBProgressHUD.h>
+
+#ifdef DEBUG
+#define DebugLog(s, ...) NSLog(s, ##__VA_ARGS__)
+#else
+#define DebugLog(s, ...)
+#endif
+
+//导航栏状态栏
+#define OB_StatusBarHeight (OB_ISiPhoneX ? [[UIApplication sharedApplication] statusBarFrame].size.height : 20) //状态栏高度
+#define OB_NavBarHeight 44.0
+#define OB_TabBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height //底部tabbar高度
+#define OB_TopHeight (OB_StatusBarHeight + OB_NavBarHeight) //整个导航栏高度
+#define OB_ISiPhoneX (@available(iOS 11.0, *) ? [[[UIApplication sharedApplication] delegate] window].safeAreaInsets.bottom > 0.0 : NO)
+
+//字体
+
+
+//颜色
+#define OB_BlackWithFakeAlpha(arg) [UIColor colorWithRed:(1-arg)*255/255.0 green:(1-arg)*255/255.0 blue:(1-arg)*255/255.0 alpha:1]
+#define OB_BlackWithActualAlpha(arg) [UIColor colorWithRed:0 green:0 blue:0 alpha:arg]
+#define OB_GoldColor [UIColor colorWithRed:187/255.0 green:157/255.0 blue:95/255.0 alpha:1]
+#define OB_BackViewColor [UIColor colorWithRed:243/255.0 green:242/255.0 blue:240/255.0 alpha:1]
+
+
+#endif /* PrefixHeader_pch */
