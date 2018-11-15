@@ -15,10 +15,10 @@
 
 @interface TodayCardView()
 
-@property (strong,nonatomic)CALayer * secondCardLayer;
-@property (strong,nonatomic)CALayer * thirdCardLayer;
-@property (strong,nonatomic)UILabel * labelL;
-@property (strong,nonatomic)UILabel * labelR;
+@property (nonatomic, strong) CALayer * secondCardLayer;
+@property (nonatomic, strong) CALayer * thirdCardLayer;
+@property (nonatomic, strong) UILabel * labelL;
+@property (nonatomic, strong) UILabel * labelR;
 @end
 
 @implementation TodayCardView

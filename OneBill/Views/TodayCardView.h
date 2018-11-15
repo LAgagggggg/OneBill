@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TodayCardView : UIView
-@property (strong,nonatomic)UILabel * labelNum;
+@property (nonatomic, strong) UILabel * labelNum;
 @end
 
 NS_ASSUME_NONNULL_END

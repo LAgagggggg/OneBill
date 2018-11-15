@@ -25,24 +25,24 @@
 
 @interface NewOrEditBillViewController () <UITextFieldDelegate,CLLocationManagerDelegate,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic)OBCategoryScrollView *categoryScrollView;
-@property (strong,nonatomic)BillValueInputView *inputView;
-@property (strong,nonatomic)CategoryManager *categoryManager;
-@property (strong,nonatomic)InoutSwitchButton * inoutSwitchBtn;
-@property (strong,nonatomic)UIButton * confirmBtn;
-@property (strong,nonatomic)UILabel * locationLabel;
-@property (strong,nonatomic)UITextField * dateLabel;
-@property (strong,nonatomic)UIView * predictView;
-@property (strong,nonatomic)CLLocationManager * locationManager;
-@property (strong,nonatomic)CLGeocoder * geoCoder;
-@property (strong,nonatomic)CLLocation * location;
-@property (strong,nonatomic)NSDate * date;
-@property (strong,nonatomic)NSMutableString * locDescription;
-@property (strong,nonatomic)NSString * revokeCategory;
+@property (nonatomic, strong) OBCategoryScrollView *categoryScrollView;
+@property (nonatomic, strong) BillValueInputView *inputView;
+@property (nonatomic, strong) CategoryManager *categoryManager;
+@property (nonatomic, strong) InoutSwitchButton * inoutSwitchBtn;
+@property (nonatomic, strong) UIButton * confirmBtn;
+@property (nonatomic, strong) UILabel * locationLabel;
+@property (nonatomic, strong) UITextField * dateLabel;
+@property (nonatomic, strong) UIView * predictView;
+@property (nonatomic, strong) CLLocationManager * locationManager;
+@property (nonatomic, strong) CLGeocoder * geoCoder;
+@property (nonatomic, strong) CLLocation * location;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSMutableString * locDescription;
+@property (nonatomic, strong) NSString * revokeCategory;
 @property double revokeValue;
 //about edit mode
 @property BOOL editMode;
-@property (strong,nonatomic)OBBill * editModeOldBill;
+@property (nonatomic, strong) OBBill * editModeOldBill;
 
 @end
 

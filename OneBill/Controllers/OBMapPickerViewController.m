@@ -11,8 +11,8 @@
 
 @interface OBMapPickerViewController ()<MKMapViewDelegate>
 
-@property (strong,nonatomic)MKMapView *mapView;
-@property (strong,nonatomic)MKPointAnnotation *annotation;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) MKPointAnnotation *annotation;
 
 @end
 

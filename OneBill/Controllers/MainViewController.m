@@ -33,7 +33,7 @@
 @property (nonatomic, strong) OBInteractiveTransition *interactivePushToSummary;
 @property (nonatomic, strong) BillDetailViewController *todayDetailVC;
 @property (nonatomic, strong) DaySummaryViewController *summaryVC;
-@property (strong,nonatomic) UIImpactFeedbackGenerator * impactFeedBack;
+@property (nonatomic, strong)  UIImpactFeedbackGenerator * impactFeedBack;
 //@property (strong, nonatomic) IBOutlet UIBarButtonItem *menuBtn;
 
 @end
@@ -150,7 +150,7 @@
 }
 
 
-#pragma mark - button event
+#pragma mark - event response
 - (void)makeImpact{
     if (!self.impactFeedBack) {
         self.impactFeedBack=[[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];

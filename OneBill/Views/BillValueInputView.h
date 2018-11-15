@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BillValueInputView : UIView
-@property (strong,nonatomic)UITextField * textField;
-@property (strong,nonatomic)NSString * text;
+@property (nonatomic, strong) UITextField * textField;
+@property (nonatomic, strong) NSString * text;
 @property(nullable, nonatomic,weak)   id<UITextFieldDelegate> delegate;
 @property BOOL isEdited;
 @property BOOL isDecimalEdited;

@@ -11,7 +11,7 @@
 
 @interface OneBillTests : XCTestCase
 
-@property (strong,nonatomic) OBBillManager * billManager;
+@property (nonatomic, strong)  OBBillManager * billManager;
 
 @end
 

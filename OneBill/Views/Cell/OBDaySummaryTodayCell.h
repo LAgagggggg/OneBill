@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBDaySummaryTodayCell : UITableViewCell
 
-@property (strong,nonatomic)UILabel * todaySumLabel;
-@property (strong,nonatomic)UIView * todayView;
+@property (nonatomic, strong) UILabel * todaySumLabel;
+@property (nonatomic, strong) UIView * todayView;
 
 - (void)setupTodayCell;
 

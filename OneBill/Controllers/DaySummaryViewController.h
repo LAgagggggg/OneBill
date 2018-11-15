@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DaySummaryViewController : UIViewController
 
-@property (strong,nonatomic)UITableView * tableView;
+@property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic,strong) UITableViewCell * selectedCell;
 @property (nonatomic,strong) OBDaySummaryTodayCell * todayCell;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePop;

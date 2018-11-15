@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CategoryView : UIView
-@property (strong,nonatomic)UIButton * button;
-@property (strong,nonatomic)UILabel * label;
+@property (nonatomic, strong) UIButton * button;
+@property (nonatomic, strong) UILabel * label;
 - (instancetype)initWithCategory:(NSString *)text;
 - (void)highlight;
 - (void)downplay;

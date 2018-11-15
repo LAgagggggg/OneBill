@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CategoryManagerCell : UITableViewCell
-@property(strong,nonatomic)UIButton * editBtn;
-@property(strong,nonatomic)UITextField * categoryTextField;
+@property(nonatomic, strong) UIButton * editBtn;
+@property(nonatomic, strong) UITextField * categoryTextField;
 @property BOOL isSelected;
 @property BOOL hasHideReorderControl;
 - (void)setWithCategory:(NSString *)category;

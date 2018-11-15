@@ -12,8 +12,8 @@
 
 @interface OBBillManager()
 
-@property (strong,nonatomic)NSString * dbPath;
-@property (strong,nonatomic)FMDatabaseQueue * queue;
+@property (nonatomic, strong) NSString * dbPath;
+@property (nonatomic, strong) FMDatabaseQueue * queue;
 
 @end
 

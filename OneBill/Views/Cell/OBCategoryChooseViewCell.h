@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OBCategoryChooseViewCell : UITableViewCell
-@property (strong,nonatomic)UILabel * label;
+@property (nonatomic, strong) UILabel * label;
 - (void)highlight;
 - (void)downplay;
 @end

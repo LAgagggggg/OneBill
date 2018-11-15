@@ -13,9 +13,9 @@
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface OBDetailCardCell()
-@property (strong,nonatomic)UILabel * timeLabel;
-@property (strong,nonatomic)UILabel * valueLabel;
-@property (strong,nonatomic)UILabel * locLabel;
+@property (nonatomic, strong) UILabel * timeLabel;
+@property (nonatomic, strong) UILabel * valueLabel;
+@property (nonatomic, strong) UILabel * locLabel;
 @end
 
 @implementation OBDetailCardCell

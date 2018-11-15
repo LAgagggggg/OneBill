@@ -21,9 +21,9 @@
 
 @interface DaySummaryViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic) NSMutableArray<OBDaySummary *> * summaryArr;
-@property (strong,nonatomic) UIActivityIndicatorView *reloadIndicator;
-@property(strong,nonatomic) UIImpactFeedbackGenerator * impactFeedback;
+@property (nonatomic, strong)  NSMutableArray<OBDaySummary *> * summaryArr;
+@property (nonatomic, strong)  UIActivityIndicatorView *reloadIndicator;
+@property(nonatomic, strong)  UIImpactFeedbackGenerator * impactFeedback;
 //@property (nonatomic, strong) ODRefreshControl *refreshControl;
 @property NSInteger fetchIndex;
 @property BOOL fetchStopFlag;

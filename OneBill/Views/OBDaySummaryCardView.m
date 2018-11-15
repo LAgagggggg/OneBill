@@ -13,8 +13,8 @@
 #define LightCyanColor [UIColor colorWithRed:241/255.0 green:251/255.0 blue:251/255.0 alpha:1]
 
 @interface OBDaySummaryCardView()
-@property (strong,nonatomic)UILabel * dateLabel;
-@property (strong,nonatomic)UILabel * moneyLabel;
+@property (nonatomic, strong) UILabel * dateLabel;
+@property (nonatomic, strong) UILabel * moneyLabel;
 @end
 
 @implementation OBDaySummaryCardView

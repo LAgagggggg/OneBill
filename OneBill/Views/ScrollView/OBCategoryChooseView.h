@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OBCategoryChooseView : UIView
-@property (strong,nonatomic)NSString * selectedCategory;
-@property (strong,nonatomic)UIView * dimView;
+@property (nonatomic, strong) NSString * selectedCategory;
+@property (nonatomic, strong) UIView * dimView;
 - (instancetype)initWithCategories:(NSArray<NSString *>*)categoryArr;
 @end
 

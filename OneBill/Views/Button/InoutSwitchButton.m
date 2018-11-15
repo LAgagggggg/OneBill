@@ -14,10 +14,10 @@
 #define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
 
 @interface InoutSwitchButton()
-@property (strong,nonatomic)UIView * inView;
-@property (strong,nonatomic)UIView * outView;
-@property (strong,nonatomic)UILabel * inLabel;
-@property (strong,nonatomic)UILabel * outLabel;
+@property (nonatomic, strong) UIView * inView;
+@property (nonatomic, strong) UIView * outView;
+@property (nonatomic, strong) UILabel * inLabel;
+@property (nonatomic, strong) UILabel * outLabel;
 @end
 
 

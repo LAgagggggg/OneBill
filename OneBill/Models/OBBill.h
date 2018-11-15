@@ -15,11 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OBBill : NSObject
 
 @property double value;
-@property (strong,nonatomic) NSDate * date;
-@property (strong,nonatomic) NSString * category;
+@property (nonatomic, strong)  NSDate * date;
+@property (nonatomic, strong)  NSString * category;
 @property BOOL isOut;
-@property (strong,nonatomic) CLLocation * location;
-@property (strong,nonatomic) NSString * locDescription;
+@property (nonatomic, strong)  CLLocation * location;
+@property (nonatomic, strong)  NSString * locDescription;
 
 - (instancetype)initWithValue:(double)value Date:(NSDate *)date Location:(nullable CLLocation *)location AndLocationDescription:(NSString *)description Category:(NSString *)category andIsOut:(BOOL)isOut;
 

@@ -14,8 +14,8 @@
 #define CellEdgeInset 8
 
 @interface OBDaySummaryTableViewCell()
-@property(strong,nonatomic)UILabel * dateLabel;
-@property(strong,nonatomic)UILabel * sumLabel;
+@property(nonatomic, strong) UILabel * dateLabel;
+@property(nonatomic, strong) UILabel * sumLabel;
 @end
 
 @implementation OBDaySummaryTableViewCell

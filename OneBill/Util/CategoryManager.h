@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CategoryManager : NSObject
 
-@property (strong,nonatomic) NSMutableArray<NSString *> * categoriesArr;
+@property (nonatomic, strong)  NSMutableArray<NSString *> * categoriesArr;
 
 + (CategoryManager *)sharedInstance;
 - (BOOL)replaceCategory:(NSString *)old withNewCategory:(NSString *)new;

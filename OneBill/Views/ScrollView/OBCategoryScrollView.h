@@ -13,12 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OBCategoryScrollView : UIScrollView
 
-@property (strong,nonatomic) CategoryView * selectedView;
-@property (strong,nonatomic) NSMutableArray<CategoryView *> * cViewArr;
-@property (strong,nonatomic) NSString * currentCategory;
-@property (strong,nonatomic) UITextField * addTextField;
+@property (nonatomic, strong)  CategoryView * selectedView;
+@property (nonatomic, strong)  NSMutableArray<CategoryView *> * cViewArr;
+@property (nonatomic, strong)  NSString * currentCategory;
+@property (nonatomic, strong)  UITextField * addTextField;
 @property (nonatomic) BOOL alwaysShowSum;
-@property (strong,nonatomic) NSArray<NSString *> * categoryArr;
+@property (nonatomic, strong)  NSArray<NSString *> * categoryArr;
 
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr;
 - (void)setHighlightCategory:(NSString *)category;

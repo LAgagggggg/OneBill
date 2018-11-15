@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BillDetailViewController : UIViewController
 
-@property (strong,nonatomic)OBDaySummaryCardView * summaryCardView;
-@property (strong,nonatomic)NSDate * date;
+@property (nonatomic, strong) OBDaySummaryCardView * summaryCardView;
+@property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) OBInteractiveTransition *interactivePop;
 
 - (instancetype)initWithBills:(NSArray<OBBill *>*)bills;

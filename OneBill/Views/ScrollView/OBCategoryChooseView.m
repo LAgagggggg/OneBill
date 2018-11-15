@@ -15,12 +15,12 @@
 #import <MBProgressHUD.h>
 
 @interface OBCategoryChooseView()<UITableViewDelegate,UITableViewDataSource>
-@property (strong,nonatomic)UIButton * bottomBtn;
-@property (strong,nonatomic)UIView * actualView;
-@property (strong,nonatomic)UITableView * tableView;
-@property (strong,nonatomic)NSMutableArray<NSString *> * categoryArr;
-@property (strong,nonatomic)OBCategoryChooseViewCell * selectedCell;
-@property (strong,nonatomic)UITextField * addingField;
+@property (nonatomic, strong) UIButton * bottomBtn;
+@property (nonatomic, strong) UIView * actualView;
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) NSMutableArray<NSString *> * categoryArr;
+@property (nonatomic, strong) OBCategoryChooseViewCell * selectedCell;
+@property (nonatomic, strong) UITextField * addingField;
 @property BOOL isAdding;
 @end
 

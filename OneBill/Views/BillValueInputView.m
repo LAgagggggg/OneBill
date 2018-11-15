@@ -15,8 +15,8 @@
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface BillValueInputView()
-@property (strong,nonatomic)UIButton * clearBtn;
-@property (strong,nonatomic)UILabel * moneyLabel;
+@property (nonatomic, strong) UIButton * clearBtn;
+@property (nonatomic, strong) UILabel * moneyLabel;
 @end
 
 @implementation BillValueInputView

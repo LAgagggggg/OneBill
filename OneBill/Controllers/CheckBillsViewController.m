@@ -19,12 +19,12 @@
 
 @interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
-@property (strong,nonatomic)UIView * topView;
-@property (strong,nonatomic)OBCategoryScrollView * categoryScrollView;
-@property (strong,nonatomic)UITableView * tableView;
-@property (strong,nonatomic)NSString * currentCategory;
-@property (strong,nonatomic)UITapGestureRecognizer * textFieldResignTap;
+@property (nonatomic, strong) NSMutableArray<OBBill *>* billsArr;
+@property (nonatomic, strong) UIView * topView;
+@property (nonatomic, strong) OBCategoryScrollView * categoryScrollView;
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) NSString * currentCategory;
+@property (nonatomic, strong) UITapGestureRecognizer * textFieldResignTap;
 @property BOOL categoriesEditedFlag;
 
 @end

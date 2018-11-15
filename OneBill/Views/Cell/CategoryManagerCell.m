@@ -15,9 +15,9 @@
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface CategoryManagerCell()
-@property (strong,nonatomic)NSString * oldValue;
-@property(strong,nonatomic)UIButton * checkIconBtn;
-@property(strong,nonatomic)UIView * deleteLine;
+@property (nonatomic, strong) NSString * oldValue;
+@property(nonatomic, strong) UIButton * checkIconBtn;
+@property(nonatomic, strong) UIView * deleteLine;
 @end
 
 static float animationDuration=0.3;

@@ -20,17 +20,27 @@
 
 @interface BillDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
-@property (strong,nonatomic)NSMutableArray<OBBill *>* billsArr;
-@property (strong,nonatomic)OBDetailTableView * tableView;
-@property (strong,nonatomic)OBCategoryChooseView * categoryChooseView;
-@property (strong,nonatomic)OBBill * editingBill;
-@property (strong,nonatomic)NSString * editingBillOldCategory;
-@property (strong,nonatomic)NSIndexPath * editingIndexPath;
+@property (nonatomic, strong) NSMutableArray<OBBill *>* billsArr;
+@property (nonatomic, strong) OBDetailTableView * tableView;
+@property (nonatomic, strong) OBCategoryChooseView * categoryChooseView;
+@property (nonatomic, strong) OBBill * editingBill;
+@property (nonatomic, strong) NSString * editingBillOldCategory;
+@property (nonatomic, strong) NSIndexPath * editingIndexPath;
+@property (nonatomic, strong) UIView *  billEmptyView;
 
 @end
 
 @implementation BillDetailViewController
 static NSString * const reuseIdentifier = @"Cell";
+
+- (instancetype)initWithBills:(NSArray<OBBill *>*)bills
+{
+    self = [super init];
+    if (self) {
+        self.billsArr=bills.mutableCopy;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,10 +68,18 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewWillAppear:animated];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         double sumOfDay=[[OBBillManager sharedInstance]sumOfDay:self.date];
+        self.billsArr=[[OBBillManager sharedInstance] billsSameDayAsDate:self.date];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.date Money:sumOfDay];
+            [self.tableView reloadData];
         });
     });
+    //没有账单则显示默认图
+    if (self.billsArr.count==0) {
+      self.billEmptyView.alpha=1;
+    } else{
+        self.billEmptyView.alpha=0;
+    }
 }
 
 -(void)dealloc{
@@ -118,15 +136,34 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.view bringSubviewToFront:shadowView];
     [self.view bringSubviewToFront:self.summaryCardView];
     [self.view bringSubviewToFront:self.categoryChooseView];
-}
-
-- (instancetype)initWithBills:(NSArray<OBBill *>*)bills
-{
-    self = [super init];
-    if (self) {
-        self.billsArr=bills.mutableCopy;
-    }
-    return self;
+    //默认图
+    self.billEmptyView=({
+        UIView * billEmptyView=[[UIView alloc] init];
+        [self.view addSubview:billEmptyView];
+        [billEmptyView mas_makeConstraints:^(MASConstraintMaker * make) {
+            make.left.equalTo(self.view.mas_left).with.offset(30);
+            make.right.equalTo(self.view.mas_right).with.offset(-30);
+            make.top.equalTo(self.summaryCardView.mas_bottom).with.offset(67);
+            make.height.equalTo(billEmptyView.mas_width).multipliedBy(335/316.0);
+        }];
+        billEmptyView.layer.contents=(__bridge id)[UIImage imageNamed:@"emptyDefaultImage"].CGImage;
+        billEmptyView.layer.contentsGravity=kCAGravityResizeAspect;
+        UIButton * addBillButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [billEmptyView addSubview:addBillButton];
+        [addBillButton mas_makeConstraints:^(MASConstraintMaker * make) {
+            make.width.mas_equalTo(163);
+            make.height.mas_equalTo(42);
+            make.centerX.equalTo(billEmptyView.mas_centerX);
+            make.bottom.equalTo(billEmptyView.mas_bottom).with.offset(-67*[UIScreen mainScreen].bounds.size.width/375);
+        }];
+        addBillButton.backgroundColor=OB_DarkBlueColor;
+        addBillButton.alpha=0.8;
+        addBillButton.layer.cornerRadius=10.f;
+        [addBillButton setTitle:@"Add one Bill" forState:UIControlStateNormal];
+        addBillButton.tintColor=[UIColor whiteColor];
+        [addBillButton addTarget:self action:@selector(addButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        billEmptyView;
+    });
 }
 
 #pragma mark CategoryEdit
@@ -240,7 +277,12 @@ static NSString * const reuseIdentifier = @"Cell";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
             [self.billsArr removeObjectAtIndex:indexPath.row];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (self.billsArr.count==0) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.billEmptyView.alpha=1;
+                }];
+            }
         });
     });
     
@@ -271,6 +313,11 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark - event response
+
+- (void)addButtonClicked{
+    NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
+    [self.navigationController pushViewController:addVC animated:YES];
+}
 
 - (void)returnBtnClicked{
     [self.navigationController popViewControllerAnimated:YES];

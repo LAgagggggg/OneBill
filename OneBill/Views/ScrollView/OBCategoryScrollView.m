@@ -14,7 +14,7 @@
 
 @interface OBCategoryScrollView()<UIScrollViewDelegate>
 @property BOOL isLabelShowing;
-@property (strong,nonatomic) UIView * sumLabelView;
+@property (nonatomic, strong)  UIView * sumLabelView;
 @end
 
 @implementation OBCategoryScrollView

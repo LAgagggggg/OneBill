@@ -10,7 +10,7 @@
 
 @interface CategoryManager()
 
-@property (strong,nonatomic) void(^categoriesEditedHandler)(void);
+@property (nonatomic, strong)  void(^categoriesEditedHandler)(void);
 
 @end
 

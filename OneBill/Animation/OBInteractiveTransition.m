@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) OBInteractiveTransitionGestureDirection direction;
 @property (nonatomic, assign) OBInteractiveTransitionType type;
-@property (strong,nonatomic) UIImpactFeedbackGenerator * impactFeedBack;
+@property (nonatomic, strong)  UIImpactFeedbackGenerator * impactFeedBack;
 
 @end
 

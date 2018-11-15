@@ -13,9 +13,9 @@
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 
 @interface OBMainButton()
-@property (strong,nonatomic)UIImageView * icon;
-@property (strong,nonatomic)UILabel * label;
-@property (strong,nonatomic)UIButton * btn;
+@property (nonatomic, strong) UIImageView * icon;
+@property (nonatomic, strong) UILabel * label;
+@property (nonatomic, strong) UIButton * btn;
 @end
 
 @implementation OBMainButton

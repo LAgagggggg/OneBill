@@ -36,6 +36,7 @@
 #define OB_BlackWithActualAlpha(arg) [UIColor colorWithRed:0 green:0 blue:0 alpha:arg]
 #define OB_GoldColor [UIColor colorWithRed:187/255.0 green:157/255.0 blue:95/255.0 alpha:1]
 #define OB_BackViewColor [UIColor colorWithRed:243/255.0 green:242/255.0 blue:240/255.0 alpha:1]
+#define OB_DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 
 
 #endif /* PrefixHeader_pch */
