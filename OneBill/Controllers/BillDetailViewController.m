@@ -72,14 +72,14 @@ static NSString * const reuseIdentifier = @"Cell";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.date Money:sumOfDay];
             [self.tableView reloadData];
+            //没有账单则显示默认图
+            if (self.billsArr.count==0) {
+                self.billEmptyView.alpha=1;
+            } else{
+                self.billEmptyView.alpha=0;
+            }
         });
     });
-    //没有账单则显示默认图
-    if (self.billsArr.count==0) {
-      self.billEmptyView.alpha=1;
-    } else{
-        self.billEmptyView.alpha=0;
-    }
 }
 
 -(void)dealloc{
