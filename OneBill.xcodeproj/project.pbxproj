@@ -55,6 +55,7 @@
 		08FA13D421304C7F00E830A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA13D321304C7F00E830A5 /* Foundation.framework */; };
 		08FA13D521304C9300E830A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC420FD79BE0036B5FC /* Assets.xcassets */; };
 		4C5D426A12EA881EA8A8565A /* libPods-OneBill.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */; };
+		C95E4D8506470052A342C800 /* MainToAddTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E47D0EE03F433D2291671 /* MainToAddTransitionAnimationPush.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,8 @@
 		4BEDCD7393621A1D868FDE1A /* Pods-OneBill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.release.xcconfig"; sourceTree = "<group>"; };
 		75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBill.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6A73D7CD687F1DEA2030AC /* Pods-OneBill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.debug.xcconfig"; sourceTree = "<group>"; };
+		C95E47D0EE03F433D2291671 /* MainToAddTransitionAnimationPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainToAddTransitionAnimationPush.m; sourceTree = "<group>"; };
+		C95E4F9FEA26A5E9D9EB77C2 /* MainToAddTransitionAnimationPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainToAddTransitionAnimationPush.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +282,8 @@
 				08E42DA3213A317B00F7DC33 /* MainToSummaryTransitionAnimationPop.m */,
 				0833B1DE212919E8003D8428 /* OBInteractiveTransition.h */,
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
+				C95E47D0EE03F433D2291671 /* MainToAddTransitionAnimationPush.m */,
+				C95E4F9FEA26A5E9D9EB77C2 /* MainToAddTransitionAnimationPush.h */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 				08E425D92106218C008F87DB /* OBDetailCardCell.m in Sources */,
 				08E425CD210460E1008F87DB /* OBBill.m in Sources */,
 				08E425DC21073C3E008F87DB /* OBDaySummaryTableViewCell.m in Sources */,
+				C95E4D8506470052A342C800 /* MainToAddTransitionAnimationPush.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
