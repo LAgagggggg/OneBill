@@ -11,7 +11,7 @@
 
 @property (nonatomic, strong) id <UIViewControllerContextTransitioning> transitionContext;
 @property (nonatomic, weak) UIView * toView;
-@property (nonatomic, strong) UIView * whiteView;
+@property (nonatomic, strong) CALayer * whiteLayer;
 
 @end
 
@@ -29,9 +29,10 @@ static float animationDuration=0.5;
     [containView addSubview:fromVC.view];
     containView.backgroundColor=[UIColor whiteColor];
     //白色幕布view
-    self.whiteView=[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [containView addSubview:self.whiteView];
-    self.whiteView.backgroundColor=[UIColor whiteColor];
+    self.whiteLayer=[CALayer layer];
+    self.whiteLayer.frame=[UIScreen mainScreen].bounds;
+    [containView.layer addSublayer:self.whiteLayer];
+    self.whiteLayer.backgroundColor=[UIColor whiteColor].CGColor;
     [containView addSubview:toVC.view];
     self.toView=toVC.view;
 
@@ -48,7 +49,7 @@ static float animationDuration=0.5;
     //赋值给toVc视图layer的mask
     CAShapeLayer * maskLayer=[CAShapeLayer layer];
     maskLayer.path=endPath.CGPath;
-    self.whiteView.layer.mask=maskLayer;
+    self.whiteLayer.mask=maskLayer;
     self.toView.alpha=0;
 
     CABasicAnimation * maskAnimation=[CABasicAnimation animationWithKeyPath:@"path"];
@@ -71,7 +72,7 @@ static float animationDuration=0.5;
         self.toView.alpha=1;
     } completion:^(BOOL finished) {
         [self.transitionContext completeTransition:YES];
-        [self.whiteView removeFromSuperview];
+        [self.whiteLayer removeFromSuperlayer];
     }];
 
 
