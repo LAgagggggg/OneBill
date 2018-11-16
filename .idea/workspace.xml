@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90e3ee8a-579a-4376-8a3a-f3d2b44bad75" name="Default" comment="refactor and add some UI">
-      <change afterPath="$PROJECT_DIR$/OneBill/Animation/MainToAddTransitionAnimationPush.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OneBill/Animation/MainToAddTransitionAnimationPush.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/MainViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/MainViewController.m" afterDir="false" />
-    </list>
+    <list default="true" id="90e3ee8a-579a-4376-8a3a-f3d2b44bad75" name="Default" comment="add some animation" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +13,7 @@
     <session id="-959697788">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.opened" value="3" />
@@ -27,7 +21,7 @@
       </usages-collector>
       <usages-collector id="statistics.appcode.build">
         <counts>
-          <entry key="xcodebuild" value="26" />
+          <entry key="xcodebuild" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -47,19 +41,19 @@
           <entry key="h" value="7" />
           <entry key="m" value="1602" />
           <entry key="pch" value="22" />
-          <entry key="txt" value="40" />
+          <entry key="txt" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="ObjectiveC" value="1631" />
-          <entry key="PLAIN_TEXT" value="40" />
+          <entry key="PLAIN_TEXT" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.appcode.reveal">
         <counts>
-          <entry key="inject" value="18" />
-          <entry key="installOnDevice" value="18" />
+          <entry key="inject" value="19" />
+          <entry key="installOnDevice" value="19" />
           <entry key="showInReveal" value="1" />
         </counts>
       </usages-collector>
@@ -100,8 +94,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OneBill/Animation/MainToAddTransitionAnimationPush.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-69">
-              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+            <state relative-caret-position="186">
+              <caret line="36" column="36" lean-forward="true" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
               <folding>
                 <element signature="e#98#138#0" expanded="true" />
               </folding>
@@ -297,7 +291,7 @@
       <workItem from="1540538846692" duration="2409000" />
       <workItem from="1540695213559" duration="507000" />
       <workItem from="1540900761286" duration="27000" />
-      <workItem from="1542274682597" duration="7037000" />
+      <workItem from="1542274682597" duration="7111000" />
     </task>
     <task id="LOCAL-00001" summary="refactor and add some UI">
       <created>1542282984926</created>
@@ -313,11 +307,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542283812030</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add some animation">
+      <created>1542286762979</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1542286762980</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11716000" />
+    <option name="totallyTimeSpent" value="11790000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1723" y="-80" width="1531" height="970" extended-state="0" />
@@ -329,7 +330,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32915717" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25284737" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25284737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -355,7 +356,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor and add some UI" />
     <MESSAGE value="minor UI fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor UI fixed" />
+    <MESSAGE value="add some animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="add some animation" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/OneBill/Models/OBBill.m">
@@ -487,8 +489,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OneBill/Animation/MainToAddTransitionAnimationPush.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+        <state relative-caret-position="186">
+          <caret line="36" column="36" lean-forward="true" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
           <folding>
             <element signature="e#98#138#0" expanded="true" />
           </folding>

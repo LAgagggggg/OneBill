@@ -157,7 +157,7 @@ static NSString * const reuseIdentifier = @"Cell";
             make.bottom.equalTo(billEmptyView.mas_bottom).with.offset(-67*[UIScreen mainScreen].bounds.size.width/375);
         }];
         addBillButton.backgroundColor=OB_DarkBlueColor;
-        addBillButton.alpha=0.8;
+//        addBillButton.alpha=0.8;
         addBillButton.layer.cornerRadius=10.f;
         [addBillButton setTitle:@"Add one Bill" forState:UIControlStateNormal];
         addBillButton.tintColor=[UIColor whiteColor];

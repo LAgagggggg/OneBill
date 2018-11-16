@@ -11,6 +11,7 @@
 
 @property (nonatomic, strong) id <UIViewControllerContextTransitioning> transitionContext;
 @property (nonatomic, weak) UIView * toView;
+@property (nonatomic, strong) UIView * whiteView;
 
 @end
 
@@ -28,19 +29,19 @@ static float animationDuration=0.5;
     [containView addSubview:fromVC.view];
     containView.backgroundColor=[UIColor whiteColor];
     //白色幕布view
-    UIView * whiteView=[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [containView addSubview:whiteView];
-    whiteView.backgroundColor=[UIColor whiteColor];
+    self.whiteView=[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [containView addSubview:self.whiteView];
+    self.whiteView.backgroundColor=[UIColor whiteColor];
     [containView addSubview:toVC.view];
     self.toView=toVC.view;
 
-    UIButton * button=fromVC.addBtn;
+    UIView * button=(UIView *)fromVC.addBtn;
     UIBezierPath * startPath=[UIBezierPath bezierPathWithRoundedRect:button.frame cornerRadius:10.f];
     UIBezierPath * endPath=[UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:10.f];
     //赋值给toVc视图layer的mask
     CAShapeLayer * maskLayer=[CAShapeLayer layer];
     maskLayer.path=endPath.CGPath;
-    whiteView.layer.mask=maskLayer;
+    self.whiteView.layer.mask=maskLayer;
     self.toView.alpha=0;
 
     CABasicAnimation * maskAnimation=[CABasicAnimation animationWithKeyPath:@"path"];
@@ -63,8 +64,7 @@ static float animationDuration=0.5;
         self.toView.alpha=1;
     } completion:^(BOOL finished) {
         [self.transitionContext completeTransition:YES];
-        [self.transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey].view.layer.mask=nil;
-        [self.transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view.layer.mask=nil;
+        [self.whiteView removeFromSuperview];
     }];
 
 
