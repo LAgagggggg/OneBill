@@ -68,7 +68,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewWillAppear:animated];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         double sumOfDay=[[OBBillManager sharedInstance]sumOfDay:self.date];
-        self.billsArr=[[OBBillManager sharedInstance] billsSameDayAsDate:self.date];
+        self.billsArr=[[[OBBillManager sharedInstance] billsSameDayAsDate:self.date] copy];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.date Money:sumOfDay];
             [self.tableView reloadData];
