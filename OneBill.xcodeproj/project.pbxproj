@@ -26,6 +26,10 @@
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
 		0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875F7F3216474CC006DBE13 /* OBDetailTableView.m */; };
 		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
+		08972876219FF7C500DB3BC2 /* onebill_launch_part1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */; };
+		08972877219FF7C500DB3BC2 /* onebill_launch_part2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */; };
+		08972878219FF7C500DB3BC2 /* onebill_launch_part3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */; };
+		08972879219FF7C500DB3BC2 /* onebill_launch_part4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */; };
 		089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */; };
 		08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */; };
 		08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B420FE4E9C008F87DB /* OBMainButton.m */; };
@@ -55,6 +59,7 @@
 		08FA13D421304C7F00E830A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FA13D321304C7F00E830A5 /* Foundation.framework */; };
 		08FA13D521304C9300E830A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 082B1FC420FD79BE0036B5FC /* Assets.xcassets */; };
 		4C5D426A12EA881EA8A8565A /* libPods-OneBill.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */; };
+		C95E41FF3781B937E4D49AB4 /* IntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E497B930D9B0CCC1A1A7D /* IntroduceViewController.m */; };
 		C95E4D8506470052A342C800 /* gotoAddTransitionAnimationPush.m in Sources */ = {isa = PBXBuildFile; fileRef = C95E47D0EE03F433D2291671 /* gotoAddTransitionAnimationPush.m */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +119,10 @@
 		0875F7F3216474CC006DBE13 /* OBDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDetailTableView.m; sourceTree = "<group>"; };
 		087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseView.h; sourceTree = "<group>"; };
 		087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseView.m; sourceTree = "<group>"; };
+		0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part3.mp4; sourceTree = "<group>"; };
+		0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part1.mp4; sourceTree = "<group>"; };
+		08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part4.mp4; sourceTree = "<group>"; };
+		08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part2.mp4; sourceTree = "<group>"; };
 		089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseViewCell.h; sourceTree = "<group>"; };
 		089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseViewCell.m; sourceTree = "<group>"; };
 		08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMapPickerViewController.h; sourceTree = "<group>"; };
@@ -170,6 +179,8 @@
 		75F13FBC63FDE3FBED69B34C /* libPods-OneBill.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneBill.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6A73D7CD687F1DEA2030AC /* Pods-OneBill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneBill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneBill/Pods-OneBill.debug.xcconfig"; sourceTree = "<group>"; };
 		C95E47D0EE03F433D2291671 /* gotoAddTransitionAnimationPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gotoAddTransitionAnimationPush.m; sourceTree = "<group>"; };
+		C95E497B930D9B0CCC1A1A7D /* IntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroduceViewController.m; sourceTree = "<group>"; };
+		C95E4DCF33D0FF4145794EA9 /* IntroduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroduceViewController.h; sourceTree = "<group>"; };
 		C95E4F9FEA26A5E9D9EB77C2 /* gotoAddTransitionAnimationPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gotoAddTransitionAnimationPush.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				082B1FBA20FD79BB0036B5FC /* OneBill */,
+				0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */,
 				08FA13B8212FF42100E830A5 /* OneBillTests */,
 				08FA13C6212FFA9F00E830A5 /* OneBillUITests */,
 				082B1FB920FD79BB0036B5FC /* Products */,
@@ -345,6 +357,8 @@
 			children = (
 				082B1FBE20FD79BB0036B5FC /* MainViewController.h */,
 				082B1FBF20FD79BB0036B5FC /* MainViewController.m */,
+				C95E4DCF33D0FF4145794EA9 /* IntroduceViewController.h */,
+				C95E497B930D9B0CCC1A1A7D /* IntroduceViewController.m */,
 				08E425B620FF0144008F87DB /* NewOrEditBillViewController.h */,
 				08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */,
 				08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */,
@@ -359,6 +373,17 @@
 				08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */ = {
+			isa = PBXGroup;
+			children = (
+				0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */,
+				08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */,
+				0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */,
+				08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */,
+			);
+			path = LaunchIntroduceVideo;
 			sourceTree = "<group>";
 		};
 		08E425BC20FF1BFD008F87DB /* Models */ = {
@@ -519,6 +544,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08972876219FF7C500DB3BC2 /* onebill_launch_part1.mp4 in Resources */,
+				08972877219FF7C500DB3BC2 /* onebill_launch_part2.mp4 in Resources */,
+				08972878219FF7C500DB3BC2 /* onebill_launch_part3.mp4 in Resources */,
+				08972879219FF7C500DB3BC2 /* onebill_launch_part4.mp4 in Resources */,
 				082B1FC820FD79BE0036B5FC /* LaunchScreen.storyboard in Resources */,
 				082B1FC520FD79BE0036B5FC /* Assets.xcassets in Resources */,
 			);
@@ -605,6 +634,7 @@
 				08E425CD210460E1008F87DB /* OBBill.m in Sources */,
 				08E425DC21073C3E008F87DB /* OBDaySummaryTableViewCell.m in Sources */,
 				C95E4D8506470052A342C800 /* gotoAddTransitionAnimationPush.m in Sources */,
+				C95E41FF3781B937E4D49AB4 /* IntroduceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

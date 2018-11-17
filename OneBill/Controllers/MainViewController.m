@@ -24,6 +24,7 @@
 #import "CheckBillsViewController.h"
 #import  "OBInteractiveTransition.h"
 #import "TodaySayingView.h"
+#import "IntroduceViewController.h"
 
 @interface MainViewController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -35,7 +36,7 @@
 @property (nonatomic, strong) BillDetailViewController * todayDetailVC;
 @property (nonatomic, strong) DaySummaryViewController * summaryVC;
 @property (nonatomic, strong) UIImpactFeedbackGenerator * impactFeedBack;
-//@property (strong, nonatomic) IBOutlet UIBarButtonItem *menuBtn;
+@property (nonatomic, strong) UIButton * menuBtn;
 
 @end
 
@@ -62,18 +63,25 @@
 
 - (void)setUI {
     double screenHeightAdaptRatio=[UIScreen mainScreen].bounds.size.height/667.0;
-    //导航栏返回按钮
-//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-//    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"returnBtn"];
-//    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"returnBtn"];
-//    backItem.imageInsets=UIEdgeInsetsMake(0, 100, 20, 0);
-//    self.navigationItem.backBarButtonItem = backItem;
     //导航栏透明
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage=[UIImage new];
     //导航栏颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
+    UIBarButtonItem * menuItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"mainMenuBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonClicked)];
+    self.navigationItem.leftBarButtonItem=menuItem;
+    //左上角按钮
+//    self.menuBtn=[UIButton buttonWithType:UIButtonTypeSystem];
+//    [self.view addSubview:self.menuBtn];
+//    [self.menuBtn mas_makeConstraints:^(MASConstraintMaker * make) {
+//        make.left.equalTo(self.view.mas_left).with.offset(14);
+//        make.top.equalTo(self.view.mas_top).with.offset(40*screenHeightAdaptRatio);
+//        make.width.height.mas_equalTo(15);
+//    }];
+//    [self.menuBtn setImage:[UIImage imageNamed:@"mainMenuBtn"] forState:UIControlStateNormal];
+//    [self.menuBtn setTintColor:[UIColor darkGrayColor]];
+//    [self.menuBtn addTarget:self action:@selector(menuButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     //顶部文字
     self.sayingView=[[TodaySayingView alloc] initWithLine:@[@"One Bill A Day", @"Keeps worries away."]];
     [self.view addSubview:self.sayingView];
@@ -241,6 +249,11 @@
     } else {
         return nil;
     }
+}
+
+- (void)menuButtonClicked{
+    IntroduceViewController * introduceVC=[[IntroduceViewController alloc] init];
+    [self presentViewController:introduceVC animated:YES completion:nil];
 }
 
 @end
