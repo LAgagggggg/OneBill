@@ -31,11 +31,22 @@ typedef enum : NSInteger {
     [super viewDidLoad];
     [self setUI];
     UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewDidTaped)];
-    UISwipeGestureRecognizer * swipeDown=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(viewDidSwiped)];
+    UISwipeGestureRecognizer * swipeDown=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(viewDidSwipedDown)];
     swipeDown.direction=UISwipeGestureRecognizerDirectionDown;
+    UISwipeGestureRecognizer * swipeLeft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(viewDidSwipedLeft)];
+    swipeLeft.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:tap];
     [self.view addGestureRecognizer:swipeDown];
+    [self.view addGestureRecognizer:swipeLeft];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(videoPlayDidEnd) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.player replaceCurrentItemWithPlayerItem:self.playerItemArr[0]];
+    self.status=OBIntroduceStatusFirst;
+    self.player.rate=-1;
+    [self.player play];
 }
 
 -(void)setUI{
@@ -57,13 +68,6 @@ typedef enum : NSInteger {
     [skipButton setTitle:@"Skip" forState:UIControlStateNormal];
     [skipButton setTintColor:[UIColor lightGrayColor]];
     [skipButton addTarget:self action:@selector(skipButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItemArr[0]];
-    self.status=OBIntroduceStatusFirst;
-    [self.player play];
 }
 
 
@@ -138,7 +142,7 @@ typedef enum : NSInteger {
     }
 }
 
-- (void)viewDidSwiped{
+- (void)viewDidSwipedDown{
     if (self.status==OBIntroduceStatusSecond) {
         if (self.player.timeControlStatus==AVPlayerTimeControlStatusPlaying) {
             self.status=OBIntroduceStatusSecondEnd;
@@ -150,6 +154,40 @@ typedef enum : NSInteger {
         }
         
     }
+}
+
+- (void)viewDidSwipedLeft{
+    if (self.status==OBIntroduceStatusFirst) {
+        if (self.player.timeControlStatus==AVPlayerTimeControlStatusPlaying) {
+            self.status=OBIntroduceStatusFirstEnd;
+        }
+        else{
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItemArr[1]];
+            self.status=OBIntroduceStatusSecond;
+            [self.player play];
+        }
+    }else if (self.status==OBIntroduceStatusSecond) {
+        if (self.player.timeControlStatus==AVPlayerTimeControlStatusPlaying) {
+            self.status=OBIntroduceStatusSecondEnd;
+        }
+        else{
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItemArr[2]];
+            self.status=OBIntroduceStatusThird;
+            [self.player play];
+        }
+    } else if (self.status==OBIntroduceStatusThird){
+        if (self.player.timeControlStatus==AVPlayerTimeControlStatusPlaying) {
+            self.status=OBIntroduceStatusThirdEnd;
+        }
+        else{
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItemArr[3]];
+            self.status=OBIntroduceStatusLast;
+            [self.player play];
+        }
+    } else if (self.status==OBIntroduceStatusEnd){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 - (void)skipButtonClicked{
