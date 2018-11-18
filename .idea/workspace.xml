@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90e3ee8a-579a-4376-8a3a-f3d2b44bad75" name="Default" comment="add some animation">
-      <change afterPath="$PROJECT_DIR$/LaunchIntroduceVideo/onebill_launch_part1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LaunchIntroduceVideo/onebill_launch_part2.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LaunchIntroduceVideo/onebill_launch_part3.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LaunchIntroduceVideo/onebill_launch_part4.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill.xcodeproj/xcuserdata/lagagggggg.xcuserdatad/xcschemes/OneBill.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcodeproj/xcuserdata/lagagggggg.xcuserdatad/xcschemes/OneBill.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/MainViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/MainViewController.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OneBill/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Info.plist" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +15,7 @@
     <session id="-959697788">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
@@ -122,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+            <state relative-caret-position="684">
+              <caret line="172" column="26" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
               <folding>
                 <element signature="e#98#133#0" expanded="true" />
               </folding>
@@ -307,7 +295,7 @@
       <workItem from="1540900761286" duration="27000" />
       <workItem from="1542274682597" duration="7111000" />
       <workItem from="1542369176831" duration="19000" />
-      <workItem from="1542434794682" duration="4820000" />
+      <workItem from="1542434794682" duration="5706000" />
     </task>
     <task id="LOCAL-00001" summary="refactor and add some UI">
       <created>1542282984926</created>
@@ -334,19 +322,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16629000" />
+    <option name="totallyTimeSpent" value="17515000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1477" y="-128" width="1811" height="988" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15036744" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15036744" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32915717" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25223213" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25223213" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -507,8 +494,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+        <state relative-caret-position="684">
+          <caret line="172" column="26" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
           <folding>
             <element signature="e#98#133#0" expanded="true" />
           </folding>

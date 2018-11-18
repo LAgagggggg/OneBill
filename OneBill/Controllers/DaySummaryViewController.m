@@ -42,6 +42,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.fetchIndex=0;
     self.didEnterIndex=-1;
     self.isInserting=YES;
+    //准备bills
     [[OBBillManager sharedInstance]updateSumOfDay:[NSDate date]];
     self.summaryArr=[[NSMutableArray alloc]init];
     NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:self.fetchEachTime]];
@@ -49,8 +50,11 @@ static NSString * const reuseIdentifier = @"Cell";
     self.fetchIndex+=tempArr.count;
     self.fetchStopFlag= tempArr.count==self.fetchEachTime? NO:YES;
     [self setUI];
+    //滑动至底部
+    [self.view layoutIfNeeded];
     if (self.summaryArr.count) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.summaryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height-self.tableView.frame.size.height)];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.isInserting=NO;
@@ -120,8 +124,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];
-    self.tableView.estimatedRowHeight=((commonCellHeight-12)*self.summaryArr.count+(todayCellHeight-commonCellHeight+12)+TableViewRefreshInset)/self.summaryArr.count;
-//    self.tableView.estimatedRowHeight=2411/self.summaryArr.count;
+    self.tableView.estimatedRowHeight=((commonCellHeight)*self.summaryArr.count+(todayCellHeight-commonCellHeight))/(CGFloat)(self.summaryArr.count);
+//    self.tableView.estimatedRowHeight=3016/(CGFloat)(self.summaryArr.count);
     //菊花
 //    _refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
 //    [_refreshControl addTarget:self action:@selector(insertCellAndBackToRightPosition) forControlEvents:UIControlEventValueChanged];
@@ -132,7 +136,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.bottom.equalTo(self.tableView.mas_top);
         make.height.equalTo(@(TableViewRefreshInset));
     }];
-    self.tableView.contentInset=UIEdgeInsetsMake(TableViewRefreshInset, 0, 54, 0);
+    self.tableView.contentInset=UIEdgeInsetsMake(0, 0, 54, 0);
     [self.reloadIndicator setHidesWhenStopped:YES];
 }
 
@@ -177,10 +181,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - refresh&fetch more
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"---%lf---",scrollView.contentOffset.y);
-//    NSLog(@"---%lf---",[self.tableView convertRect:self.todayCell.frame toView:self.view].origin.y);
-//    NSLog(@"!!!%@!!!",NSStringFromCGRect(self.todayCell.frame));
-//    NSLog(@"!!!%lf-%lf",self.todayCell.frame.origin.y,[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathWithIndex:[self.tableView numberOfRowsInSection:0]]].origin.y);
+    DebugLog(@"---%lf of %lf---",scrollView.contentOffset.y,scrollView.contentSize.height);
     if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
         if (!self.reloadIndicator.animating) [self.impactFeedback impactOccurred];
         [self.reloadIndicator startAnimating];
@@ -195,6 +196,9 @@ static NSString * const reuseIdentifier = @"Cell";
             [self.reloadIndicator stopAnimating];
         });
     }
+    else if (self.reloadIndicator.animating){
+        [self.reloadIndicator stopAnimating];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -204,6 +208,9 @@ static NSString * const reuseIdentifier = @"Cell";
             [self insertCellAndBackToRightPosition];
             [self.reloadIndicator stopAnimating];
         });
+    }
+    else if (self.reloadIndicator.animating){
+        [self.reloadIndicator stopAnimating];
     }
 }
 
