@@ -29,7 +29,7 @@
     [self.window setRootViewController:navVC];
     [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
-    [self creatShortcutItem];
+    [self createShortCutItem];
     UIApplicationShortcutItem *shortcutItem = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
     //如果是从快捷选项标签启动app，则根据不同标识执行不同操作，然后返回NO，防止调用- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
     if (shortcutItem) {
@@ -59,7 +59,7 @@
     }
 }
 
-- (void)creatShortcutItem
+- (void)createShortCutItem
 {
     UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAdd];
     UIApplicationShortcutItem * item = [[UIApplicationShortcutItem alloc] initWithType:@"com.ookkee.OneBill.add" localizedTitle:@"Add Bill" localizedSubtitle:nil icon:icon userInfo:nil];

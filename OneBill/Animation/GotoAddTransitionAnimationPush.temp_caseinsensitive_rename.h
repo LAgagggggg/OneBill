@@ -5,6 +5,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface gotoAddTransitionAnimationPush : NSObject <UIViewControllerAnimatedTransitioning>
+@interface GotoAddTransitionAnimationPush : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end

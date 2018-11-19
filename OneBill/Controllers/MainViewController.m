@@ -14,7 +14,7 @@
 #import  "SummaryToDetailTransitionAnimationPop.h"
 #import  "MainToSummaryTransitionAnimationPush.h"
 #import  "MainToSummaryTransitionAnimationPop.h"
-#import "gotoAddTransitionAnimationPush.h"
+#import "GotoAddTransitionAnimationPush.h"
 #import "NewOrEditBillViewController.h"
 #import  "TodayCardView.h"
 #import  "OBMainButton.h"
@@ -227,7 +227,7 @@
         pop.interactivePop=vc.interactivePop;
         return pop;
     } else if ([toVC isMemberOfClass:[NewOrEditBillViewController class]]) {
-        return [[gotoAddTransitionAnimationPush alloc] init];
+        return [[GotoAddTransitionAnimationPush alloc] init];
     } else {
         return nil;
     }
