@@ -35,15 +35,8 @@ static float animationDuration=0.5;
     self.whiteLayer.backgroundColor=[UIColor whiteColor].CGColor;
     [containView addSubview:toVC.view];
     self.toView=toVC.view;
-
-    CGRect startFrame;
-    if ([fromVC isMemberOfClass:[MainViewController class]]) {
-        MainViewController * mainVC=(MainViewController *)fromVC;
-        startFrame=((UIView *)mainVC.addBtn).frame;
-    }
-    else{
-        startFrame=CGRectMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2, 1, 1);
-    }
+    
+    CGRect startFrame=CGRectMake(toVC.pushAnimationStartPoint.x, toVC.pushAnimationStartPoint.y, 1, 1);
     UIBezierPath * startPath=[UIBezierPath bezierPathWithRoundedRect:startFrame cornerRadius:10.f];
     UIBezierPath * endPath=[UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:10.f];
     //赋值给toVc视图layer的mask

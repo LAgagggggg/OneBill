@@ -68,7 +68,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewWillAppear:animated];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         double sumOfDay=[[OBBillManager sharedInstance]sumOfDay:self.date];
-        self.billsArr=[[[OBBillManager sharedInstance] billsSameDayAsDate:self.date] copy];
+        self.billsArr=[[OBBillManager sharedInstance] billsSameDayAsDate:self.date].mutableCopy;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.date Money:sumOfDay];
             [self.tableView reloadData];
@@ -161,7 +161,7 @@ static NSString * const reuseIdentifier = @"Cell";
         addBillButton.layer.cornerRadius=10.f;
         [addBillButton setTitle:@"Add one Bill" forState:UIControlStateNormal];
         addBillButton.tintColor=[UIColor whiteColor];
-        [addBillButton addTarget:self action:@selector(addButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [addBillButton addTarget:self action:@selector(addButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         billEmptyView;
     });
 }
@@ -240,12 +240,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NewOrEditBillViewController * vc=[[NewOrEditBillViewController alloc]init];
-    [vc editModeWithBill:self.billsArr[indexPath.row]];
-    vc.editCompletedHandler = ^{
+    NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
+    addVC.pushAnimationStartPoint=[self.tableView convertPoint:[self.tableView cellForRowAtIndexPath:indexPath].center toView:self.view.window];
+    [addVC editModeWithBill:self.billsArr[indexPath.row]];
+    addVC.editCompletedHandler = ^{
         [self updateEditedCell];
     };
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 - (void)updateEditedCell{
@@ -314,8 +315,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - event response
 
-- (void)addButtonClicked{
+- (void)addButtonClicked:(UIButton *)button{
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
+    addVC.pushAnimationStartPoint=[self.billEmptyView convertPoint:button.center toView:self.view.window];
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

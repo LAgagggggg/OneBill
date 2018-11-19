@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)editModeWithBill:(OBBill *)bill;
 
-@property (nonatomic, strong)  void(^editCompletedHandler)(void);
+@property (nonatomic, strong) void(^editCompletedHandler)(void);
+@property (nonatomic) CGPoint pushAnimationStartPoint;
 
 @end
 

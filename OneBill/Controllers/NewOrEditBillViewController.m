@@ -50,6 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //获取分类
     self.categoryManager=[CategoryManager sharedInstance];
     [self addObserver:self forKeyPath:@"categoryScrollView.currentCategory" options:NSKeyValueObservingOptionNew context:nil];
     [self setUI];
