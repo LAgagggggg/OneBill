@@ -90,11 +90,11 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title=@"Bill detail";
     self.automaticallyAdjustsScrollViewInsets=NO;
     //导航栏搜索按钮
-//    UIBarButtonItem * searchBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-//    self.navigationItem.rightBarButtonItem=searchBtn;
+//    UIBarButtonItem * searchButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barSearchButton"] style:UIBarButtonItemStylePlain target:self action:nil];
+//    self.navigationItem.rightBarButtonItem=searchButton;
     //设置导航栏返回按钮
-    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
-    self.navigationItem.leftBarButtonItem=returnBarBtn;
+    UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnButton"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarButton;
 //    self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //顶部遮盖
@@ -167,7 +167,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark CategoryEdit
--(void)categoryBtnClicked:(id)sender{
+-(void)categoryButtonClicked:(id)sender{
     UIButton * button=(UIButton *)sender;
     self.editingIndexPath=[self.tableView indexPathForCell:(UITableViewCell *)button.superview.superview];
     self.editingBill=self.billsArr[self.editingIndexPath.row];
@@ -221,7 +221,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(OBDetailCardCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     [cell setCellWithBill:self.billsArr[indexPath.row] andStylePreference:OBTimeLibelTimeOnly];
-    [cell.categoryBtn addTarget:self action:@selector(categoryBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.categoryButton addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -291,7 +291,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (@available(iOS 11,*)) {//only set deleteBtn for above iOS11 here, under iOS11 will be set in cell
+    if (@available(iOS 11,*)) {//only set deleteButton for above iOS11 here, under iOS11 will be set in cell
         for (UIView *subview in tableView.subviews)
         {
             if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")] )
@@ -299,9 +299,9 @@ static NSString * const reuseIdentifier = @"Cell";
                 subview.backgroundColor=[UIColor clearColor];
                 subview.layer.cornerRadius=10.f;
                 subview.layer.masksToBounds=YES;
-                UIView * deleteBtn=subview.subviews[0];
-                deleteBtn.layer.cornerRadius=10.f;
-                deleteBtn.layer.masksToBounds=YES;
+                UIView * deleteButton=subview.subviews[0];
+                deleteButton.layer.cornerRadius=10.f;
+                deleteButton.layer.masksToBounds=YES;
             }
         }
     }
@@ -321,7 +321,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
-- (void)returnBtnClicked{
+- (void)returnButtonClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

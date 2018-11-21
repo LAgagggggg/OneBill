@@ -44,7 +44,7 @@
     [key tap];
     [key tap];
     [element tap];
-    [app.buttons[@"confirmBtn"] tap];
+    [app.buttons[@"confirmButton"] tap];
     
     
 }

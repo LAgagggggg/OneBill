@@ -37,10 +37,10 @@
     self.navigationController.navigationBar.shadowImage=[UIImage new];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
-    UIBarButtonItem * cancelBtn=[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelBtnClicked)];
-    UIBarButtonItem * doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneBtnClicked)];
-    self.navigationItem.leftBarButtonItem=cancelBtn;
-    self.navigationItem.rightBarButtonItem=doneBtn;
+    UIBarButtonItem * cancelButton=[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked)];
+    UIBarButtonItem * doneButton=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonClicked)];
+    self.navigationItem.leftBarButtonItem=cancelButton;
+    self.navigationItem.rightBarButtonItem=doneButton;
     self.mapView=[[MKMapView alloc]initWithFrame:self.view.frame];
     self.mapView.showsUserLocation=YES;
     self.mapView.delegate=self;
@@ -49,11 +49,11 @@
     [self.mapView addGestureRecognizer:tap];
 }
 
-- (void)cancelBtnClicked{
+- (void)cancelButtonClicked{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)doneBtnClicked{
+- (void)doneButtonClicked{
     [self dismissViewControllerAnimated:YES completion:nil];
     self.locationPickDoneHandler(self.location);
 }

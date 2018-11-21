@@ -16,7 +16,7 @@
 
 @interface CategoryManagerCell()
 @property (nonatomic, strong) NSString * oldValue;
-@property(nonatomic, strong) UIButton * checkIconBtn;
+@property(nonatomic, strong) UIButton * checkIconButton;
 @property(nonatomic, strong) UIView * deleteLine;
 @end
 
@@ -56,47 +56,47 @@ static float animationDuration=0.3;
             make.left.equalTo(self.contentView.mas_left).with.offset(41);
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
-        self.editBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-        [self.editBtn setImage:[UIImage imageNamed:@"categoryEditBtn"] forState:UIControlStateNormal];
-        self.editBtn.imageEdgeInsets=UIEdgeInsetsMake(10, 10, 10, 10);
-        self.editBtn.tintColor=textGrayColor;
-        [self.contentView addSubview:self.editBtn];
-        [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.editButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [self.editButton setImage:[UIImage imageNamed:@"categoryEditButton"] forState:UIControlStateNormal];
+        self.editButton.imageEdgeInsets=UIEdgeInsetsMake(10, 10, 10, 10);
+        self.editButton.tintColor=textGrayColor;
+        [self.contentView addSubview:self.editButton];
+        [self.editButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-23);
             make.centerY.equalTo(self.contentView.mas_centerY);
             make.width.equalTo(@(31));
             make.height.equalTo(@(32));
         }];
-        [self.editBtn addTarget:self action:@selector(editCategory) forControlEvents:UIControlEventTouchUpInside];
+        [self.editButton addTarget:self action:@selector(editCategory) forControlEvents:UIControlEventTouchUpInside];
 //        UIImage *image= [MyUtil imageWithImage:[UIImage imageNamed:@"MyImage"] scaledToSize:CGSizeMake(80, 80)];
 //
 //        UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 //        imgView.contentMode = UIViewContentModeCenter;
 //        [imgView setImage:image];
-        self.checkIconBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        [self.checkIconBtn setImage:[UIImage imageNamed:@"categoryCheckIcon"] forState:UIControlStateNormal];
-        [self.checkIconBtn setImageEdgeInsets:UIEdgeInsetsMake(3,3,3,3)];
-        [self.contentView addSubview:self.checkIconBtn];
-        [self.checkIconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.checkIconButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [self.checkIconButton setImage:[UIImage imageNamed:@"categoryCheckIcon"] forState:UIControlStateNormal];
+        [self.checkIconButton setImageEdgeInsets:UIEdgeInsetsMake(3,3,3,3)];
+        [self.contentView addSubview:self.checkIconButton];
+        [self.checkIconButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-23);
             make.centerY.equalTo(self.contentView.mas_centerY);
             make.width.equalTo(@(14));
             make.height.equalTo(@(14));
         }];
-        self.checkIconBtn.backgroundColor=[UIColor whiteColor];
-        self.checkIconBtn.layer.cornerRadius=7.f;
-        self.checkIconBtn.layer.borderWidth=1.f;
-        self.checkIconBtn.layer.masksToBounds=YES;
-        self.checkIconBtn.layer.borderColor=DarkBlueColor.CGColor;
-        self.checkIconBtn.imageView.alpha=0;
-        self.checkIconBtn.alpha=0;
-        self.checkIconBtn.userInteractionEnabled=NO;
+        self.checkIconButton.backgroundColor=[UIColor whiteColor];
+        self.checkIconButton.layer.cornerRadius=7.f;
+        self.checkIconButton.layer.borderWidth=1.f;
+        self.checkIconButton.layer.masksToBounds=YES;
+        self.checkIconButton.layer.borderColor=DarkBlueColor.CGColor;
+        self.checkIconButton.imageView.alpha=0;
+        self.checkIconButton.alpha=0;
+        self.checkIconButton.userInteractionEnabled=NO;
         self.deleteLine=[[UIView alloc]init];
         [self.contentView addSubview:self.deleteLine];
         self.deleteLine.backgroundColor=[UIColor whiteColor];
         [self.deleteLine mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left);
-            make.right.equalTo(self.editBtn.mas_left).with.offset(-13);
+            make.right.equalTo(self.editButton.mas_left).with.offset(-13);
             make.centerY.equalTo(self.contentView.mas_centerY);
             make.height.equalTo(@(1));
         }];
@@ -158,9 +158,9 @@ static float animationDuration=0.3;
 - (void)beginMultiDelete{
     self.hasHideReorderControl=NO;
     [UIView animateWithDuration:animationDuration animations:^{
-        self.editBtn.alpha=0;
-        self.checkIconBtn.alpha=1;
-        self.checkIconBtn.imageView.alpha=0;
+        self.editButton.alpha=0;
+        self.checkIconButton.alpha=1;
+        self.checkIconButton.imageView.alpha=0;
     }];
     
 }
@@ -169,8 +169,8 @@ static float animationDuration=0.3;
     self.hasHideReorderControl=NO;
     [self multiDeleteBeDeselected];
     [UIView animateWithDuration:animationDuration animations:^{
-        self.editBtn.alpha=1;
-        self.checkIconBtn.alpha=0;
+        self.editButton.alpha=1;
+        self.checkIconButton.alpha=0;
     }];
 }
 
@@ -180,7 +180,7 @@ static float animationDuration=0.3;
         self.contentView.backgroundColor=DarkBlueColor;
         self.contentView.layer.masksToBounds=YES;
         self.deleteLine.alpha=1;
-        self.checkIconBtn.imageView.alpha=1;
+        self.checkIconButton.imageView.alpha=1;
         self.categoryTextField.textColor=[UIColor whiteColor];
     }];
     
@@ -192,7 +192,7 @@ static float animationDuration=0.3;
         self.contentView.backgroundColor=[UIColor whiteColor];
         self.contentView.layer.masksToBounds=NO;
         self.deleteLine.alpha=0;
-        self.checkIconBtn.imageView.alpha=0;
+        self.checkIconButton.imageView.alpha=0;
         self.categoryTextField.textColor=textGrayColor;
     }];
     

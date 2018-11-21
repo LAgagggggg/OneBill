@@ -55,11 +55,11 @@
             make.right.equalTo(self.inView.mas_right);
             make.bottom.equalTo(self.inView.mas_bottom);
         }];
-        UIButton * inBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        inBtn.backgroundColor=[UIColor clearColor];
-        [inBtn addTarget:self action:@selector(chooseIn) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:inBtn];
-        [inBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIButton * inButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        inButton.backgroundColor=[UIColor clearColor];
+        [inButton addTarget:self action:@selector(chooseIn) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:inButton];
+        [inButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.inView.mas_left);
             make.top.equalTo(self.inView.mas_top);
             make.right.equalTo(self.inView.mas_right);
@@ -102,11 +102,11 @@
             make.right.equalTo(self.outView.mas_right);
             make.bottom.equalTo(self.outView.mas_bottom);
         }];
-        UIButton * outBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        outBtn.backgroundColor=[UIColor clearColor];
-        [outBtn addTarget:self action:@selector(chooseOut) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:outBtn];
-        [outBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIButton * outButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        outButton.backgroundColor=[UIColor clearColor];
+        [outButton addTarget:self action:@selector(chooseOut) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:outButton];
+        [outButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.outView.mas_left);
             make.top.equalTo(self.outView.mas_top);
             make.right.equalTo(self.outView.mas_right);

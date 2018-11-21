@@ -58,12 +58,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title=@"Bills";
     self.automaticallyAdjustsScrollViewInsets=NO;
     //导航栏右侧按钮
-//    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-    UIBarButtonItem * moreBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(moreBtnClicked)];
-    self.navigationItem.rightBarButtonItems=@[moreBtn];
+//    UIBarButtonItem * calendarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarButton"] style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem * moreButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreButton"] style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonClicked)];
+    self.navigationItem.rightBarButtonItems=@[moreButton];
     //设置导航栏返回按钮
-    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
-    self.navigationItem.leftBarButtonItem=returnBarBtn;
+    UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnButton"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarButton;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //顶部选择category
@@ -198,11 +198,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - event response
 
-- (void)returnBtnClicked{
+- (void)returnButtonClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)moreBtnClicked{
+- (void)moreButtonClicked{
     [[CategoryManager sharedInstance] registerWriteToFileCallBack:^{
         self.categoriesEditedFlag=YES;
     }];

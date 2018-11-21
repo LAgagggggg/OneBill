@@ -92,12 +92,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title=@"Bills";
     self.automaticallyAdjustsScrollViewInsets=NO;
     //设置导航栏返回按钮
-    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
-    self.navigationItem.leftBarButtonItem=returnBarBtn;
+    UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnButton"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarButton;
     self.view.backgroundColor=[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
     //导航栏右侧按钮
-//    UIBarButtonItem * calendarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"summaryBarCalendarBtn"] style:UIBarButtonItemStylePlain target:self action:nil];
-//    self.navigationItem.rightBarButtonItem=calendarBtn;
+//    UIBarButtonItem * calendarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"summaryBarCalendarButton"] style:UIBarButtonItemStylePlain target:self action:nil];
+//    self.navigationItem.rightBarButtonItem=calendarButton;
     //顶部阴影
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;
@@ -231,7 +231,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-- (void)returnBtnClicked{
+- (void)returnButtonClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

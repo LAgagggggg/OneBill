@@ -28,8 +28,8 @@
 @property (nonatomic, strong) OBCategoryScrollView *categoryScrollView;
 @property (nonatomic, strong) BillValueInputView *inputView;
 @property (nonatomic, strong) CategoryManager *categoryManager;
-@property (nonatomic, strong) InoutSwitchButton * inoutSwitchBtn;
-@property (nonatomic, strong) UIButton * confirmBtn;
+@property (nonatomic, strong) InoutSwitchButton * inoutSwitchButton;
+@property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic, strong) UILabel * locationLabel;
 @property (nonatomic, strong) UITextField * dateLabel;
 @property (nonatomic, strong) UIView * predictView;
@@ -77,8 +77,8 @@
     //设置导航栏返回按钮
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=@"Add New Bill";
-    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnBtn"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
-    self.navigationItem.leftBarButtonItem=returnBarBtn;
+    UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnButton"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarButton;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.locDescription=[[NSMutableString alloc]init];
     self.view.backgroundColor=[UIColor whiteColor];
@@ -99,9 +99,9 @@
         make.height.equalTo(@(76));
     }];
     self.inputView.delegate=self;
-    self.inoutSwitchBtn=[[InoutSwitchButton alloc]init];
-    [self.view addSubview:self.inoutSwitchBtn];
-    [self.inoutSwitchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.inoutSwitchButton=[[InoutSwitchButton alloc]init];
+    [self.view addSubview:self.inoutSwitchButton];
+    [self.inoutSwitchButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.top.equalTo(self.inputView.mas_bottom).with.offset(49*screenHeightAdaptRatio);
         make.width.equalTo(@(120));
@@ -117,19 +117,19 @@
         make.left.equalTo(self.view.mas_left).with.offset(70.5);
         make.right.equalTo(self.view.mas_right).with.offset(-50.5);
     }];
-    self.confirmBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.confirmBtn setImage:[UIImage imageNamed:@"confirmBtn"] forState:UIControlStateNormal];
-    [self.confirmBtn setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
-    self.confirmBtn.backgroundColor=[UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1];
-    self.confirmBtn.layer.cornerRadius=10.f;
-    self.confirmBtn.layer.shadowColor=[UIColor grayColor].CGColor;
-    self.confirmBtn.layer.shadowOffset=CGSizeMake(0, 5);
-    self.confirmBtn.layer.shadowOpacity=0.1;
-    self.confirmBtn.layer.shadowRadius=3;
-    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.confirmBtn.bounds cornerRadius:10.f];
-    self.confirmBtn.layer.shadowPath=shadowPath.CGPath;
-    [self.view addSubview:self.confirmBtn];
-    [self.confirmBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.confirmButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.confirmButton setImage:[UIImage imageNamed:@"confirmButton"] forState:UIControlStateNormal];
+    [self.confirmButton setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-81, [UIScreen mainScreen].bounds.size.height-103, 60, 60)];
+    self.confirmButton.backgroundColor=[UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1];
+    self.confirmButton.layer.cornerRadius=10.f;
+    self.confirmButton.layer.shadowColor=[UIColor grayColor].CGColor;
+    self.confirmButton.layer.shadowOffset=CGSizeMake(0, 5);
+    self.confirmButton.layer.shadowOpacity=0.1;
+    self.confirmButton.layer.shadowRadius=3;
+    UIBezierPath * shadowPath=[UIBezierPath bezierPathWithRoundedRect:self.confirmButton.bounds cornerRadius:10.f];
+    self.confirmButton.layer.shadowPath=shadowPath.CGPath;
+    [self.view addSubview:self.confirmButton];
+    [self.confirmButton addTarget:self action:@selector(confirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     //地理位置
     UIView * locationView=[[UIView alloc]init];
     locationView.backgroundColor=[UIColor clearColor];
@@ -160,10 +160,10 @@
         make.right.equalTo(locationView.mas_right);
         make.height.equalTo(@(34));
     }];
-    UIButton * locationBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [locationBtn addTarget:self action:@selector(locationLabelTaped) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:locationBtn];
-    [locationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton * locationButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [locationButton addTarget:self action:@selector(locationLabelTaped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:locationButton];
+    [locationButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.locationLabel.mas_left);
         make.right.equalTo(self.locationLabel.mas_right);
         make.top.equalTo(self.locationLabel.mas_top);
@@ -229,13 +229,13 @@
         make.left.equalTo(self.predictView.mas_left).with.offset(25);
         make.centerY.equalTo(self.predictView.mas_centerY);
     }];
-    UIButton * revokeBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-    [revokeBtn setTitle:@"Revoke" forState:UIControlStateNormal];
-    [revokeBtn.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
-    [revokeBtn setTintColor:[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]];
-    [revokeBtn addTarget:self action:@selector(revokePrediction) forControlEvents:UIControlEventTouchUpInside];
-    [self.predictView addSubview:revokeBtn];
-    [revokeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton * revokeButton=[UIButton buttonWithType:UIButtonTypeSystem];
+    [revokeButton setTitle:@"Revoke" forState:UIControlStateNormal];
+    [revokeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+    [revokeButton setTintColor:[UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]];
+    [revokeButton addTarget:self action:@selector(revokePrediction) forControlEvents:UIControlEventTouchUpInside];
+    [self.predictView addSubview:revokeButton];
+    [revokeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.predictView.mas_right).with.offset(-25);
         make.centerY.equalTo(self.predictView.mas_centerY);
         make.height.equalTo(@(14));
@@ -252,7 +252,7 @@
     [self.categoryScrollView setHighlightCategory:self.editModeOldBill.category];
     self.inputView.text=[NSString stringWithFormat:@"%.2lf",self.editModeOldBill.value];
     self.inputView.isEdited=YES;
-    self.editModeOldBill.isOut?[self.inoutSwitchBtn chooseOut]:[self.inoutSwitchBtn chooseIn];
+    self.editModeOldBill.isOut?[self.inoutSwitchButton chooseOut]:[self.inoutSwitchButton chooseIn];
     self.date=self.editModeOldBill.date;
     self.location=self.editModeOldBill.location;
 }
@@ -370,9 +370,9 @@
     NSDictionary *userInfo = [notification userInfo];
     NSValue *value = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [value CGRectValue];
-    CGRect frame=self.confirmBtn.frame;
+    CGRect frame=self.confirmButton.frame;
     frame.origin.y=keyboardRect.origin.y-frame.size.height-33;
-    self.confirmBtn.frame=frame;
+    self.confirmButton.frame=frame;
 }
 
 //******************************ABOUT TEXTFIELD************************************//
@@ -436,9 +436,9 @@
 }
 //*********************************************************************************//
 
--(void)confirmBtnClicked{
+-(void)confirmButtonClicked{
     if (self.editMode) {
-        OBBill * newBill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+        OBBill * newBill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchButton.isOut];
         [[OBBillManager sharedInstance] editBillOfDate:self.editModeOldBill.date Value:self.editModeOldBill.value withBill:newBill];
         [[OBBillManager sharedInstance] updateSumOfDay:newBill.date];
         [[OBBillManager sharedInstance] updateSumOfDay:self.editModeOldBill.date];
@@ -446,7 +446,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else{
-        OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchBtn.isOut];
+        OBBill * bill=[[OBBill alloc]initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchButton.isOut];
         [[OBBillManager sharedInstance] insertBill:bill];
         [[OBBillManager sharedInstance] updateSumOfDay:bill.date];
         [self.navigationController popViewControllerAnimated:YES];
@@ -496,7 +496,7 @@
     }
 }
 
-- (void)returnBtnClicked{
+- (void)returnButtonClicked{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

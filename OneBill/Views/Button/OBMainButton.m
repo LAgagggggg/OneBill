@@ -15,7 +15,7 @@
 @interface OBMainButton()
 @property (nonatomic, strong) UIImageView * icon;
 @property (nonatomic, strong) UILabel * label;
-@property (nonatomic, strong) UIButton * btn;
+@property (nonatomic, strong) UIButton * Button;
 @end
 
 @implementation OBMainButton
@@ -94,17 +94,17 @@
             }];
         }
         //添加按钮效果
-        self.btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        self.btn.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.btn];
-        [self.btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.Button=[UIButton buttonWithType:UIButtonTypeCustom];
+        self.Button.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.Button];
+        [self.Button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top);
             make.bottom.equalTo(self.mas_bottom);
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
         }];
-        [self.btn addTarget:self action:@selector(buttonDim) forControlEvents:UIControlEventTouchDown];
-        [self.btn addTarget:self action:@selector(buttonBright) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside ];
+        [self.Button addTarget:self action:@selector(buttonDim) forControlEvents:UIControlEventTouchDown];
+        [self.Button addTarget:self action:@selector(buttonBright) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside ];
     }
     return self;
 }
@@ -125,11 +125,11 @@
 }
 
 -(void)addTarget:(id)tar action:(SEL)sel forControlEvents:(UIControlEvents)event{
-    [self.btn addTarget:tar action:sel forControlEvents:event];
+    [self.Button addTarget:tar action:sel forControlEvents:event];
 }
 
 - (void)cancelHighlight{
-    self.btn.highlighted=NO;
+    self.Button.highlighted=NO;
     [self buttonBright];
 }
 

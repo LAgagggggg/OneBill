@@ -140,8 +140,8 @@
 }
 
 - (void)didClickOneView:(id)sender{
-    UIButton * clickedBtn=(UIButton *)sender;
-    CategoryView * clickedView=(CategoryView *)clickedBtn.superview;
+    UIButton * clickedButton=(UIButton *)sender;
+    CategoryView * clickedView=(CategoryView *)clickedButton.superview;
     if (self.selectedView!=clickedView) {
         [UIView animateWithDuration:0.3 animations:^{
             [clickedView highlight];

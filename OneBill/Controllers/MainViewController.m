@@ -28,7 +28,7 @@
 
 @interface MainViewController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) OBMainButton * checkBtn;
+@property (strong, nonatomic) OBMainButton * checkButton;
 @property (strong, nonatomic) TodaySayingView * sayingView;
 @property double todaySpend;
 @property (nonatomic, strong) OBInteractiveTransition * interactivePushToDetail;
@@ -36,7 +36,7 @@
 @property (nonatomic, strong) BillDetailViewController * todayDetailVC;
 @property (nonatomic, strong) DaySummaryViewController * summaryVC;
 @property (nonatomic, strong) UIImpactFeedbackGenerator * impactFeedBack;
-@property (nonatomic, strong) UIButton * menuBtn;
+@property (nonatomic, strong) UIButton * menuButton;
 
 @end
 
@@ -69,19 +69,19 @@
     //导航栏颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
-    UIBarButtonItem * menuItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"mainMenuBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonClicked)];
+    UIBarButtonItem * menuItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"mainMenuButton"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonClicked)];
     self.navigationItem.leftBarButtonItem=menuItem;
     //左上角按钮
-//    self.menuBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-//    [self.view addSubview:self.menuBtn];
-//    [self.menuBtn mas_makeConstraints:^(MASConstraintMaker * make) {
+//    self.menuButton=[UIButton buttonWithType:UIButtonTypeSystem];
+//    [self.view addSubview:self.menuButton];
+//    [self.menuButton mas_makeConstraints:^(MASConstraintMaker * make) {
 //        make.left.equalTo(self.view.mas_left).with.offset(14);
 //        make.top.equalTo(self.view.mas_top).with.offset(40*screenHeightAdaptRatio);
 //        make.width.height.mas_equalTo(15);
 //    }];
-//    [self.menuBtn setImage:[UIImage imageNamed:@"mainMenuBtn"] forState:UIControlStateNormal];
-//    [self.menuBtn setTintColor:[UIColor darkGrayColor]];
-//    [self.menuBtn addTarget:self action:@selector(menuButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self.menuButton setImage:[UIImage imageNamed:@"mainMenuButton"] forState:UIControlStateNormal];
+//    [self.menuButton setTintColor:[UIColor darkGrayColor]];
+//    [self.menuButton addTarget:self action:@selector(menuButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     //顶部文字
     self.sayingView=[[TodaySayingView alloc] initWithLine:@[@"One Bill A Day", @"Keeps worries away."]];
     [self.view addSubview:self.sayingView];
@@ -101,28 +101,28 @@
         make.height.equalTo(@(229*screenHeightAdaptRatio));
     }];
     //按钮
-    self.addBtn=[[OBMainButton alloc] initWithType:OBButtonTypeAdd];
-    [self.view addSubview:self.addBtn];
-    [self.addBtn mas_makeConstraints:^(MASConstraintMaker * make) {
+    self.addButton=[[OBMainButton alloc] initWithType:OBButtonTypeAdd];
+    [self.view addSubview:self.addButton];
+    [self.addButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerX.equalTo(self.view.mas_centerX);
         make.centerY.equalTo(self.todayCardView.mas_bottom);
         make.height.equalTo(@(66));
         make.width.equalTo(@(200));
     }];
-    [self.addBtn addTarget:self action:@selector(addNewBill) forControlEvents:UIControlEventTouchUpInside];
-    [self.addBtn addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
-    [self.addBtn addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
-    self.checkBtn=[[OBMainButton alloc] initWithType:OBButtonTypeCheck];
-    [self.view addSubview:self.checkBtn];
-    [self.checkBtn mas_makeConstraints:^(MASConstraintMaker * make) {
+    [self.addButton addTarget:self action:@selector(addNewBill) forControlEvents:UIControlEventTouchUpInside];
+    [self.addButton addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
+    [self.addButton addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
+    self.checkButton=[[OBMainButton alloc] initWithType:OBButtonTypeCheck];
+    [self.view addSubview:self.checkButton];
+    [self.checkButton mas_makeConstraints:^(MASConstraintMaker * make) {
         make.centerX.equalTo(self.view.mas_centerX);
-        make.top.equalTo(self.addBtn.mas_bottom).with.offset(18);
+        make.top.equalTo(self.addButton.mas_bottom).with.offset(18);
         make.height.equalTo(@(42));
         make.width.equalTo(@(200));
     }];
-    [self.checkBtn addTarget:self action:@selector(checkBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.checkBtn addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
-    [self.checkBtn addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
+    [self.checkButton addTarget:self action:@selector(checkButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.checkButton addTarget:self action:@selector(makeImpact) forControlEvents:UIControlEventTouchDown|UIControlEventTouchUpInside];
+    [self.checkButton addTarget:self action:@selector(makeImpactWhenMoveOut:) forControlEvents:UIControlEventTouchDragExit];
     //进入今日账单详情的手势
     UITapGestureRecognizer * tapForToday=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterTodayDetail)];
     [self.todayCardView addGestureRecognizer:tapForToday];
@@ -170,8 +170,8 @@
 }
 
 - (void)makeImpactWhenMoveOut:(UIButton *)button {
-    OBMainButton * btn=(OBMainButton *) button.superview;
-    [btn cancelHighlight];
+    OBMainButton * Button=(OBMainButton *) button.superview;
+    [Button cancelHighlight];
     [self.impactFeedBack impactOccurred];
 }
 
@@ -188,11 +188,11 @@
 
 - (void)addNewBill {
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc] init];
-    addVC.pushAnimationStartPoint=self.addBtn.center;
+    addVC.pushAnimationStartPoint=self.addButton.center;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
-- (void)checkBtnClicked {
+- (void)checkButtonClicked {
     CheckBillsViewController * vc=[[CheckBillsViewController alloc] initWithDate:[NSDate date]];
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -33,9 +33,9 @@
 //        subview.backgroundColor=[UIColor clearColor];
 //        subview.layer.cornerRadius=10.f;
 //        subview.layer.masksToBounds=YES;
-//        UIView * deleteBtn=subview.subviews[0];
-//        deleteBtn.layer.cornerRadius=10.f;
-//        deleteBtn.layer.masksToBounds=YES;
+//        UIView * deleteButton=subview.subviews[0];
+//        deleteButton.layer.cornerRadius=10.f;
+//        deleteButton.layer.masksToBounds=YES;
 //    }
 //}
 

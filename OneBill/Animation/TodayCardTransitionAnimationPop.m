@@ -48,19 +48,19 @@ static float animationDuration=0.5;
     fromImgView.layer.shadowRadius=12;
     [containView addSubview:fromImgView];
     //button
-    UIView * addBtnImgView=[toVC.addBtn snapshotViewAfterScreenUpdates:YES];
-    addBtnImgView.frame=toVC.addBtn.frame;
-    addBtnImgView.layer.cornerRadius=10.f;
-    [containView addSubview:addBtnImgView];
+    UIView * addButtonImgView=[toVC.addButton snapshotViewAfterScreenUpdates:YES];
+    addButtonImgView.frame=toVC.addButton.frame;
+    addButtonImgView.layer.cornerRadius=10.f;
+    [containView addSubview:addButtonImgView];
     //准备动画
     fromVC.summaryCardView.hidden=YES;
     toVC.view.alpha=0;
-    addBtnImgView.alpha=0;
+    addButtonImgView.alpha=0;
     [UIView animateWithDuration:animationDuration animations:^{
         fromVC.view.alpha=0;
         if (![self.transitionContext transitionWasCancelled]) {
             toVC.view.alpha=1;
-            addBtnImgView.alpha=1;
+            addButtonImgView.alpha=1;
         }
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:animationDuration animations:^{
@@ -70,7 +70,7 @@ static float animationDuration=0.5;
     [UIView replaceView:fromImgView withView:toVC.todayCardView duration:animationDuration backgroundColor:fromVC.summaryCardView.backgroundColor transitionContext:self.transitionContext completion:^(BOOL finished) {
         fromVC.view.alpha=1;
         fromVC.summaryCardView.hidden=NO;
-        addBtnImgView.hidden=YES;
+        addButtonImgView.hidden=YES;
         [self.transitionContext completeTransition:![self.transitionContext transitionWasCancelled]];
         //转场失败后的处理
         if ([transitionContext transitionWasCancelled]) {

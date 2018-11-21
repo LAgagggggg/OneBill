@@ -15,7 +15,7 @@
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]
 
 @interface BillValueInputView()
-@property (nonatomic, strong) UIButton * clearBtn;
+@property (nonatomic, strong) UIButton * clearButton;
 @property (nonatomic, strong) UILabel * moneyLabel;
 @end
 
@@ -36,21 +36,21 @@
             make.bottom.equalTo(self.mas_bottom);
             make.width.equalTo(@(36));
         }];
-        self.clearBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-        self.clearBtn.backgroundColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:0.1];
-        self.clearBtn.tintColor=textGrayColor;
-        self.clearBtn.frame=CGRectMake(0, 0, 24, 24);
-        self.clearBtn.layer.cornerRadius=12;
-        [self.clearBtn setTitle:@"" forState:UIControlStateNormal];
-        [self.clearBtn setImage:[UIImage imageNamed:@"clearBtn"] forState:UIControlStateNormal];
-        [self addSubview:self.clearBtn];
-        [self.clearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.clearButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        self.clearButton.backgroundColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:0.1];
+        self.clearButton.tintColor=textGrayColor;
+        self.clearButton.frame=CGRectMake(0, 0, 24, 24);
+        self.clearButton.layer.cornerRadius=12;
+        [self.clearButton setTitle:@"" forState:UIControlStateNormal];
+        [self.clearButton setImage:[UIImage imageNamed:@"clearButton"] forState:UIControlStateNormal];
+        [self addSubview:self.clearButton];
+        [self.clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.mas_right);
             make.centerY.equalTo(self.mas_centerY);
             make.width.equalTo(@(24));
             make.height.equalTo(@(24));
         }];
-        [self.clearBtn addTarget:self action:@selector(clearAndEnactived) forControlEvents:UIControlEventTouchUpInside];
+        [self.clearButton addTarget:self action:@selector(clearAndEnactived) forControlEvents:UIControlEventTouchUpInside];
         self.textField=[[UITextField alloc]init];
         self.textField.tintColor=DarkBlueColor;
         self.textField.text=@"0.00";
@@ -65,7 +65,7 @@
             make.top.equalTo(self.mas_top);
             make.bottom.equalTo(self.mas_bottom);
             make.left.equalTo(self.moneyLabel.mas_right);
-            make.right.equalTo(self.clearBtn.mas_left);
+            make.right.equalTo(self.clearButton.mas_left);
         }];
         self.textField.adjustsFontSizeToFitWidth=YES;
         [self makeTextCursorToIndex:0];

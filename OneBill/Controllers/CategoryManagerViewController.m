@@ -24,9 +24,9 @@
 @property (strong, nonatomic) NSMutableIndexSet * selectedIndexSet;
 @property (strong, nonatomic) NSMutableArray<NSString *> * categoryArr;
 @property (strong, nonatomic) CategoryManagerCell * addCell;
-@property (strong, nonatomic) UIButton * addBtn;
-@property (strong, nonatomic) UIBarButtonItem * deleteBtn;
-@property (strong, nonatomic) UIBarButtonItem * doneBtn;
+@property (strong, nonatomic) UIButton * addButton;
+@property (strong, nonatomic) UIBarButtonItem * deleteButton;
+@property (strong, nonatomic) UIBarButtonItem * doneButton;
 @property (strong, nonatomic) UITapGestureRecognizer * tapGestureRecognizer;
 @property BOOL isAdding;
 @property BOOL isMultiDeleting;
@@ -75,14 +75,14 @@ static float animationDuration=0.3;
 - (void)setUI {
     self.automaticallyAdjustsScrollViewInsets=NO;
     //设置导航栏返回按钮
-    UIBarButtonItem * returnBarBtn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"returnBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnBtnClicked)];
-    self.navigationItem.leftBarButtonItem=returnBarBtn;
+    UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"returnButton"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
+    self.navigationItem.leftBarButtonItem=returnBarButton;
     self.navigationController.interactivePopGestureRecognizer.delegate=self;
     self.navigationItem.title=@"Categories";
     self.view.backgroundColor=grayWhiteColor;
-    self.deleteBtn=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"categoryDeleteBtn"] style:UIBarButtonItemStylePlain target:self action:@selector(beginMultiDelete)];
-    self.doneBtn=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneMultiDelete)];
-    self.navigationItem.rightBarButtonItem=self.deleteBtn;
+    self.deleteButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"categoryDeleteButton"] style:UIBarButtonItemStylePlain target:self action:@selector(beginMultiDelete)];
+    self.doneButton=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneMultiDelete)];
+    self.navigationItem.rightBarButtonItem=self.deleteButton;
     //顶部阴影
     CGRect rectStatus=[[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav=self.navigationController.navigationBar.frame;
@@ -121,7 +121,7 @@ static float animationDuration=0.3;
     [self.view bringSubviewToFront:self.shadowView];
 }
 
-- (void)returnBtnClicked {
+- (void)returnButtonClicked {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -168,24 +168,24 @@ static float animationDuration=0.3;
 #pragma mark - add&edit category
 
 - (void)setBottomCell:(CategoryManagerCell *)cell {
-    [cell.editBtn setHidden:YES];
+    [cell.editButton setHidden:YES];
     [cell.categoryTextField setHidden:YES];
     cell.categoryTextField.userInteractionEnabled=YES;
     cell.categoryTextField.delegate=self;
-    self.addBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-    [self.addBtn setTintColor:textGrayColor];
-    [self.addBtn setImage:[UIImage imageNamed:@"categoryAddBtn_dim"] forState:UIControlStateNormal];
-    [cell.contentView addSubview:self.addBtn];
-    [self.addBtn mas_remakeConstraints:^(MASConstraintMaker * make) {
+    self.addButton=[UIButton buttonWithType:UIButtonTypeSystem];
+    [self.addButton setTintColor:textGrayColor];
+    [self.addButton setImage:[UIImage imageNamed:@"categoryAddButton_dim"] forState:UIControlStateNormal];
+    [cell.contentView addSubview:self.addButton];
+    [self.addButton mas_remakeConstraints:^(MASConstraintMaker * make) {
         make.left.equalTo(cell.contentView.mas_left);
         make.right.equalTo(cell.contentView.mas_right);
         make.top.equalTo(cell.contentView.mas_top);
         make.bottom.equalTo(cell.contentView.mas_bottom);
     }];
-    [self.addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.addButton addTarget:self action:@selector(addButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)addBtnClicked:(UIButton *)sender {
+- (void)addButtonClicked:(UIButton *)sender {
     self.isAdding=YES;
     sender.hidden=YES;
     self.addCell.categoryTextField.hidden=NO;
@@ -230,7 +230,7 @@ static float animationDuration=0.3;
         }
     }
     self.isAdding=NO;
-    self.addBtn.hidden=NO;
+    self.addButton.hidden=NO;
     self.addCell.categoryTextField.text=@"";
     self.addCell.categoryTextField.hidden=YES;
 }
@@ -241,7 +241,7 @@ static float animationDuration=0.3;
     self.isMultiDeleting=YES;
 //    self.tableView.editing=NO;
     self.tapGestureRecognizer.enabled=NO;
-    self.navigationItem.rightBarButtonItem=self.doneBtn;
+    self.navigationItem.rightBarButtonItem=self.doneButton;
     [UIView animateWithDuration:animationDuration animations:^{
         self.navigationItem.title=@"Multiple Delete";
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
@@ -265,7 +265,7 @@ static float animationDuration=0.3;
         [[CategoryManager sharedInstance] writeToFile];
         [self.selectedIndexSet removeAllIndexes];
     }
-    self.navigationItem.rightBarButtonItem=self.deleteBtn;
+    self.navigationItem.rightBarButtonItem=self.deleteButton;
     [UIView animateWithDuration:animationDuration animations:^{
         self.navigationItem.title=@"Categories";
         self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1];

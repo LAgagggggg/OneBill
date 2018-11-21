@@ -15,7 +15,7 @@
 #import <MBProgressHUD.h>
 
 @interface OBCategoryChooseView()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic, strong) UIButton * bottomBtn;
+@property (nonatomic, strong) UIButton * bottomButton;
 @property (nonatomic, strong) UIView * actualView;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray<NSString *> * categoryArr;
@@ -55,22 +55,22 @@ CGFloat foldPositionY;
             make.right.equalTo(self.mas_right);
             make.top.equalTo(self.mas_bottom).with.offset(-foldPositionY);
         }];
-        self.bottomBtn=[UIButton buttonWithType:UIButtonTypeSystem];
-        [self.bottomBtn setImage:[UIImage imageNamed:@"categoryAddBtn"] forState:UIControlStateNormal];
-        [self.bottomBtn setImageEdgeInsets:UIEdgeInsetsMake(14, ([UIScreen mainScreen].bounds.size.width-16)/2, 14, ([UIScreen mainScreen].bounds.size.width-16)/2)];
-        [self.actualView addSubview:self.bottomBtn];
-        [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.bottomButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        [self.bottomButton setImage:[UIImage imageNamed:@"categoryAddButton"] forState:UIControlStateNormal];
+        [self.bottomButton setImageEdgeInsets:UIEdgeInsetsMake(14, ([UIScreen mainScreen].bounds.size.width-16)/2, 14, ([UIScreen mainScreen].bounds.size.width-16)/2)];
+        [self.actualView addSubview:self.bottomButton];
+        [self.bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.actualView.mas_left);
             make.right.equalTo(self.actualView.mas_right);
             make.bottom.equalTo(self.actualView.mas_bottom).with.offset(-14);
             make.height.equalTo(@(44));
         }];
-        [self.bottomBtn addTarget:self action:@selector(addCategory) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomButton addTarget:self action:@selector(addCategory) forControlEvents:UIControlEventTouchUpInside];
         self.tableView=[[UITableView alloc]init];
         [self.actualView addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.actualView.mas_top).with.offset(14);
-            make.bottom.equalTo(self.bottomBtn.mas_top).with.offset(-9);
+            make.bottom.equalTo(self.bottomButton.mas_top).with.offset(-9);
             make.left.equalTo(self.actualView.mas_left);
             make.right.equalTo(self.actualView.mas_right);
         }];
@@ -145,7 +145,7 @@ CGFloat foldPositionY;
     }
 }
 
-//bottomBtnAction
+//bottomButtonAction
 - (void)addCategory{
     //确认按钮随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:)                                           name:UIKeyboardWillChangeFrameNotification object:nil];

@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
 } OBTimeLabelPreference;
 
 @interface OBDetailCardCell : UITableViewCell
-@property (nonatomic, strong) UIButton * categoryBtn;
+@property (nonatomic, strong) UIButton * categoryButton;
 //adapt for under iOS11
 @property BOOL frameSetFlag;
 @property BOOL frameSolidFlag;
