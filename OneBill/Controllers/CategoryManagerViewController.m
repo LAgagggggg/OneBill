@@ -11,7 +11,7 @@
 #import <MBProgressHUD.h>
 #import "CategoryManagerViewController.h"
 #import  "CategoryManagerCell.h"
-#import  "CategoryManager.h"
+#import  "OBCategoryManager.h"
 
 #define grayWhiteColor [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
@@ -39,7 +39,7 @@ static float animationDuration=0.3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
+    self.categoryArr=[OBCategoryManager sharedInstance].categoriesArr.mutableCopy;
     [self setUI];
     //添加cell随键盘移动
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -219,8 +219,8 @@ static float animationDuration=0.3;
     if (textField.text.length) {
         if (![self.categoryArr containsObject:textField.text]) {
             [self.categoryArr addObject:textField.text];
-            [[CategoryManager sharedInstance].categoriesArr addObject:textField.text];
-            [[CategoryManager sharedInstance] writeToFile];
+            [[OBCategoryManager sharedInstance].categoriesArr addObject:textField.text];
+            [[OBCategoryManager sharedInstance] writeToFile];
             [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         } else {
             MBProgressHUD * hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -260,9 +260,9 @@ static float animationDuration=0.3;
 //    self.tableView.editing=YES;
     self.tapGestureRecognizer.enabled=YES;
     if (self.selectedIndexSet.count) {
-        [[CategoryManager sharedInstance].categoriesArr removeObjectsAtIndexes:self.selectedIndexSet];
-        self.categoryArr=[CategoryManager sharedInstance].categoriesArr.mutableCopy;
-        [[CategoryManager sharedInstance] writeToFile];
+        [[OBCategoryManager sharedInstance].categoriesArr removeObjectsAtIndexes:self.selectedIndexSet];
+        self.categoryArr=[OBCategoryManager sharedInstance].categoriesArr.mutableCopy;
+        [[OBCategoryManager sharedInstance] writeToFile];
         [self.selectedIndexSet removeAllIndexes];
     }
     self.navigationItem.rightBarButtonItem=self.deleteButton;
@@ -320,8 +320,8 @@ static float animationDuration=0.3;
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.categoryArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-        [[CategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-        [[CategoryManager sharedInstance] writeToFile];
+        [[OBCategoryManager sharedInstance].categoriesArr exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+        [[OBCategoryManager sharedInstance] writeToFile];
     });
 }
 

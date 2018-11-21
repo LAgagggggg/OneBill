@@ -10,7 +10,7 @@
 
 #import "OBCategoryChooseView.h"
 #import "OBCategoryChooseViewCell.h"
-#import "CategoryManager.h"
+#import "OBCategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
@@ -179,8 +179,8 @@ CGFloat foldPositionY;
                 [self.categoryArr addObject:self.addingField.text];
                 [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.categoryArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                [[CategoryManager sharedInstance].categoriesArr addObject:self.addingField.text];
-                [[CategoryManager sharedInstance]writeToFile];
+                [[OBCategoryManager sharedInstance].categoriesArr addObject:self.addingField.text];
+                [[OBCategoryManager sharedInstance]writeToFile];
             }
             else{//否则提示
                 MBProgressHUD* hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];

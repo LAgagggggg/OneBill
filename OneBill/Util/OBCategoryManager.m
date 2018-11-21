@@ -1,26 +1,26 @@
 //
-//  CategoryManager.m
+//  OBCategoryManager.m
 //  OneBill
 //
 //  Created by LAgagggggg on 2018/7/18.
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import "CategoryManager.h"
+#import "OBCategoryManager.h"
 
-@interface CategoryManager()
+@interface OBCategoryManager()
 
 @property (nonatomic, strong)  void(^categoriesEditedHandler)(void);
 
 @end
 
-@implementation CategoryManager
+@implementation OBCategoryManager
 
-+(CategoryManager *)sharedInstance{
-    static CategoryManager * manager=nil;
++(OBCategoryManager *)sharedInstance{
+    static OBCategoryManager * manager=nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager=[[CategoryManager alloc]init];
+        manager=[[OBCategoryManager alloc]init];
         NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsPath = [path objectAtIndex:0];
         NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"categoryArr.plist"];

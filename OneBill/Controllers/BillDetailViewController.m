@@ -12,7 +12,7 @@
 #import "OBDaySummaryCardView.h"
 #import "OBDetailCardCell.h"
 #import "OBCategoryChooseView.h"
-#import "CategoryManager.h"
+#import "OBCategoryManager.h"
 #import "OBDetailTableView.h"
 
 
@@ -127,7 +127,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.estimatedRowHeight=117;
     [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];
-    self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[CategoryManager sharedInstance].categoriesArr];
+    self.categoryChooseView=[[OBCategoryChooseView alloc]initWithCategories:[OBCategoryManager sharedInstance].categoriesArr];
     [self.view addSubview:self.categoryChooseView];
     self.categoryChooseView.frame=CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]init];

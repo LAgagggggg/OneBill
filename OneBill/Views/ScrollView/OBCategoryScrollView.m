@@ -8,7 +8,7 @@
 
 #import "OBCategoryScrollView.h"
 #import "OBBillManager.h"
-#import "CategoryManager.h"
+#import "OBCategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
@@ -155,9 +155,9 @@
 -(void)textFieldDidEndEditing{
     if(self.addTextField.text.length ){
         if (![[NSSet setWithArray:self.categoryArr] containsObject:self.addTextField.text]) {
-            [[CategoryManager sharedInstance].categoriesArr addObject:self.addTextField.text];
-            [[CategoryManager sharedInstance]writeToFile];
-            self.categoryArr=[CategoryManager sharedInstance].categoriesArr;
+            [[OBCategoryManager sharedInstance].categoriesArr addObject:self.addTextField.text];
+            [[OBCategoryManager sharedInstance]writeToFile];
+            self.categoryArr=[OBCategoryManager sharedInstance].categoriesArr;
             float needWidth=self.contentSize.width;
             CategoryView * cView=[[CategoryView alloc]initWithCategory:self.addTextField.text];
             [self.addTextField.superview removeFromSuperview];

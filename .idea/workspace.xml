@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90e3ee8a-579a-4376-8a3a-f3d2b44bad75" name="Default" comment="add some animation">
+    <list default="true" id="90e3ee8a-579a-4376-8a3a-f3d2b44bad75" name="Default" comment="minor refactor on naming">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill.xcworkspace/xcuserdata/lagagggggg.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/BillDetailViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/BillDetailViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/CategoryManagerViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/CategoryManagerViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/CheckBillsViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/CheckBillsViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Util/CategoryManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Util/OBCategoryManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Util/CategoryManager.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Util/OBCategoryManager.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Util/OBBillManager.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Util/OBBillManager.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Views/Cell/CategoryManagerCell.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Views/Cell/CategoryManagerCell.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Views/ScrollView/OBCategoryChooseView.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Views/ScrollView/OBCategoryChooseView.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OneBill/Views/ScrollView/OBCategoryScrollView.m" beforeDir="false" afterPath="$PROJECT_DIR$/OneBill/Views/ScrollView/OBCategoryScrollView.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,43 +32,44 @@
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.appcode.build">
         <counts>
-          <entry key="xcodebuild" value="30" />
+          <entry key="xcodebuild" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="h" value="5" />
-          <entry key="m" value="8" />
+          <entry key="h" value="7" />
+          <entry key="m" value="12" />
           <entry key="pch" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="ObjectiveC" value="14" />
+          <entry key="ObjectiveC" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="h" value="10" />
-          <entry key="m" value="2322" />
+          <entry key="h" value="12" />
+          <entry key="m" value="2359" />
           <entry key="pch" value="22" />
-          <entry key="txt" value="58" />
+          <entry key="txt" value="83" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="2354" />
-          <entry key="PLAIN_TEXT" value="58" />
+          <entry key="ObjectiveC" value="2393" />
+          <entry key="PLAIN_TEXT" value="83" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.appcode.reveal">
         <counts>
-          <entry key="inject" value="22" />
+          <entry key="inject" value="24" />
           <entry key="installOnDevice" value="19" />
           <entry key="showInReveal" value="1" />
         </counts>
@@ -66,52 +79,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OneBill/Controllers/BillDetailViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="81" column="7" selection-start-line="81" selection-start-column="7" selection-end-line="81" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OneBill/Controllers/MainViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="252" lean-forward="true" selection-start-line="252" selection-end-line="252" />
-              <folding>
-                <element signature="e#133#152#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OneBill/Animation/TodayCardTransitionAnimationPush.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="117" selection-start-line="31" selection-start-column="117" selection-end-line="31" selection-end-column="117" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OneBill/Animation/MainToSummaryTransitionAnimationPop.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="34" column="53" selection-start-line="27" selection-start-column="4" selection-end-line="34" selection-end-column="53" />
-              <folding>
-                <element signature="e#153#200#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="172" column="26" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
+            <state relative-caret-position="294">
+              <caret line="184" column="31" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
               <folding>
                 <element signature="e#98#133#0" expanded="true" />
               </folding>
@@ -120,19 +91,52 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.h">
+        <entry file="file://$PROJECT_DIR$/OneBill/Animation/GotoAddTransitionAnimationPush.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+            <state relative-caret-position="255">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OneBill/Animation/UIView+ReplaceAnimation.h">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OneBill/Animation/UIView+ReplaceAnimation.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OneBill/Models/LocationPickerAnnotation.m">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OneBill/Util/OBCategoryManager.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OneBill/Util/OBCategoryManager.m">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="275">
+              <caret line="380" lean-forward="true" selection-start-line="380" selection-end-line="380" />
             </state>
           </provider>
         </entry>
@@ -160,9 +164,11 @@
     <findStrings>
       <find>hud</find>
       <find>(strong,nonatomic)</find>
+      <find>Btn</find>
     </findStrings>
     <replaceStrings>
       <replace>(nonatomic, strong)</replace>
+      <replace>Button</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,6 +189,10 @@
         <option value="$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.h" />
         <option value="$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m" />
         <option value="$PROJECT_DIR$/OneBill/Controllers/MainViewController.m" />
+        <option value="$PROJECT_DIR$/OneBill/Animation/UIView+ReplaceAnimation.m" />
+        <option value="$PROJECT_DIR$/OneBill/Util/CategoryManager.h" />
+        <option value="$PROJECT_DIR$/OneBill/Util/OBCategoryManager.h" />
+        <option value="$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m" />
       </list>
     </option>
   </component>
@@ -206,6 +216,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,6 +229,12 @@
               <item name="" type="efc3779f:XcodeRootNode" />
               <item name="OneBill" type="1d218c8b:XcodeProjectNode" />
               <item name="OneBill" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="OneBill" type="1d218c8b:XcodeProjectNode" />
+              <item name="OneBill" type="fcab9f18:XcodeViewNode" />
+              <item name="Util" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
@@ -236,23 +254,16 @@
               <item name="OneBill" type="fcab9f18:XcodeViewNode" />
               <item name="Controllers" type="fcab9f18:XcodeViewNode" />
             </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="OneBill" type="1d218c8b:XcodeProjectNode" />
-              <item name="LaunchIntroduceVideo" type="fcab9f18:XcodeViewNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Cidr.FilesView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="OneBill" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++/Objective-C" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -295,6 +306,7 @@
       <workItem from="1542274682597" duration="7111000" />
       <workItem from="1542369176831" duration="19000" />
       <workItem from="1542434794682" duration="5706000" />
+      <workItem from="1542812390074" duration="891000" />
     </task>
     <task id="LOCAL-00001" summary="refactor and add some UI">
       <created>1542282984926</created>
@@ -317,22 +329,30 @@
       <option name="project" value="LOCAL" />
       <updated>1542286762980</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="minor refactor on naming">
+      <created>1542812642977</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1542812642977</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17515000" />
+    <option name="totallyTimeSpent" value="18406000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1477" y="-128" width="1811" height="988" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15036744" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32915717" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25223213" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32866243" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2522293" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -340,7 +360,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32915717" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32919255" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.39174107" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3910828" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -359,7 +379,8 @@
     <MESSAGE value="refactor and add some UI" />
     <MESSAGE value="minor UI fixed" />
     <MESSAGE value="add some animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some animation" />
+    <MESSAGE value="minor refactor on naming" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor refactor on naming" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/OneBill/Models/OBBill.m">
@@ -437,6 +458,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/MainViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3780">
+          <caret line="253" selection-start-line="253" selection-end-line="253" />
+          <folding>
+            <element signature="e#133#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OneBill/Animation/TodayCardTransitionAnimationPush.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -444,10 +475,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m">
+    <entry file="file://$PROJECT_DIR$/OneBill/Animation/MainToSummaryTransitionAnimationPop.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="510">
+          <caret line="34" column="53" selection-start-line="27" selection-start-column="4" selection-end-line="34" selection-end-column="53" />
+          <folding>
+            <element signature="e#153#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -464,40 +505,50 @@
     <entry file="file://$PROJECT_DIR$/OneBill/Animation/TodayCardTransitionAnimationPush.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/OneBill/Animation/MainToSummaryTransitionAnimationPop.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="34" column="53" selection-start-line="27" selection-start-column="4" selection-end-line="34" selection-end-column="53" />
-          <folding>
-            <element signature="e#153#200#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/MainViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="252" lean-forward="true" selection-start-line="252" selection-end-line="252" />
-          <folding>
-            <element signature="e#133#152#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OneBill/Controllers/IntroduceViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="172" column="26" selection-start-line="172" selection-start-column="26" selection-end-line="172" selection-end-column="26" />
+        <state relative-caret-position="294">
+          <caret line="184" column="31" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
           <folding>
             <element signature="e#98#133#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Animation/GotoAddTransitionAnimationPush.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Animation/UIView+ReplaceAnimation.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Animation/UIView+ReplaceAnimation.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Models/LocationPickerAnnotation.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Util/OBCategoryManager.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Util/OBCategoryManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OneBill/Controllers/NewOrEditBillViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="380" lean-forward="true" selection-start-line="380" selection-end-line="380" />
         </state>
       </provider>
     </entry>

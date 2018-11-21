@@ -1,5 +1,5 @@
 //
-//  CategoryManager.h
+//  OBCategoryManager.h
 //  OneBill
 //
 //  Created by LAgagggggg on 2018/7/18.
@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CategoryManager : NSObject
+@interface OBCategoryManager : NSObject
 
 @property (nonatomic, strong)  NSMutableArray<NSString *> * categoriesArr;
 
-+ (CategoryManager *)sharedInstance;
++ (OBCategoryManager *)sharedInstance;
 - (BOOL)replaceCategory:(NSString *)old withNewCategory:(NSString *)new;
 - (void)writeToFile;
 - (void)registerWriteToFileCallBack:(void(^)(void))handler;

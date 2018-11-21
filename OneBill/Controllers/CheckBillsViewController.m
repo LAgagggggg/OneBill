@@ -9,7 +9,7 @@
 #import <Masonry.h>
 #import "CheckBillsViewController.h"
 #import "CategoryManagerViewController.h"
-#import  "CategoryManager.h"
+#import  "OBCategoryManager.h"
 #import  "OBBillManager.h"
 #import  "OBDaySummaryCardView.h"
 #import  "OBDetailCardCell.h"
@@ -104,7 +104,7 @@ static NSString * const reuseIdentifier = @"Cell";
             self.categoryScrollView.alpha=0;
         } completion:^(BOOL finished) {
             [self.categoryScrollView removeFromSuperview];
-            self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
+            self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[OBCategoryManager sharedInstance].categoriesArr];
             self.categoryScrollView.alwaysShowSum=YES;
             [self.topView addSubview:self.categoryScrollView];
             [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,7 +119,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }];
     }
     else{
-        self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[CategoryManager sharedInstance].categoriesArr];
+        self.categoryScrollView=[[OBCategoryScrollView alloc]initWithCategorys:[OBCategoryManager sharedInstance].categoriesArr];
         self.categoryScrollView.alwaysShowSum=YES;
         [self.topView addSubview:self.categoryScrollView];
         [self.categoryScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -135,7 +135,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     self = [super init];
     if (self) {
-        self.currentCategory=[CategoryManager sharedInstance].categoriesArr[0];
+        self.currentCategory=[OBCategoryManager sharedInstance].categoriesArr[0];
         self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:date ofCategory:self.currentCategory].mutableCopy;
     }
     return self;
@@ -203,7 +203,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)moreButtonClicked{
-    [[CategoryManager sharedInstance] registerWriteToFileCallBack:^{
+    [[OBCategoryManager sharedInstance] registerWriteToFileCallBack:^{
         self.categoriesEditedFlag=YES;
     }];
     CategoryManagerViewController * vc=[[CategoryManagerViewController alloc]init];

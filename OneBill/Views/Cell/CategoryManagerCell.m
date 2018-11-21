@@ -7,7 +7,7 @@
 //
 
 #import "CategoryManagerCell.h"
-#import "CategoryManager.h"
+#import "OBCategoryManager.h"
 #import <masonry.h>
 #import <MBProgressHUD.h>
 
@@ -132,9 +132,9 @@ static float animationDuration=0.3;
     }
     else if (![textField.text isEqualToString:self.oldValue]){
         NSString * hudText;
-        if ([[CategoryManager sharedInstance] replaceCategory:self.oldValue withNewCategory:textField.text]) {
+        if ([[OBCategoryManager sharedInstance] replaceCategory:self.oldValue withNewCategory:textField.text]) {
             hudText=@"Category Successfully Edited";
-            [[CategoryManager sharedInstance] writeToFile];
+            [[OBCategoryManager sharedInstance] writeToFile];
         }
         else{
             hudText=@"Category Already Existed";
