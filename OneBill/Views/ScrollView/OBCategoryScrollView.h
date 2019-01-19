@@ -19,10 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)  UITextField * addTextField;
 @property (nonatomic) BOOL alwaysShowSum;
 @property (nonatomic, strong)  NSArray<NSString *> * categoryArr;
+@property (nonatomic, strong) NSDate * dateOfSum;
 
 - (instancetype)initWithCategorys:(NSArray<NSString *>*)categoriesArr;
 - (void)setHighlightCategory:(NSString *)category;
-- (void)updateCategoried;
+- (void)updateCategories;
 
 @end
 

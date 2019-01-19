@@ -129,6 +129,9 @@
 }
 
 - (void)backgroundClicked{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dateSelectView:didSelectDate:)]) {
+        [self.delegate dateSelectView:self didSelectDate:self.datePicker.date];
+    }
     [self dismiss];
 }
 

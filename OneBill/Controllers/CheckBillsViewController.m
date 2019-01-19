@@ -18,7 +18,9 @@
 
 #define CellEdgeInset 8
 
-@interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+@interface CheckBillsViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,PopUpDateSelectViewDelegate>
+
+@property (nonatomic, strong) NSDate * showingDate;
 
 @property (nonatomic, strong) NSMutableArray<OBBill *>* billsArr;
 @property (nonatomic, strong) UIView * topView;
@@ -100,6 +102,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.view addGestureRecognizer:self.textFieldResignTap];
     self.dateSelectView=[[PopUpDateSelectView alloc]initWithView:self.view];
     [self.view addSubview:self.dateSelectView];
+    self.dateSelectView.delegate=self;
 }
 
 - (void)setCategoryView{//in order to refresh the category scrollView after categories being edited
@@ -139,13 +142,14 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     self = [super init];
     if (self) {
+        _showingDate=date;
         self.currentCategory=[OBCategoryManager sharedInstance].categoriesArr[0];
-        self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:date ofCategory:self.currentCategory].mutableCopy;
+        self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:_showingDate ofCategory:self.currentCategory].mutableCopy;
     }
     return self;
 }
 
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OBDetailCardCell * cell=[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
@@ -176,7 +180,7 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"categoryScrollView.currentCategory"]&&object==self) {
         self.currentCategory=self.categoryScrollView.currentCategory;
-        self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:[NSDate date] ofCategory:self.currentCategory].mutableCopy;
+        self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:self.showingDate ofCategory:self.currentCategory].mutableCopy;
         [self.tableView setContentOffset:CGPointMake(0, 0)];
         [self.tableView reloadData];
     }
@@ -199,6 +203,16 @@ static NSString * const reuseIdentifier = @"Cell";
 //    }
 //    return YES;
 //}
+
+#pragma mark - popUpDateSelectView delegate
+
+-(void)dateSelectView:(PopUpDateSelectView *)dateSelectView didSelectDate:(NSDate *)date{
+    self.showingDate=date;
+    self.billsArr=[[OBBillManager sharedInstance]billsSameMonthAsDate:self.showingDate ofCategory:self.currentCategory].mutableCopy;
+    [self.tableView setContentOffset:CGPointMake(0, 0)];
+    [self.tableView reloadData];
+    self.categoryScrollView.dateOfSum=date;
+}
 
 #pragma mark - event response
 

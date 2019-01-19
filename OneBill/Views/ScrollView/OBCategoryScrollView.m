@@ -13,8 +13,11 @@
 #import <MBProgressHUD.h>
 
 @interface OBCategoryScrollView()<UIScrollViewDelegate>
+
 @property BOOL isLabelShowing;
 @property (nonatomic, strong)  UIView * sumLabelView;
+@property (nonatomic, strong)  NSMutableArray<UILabel *> * sumLabelArray;
+
 @end
 
 @implementation OBCategoryScrollView
@@ -24,6 +27,7 @@
     self = [super init];
     if (self) {
         self.delegate=self;
+        _dateOfSum=[NSDate date];
         self.categoryArr=categoriesArr;
         self.showsVerticalScrollIndicator=NO;
         self.showsHorizontalScrollIndicator=NO;
@@ -32,6 +36,7 @@
         float needWidth=0;
         int i=0;
         self.cViewArr=[[NSMutableArray alloc]init];
+        self.sumLabelArray=[[NSMutableArray alloc]init];
         self.sumLabelView=[[UIView alloc]init];
         self.sumLabelView.alpha=0;
         self.isLabelShowing=NO;
@@ -46,9 +51,10 @@
             UILabel * sumLabel=[[UILabel alloc]init];
             sumLabel.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
             sumLabel.textColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:0.5];
-            sumLabel.text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:category InMonthOfDate:[NSDate date]]];
+            sumLabel.text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:category InMonthOfDate:self.dateOfSum]];
             sumLabel.textAlignment=NSTextAlignmentCenter;
             [self.sumLabelView addSubview:sumLabel];
+            [self.sumLabelArray addObject:sumLabel];
             [cView layoutIfNeeded];
             needWidth+=cView.frame.size.width;
             [self addSubview:cView];
@@ -156,7 +162,7 @@
     if(self.addTextField.text.length ){
         if (![[NSSet setWithArray:self.categoryArr] containsObject:self.addTextField.text]) {
             [[OBCategoryManager sharedInstance].categoriesArr addObject:self.addTextField.text];
-            [[OBCategoryManager sharedInstance]writeToFile];
+            [[OBCategoryManager sharedInstance] writeToFile];
             self.categoryArr=[OBCategoryManager sharedInstance].categoriesArr;
             float needWidth=self.contentSize.width;
             CategoryView * cView=[[CategoryView alloc]initWithCategory:self.addTextField.text];
@@ -175,9 +181,10 @@
             UILabel * sumLabel=[[UILabel alloc]init];
             sumLabel.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
             sumLabel.textColor=[UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:0.5];
-            sumLabel.text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:cView.label.text InMonthOfDate:[NSDate date]]];
+            sumLabel.text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:cView.label.text InMonthOfDate:self.dateOfSum]];
             sumLabel.textAlignment=NSTextAlignmentCenter;
             [self.sumLabelView addSubview:sumLabel];
+            [self.sumLabelArray addObject:sumLabel];
             [sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(self.sumLabelView.mas_top);
                 make.centerX.equalTo(cView.mas_centerX);
@@ -259,8 +266,21 @@
     }
 }
 
-- (void)updateCategoried{
+- (void)updateCategories{
     
+}
+
+- (void)setDateOfSum:(NSDate *)dateOfSum{//如果日期变化 更新sum
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitMonth | NSCalendarUnitYear;
+    NSDateComponents *newMonth = [calendar components:unit fromDate:dateOfSum];
+    NSDateComponents *currentMonth = [calendar components:unit fromDate:_dateOfSum];
+    if (!((newMonth.year == currentMonth.year) && (newMonth.month == currentMonth.month))){
+        _dateOfSum=dateOfSum;
+        for (NSInteger i=0; i< self.cViewArr.count; i++) {
+            self.sumLabelArray[i].text=[NSString stringWithFormat:@"¥%+.2lf",[[OBBillManager sharedInstance] sumOfCategory:self.categoryArr[i] InMonthOfDate:self.dateOfSum]];
+        }
+    }
 }
 
 @end
