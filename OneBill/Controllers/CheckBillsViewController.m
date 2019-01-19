@@ -14,6 +14,7 @@
 #import  "OBDaySummaryCardView.h"
 #import  "OBDetailCardCell.h"
 #import  "OBCategoryScrollView.h"
+#import "PopUpDateSelectView.h"
 
 #define CellEdgeInset 8
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSString * currentCategory;
 @property (nonatomic, strong) UITapGestureRecognizer * textFieldResignTap;
+@property (nonatomic, strong) PopUpDateSelectView * dateSelectView;
 @property BOOL categoriesEditedFlag;
 
 @end
@@ -58,9 +60,9 @@ static NSString * const reuseIdentifier = @"Cell";
     self.title=@"Bills";
     self.automaticallyAdjustsScrollViewInsets=NO;
     //导航栏右侧按钮
-//    UIBarButtonItem * calendarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarButton"] style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem * calendarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"checkBarCalendarButton"] style:UIBarButtonItemStylePlain target:self action:@selector(calendarButtonClicked)];
     UIBarButtonItem * moreButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"barMoreButton"] style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonClicked)];
-    self.navigationItem.rightBarButtonItems=@[moreButton];
+    self.navigationItem.rightBarButtonItems=@[moreButton,calendarButton];
     //设置导航栏返回按钮
     UIBarButtonItem * returnBarButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"returnButton"]  style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked)];
     self.navigationItem.leftBarButtonItem=returnBarButton;
@@ -96,6 +98,8 @@ static NSString * const reuseIdentifier = @"Cell";
     //用于注销firstResponder
     self.textFieldResignTap=[[UITapGestureRecognizer alloc]init];
     [self.view addGestureRecognizer:self.textFieldResignTap];
+    self.dateSelectView=[[PopUpDateSelectView alloc]initWithView:self.view];
+    [self.view addSubview:self.dateSelectView];
 }
 
 - (void)setCategoryView{//in order to refresh the category scrollView after categories being edited
@@ -208,6 +212,10 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
     CategoryManagerViewController * vc=[[CategoryManagerViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)calendarButtonClicked{
+    [self.dateSelectView popUp];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
