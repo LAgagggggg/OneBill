@@ -26,11 +26,11 @@
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
 		0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875F7F3216474CC006DBE13 /* OBDetailTableView.m */; };
 		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
-		08972876219FF7C500DB3BC2 /* onebill_launch_part1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */; };
-		08972877219FF7C500DB3BC2 /* onebill_launch_part2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */; };
-		08972878219FF7C500DB3BC2 /* onebill_launch_part3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */; };
-		08972879219FF7C500DB3BC2 /* onebill_launch_part4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */; };
 		089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */; };
+		08B9A6C722284D0200C545A7 /* Introduce1x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C322284D0200C545A7 /* Introduce1x.mov */; };
+		08B9A6C822284D0200C545A7 /* Introduce2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C422284D0200C545A7 /* Introduce2x.mov */; };
+		08B9A6C922284D0200C545A7 /* Introduce3x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C522284D0200C545A7 /* Introduce3x.mov */; };
+		08B9A6CA22284D0200C545A7 /* Introduce4x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C622284D0200C545A7 /* Introduce4x.mov */; };
 		08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */; };
 		08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B420FE4E9C008F87DB /* OBMainButton.m */; };
 		08E425B820FF0144008F87DB /* NewOrEditBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */; };
@@ -120,12 +120,12 @@
 		0875F7F3216474CC006DBE13 /* OBDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDetailTableView.m; sourceTree = "<group>"; };
 		087C0F6D210C14D9006ADBEC /* OBCategoryChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseView.h; sourceTree = "<group>"; };
 		087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseView.m; sourceTree = "<group>"; };
-		0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part3.mp4; sourceTree = "<group>"; };
-		0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part1.mp4; sourceTree = "<group>"; };
-		08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part4.mp4; sourceTree = "<group>"; };
-		08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = onebill_launch_part2.mp4; sourceTree = "<group>"; };
 		089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseViewCell.h; sourceTree = "<group>"; };
 		089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseViewCell.m; sourceTree = "<group>"; };
+		08B9A6C322284D0200C545A7 /* Introduce1x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce1x.mov; sourceTree = "<group>"; };
+		08B9A6C422284D0200C545A7 /* Introduce2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce2x.mov; sourceTree = "<group>"; };
+		08B9A6C522284D0200C545A7 /* Introduce3x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce3x.mov; sourceTree = "<group>"; };
+		08B9A6C622284D0200C545A7 /* Introduce4x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce4x.mov; sourceTree = "<group>"; };
 		08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMapPickerViewController.h; sourceTree = "<group>"; };
 		08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBMapPickerViewController.m; sourceTree = "<group>"; };
 		08E425B320FE4E9C008F87DB /* OBMainButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMainButton.h; sourceTree = "<group>"; };
@@ -383,10 +383,10 @@
 		0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */ = {
 			isa = PBXGroup;
 			children = (
-				0897286F219FF08D00DB3BC2 /* onebill_launch_part1.mp4 */,
-				08972871219FF08E00DB3BC2 /* onebill_launch_part2.mp4 */,
-				0897286E219FF08D00DB3BC2 /* onebill_launch_part3.mp4 */,
-				08972870219FF08D00DB3BC2 /* onebill_launch_part4.mp4 */,
+				08B9A6C322284D0200C545A7 /* Introduce1x.mov */,
+				08B9A6C422284D0200C545A7 /* Introduce2x.mov */,
+				08B9A6C522284D0200C545A7 /* Introduce3x.mov */,
+				08B9A6C622284D0200C545A7 /* Introduce4x.mov */,
 			);
 			path = LaunchIntroduceVideo;
 			sourceTree = "<group>";
@@ -549,12 +549,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08972876219FF7C500DB3BC2 /* onebill_launch_part1.mp4 in Resources */,
-				08972877219FF7C500DB3BC2 /* onebill_launch_part2.mp4 in Resources */,
-				08972878219FF7C500DB3BC2 /* onebill_launch_part3.mp4 in Resources */,
-				08972879219FF7C500DB3BC2 /* onebill_launch_part4.mp4 in Resources */,
 				082B1FC820FD79BE0036B5FC /* LaunchScreen.storyboard in Resources */,
 				082B1FC520FD79BE0036B5FC /* Assets.xcassets in Resources */,
+				08B9A6CA22284D0200C545A7 /* Introduce4x.mov in Resources */,
+				08B9A6C822284D0200C545A7 /* Introduce2x.mov in Resources */,
+				08B9A6C722284D0200C545A7 /* Introduce1x.mov in Resources */,
+				08B9A6C922284D0200C545A7 /* Introduce3x.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
