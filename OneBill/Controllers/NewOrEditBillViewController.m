@@ -29,7 +29,6 @@
 @property (nonatomic, strong) BillValueInputView * inputView;
 @property (nonatomic, strong) OBCategoryManager * categoryManager;
 @property (nonatomic, strong) InoutSwitchButton * inoutSwitchButton;
-@property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic, strong) UILabel * locationLabel;
 @property (nonatomic, strong) UITextField * dateLabel;
 @property (nonatomic, strong) UIView * predictView;
@@ -436,6 +435,7 @@
 
 
 - (void)confirmButtonClicked {
+    self.confirmed=YES;
     if (self.editMode) {
         OBBill * newBill=[[OBBill alloc] initWithValue:self.inputView.text.doubleValue Date:self.date Location:self.location AndLocationDescription:self.locDescription Category:self.categoryScrollView.selectedView.label.text andIsOut:self.inoutSwitchButton.isOut];
         [[OBBillManager sharedInstance] editBillOfDate:self.editModeOldBill.date Value:self.editModeOldBill.value withBill:newBill];

@@ -214,7 +214,7 @@
     double fetchRange=60*60*24*30;//三十天
     int valuePrecision=10;
     double becomePredictValueStandard=0.6;
-    int billEnoughForPredict=6;
+    int billEnoughForPredict=10;
     /*
      首先取出之前一段时间的数据
      将其归类为都相符、仅时间相符以及仅地点相符
@@ -348,7 +348,7 @@
     double timeMatchD=3600;
     double fetchRange=60*60*24*7;//七天
     double becomePredictValueStandard=0.6;
-    int billEnoughForPredict=1;
+    int billEnoughForPredict=6;
     /*
      首先取出之前一段时间的数据
      将其归类为都相符、仅时间相符以及仅地点相符

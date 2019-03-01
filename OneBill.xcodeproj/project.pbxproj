@@ -23,6 +23,7 @@
 		0833B1EC212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0833B1EB212C7426003D8428 /* SummaryToDetailTransitionAnimationPop.m */; };
 		08524B7621129F6D00D0D397 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */; };
 		08524B792112A30500D0D397 /* CategoryManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08524B782112A30500D0D397 /* CategoryManagerCell.m */; };
+		0852B4E42228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852B4E32228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.m */; };
 		0859FA1C2117EE6D00784EED /* LocationPickerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */; };
 		0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875F7F3216474CC006DBE13 /* OBDetailTableView.m */; };
 		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
@@ -114,6 +115,8 @@
 		08524B7521129F6D00D0D397 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		08524B772112A30500D0D397 /* CategoryManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryManagerCell.h; sourceTree = "<group>"; };
 		08524B782112A30500D0D397 /* CategoryManagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerCell.m; sourceTree = "<group>"; };
+		0852B4E22228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCompleteTransitionAnimationPop.h; sourceTree = "<group>"; };
+		0852B4E32228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCompleteTransitionAnimationPop.m; sourceTree = "<group>"; };
 		0859FA1A2117EE6D00784EED /* LocationPickerAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerAnnotation.h; sourceTree = "<group>"; };
 		0859FA1B2117EE6D00784EED /* LocationPickerAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerAnnotation.m; sourceTree = "<group>"; };
 		0875F7F2216474CC006DBE13 /* OBDetailTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBDetailTableView.h; sourceTree = "<group>"; };
@@ -220,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				082B1FBA20FD79BB0036B5FC /* OneBill */,
-				0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */,
 				08FA13B8212FF42100E830A5 /* OneBillTests */,
 				08FA13C6212FFA9F00E830A5 /* OneBillUITests */,
 				082B1FB920FD79BB0036B5FC /* Products */,
@@ -249,6 +251,7 @@
 				0834A7AF2190296000FD32ED /* PrefixHeader.pch */,
 				082B1FCA20FD79BE0036B5FC /* main.m */,
 				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
+				0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */,
 				08771EEF214514C10058A13E /* Util */,
 				08E425BC20FF1BFD008F87DB /* Models */,
 				082B1FD420FDCFFB0036B5FC /* Views */,
@@ -301,6 +304,8 @@
 				0833B1DF212919E8003D8428 /* OBInteractiveTransition.m */,
 				C95E4F9FEA26A5E9D9EB77C2 /* GotoAddTransitionAnimationPush.h */,
 				C95E47D0EE03F433D2291671 /* GotoAddTransitionAnimationPush.m */,
+				0852B4E22228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.h */,
+				0852B4E32228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.m */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 				0809700F2163268700C104CD /* TodaySayingView.m in Sources */,
 				082B1FC020FD79BB0036B5FC /* MainViewController.m in Sources */,
 				08E425E2210743CD008F87DB /* OBDaySummary.m in Sources */,
+				0852B4E42228CF8800B7DB6C /* AddCompleteTransitionAnimationPop.m in Sources */,
 				08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */,
 				0833B1DC2129075F003D8428 /* UIView+ReplaceAnimation.m in Sources */,
 				082B1FCB20FD79BE0036B5FC /* main.m in Sources */,

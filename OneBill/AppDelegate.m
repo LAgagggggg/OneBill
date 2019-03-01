@@ -21,12 +21,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Bugly startWithAppId:@"42bb66e033"];
-//    if (@available(iOS 11, *)) {
-//        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    
+//    self.window.layer.speed=0.1;
     UINavigationController * navVC=[[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc]init]];
     [self.window setRootViewController:navVC];
     [self.window makeKeyAndVisible];
