@@ -278,12 +278,13 @@ static NSString * const reuseIdentifier = @"Cell";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.summaryCardView setDate:self.billsArr[indexPath.row].date Money:[[OBBillManager sharedInstance] sumOfDay:self.billsArr[indexPath.row].date]];
             [self.billsArr removeObjectAtIndex:indexPath.row];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeftdiu];
             if (self.billsArr.count==0) {
                 [UIView animateWithDuration:0.5 animations:^{
                     self.billEmptyView.alpha=1;
                 }];
             }
+            [tableView reloadData];
         });
     });
     
