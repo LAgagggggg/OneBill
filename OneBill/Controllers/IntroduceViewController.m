@@ -104,7 +104,7 @@ typedef enum : NSInteger {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.status==OBIntroduceStatusThird) {
                 CMTimeScale scale=self.player.currentItem.duration.timescale;
-                CMTimeValue value=780;
+                CMTimeValue value=860;
                 [self.player seekToTime:CMTimeMake(value, scale)];
                 [self.player play];
             }
@@ -200,8 +200,8 @@ typedef enum : NSInteger {
     if (!_playerItemArr) {
         NSMutableArray * tempArr=[[NSMutableArray alloc]init];
         for (int i=1; i<=4; i++) {
-            NSString * resource=[NSString stringWithFormat:@"Introduce%dx",i];
-            NSString * videoPath=[[NSBundle mainBundle] pathForResource:resource ofType:@"mov"];
+            NSString * resource=[NSString stringWithFormat:@"Introduce%d",i];
+            NSString * videoPath=[[NSBundle mainBundle] pathForResource:resource ofType:@"mp4"];
             NSURL * videoURL=[NSURL fileURLWithPath:videoPath];
             AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:videoURL];
             [tempArr addObject:playerItem];

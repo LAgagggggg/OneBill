@@ -27,10 +27,10 @@
 		0875F7F4216474CC006DBE13 /* OBDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875F7F3216474CC006DBE13 /* OBDetailTableView.m */; };
 		087C0F6F210C14D9006ADBEC /* OBCategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */; };
 		089C297E210C939C000D4F1B /* OBCategoryChooseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */; };
-		08B9A6C722284D0200C545A7 /* Introduce1x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C322284D0200C545A7 /* Introduce1x.mov */; };
-		08B9A6C822284D0200C545A7 /* Introduce2x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C422284D0200C545A7 /* Introduce2x.mov */; };
-		08B9A6C922284D0200C545A7 /* Introduce3x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C522284D0200C545A7 /* Introduce3x.mov */; };
-		08B9A6CA22284D0200C545A7 /* Introduce4x.mov in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6C622284D0200C545A7 /* Introduce4x.mov */; };
+		08B9A6CF2228C62100C545A7 /* Introduce1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6CC2228C5B300C545A7 /* Introduce1.mp4 */; };
+		08B9A6D02228C62100C545A7 /* Introduce2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6CD2228C5B300C545A7 /* Introduce2.mp4 */; };
+		08B9A6D22228C62100C545A7 /* Introduce4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6CB2228C5B300C545A7 /* Introduce4.mp4 */; };
+		08B9A6D62228C75800C545A7 /* Introduce3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 08B9A6D52228C75800C545A7 /* Introduce3.mp4 */; };
 		08E046C32116A66B00C3E9E3 /* OBMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */; };
 		08E425B520FE4E9C008F87DB /* OBMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B420FE4E9C008F87DB /* OBMainButton.m */; };
 		08E425B820FF0144008F87DB /* NewOrEditBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E425B720FF0144008F87DB /* NewOrEditBillViewController.m */; };
@@ -122,10 +122,10 @@
 		087C0F6E210C14D9006ADBEC /* OBCategoryChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseView.m; sourceTree = "<group>"; };
 		089C297C210C939C000D4F1B /* OBCategoryChooseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBCategoryChooseViewCell.h; sourceTree = "<group>"; };
 		089C297D210C939C000D4F1B /* OBCategoryChooseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBCategoryChooseViewCell.m; sourceTree = "<group>"; };
-		08B9A6C322284D0200C545A7 /* Introduce1x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce1x.mov; sourceTree = "<group>"; };
-		08B9A6C422284D0200C545A7 /* Introduce2x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce2x.mov; sourceTree = "<group>"; };
-		08B9A6C522284D0200C545A7 /* Introduce3x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce3x.mov; sourceTree = "<group>"; };
-		08B9A6C622284D0200C545A7 /* Introduce4x.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Introduce4x.mov; sourceTree = "<group>"; };
+		08B9A6CB2228C5B300C545A7 /* Introduce4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Introduce4.mp4; sourceTree = "<group>"; };
+		08B9A6CC2228C5B300C545A7 /* Introduce1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Introduce1.mp4; sourceTree = "<group>"; };
+		08B9A6CD2228C5B300C545A7 /* Introduce2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Introduce2.mp4; sourceTree = "<group>"; };
+		08B9A6D52228C75800C545A7 /* Introduce3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Introduce3.mp4; sourceTree = "<group>"; };
 		08E046C12116A66B00C3E9E3 /* OBMapPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMapPickerViewController.h; sourceTree = "<group>"; };
 		08E046C22116A66B00C3E9E3 /* OBMapPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBMapPickerViewController.m; sourceTree = "<group>"; };
 		08E425B320FE4E9C008F87DB /* OBMainButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBMainButton.h; sourceTree = "<group>"; };
@@ -383,10 +383,10 @@
 		0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */ = {
 			isa = PBXGroup;
 			children = (
-				08B9A6C322284D0200C545A7 /* Introduce1x.mov */,
-				08B9A6C422284D0200C545A7 /* Introduce2x.mov */,
-				08B9A6C522284D0200C545A7 /* Introduce3x.mov */,
-				08B9A6C622284D0200C545A7 /* Introduce4x.mov */,
+				08B9A6CC2228C5B300C545A7 /* Introduce1.mp4 */,
+				08B9A6CD2228C5B300C545A7 /* Introduce2.mp4 */,
+				08B9A6D52228C75800C545A7 /* Introduce3.mp4 */,
+				08B9A6CB2228C5B300C545A7 /* Introduce4.mp4 */,
 			);
 			path = LaunchIntroduceVideo;
 			sourceTree = "<group>";
@@ -549,12 +549,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B9A6D02228C62100C545A7 /* Introduce2.mp4 in Resources */,
 				082B1FC820FD79BE0036B5FC /* LaunchScreen.storyboard in Resources */,
+				08B9A6D22228C62100C545A7 /* Introduce4.mp4 in Resources */,
+				08B9A6D62228C75800C545A7 /* Introduce3.mp4 in Resources */,
 				082B1FC520FD79BE0036B5FC /* Assets.xcassets in Resources */,
-				08B9A6CA22284D0200C545A7 /* Introduce4x.mov in Resources */,
-				08B9A6C822284D0200C545A7 /* Introduce2x.mov in Resources */,
-				08B9A6C722284D0200C545A7 /* Introduce1x.mov in Resources */,
-				08B9A6C922284D0200C545A7 /* Introduce3x.mov in Resources */,
+				08B9A6CF2228C62100C545A7 /* Introduce1.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

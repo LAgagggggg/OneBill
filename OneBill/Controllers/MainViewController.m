@@ -69,8 +69,8 @@
     //导航栏颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]}];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]];
-    UIBarButtonItem * menuItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"mainMenuButton"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonClicked)];
-    self.navigationItem.leftBarButtonItem=menuItem;
+//    UIBarButtonItem * menuItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"mainMenuButton"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonClicked)];
+//    self.navigationItem.leftBarButtonItem=menuItem;
     //左上角按钮
 //    self.menuButton=[UIButton buttonWithType:UIButtonTypeSystem];
 //    [self.view addSubview:self.menuButton];
@@ -252,9 +252,9 @@
     }
 }
 
-- (void)menuButtonClicked{
-    IntroduceViewController * introduceVC=[[IntroduceViewController alloc] init];
-    [self presentViewController:introduceVC animated:YES completion:nil];
-}
+//- (void)menuButtonClicked{
+//    IntroduceViewController * introduceVC=[[IntroduceViewController alloc] init];
+//    [self presentViewController:introduceVC animated:YES completion:nil];
+//}
 
 @end
