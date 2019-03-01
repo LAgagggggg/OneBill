@@ -115,7 +115,7 @@
     self.alpha=1;
     [UIView animateWithDuration:0.5 animations:^{
         self.backgroundView.alpha=1;
-        self.dateSelectViewWrapperView.frame=CGRectMake(0, self.bounds.size.height-288, self.bounds.size.width, 288);
+        self.dateSelectViewWrapperView.frame=CGRectMake(0, self.bounds.size.height-288-(OB_ISiPhoneX?30:0), self.bounds.size.width, 288);
     }];
 }
 
