@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)editModeWithBill:(OBBill *)bill;
 
 @property (nonatomic, strong) void(^editCompletedHandler)(void);
+@property (nonatomic, weak) UIView * pushAnimationStartView;
 @property (nonatomic) CGPoint pushAnimationStartPoint;
 @property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic) BOOL confirmed;

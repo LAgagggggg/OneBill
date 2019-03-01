@@ -84,6 +84,7 @@
 //    [self.menuButton setTintColor:[UIColor darkGrayColor]];
 //    [self.menuButton addTarget:self action:@selector(menuButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     //顶部文字
+    self.view.backgroundColor=[UIColor whiteColor];
     self.sayingView=[[TodaySayingView alloc] initWithLine:@[@"One Bill A Day", @"Keeps worries away."]];
     [self.view addSubview:self.sayingView];
     [self.sayingView mas_makeConstraints:^(MASConstraintMaker * make) {
@@ -190,6 +191,7 @@
 - (void)addNewBill {
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc] init];
     addVC.pushAnimationStartPoint=self.addButton.center;
+    addVC.pushAnimationStartView=self.addButton;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

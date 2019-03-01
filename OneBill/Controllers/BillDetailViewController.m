@@ -242,6 +242,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
     addVC.pushAnimationStartPoint=[self.tableView convertPoint:[self.tableView cellForRowAtIndexPath:indexPath].center toView:self.view.window];
+    addVC.pushAnimationStartView=[self.tableView cellForRowAtIndexPath:indexPath];
     [addVC editModeWithBill:self.billsArr[indexPath.row]];
     addVC.editCompletedHandler = ^{
         [self updateEditedCell];

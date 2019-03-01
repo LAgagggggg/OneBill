@@ -251,12 +251,12 @@
 				0834A7AF2190296000FD32ED /* PrefixHeader.pch */,
 				082B1FCA20FD79BE0036B5FC /* main.m */,
 				082B1FC420FD79BE0036B5FC /* Assets.xcassets */,
-				0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */,
 				08771EEF214514C10058A13E /* Util */,
 				08E425BC20FF1BFD008F87DB /* Models */,
 				082B1FD420FDCFFB0036B5FC /* Views */,
 				0833B1DD21290EF2003D8428 /* Animation */,
 				0889CB0E214510B90069BEBA /* Controllers */,
+				0897286D219FF06000DB3BC2 /* LaunchIntroduceVideo */,
 			);
 			path = OneBill;
 			sourceTree = "<group>";

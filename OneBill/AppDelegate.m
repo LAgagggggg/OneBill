@@ -10,6 +10,7 @@
 #import  "OBBillManager.h"
 #import "MainViewController.h"
 #import "NewOrEditBillViewController.h"
+#import "IntroduceViewController.h"
 #import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
@@ -28,6 +29,14 @@
     UINavigationController * navVC=[[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc]init]];
     [self.window setRootViewController:navVC];
     [self.window makeKeyAndVisible];
+    
+    //第一次使用时弹出介绍
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"newUserCheck"]!=YES) {
+        IntroduceViewController * introduceVC=[[IntroduceViewController alloc] init];
+        [navVC presentViewController:introduceVC animated:YES completion:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"newUserCheck"];
+    }
+    
     // Override point for customization after application launch.
     [self createShortCutItem];
     UIApplicationShortcutItem *shortcutItem = [launchOptions valueForKey:UIApplicationLaunchOptionsShortcutItemKey];
