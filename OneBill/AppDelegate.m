@@ -10,6 +10,7 @@
 #import  "OBBillManager.h"
 #import "MainViewController.h"
 #import "NewOrEditBillViewController.h"
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Bugly startWithAppId:@"42bb66e033"];
 //    if (@available(iOS 11, *)) {
 //        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 //    }

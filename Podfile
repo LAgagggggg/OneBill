@@ -8,5 +8,6 @@ pod 'Masonry'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'FMDB'
 pod 'ODRefreshControl', '~> 1.2'
+pod 'Bugly', '~> 2.5.0'
 
 end

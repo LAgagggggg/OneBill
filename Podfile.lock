@@ -1,4 +1,5 @@
 PODS:
+  - Bugly (2.5.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -7,6 +8,7 @@ PODS:
   - ODRefreshControl (1.2)
 
 DEPENDENCIES:
+  - Bugly (~> 2.5.0)
   - FMDB
   - Masonry
   - MBProgressHUD (~> 1.0.0)
@@ -14,17 +16,19 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Bugly
     - FMDB
     - Masonry
     - MBProgressHUD
     - ODRefreshControl
 
 SPEC CHECKSUMS:
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ODRefreshControl: 907e6149d72dde488d5917ccfabee5bd8d711a20
 
-PODFILE CHECKSUM: 2a56fbd3dab84528283b1b2ed2eef7c2d285ab8d
+PODFILE CHECKSUM: ebf8ae247bc2c6279dd8694904ace5a3c801c7fa
 
 COCOAPODS: 1.5.2
