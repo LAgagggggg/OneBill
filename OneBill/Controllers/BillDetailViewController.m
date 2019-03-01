@@ -241,8 +241,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
-    addVC.pushAnimationStartPoint=[self.tableView convertPoint:[self.tableView cellForRowAtIndexPath:indexPath].center toView:self.view.window];
-    addVC.pushAnimationStartView=[self.tableView cellForRowAtIndexPath:indexPath];
+    addVC.pushAnimationStartFrame=[self.tableView convertRect:[self.tableView cellForRowAtIndexPath:indexPath].frame toView:self.view.window];
     [addVC editModeWithBill:self.billsArr[indexPath.row]];
     addVC.editCompletedHandler = ^{
         [self updateEditedCell];
@@ -318,7 +317,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)addButtonClicked:(UIButton *)button{
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc]init];
-    addVC.pushAnimationStartPoint=[self.billEmptyView convertPoint:button.center toView:self.view.window];
+//    addVC.pushAnimationStartFrame=[self.billEmptyView convertRect:button.frame toView:self.view.window];
+    addVC.pushAnimationStartView=self.billEmptyView;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

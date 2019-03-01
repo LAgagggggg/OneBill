@@ -190,7 +190,6 @@
 
 - (void)addNewBill {
     NewOrEditBillViewController * addVC=[[NewOrEditBillViewController alloc] init];
-    addVC.pushAnimationStartPoint=self.addButton.center;
     addVC.pushAnimationStartView=self.addButton;
     [self.navigationController pushViewController:addVC animated:YES];
 }

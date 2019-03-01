@@ -12,13 +12,14 @@
 @property (nonatomic, strong) id <UIViewControllerContextTransitioning> transitionContext;
 @property (nonatomic, weak) UIView * fromView;
 @property (nonatomic, strong) CALayer * whiteLayer;
+@property (nonatomic, weak) UIView * clickedSnapView;
 
 @end
 
 
 @implementation GotoAddTransitionAnimationPush
 
-static float animationDuration=0.6;
+static float animationDuration=0.5;
 
 - (void)animateTransition:(nonnull id <UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext=transitionContext;
@@ -35,10 +36,22 @@ static float animationDuration=0.6;
     [fromVC.view.layer addSublayer:self.whiteLayer];
     self.whiteLayer.backgroundColor=[UIColor whiteColor].CGColor;
     self.fromView=fromVC.view;
-    [self.fromView bringSubviewToFront:toVC.pushAnimationStartView];
     
-//    CGRect startFrame=CGRectMake(toVC.pushAnimationStartPoint.x, toVC.pushAnimationStartPoint.y, 1, 1);
-    CGRect startFrame=toVC.pushAnimationStartView.frame;
+    //如果toVC设置了动画起始view则将其放在subview最顶端，否则将fromView截图设置在subview最顶端。
+    CGRect startFrame;
+    if (toVC.pushAnimationStartView) {
+        [self.fromView bringSubviewToFront:toVC.pushAnimationStartView];
+        startFrame=toVC.pushAnimationStartView.frame;
+    }
+    else{
+        self.clickedSnapView=[fromVC.view snapshotViewAfterScreenUpdates:NO];
+        self.clickedSnapView.frame=fromVC.view.frame;
+        CAShapeLayer * imgMaskLayer=[CAShapeLayer layer];
+        imgMaskLayer.path=[UIBezierPath bezierPathWithRoundedRect:toVC.pushAnimationStartFrame cornerRadius:10.f].CGPath;
+        self.clickedSnapView.layer.mask=imgMaskLayer;
+        [self.fromView addSubview:self.clickedSnapView];
+        startFrame=toVC.pushAnimationStartFrame;
+    }
     UIBezierPath * startPath=[UIBezierPath bezierPathWithRoundedRect:startFrame cornerRadius:10.f];
     UIBezierPath * endPath=[UIBezierPath bezierPathWithRoundedRect:[UIScreen mainScreen].bounds cornerRadius:10.f];
     //赋值给toVc视图layer的mask
@@ -68,6 +81,7 @@ static float animationDuration=0.6;
         [self.transitionContext completeTransition:YES];
         [self.whiteLayer removeFromSuperlayer];
         self.fromView.alpha=1;
+        [self.clickedSnapView removeFromSuperview];
     }];
 
 

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) void(^editCompletedHandler)(void);
 @property (nonatomic, weak) UIView * pushAnimationStartView;
-@property (nonatomic) CGPoint pushAnimationStartPoint;
+@property (nonatomic) CGRect pushAnimationStartFrame;
 @property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic) BOOL confirmed;
 
