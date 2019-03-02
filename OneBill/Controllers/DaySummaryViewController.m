@@ -181,7 +181,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - refresh&fetch more
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    DebugLog(@"---%lf of %lf---",scrollView.contentOffset.y,scrollView.contentSize.height);
+//    DebugLog(@"---%lf---",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y<=0 && !self.fetchStopFlag) {
         if (!self.reloadIndicator.animating) [self.impactFeedback impactOccurred];
         [self.reloadIndicator startAnimating];

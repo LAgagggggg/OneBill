@@ -368,12 +368,14 @@
 
 //弹出键盘时
 - (void)keyboardWillChange:(NSNotification *)notification {
-    NSDictionary * userInfo=[notification userInfo];
-    NSValue * value=[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect=[value CGRectValue];
-    CGRect frame=self.confirmButton.frame;
-    frame.origin.y=keyboardRect.origin.y-frame.size.height-33;
-    self.confirmButton.frame=frame;
+    if (!self.confirmed) {
+        NSDictionary * userInfo=[notification userInfo];
+        NSValue * value=[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+        CGRect keyboardRect=[value CGRectValue];
+        CGRect frame=self.confirmButton.frame;
+        frame.origin.y=keyboardRect.origin.y-frame.size.height-33;
+        self.confirmButton.frame=frame;
+    }
 }
 
 #pragma mark - about textField
