@@ -93,6 +93,7 @@
         make.height.equalTo(@(60));
         make.width.equalTo(self.view.mas_width);
     }];
+    self.sayingView.backgroundColor=self.view.backgroundColor;
     //今日卡片
     self.todayCardView=[[TodayCardView alloc] init];
     [self.view addSubview:self.todayCardView];

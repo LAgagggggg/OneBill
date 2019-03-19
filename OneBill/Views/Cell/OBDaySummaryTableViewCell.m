@@ -32,6 +32,8 @@
         self.layer.shadowOffset = CGSizeMake(5, 5);
         self.layer.shadowOpacity = 0.1;
         self.layer.shadowRadius = 3;
+//        self.layer.shouldRasterize=YES;
+//        self.layer.rasterizationScale=[UIScreen mainScreen].scale;
         //文字
         self.dateLabel=[[UILabel alloc]init];
         [self.dateLabel setTextColor:textGrayColor];
@@ -41,6 +43,7 @@
             make.left.equalTo(self.contentView.mas_left).with.offset(31);
             make.top.equalTo(self.contentView.mas_top).with.offset(26);
         }];
+        self.dateLabel.backgroundColor=self.backgroundColor;
         self.sumLabel=[[UILabel alloc]init];
         [self.sumLabel setTextColor:textGrayColor];
         [self.sumLabel setTextAlignment:NSTextAlignmentCenter];
@@ -50,6 +53,7 @@
             make.centerX.equalTo(self.contentView.mas_centerX);
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
+        self.sumLabel.backgroundColor=self.backgroundColor;
     }
     return self;
 }

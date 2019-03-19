@@ -15,6 +15,7 @@
 {
     self = [super init];
     if (self) {
+        self.backgroundColor=[UIColor whiteColor];
         UILabel * labelUpon;
         BOOL firstLine=YES;
         for (NSString * line in lines) {
@@ -30,6 +31,7 @@
                     make.centerX.equalTo(self.mas_centerX);
                     make.top.equalTo(self.mas_top);
                 }];
+                label.backgroundColor=self.backgroundColor;
                 UILabel * quoteLabel=[[UILabel alloc]init];
                 [self addSubview:quoteLabel];
                 quoteLabel.text=@"“";
@@ -39,6 +41,7 @@
                     make.centerY.equalTo(label.mas_centerY).with.offset(5);
                     make.left.equalTo(label.mas_left).with.offset(-30);
                 }];
+                quoteLabel.backgroundColor=self.backgroundColor;
                 labelUpon=label;
             }
             else{
@@ -52,6 +55,7 @@
                     make.centerX.equalTo(self.mas_centerX);
                     make.top.equalTo(labelUpon.mas_bottom);
                 }];
+                label.backgroundColor=self.backgroundColor;
                 labelUpon=label;
             }
         }

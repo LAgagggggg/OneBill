@@ -64,6 +64,8 @@
         make.left.equalTo(todayLabelL.mas_right);
         make.top.equalTo(self.todayView.mas_top).with.offset(26);
     }];
+    todayLabelL.backgroundColor=self.todayView.backgroundColor;
+    todayLabelR.backgroundColor=self.todayView.backgroundColor;
     self.todaySumLabel=[[UILabel alloc]init];
     [self.todaySumLabel setTextColor:[UIColor whiteColor]];
     [self.todaySumLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:48]];
@@ -74,6 +76,7 @@
         make.centerX.equalTo(self.todayView.mas_centerX);
         make.top.equalTo(todayLabelR.mas_bottom).with.offset(5);
     }];
+    self.todaySumLabel.backgroundColor=self.todayView.backgroundColor;
 }
 
 - (void)layoutSubviews{//shadowPath

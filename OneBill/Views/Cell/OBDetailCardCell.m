@@ -42,6 +42,7 @@
             make.left.equalTo(self.contentView.mas_left).with.offset(24.6);
             make.top.equalTo(self.contentView.mas_top).with.offset(19);
         }];
+        self.timeLabel.backgroundColor=self.backgroundColor;
         UILabel * moneyLabel=[[UILabel alloc]init];
         [moneyLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:36]];
         [moneyLabel setTextColor:DarkBlueColor];
@@ -51,6 +52,7 @@
             make.left.equalTo(self.timeLabel.mas_left);
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
+        moneyLabel.backgroundColor=self.backgroundColor;
         self.valueLabel=[[UILabel alloc]init];
         [self.valueLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:36]];
         [self.valueLabel setTextColor:textGrayColor];
@@ -59,6 +61,7 @@
             make.left.equalTo(moneyLabel.mas_right).with.offset(9.7);
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
+        self.valueLabel.backgroundColor=self.backgroundColor;
         self.categoryButton=[UIButton buttonWithType:UIButtonTypeSystem];
         self.categoryButton.tintColor=DarkBlueColor;
 //        self.categoryButton.titleEdgeInsets=UIEdgeInsetsMake(0, 13, 0, 13);
@@ -73,6 +76,8 @@
             make.right.equalTo(self.categoryButton.mas_right).with.offset(-8);
             make.centerY.equalTo(self.categoryButton.mas_centerY);
         }];
+        self.categoryButton.backgroundColor=self.backgroundColor;
+        self.categoryButton.titleLabel.backgroundColor=self.categoryButton.backgroundColor;
         [self.categoryButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right).with.offset(-17);
             make.top.equalTo(self.contentView.mas_top).with.offset(16);
@@ -89,6 +94,7 @@
             make.right.equalTo(self.contentView.mas_right).with.offset(-16);
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-16);
         }];
+        self.locLabel.backgroundColor=self.backgroundColor;
     }
     return self;
 }

@@ -56,6 +56,7 @@ static float animationDuration=0.3;
             make.left.equalTo(self.contentView.mas_left).with.offset(41);
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
+        self.categoryTextField.backgroundColor=self.contentView.backgroundColor;
         self.editButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [self.editButton setImage:[UIImage imageNamed:@"categoryEditButton"] forState:UIControlStateNormal];
         self.editButton.imageEdgeInsets=UIEdgeInsetsMake(10, 10, 10, 10);

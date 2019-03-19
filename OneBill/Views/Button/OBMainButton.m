@@ -29,6 +29,7 @@
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.1;
         self.layer.shadowRadius = 3;
+//        self.layer.opaque=YES;
         if (type==OBButtonTypeAdd) {
             self.backgroundColor=[UIColor whiteColor];
             //左侧icon
@@ -41,6 +42,7 @@
                 make.left.equalTo(self.mas_left).with.offset(23);
                 make.centerY.equalTo(self.mas_centerY);
             }];
+            self.icon.backgroundColor=self.backgroundColor;
             //分割线
             UIView * lineView=[[UIView alloc]init];
             lineView.backgroundColor=DarkCyanColor;
@@ -60,6 +62,7 @@
                 make.centerY.equalTo(self.mas_centerY);
                 make.left.equalTo(lineView.mas_right).with.offset(17);
             }];
+            self.label.backgroundColor=self.backgroundColor;
         }
         else if (type==OBButtonTypeCheck) {
             self.backgroundColor=DarkBlueColor;
@@ -92,6 +95,7 @@
                 make.centerY.equalTo(self.mas_centerY);
                 make.left.equalTo(lineView.mas_right).with.offset(17);
             }];
+            self.label.backgroundColor=self.backgroundColor;
         }
         //添加按钮效果
         self.Button=[UIButton buttonWithType:UIButtonTypeCustom];

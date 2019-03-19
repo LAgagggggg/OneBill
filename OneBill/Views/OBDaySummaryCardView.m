@@ -44,6 +44,7 @@
             make.centerY.equalTo(self.mas_centerY).with.offset(12.5);
             make.left.equalTo(self.mas_left).with.offset(31);
         }];
+        self.dateLabel.backgroundColor=DarkCyanColor;
         self.moneyLabel=[[UILabel alloc]init];
         [self.moneyLabel setTextAlignment:NSTextAlignmentRight];
         self.moneyLabel.adjustsFontSizeToFitWidth=YES;
@@ -54,6 +55,7 @@
             make.centerY.equalTo(self.mas_centerY).with.offset(12.5);
             make.right.equalTo(self.mas_right).with.offset(-25);
         }];
+        self.moneyLabel.backgroundColor=DarkCyanColor;
     }
     return self;
 }

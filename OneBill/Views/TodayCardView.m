@@ -64,6 +64,8 @@
             make.bottom.equalTo(self.mas_top).with.offset(80*screenHeightAdaptRatio);
             make.left.equalTo(self.mas_centerX);
         }];
+        self.labelL.backgroundColor=DarkCyanColor;
+        self.labelR.backgroundColor=DarkCyanColor;
         //数字
         self.labelNum=[[UILabel alloc]init];
         self.labelNum.adjustsFontSizeToFitWidth=YES;
@@ -77,6 +79,7 @@
             make.centerY.equalTo(self.labelR.mas_centerY).with.offset(70*screenHeightAdaptRatio);
             make.width.equalTo(self.mas_width).multipliedBy(0.8);
         }];
+        self.labelNum.backgroundColor=DarkCyanColor;
     }
     return self;
 }
