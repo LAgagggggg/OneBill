@@ -7,7 +7,6 @@
 //
 
 #import "OBDaySummaryCardView.h"
-#import <masonry.h>
 
 #define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
 #define LightCyanColor [UIColor colorWithRed:241/255.0 green:251/255.0 blue:251/255.0 alpha:1]

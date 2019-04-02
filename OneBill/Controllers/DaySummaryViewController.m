@@ -5,13 +5,10 @@
 //  Created by LAgagggggg on 2018/7/24.
 //  Copyright © 2018 ookkee. All rights reserved.
 //
-#import <Masonry.h>
-#import <ODRefreshControl.h>
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import  "OBDaySummaryTableViewCell.h"
 #import  "OBDaySummaryTodayCell.h"
-#import  "OBBillManager.h"
 
 #define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
 #define commonCellHeight 148
@@ -48,7 +45,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSArray * tempArr=[NSMutableArray arrayWithArray:[[OBBillManager sharedInstance] fetchDaySummaryFromIndex:self.fetchIndex WithAmount:self.fetchEachTime]];
     [self.summaryArr addObjectsFromArray:tempArr];
     self.fetchIndex+=tempArr.count;
-    self.fetchStopFlag= tempArr.count==self.fetchEachTime? NO:YES;
+    self.fetchStopFlag=tempArr.count!=self.fetchEachTime;
     [self setUI];
     //滑动至底部
     [self.view layoutIfNeeded];
@@ -120,7 +117,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
-    self.tableView.separatorStyle=UITextBorderStyleNone;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDaySummaryTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     [self.view bringSubviewToFront:shadowView];

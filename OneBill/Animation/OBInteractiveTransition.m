@@ -76,7 +76,7 @@
         case UIGestureRecognizerStateChanged:{
 //            NSLog(@"%lf in direction%lu",percent,(unsigned long)self.direction);
             //手势过程中
-            if (percent>0 && self.interation!=YES) {
+            if (percent>0 && !self.interation) {
                 self.interation = YES;
                 [self startGesture];
                 if(self.impactFeedBackEnable) [self.impactFeedBack impactOccurred];

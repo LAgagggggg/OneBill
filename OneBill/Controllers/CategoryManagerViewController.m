@@ -6,9 +6,7 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import <Masonry.h>
 #import <objc/runtime.h>
-#import <MBProgressHUD.h>
 #import "CategoryManagerViewController.h"
 #import  "CategoryManagerCell.h"
 #import  "OBCategoryManager.h"
@@ -144,7 +142,7 @@ static float animationDuration=0.3;
         cell=[[CategoryManagerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         [self setBottomCell:cell];
         self.addCell=cell;
-        cell.hidden=self.isMultiDeleting ? YES : NO;
+        cell.hidden=self.isMultiDeleting;
     } else {
         cell=[tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
         [cell setWithCategory:self.categoryArr[indexPath.row]];
@@ -311,7 +309,7 @@ static float animationDuration=0.3;
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.isMultiDeleting) {//防止拖动最后的添加cell
-        return indexPath.row==self.categoryArr.count ? NO : YES;
+        return indexPath.row!=self.categoryArr.count;
     } else {
         return NO;
     }

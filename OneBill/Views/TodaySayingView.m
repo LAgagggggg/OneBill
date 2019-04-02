@@ -7,7 +7,6 @@
 //
 
 #import "TodaySayingView.h"
-#import <Masonry.h>
 
 @implementation TodaySayingView
 

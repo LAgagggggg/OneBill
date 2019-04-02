@@ -6,7 +6,6 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import <Masonry.h>
 #import "MainViewController.h"
 #import  "TodayCardTransitionAnimationPush.h"
 #import  "TodayCardTransitionAnimationPop.h"
@@ -23,9 +22,7 @@
 #import "BillDetailViewController.h"
 #import "DaySummaryViewController.h"
 #import "CheckBillsViewController.h"
-#import  "OBInteractiveTransition.h"
 #import "TodaySayingView.h"
-#import "IntroduceViewController.h"
 
 @interface MainViewController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -59,6 +56,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     //刷新今日花销
+    [super viewWillAppear:animated];
     self.todayCardView.labelNum.text=[NSString stringWithFormat:@"%+.2lf", [[OBBillManager sharedInstance] sumOfDay:[NSDate date]]];
 }
 

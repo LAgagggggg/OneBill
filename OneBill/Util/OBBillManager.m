@@ -7,7 +7,6 @@
 //
 
 #import "OBBillManager.h"
-#import "OBCategoryManager.h"
 #import <FMDB.h>
 
 @interface OBBillManager()

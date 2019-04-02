@@ -9,7 +9,6 @@
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 
 #import "OBCategoryChooseViewCell.h"
-#import <masonry.h>
 
 @implementation OBCategoryChooseViewCell
 

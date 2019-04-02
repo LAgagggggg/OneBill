@@ -8,8 +8,6 @@
 
 #import "CategoryManagerCell.h"
 #import "OBCategoryManager.h"
-#import <masonry.h>
-#import <MBProgressHUD.h>
 
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]

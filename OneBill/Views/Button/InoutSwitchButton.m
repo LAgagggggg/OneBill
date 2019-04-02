@@ -7,7 +7,6 @@
 //
 
 #import "InoutSwitchButton.h"
-#import <masonry.h>
 
 #define dimColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
 #define textGrayColor [UIColor colorWithRed:111/255.0 green:117/255.0 blue:117/255.0 alpha:1]

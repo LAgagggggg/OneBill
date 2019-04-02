@@ -9,8 +9,6 @@
 #import "OBCategoryScrollView.h"
 #import "OBBillManager.h"
 #import "OBCategoryManager.h"
-#import <masonry.h>
-#import <MBProgressHUD.h>
 
 @interface OBCategoryScrollView()<UIScrollViewDelegate>
 
@@ -228,14 +226,14 @@
 
 -(void)setAlwaysShowSum:(BOOL)alwaysShowSum{
     _alwaysShowSum=alwaysShowSum;
-    self.isLabelShowing=alwaysShowSum?YES:NO;
+    self.isLabelShowing=alwaysShowSum;
     self.sumLabelView.alpha= alwaysShowSum?1:0;
 }
 
 #pragma mark SetLabelShowWhenScroll
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if (!self.alwaysShowSum) {
-        if (self.isLabelShowing==NO) {
+        if (!self.isLabelShowing) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.sumLabelView.alpha=1;
             }];
@@ -246,7 +244,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if (!self.alwaysShowSum) {
-        if (self.isLabelShowing==YES) {
+        if (self.isLabelShowing) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.sumLabelView.alpha=0;
             }];
@@ -257,7 +255,7 @@
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (!self.alwaysShowSum) {
-        if (self.isLabelShowing==YES && decelerate==NO) {
+        if (self.isLabelShowing && !decelerate) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.sumLabelView.alpha=0;
             }];

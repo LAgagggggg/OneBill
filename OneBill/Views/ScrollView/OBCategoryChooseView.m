@@ -11,8 +11,6 @@
 #import "OBCategoryChooseView.h"
 #import "OBCategoryChooseViewCell.h"
 #import "OBCategoryManager.h"
-#import <masonry.h>
-#import <MBProgressHUD.h>
 
 @interface OBCategoryChooseView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIButton * bottomButton;
@@ -100,7 +98,7 @@ CGFloat foldPositionY;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.isAdding==YES && indexPath.row>=self.categoryArr.count){//增加的输入栏
+    if(self.isAdding && indexPath.row>=self.categoryArr.count){//增加的输入栏
         UITableViewCell * cell=[[UITableViewCell alloc]init];
         [self setAddingCell:cell];
         [self.addingField becomeFirstResponder];

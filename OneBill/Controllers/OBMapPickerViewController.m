@@ -7,7 +7,6 @@
 //
 
 #import "OBMapPickerViewController.h"
-#import  "LocationPickerAnnotation.h"
 
 @interface OBMapPickerViewController ()<MKMapViewDelegate>
 

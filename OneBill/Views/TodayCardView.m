@@ -7,7 +7,6 @@
 //
 
 #import "TodayCardView.h"
-#import <Masonry.h>
 
 #define DarkCyanColor [UIColor colorWithRed:109/255.0 green:218/255.0 blue:226/255.0 alpha:1]
 #define LightCyanColor [UIColor colorWithRed:207/255.0 green:239/255.0 blue:242/255.0 alpha:1]

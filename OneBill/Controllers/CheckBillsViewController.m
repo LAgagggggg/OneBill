@@ -6,12 +6,10 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import <Masonry.h>
 #import "CheckBillsViewController.h"
 #import "CategoryManagerViewController.h"
 #import  "OBCategoryManager.h"
 #import  "OBBillManager.h"
-#import  "OBDaySummaryCardView.h"
 #import  "OBDetailCardCell.h"
 #import  "OBCategoryScrollView.h"
 #import "PopUpDateSelectView.h"
@@ -93,7 +91,7 @@ static NSString * const reuseIdentifier = @"Cell";
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.tableView.backgroundColor=[UIColor clearColor];
-    self.tableView.separatorStyle=UITextBorderStyleNone;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset=UIEdgeInsetsMake(8, 0, 20, 0);
     self.tableView.showsVerticalScrollIndicator=NO;
     [self.tableView registerClass:[OBDetailCardCell class] forCellReuseIdentifier:reuseIdentifier];

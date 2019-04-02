@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import  "OBBillManager.h"
 #import "MainViewController.h"
 #import "NewOrEditBillViewController.h"
 #import "IntroduceViewController.h"
@@ -31,7 +30,7 @@
     [self.window makeKeyAndVisible];
     
     //第一次使用时弹出介绍
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"newUserCheck"]!=YES) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"newUserCheck"]) {
         IntroduceViewController * introduceVC=[[IntroduceViewController alloc] init];
         [navVC presentViewController:introduceVC animated:YES completion:nil];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"newUserCheck"];

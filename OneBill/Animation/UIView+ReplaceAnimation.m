@@ -7,7 +7,6 @@
 //
 
 #import "UIView+ReplaceAnimation.h"
-#import <masonry.h>
 
 @implementation UIView (ReplaceAnimation)
 

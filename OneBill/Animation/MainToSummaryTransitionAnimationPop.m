@@ -11,7 +11,6 @@
 #import "DaySummaryViewController.h"
 #import "OBDaySummaryTodayCell.h"
 #import "TodayCardView.h"
-#import "OBMainButton.h"
 #import "UIView+ReplaceAnimation.h"
 
 @interface MainToSummaryTransitionAnimationPop()

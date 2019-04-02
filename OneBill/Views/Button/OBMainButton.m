@@ -7,7 +7,6 @@
 //
 
 #import "OBMainButton.h"
-#import <Masonry.h>
 
 #define DarkCyanColor [UIColor colorWithRed:136/255.0 green:216/255.0 blue:224/255.0 alpha:1]
 #define DarkBlueColor [UIColor colorWithRed:94/255.0 green:169/255.0 blue:234/255.0 alpha:1]

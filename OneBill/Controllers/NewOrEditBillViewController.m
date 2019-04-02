@@ -6,8 +6,6 @@
 //  Copyright © 2018 ookkee. All rights reserved.
 //
 
-#import <Masonry.h>
-#import <MBProgressHUD.h>
 #import "NewOrEditBillViewController.h"
 #import "OBMapPickerViewController.h"
 #import  "CategoryView.h"
@@ -457,7 +455,7 @@
 
 - (void)revokePrediction {
     self.inputView.textField.text=[NSString stringWithFormat:@"%.2lf", self.revokeValue];
-    self.inputView.isEdited=self.revokeValue==0 ? NO : YES;
+    self.inputView.isEdited=self.revokeValue!=0;
     self.inputView.isDecimalEdited=NO;
     [self.categoryScrollView setHighlightCategory:self.revokeCategory];
 }
